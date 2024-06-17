@@ -7,3 +7,14 @@ __pycache__/
 node_modules/
 .github/
 cloudinary_python.txt
+.DS_Store
+
+db.sqlite3
+
+# Visual Studio Code # 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
