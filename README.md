@@ -1,14 +1,61 @@
 # Viridian Square
 
-## Table of contents
+---
+
+**Table of content**
+
+- [Planning and methodology](#planning)
+    - [Site goals and strategy](#strategy)
+    - [Database ERD](#erd)
+    - [API plan](#api-plan)
+    - [Surface plane Design](#surface-plane-design)
+        - [Colours](#colours)
+        - [Fonts](#fonts)
+        - [Logo](#logo)
+        - [Design wireframes](#design-wireframes)
+    - [Agile methodology](#agile-methodology)
+    - [User stories](#user-stories)
+    - [Future improvements](#future-improvements)
+- [Features](#features)
+- [Tools and technologies](#tools-and-technologies)
+- [Repository description](#repo-description)
+- [Deployment](#deployment)
+- [Testing](#testing)
+- [Bugs](#bugs)
+- [Credits](#credits)
+- [Acknowledgements](#acknowledgements)
+
+---
+
+<a id="planning"></a>
+## Planning and methodology
+
+<a id="erd"></a>
+### Database ERD
+![Database ERD](documentation/erd/viridian_erd.png)
+
+<a id="api-plan"></a>
+### Plan for API
+| Model | Endpoint | Create | Read | Update | Delete | Filter | Text search |
+| - | - | - | - | - | - | - | - |
+| users | users/<br>users/:id/ | Y | Y | Y | Y | N | N |
+| profiles | profiles/<br>profiles/:id/ | Y (signals) | Y | Y | Y (signals) | N | N |
+| artpieces | artpieces/<br>artpieces/:id/ | Y | Y | Y | Y | profile<br>liked<br>for_sale_status<br>collection<br>art_medium | title<br>collection title<br>profile name<br>hashtag |
+| likes | likes/<br>likes/:id/ | Y | Y | N | Y | user | N |
+| enquiries | enquiries/<br>enquiries/:id/ | Y | Y | Y | N | user<br>artpiece | N |
+| hashtags | n/a | N | N | N | N | N | N |
 
 
-## Agile methodologies
-### Sprint 1:
+<a id="agile-methodology"></a>
+### Agile methodologies
+#### Sprint 1:
 ![Sprint 1 milestone](documentation/sprints/sprint1_milestone.png)
 
-### All user stories:
-### Epics
+<a id="user-stories"></a>
+### User stories:
+
+**Epics**
+
 1. Navigation and structure
 2. Accounts/Login
 3. Showcasing art
@@ -19,25 +66,25 @@
 8. Accessibility
 
 
-### Navigation and structure
+#### Navigation and structure
 - `Main navigation:`  As a __Site User__, I can __always see the main navigation options on the top of the page,__ so that I can __easily and intuitively find my way around the website__.
 - `404 page:` As a __Site User__ I can __see an informative 404 page guiding me back to the main page if I visit a page that does not exist by mistake__ so that I can __easily get back to the home page with minimal disruption.__
 - `Favicon:` As a __Site User__ I can __see the website's favicon__ so that I can __easily find the website if I have multiple tabs open__.
 
-### Accounts/Login
+#### Accounts/Login
 - `Account registration:` As a __Site User__, I can __register an account with a username and password__ so that I can __like art pieces, make enquiries, and set up a gallery.__
 - `Account login:`  As a __registered Site User__, I can __log in__ so that I can __fully engage with the platform, by e.g. posting art or making enquiries__.
 - `Account logout:` As a __Logged-in User__, I can __log out__ so that I can __feel safe in that others cannot access my credentials.__
 - `Clear registration and login process:` As a __Site User__, I can see __clear instructions, and get feedback and/or confirmation__ when using the forms to register/login/log out, so that I can __sign up/log in without unnecessary problems and enjoy the experience.__
 
-### Showcasing art
+#### Showcasing art
 - `Creating art pieces`: As a **logged-in user**, I can **create an art piece, including an image and details (e.g., title)**, so that I can **showcase my art.**
 - `Updating art pieces`: As a **logged-in user**, I can **update my own art piece**, so that I can **manage my own content**.
 - `Deleting art pieces`: As a **logged-in user**, I can **delete my own art piece**, so that I can **manage and be in control of my own content.**
 - `CRUD collections`: As a **logged-in user**, I can **create, update and delete collections**, so that I can **group related art pieces and present my art in a way that makes sense to me.**
 - `Adding tags to art pieces`: As a **logged-in user**, I can **add tags to my own art piece**, so that I can **increase the searchability of my art**.
 
-### Discovering art
+#### Discovering art
 - `Viewing an artist's profile/gallery page`: As a **Site User**, I can **visit an artist's profile page/gallery page**, so that I can **view all art pieces and collections published by the artist in one place.**
 - `Viewing popular/trending art pieces`:  As a **Site User**, I can **see popular/trending art pieces in a dedicated section on the discovery page** so that **I can get inspired to engage further and discover new great pieces.**
 - `Searching for art pieces`: As a **Site User**, I can **search based on artist, title, collection title, and tags**, so that I can **find art pieces matching my criteria.**
@@ -47,18 +94,18 @@
 - `Viewing art piece collection`: As a **Site User viewing an individual art piece**, I can **see if the art piece belongs to a collection**, so that I can **easily find art pieces similar to the one I am viewing.**
 - `Viewing a single art piece`: As a **Site User**, I can **click on an art piece in a list** so that I can **see a detailed view of the art piece.**
 
-### Liking art pieces
+#### Liking art pieces
 - `Liking an art piece`: As a **logged-in site user**, I can **like an art piece**, so that I can **show appreciation to the artist and so that I can more easily find my way back to art pieces I enjoy.**
 - `Removing a like from an art piece`: As a **logged-in site user who has liked an art piece**, I can **remove my like**, so that I can **change my mind or correct my mistake.**
 - `Viewing liked art pieces`:  As a **logged-in site user**, I can **visit the “Liked” page**, so that I can **view all art pieces that I have liked.**
 
-### Enquiring about art
+#### Enquiring about art
 - `Making an enquiry`: As a **logged-in site user viewing an art piece which has been marked as for sale by the artist**, I can **make an enquiry**, so that I can **express my wish to connect with the artist.**
 - `Viewing enquiries`: As a **logged-in site user who has made/received an enquiry**, I can **view the enquiry and its status on the enquiries page**, so that I can **keep track of my enquiries.**
 - `Responding to enquiries`: As a **logged-in site user who has received an enquiry from a potential buyer**, I can **respond to the enquiry on the enquiries page**, so that I can **decide if my contact details will be shared with the potential buyer.**
 
-### Customising profile
+#### Customising profile
 - `Customising the profile page:` As a **logged-in user**, I can **customise my profile page/gallery page**, so that I can **better present who I am as an artist/art buyer.**
 
-### Accessibility
+#### Accessibility
 - `Navigate the website with keyboard`: As a **Site User not able to utilise a mouse** I can **focus on and access all interactive elements on the website using a keyboard** so that I can **be included, navigate on the website, access the content, and use all core functionality**.
