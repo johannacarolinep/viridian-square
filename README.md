@@ -45,6 +45,14 @@
 | enquiries | enquiries/<br>enquiries/:id/ | Y | Y | Y | N | user<br>artpiece | N |
 | hashtags | n/a | N | N | N | N | N | N |
 
+<a id="surface-plane-design"></a>
+### Surface plane design
+
+#### Colour scheme
+
+Preliminary colour scheme: The primary brand colour, #40826, Viridian green, will be included. The other colours may be adjusted at a later stage in the project.
+
+![Colour scheme](documentation/design/colour-scheme.png)
 
 <a id="agile-methodology"></a>
 ### Agile methodologies
