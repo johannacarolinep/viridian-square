@@ -16,6 +16,7 @@
 5. Liking art pieces
 6. Enquiring about art
 7. Customising profile
+8. Accessibility
 
 
 ### Navigation and structure
@@ -58,3 +59,6 @@
 
 ### Customising profile
 - `Customising the profile page:` As a **logged-in user**, I can **customise my profile page/gallery page**, so that I can **better present who I am as an artist/art buyer.**
+
+### Accessibility
+- `Navigate the website with keyboard`: As a **Site User not able to utilise a mouse** I can **focus on and access all interactive elements on the website using a keyboard** so that I can **be included, navigate on the website, access the content, and use all core functionality**.
