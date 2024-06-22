@@ -12,6 +12,7 @@
         - [Colours](#colours)
         - [Fonts](#fonts)
         - [Logo](#logo)
+        - [Low fidelity wireframes](#basic-wireframes)
         - [Design wireframes](#design-wireframes)
     - [Agile methodology](#agile-methodology)
     - [User stories](#user-stories)
@@ -29,6 +30,9 @@
 
 <a id="planning"></a>
 ## Planning and methodology
+
+<a id="strategy"></a>
+## Site goals and strategy
 
 <a id="erd"></a>
 ### Database ERD
@@ -48,17 +52,40 @@
 <a id="surface-plane-design"></a>
 ### Surface plane design
 
+<a id="colours"></a>
 #### Colour scheme
 
 Preliminary colour scheme: The primary brand colour, #40826, Viridian green, will be included. The other colours may be adjusted at a later stage in the project.
 
 ![Colour scheme](documentation/design/colour-scheme.png)
 
+<a id="fonts"></a>
+#### Fonts
+
+![Oswald font](documentation/design/font-oswald.png)
+
+For headings, and used in logo
+
+![Heebo font](documentation/design/font-heebo.png)
+
+For normal text
+
+
+<a id="logo"></a>
+#### Logo
+
+Logo, black on transparent background:
+![Logo](documentation/design/logo.webp)
+
+<a id="basic-wireframes"></a>
 #### Low fidelity wireframes
 - [Desktop wireframes](documentation/wireframes/viridian-wireframes.pdf)
 - [Tablet](documentation/wireframes/viridian-wireframes-tablet.pdf)
 - [Mobile](documentation/wireframes/viridian-wireframes-mobile.pdf)
 
+#### Design wireframes
+An additional wireframe was created to test out the colour scheme and intended style of the website.
+- [Design wireframe, home page (Discover page)](documentation/design/design-wireframe.pdf).
 
 <a id="agile-methodology"></a>
 ### Agile methodologies
