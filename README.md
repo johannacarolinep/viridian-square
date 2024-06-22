@@ -54,6 +54,12 @@ Preliminary colour scheme: The primary brand colour, #40826, Viridian green, wil
 
 ![Colour scheme](documentation/design/colour-scheme.png)
 
+#### Low fidelity wireframes
+- [Desktop wireframes](documentation/wireframes/viridian-wireframes.pdf)
+- [Tablet](documentation/wireframes/viridian-wireframes-tablet.pdf)
+- [Mobile](documentation/wireframes/viridian-wireframes-mobile.pdf)
+
+
 <a id="agile-methodology"></a>
 ### Agile methodologies
 #### Sprint 1:
