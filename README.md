@@ -1,5 +1,9 @@
 # Viridian Square
 
+Welcome to Viridian Square - the natural meeting place for artists and art lovers!
+
+Named after a well known artist pigment, Viridian green, the platform is tailored for the needs of artists and art lovers.
+
 ---
 
 **Table of content**
@@ -33,6 +37,16 @@
 
 <a id="strategy"></a>
 ## Site goals and strategy
+
+Viridian sq. (Viridian square) provides a meeting place tailored for the needs of artists and art lovers.
+
+Artists can set up their own gallery, presenting their art pieces in a visually appealing way, with relevant information. Artists also have the option to group art pieces into collections, so that related art pieces can be viewed together, as intended.
+
+Art lovers can use the platform to discover their next find. They can search for art pieces by the works’ title, collection title, artist name, or hashtags. To make the search more efficient, they can also apply filters for art mediums used (eg. oil or watercolour), and sort the results.
+
+If an art buyer finds what they are looking for, and the artist has indicated an interest in selling the piece, an enquiry can be made. If accepted, the artist’s contact details are shared with the potential buyer, connecting the two.
+
+The goal of the site is to help independent artists to increase their visibility, and their chance to get their art noticed by potential buyers, while providing a dedicated platform for art lovers to discover new art and artists.
 
 <a id="erd"></a>
 ### Database ERD
@@ -85,6 +99,7 @@ Logo, black on transparent background:
 
 #### Design wireframes
 An additional wireframe was created to test out the colour scheme and intended style of the website.
+
 - [Design wireframe, home page (Discover page)](documentation/design/design-wireframe.pdf).
 
 <a id="agile-methodology"></a>
