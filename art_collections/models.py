@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MaxLengthValidator
-from django.contrib.auth.models import User
+from users.models import CustomUser
 
 
 class ArtCollection(models.Model):
@@ -27,7 +27,7 @@ class ArtCollection(models.Model):
         __str__: Returns a string representation of the ArtCollection instance,
         including its ID and title.
     """
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     title = models.CharField(

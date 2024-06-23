@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import CustomUser
 from artpieces.models import Artpiece
 
 
@@ -46,7 +46,7 @@ class Enquiry(models.Model):
         (1, 'Accepted'),
         (2, 'Declined')
     ]
-    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     artpiece = models.ForeignKey(Artpiece, on_delete=models.CASCADE)
     initial_message = models.CharField(
         null=False,

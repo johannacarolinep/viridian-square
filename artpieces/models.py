@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MaxLengthValidator
-from django.contrib.auth.models import User
+from users.models import CustomUser
 from cloudinary.models import CloudinaryField
 from art_collections.models import ArtCollection
 
@@ -101,7 +101,7 @@ class Artpiece(models.Model):
         (8, 'Mixed media'),
         (9, 'Other')
     ]
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     title = models.CharField(

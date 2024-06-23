@@ -53,7 +53,9 @@ INSTALLED_APPS = [
     'art_collections',
     'artpieces',
     'enquiries',
+    'likes',
     'profiles',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -97,7 +99,10 @@ DATABASES = {
     }
 }
 
-
+AUTH_USER_MODEL = 'users.CustomUser'
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
