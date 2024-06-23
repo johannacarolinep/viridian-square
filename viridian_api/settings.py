@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
     'art_collections',
     'artpieces',
+    'enquiries',
     'profiles',
 ]
 
