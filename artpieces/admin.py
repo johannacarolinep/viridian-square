@@ -1,3 +1,5 @@
 from django.contrib import admin
+from artpieces.models import Artpiece
 
-# Register your models here.
+
+admin.site.register(Artpiece)

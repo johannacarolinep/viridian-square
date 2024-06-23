@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'rest_framework',
 
+    'art_collections',
     'artpieces',
     'profiles',
 ]

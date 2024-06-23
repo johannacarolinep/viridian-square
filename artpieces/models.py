@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MaxLengthValidator
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from art_collections.models import ArtCollection
 
 
 class Artpiece(models.Model):
@@ -24,8 +25,8 @@ class Artpiece(models.Model):
         predefined choices.
         - for_sale (IntegerField): The sale status of the art piece, chosen
         from predefined choices.
-        - collection_id (ForeignKey): Optional foreign key linking to a
-        Collection. If the collection is deleted, this field is set to NULL.
+        - art_collection_id (ForeignKey): Optional foreign key linking to a
+        ArtCollection. If the collection is deleted, this field is set to NULL.
 
     Choices:
         FOR_SALE_CHOICES: Defines the sale status of the art piece.
@@ -88,9 +89,9 @@ class Artpiece(models.Model):
         null=False)
     art_medium = models.IntegerField(choices=ART_MEDIUM_CHOICES, default=0)
     for_sale = models.IntegerField(choices=FOR_SALE_CHOICES, default=0)
-    collection_id = models.ForeignKey(
-        Collection,
-        related_name='collection',
+    art_collection_id = models.ForeignKey(
+        ArtCollection,
+        related_name='art_collection',
         on_delete=models.SET_NULL,
         null=True,
         blank=True)
