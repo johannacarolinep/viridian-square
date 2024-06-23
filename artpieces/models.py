@@ -5,6 +5,33 @@ from cloudinary.models import CloudinaryField
 from art_collections.models import ArtCollection
 
 
+class Hashtag(models.Model):
+    """
+    Represents a hashtag that can be associated with multiple art pieces.
+
+    Attributes:
+        name (str): The name of the hashtag. It must be unique and non-blank.
+
+    Meta:
+        ordering (list): Specifies that hashtag instances should be ordered by
+        their name in ascending order.
+
+    Methods:
+        __str__(): Returns the name of the hashtag.
+    """
+    name = models.CharField(
+        max_length=30,
+        unique=True,
+        blank=False
+        )
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
 class Artpiece(models.Model):
     """
     Represents an art piece in the platform.
@@ -27,6 +54,9 @@ class Artpiece(models.Model):
         from predefined choices.
         - art_collection_id (ForeignKey): Optional foreign key linking to a
         ArtCollection. If the collection is deleted, this field is set to NULL.
+        - hashtags (ManyToManyField): Optional many-to-many relationship with
+        Hashtag. An art piece can have multiple hashtags, and a hashtag can be
+        associated with multiple art pieces.
 
     Choices:
         FOR_SALE_CHOICES: Defines the sale status of the art piece.
@@ -47,8 +77,8 @@ class Artpiece(models.Model):
             9 - Other
 
     Meta:
-        ordering (list): Specifies the default ordering of the Artpiece objects.
-        Ordered by creation date in descending order.
+        ordering (list): Specifies the default ordering of the Artpiece
+        objects. Ordered by creation date in descending order.
 
     Methods:
         __str__: Returns a string representation of the Artpiece instance,
@@ -94,6 +124,10 @@ class Artpiece(models.Model):
         related_name='art_collection',
         on_delete=models.SET_NULL,
         null=True,
+        blank=True)
+    hashtags = models.ManyToManyField(
+        Hashtag,
+        related_name='hashed_artpieces',
         blank=True)
 
     class Meta:
