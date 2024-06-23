@@ -89,6 +89,7 @@ For normal text
 #### Logo
 
 Logo, black on transparent background:
+
 ![Logo](documentation/design/logo.webp)
 
 <a id="basic-wireframes"></a>
