@@ -188,3 +188,4 @@ Points completed: 12
 ## Credits
 
 - [Customising the user model - Django documentation](https://docs.djangoproject.com/en/5.0/topics/auth/customizing/#a-full-example)
+- [Installation dj-rest-auth](https://dj-rest-auth.readthedocs.io/en/latest/installation.html)
