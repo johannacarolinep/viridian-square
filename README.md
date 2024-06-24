@@ -105,6 +105,7 @@ An additional wireframe was created to test out the colour scheme and intended s
 
 <a id="agile-methodology"></a>
 ### Agile methodologies
+
 #### Sprint 1:
 ![Sprint 1 milestone](documentation/sprints/sprint1_milestone.png)
 
@@ -119,6 +120,10 @@ Points completed: 12
 **Actions**
 - Moved 6 PBI's back to the backlog.
 - Reprioritised backlog.
+
+#### Sprint 2:
+
+![Sprint 2 milestone](documentation/sprints/sprint2_milestone.png)
 
 <a id="user-stories"></a>
 ### User stories:
