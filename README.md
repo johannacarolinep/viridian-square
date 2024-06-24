@@ -108,6 +108,18 @@ An additional wireframe was created to test out the colour scheme and intended s
 #### Sprint 1:
 ![Sprint 1 milestone](documentation/sprints/sprint1_milestone.png)
 
+##### Sprint 1 wrap up:
+
+Project board at end of sprint 1:
+
+![End of sprint 1 project board](documentation/sprints/sprint1_board.png)
+
+Points completed: 12
+
+**Actions**
+- Moved 6 PBI's back to the backlog.
+- Reprioritised backlog.
+
 <a id="user-stories"></a>
 ### User stories:
 
@@ -166,3 +178,8 @@ An additional wireframe was created to test out the colour scheme and intended s
 
 #### Accessibility
 - `Navigate the website with keyboard`: As a **Site User not able to utilise a mouse** I can **focus on and access all interactive elements on the website using a keyboard** so that I can **be included, navigate on the website, access the content, and use all core functionality**.
+
+<a id="credits"></a>
+## Credits
+
+- [Customising the user model - Django documentation](https://docs.djangoproject.com/en/5.0/topics/auth/customizing/#a-full-example)
