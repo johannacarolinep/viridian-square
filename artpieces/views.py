@@ -4,7 +4,7 @@ from .models import Artpiece
 
 
 # Create your views here.
-class ArtpieceDetail(generics.RetrieveAPIView):
+class ArtpieceDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve an artpiece.
     """
