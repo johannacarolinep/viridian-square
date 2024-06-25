@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import MaxLengthValidator
+from django.db.models.signals import m2m_changed
+from django.dispatch import receiver
 from users.models import CustomUser
 from cloudinary.models import CloudinaryField
 from art_collections.models import ArtCollection
@@ -135,3 +137,36 @@ class Artpiece(models.Model):
 
     def __str__(self):
         return f'{self.id} {self.title}'
+
+
+@receiver(m2m_changed, sender=Artpiece.hashtags.through)
+def check_hashtags(sender, instance, action, reverse, pk_set, **kwargs):
+    """
+    Signal handler delete unused hashtags.
+
+    This function listens to the `m2m_changed` signal for the `hashtags`
+    ManyToManyField on the `Artpiece` model. If a hashtag is about to be
+    removed from an artpiece, and is not associated with any other artpieces,
+    it is deleted from the database.
+
+    Args:
+        sender (Model): The model class that sent the signal (Artpiece).
+        instance (Artpiece): The instance of the Artpiece being modified.
+        action (str): The type of modification being made - "pre_remove" and
+        "pre_clear" actions.
+        reverse (bool): A flag indicating the direction of the relation.
+        pk_set (set): A set of primary key values for the related hashtag
+        objects.
+        **kwargs: Additional keyword arguments.
+
+    Credit: https://stackoverflow.com/questions/10609699/\
+        efficiently-delete-orphaned-m2m-objects-tags-in-django
+    """
+    if action in ["pre_remove", "pre_clear"]:
+        if action == "pre_clear":
+            pk_set = set(instance.hashtags.values_list('pk', flat=True))
+        for hashtag_id in pk_set:
+            hashtag = Hashtag.objects.get(pk=hashtag_id)
+            # checks if the hashtag is orphaned and deletes it
+            if hashtag.hashed_artpieces.count() == 1:
+                hashtag.delete()
