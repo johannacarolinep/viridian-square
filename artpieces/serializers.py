@@ -56,10 +56,18 @@ class ArtpieceSerializer(serializers.ModelSerializer):
         return obj.image.url
 
     def create(self, validated_data):
-        image = validated_data.pop('image')
+        hashtags_str = validated_data.pop('hashtags', '')
+        hashtags_list = self._parse_hashtags(hashtags_str)
+        image = validated_data.pop('image', None)
+
+        if not image:
+            raise serializers.ValidationError({'image': 'This field is required.'})
+
         upload_data = cloudinary.uploader.upload(image)
         validated_data['image'] = upload_data['url']
-        return super().create(validated_data)
+        artpiece = Artpiece.objects.create(**validated_data)
+        self._create_or_update_hashtags(artpiece, hashtags_list)
+        return artpiece
 
     def update(self, instance, validated_data):
         hashtags_str = validated_data.pop('hashtags', '')
