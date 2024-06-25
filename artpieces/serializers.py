@@ -16,23 +16,25 @@ class ArtpieceSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     image_url = serializers.SerializerMethodField()
-    image = serializers.ImageField(write_only=True, required=True)
+    image = serializers.ImageField(write_only=True, required=False)
     hashtags = serializers.CharField(write_only=True, required=False)
 
     def validate_image(self, data):
-        request = self.context['request']
-        image = request.FILES.get('image')
+        if not data:  # No image provided
+            if not self.instance:  # Creating new instance
+                raise serializers.ValidationError('Image is required.')
+            return data  # If updating artpiece, keep existing image
 
-        if image and image.size > 2 * 1024 * 1024:
+        # Validate size and dimensions of new images
+        if data.size > 2 * 1024 * 1024:
             raise serializers.ValidationError('Image size larger than 2MB!')
-        if image and image.image.height > 2000:
+        if data.image.height > 2000:
             raise serializers.ValidationError(
-                'Image height larger than 2000px!'
-            )
-        if image and image.image.width > 2000:
+                'Image height larger than 2000px!')
+        if data.image.width > 2000:
             raise serializers.ValidationError(
-                'Image width larger than 2000px!'
-            )
+                'Image width larger than 2000px!')
+
         return data
 
     def validate_hashtags(self, value):
