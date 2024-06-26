@@ -23,11 +23,19 @@ class ArtpieceList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Artpiece.objects.all().order_by('-created_on')
     filter_backends = [
-        DjangoFilterBackend
+        DjangoFilterBackend,
+        filters.SearchFilter,
     ]
     filterset_fields = [
         'art_medium',
         'for_sale',
+    ]
+    search_fields = [
+        'title',
+        'owner__username',
+        'owner__profile__name',
+        'hashtags__name',
+        'art_collection_id__title'
     ]
 
     def perform_create(self, serializer):
