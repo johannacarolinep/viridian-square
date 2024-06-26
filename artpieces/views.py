@@ -1,4 +1,5 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import ArtpieceSerializer
 from .models import Artpiece
 from viridian_api.permissions import IsOwnerOrReadOnly
@@ -21,6 +22,13 @@ class ArtpieceList(generics.ListCreateAPIView):
     serializer_class = ArtpieceSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Artpiece.objects.all().order_by('-created_on')
+    filter_backends = [
+        DjangoFilterBackend
+    ]
+    filterset_fields = [
+        'art_medium',
+        'for_sale',
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
