@@ -35,6 +35,7 @@ class ArtpieceList(generics.ListCreateAPIView):
     filterset_fields = [
         'art_medium',
         'for_sale',
+        'art_collection_id'
     ]
     search_fields = [
         'title',
