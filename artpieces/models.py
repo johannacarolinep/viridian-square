@@ -92,16 +92,16 @@ class Artpiece(models.Model):
         (2, 'Sold')
     ]
     ART_MEDIUM_CHOICES = [
-        (0, 'No medium selected'),
-        (1, 'Oil'),
-        (2, 'Watercolour'),
-        (3, 'Gouache'),
-        (4, 'Acrylic'),
-        (5, 'Charcoal'),
-        (6, 'Chalk'),
-        (7, 'Photography'),
-        (8, 'Mixed media'),
-        (9, 'Other')
+        ('noselection', 'No medium selected'),
+        ('oil', 'Oil'),
+        ('watercolour', 'Watercolour'),
+        ('gouache', 'Gouache'),
+        ('acrylic', 'Acrylic'),
+        ('charcoal', 'Charcoal'),
+        ('chalk', 'Chalk'),
+        ('photography', 'Photography'),
+        ('mixedmedia', 'Mixed media'),
+        ('other', 'Other')
     ]
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -119,7 +119,7 @@ class Artpiece(models.Model):
         'image',
         blank=False,
         null=False)
-    art_medium = models.IntegerField(choices=ART_MEDIUM_CHOICES, default=0)
+    art_medium = models.CharField(max_length=30, choices=ART_MEDIUM_CHOICES, default=0)
     for_sale = models.IntegerField(choices=FOR_SALE_CHOICES, default=0)
     art_collection_id = models.ForeignKey(
         ArtCollection,
