@@ -30,6 +30,7 @@ class ArtpieceList(generics.ListCreateAPIView):
     filter_backends = [
         DjangoFilterBackend,
         filters.SearchFilter,
+        filters.OrderingFilter,
     ]
     filterset_fields = [
         'art_medium',
@@ -41,6 +42,10 @@ class ArtpieceList(generics.ListCreateAPIView):
         'owner__profile__name',
         'hashtags__name',
         'art_collection_id__title'
+    ]
+    ordering_fields = [
+        'likes_count',
+        'created_on'
     ]
 
     def perform_create(self, serializer):
