@@ -1,6 +1,7 @@
 import re
 from rest_framework import serializers
 from .models import Artpiece, Hashtag
+from likes.models import Like
 import cloudinary.uploader
 
 
@@ -18,6 +19,7 @@ class ArtpieceSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
     image = serializers.ImageField(write_only=True, required=False)
     hashtags = serializers.CharField(write_only=True, required=False)
+    likes_count = serializers.ReadOnlyField()
 
     def validate_image(self, data):
         if not data:  # No image provided
@@ -106,5 +108,5 @@ class ArtpieceSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_on', 'updated_on',
             'title', 'description', 'image', 'image_url', 'art_medium',
-            'for_sale', 'art_collection_id', 'hashtags',
+            'for_sale', 'art_collection_id', 'hashtags', 'likes_count',
         ]

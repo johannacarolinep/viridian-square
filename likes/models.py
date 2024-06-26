@@ -24,7 +24,8 @@ class Like(models.Model):
         including the owner and the liked art piece.
     """
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    liked_piece = models.ForeignKey(Artpiece, on_delete=models.CASCADE)
+    liked_piece = models.ForeignKey(
+        Artpiece, on_delete=models.CASCADE, related_name='likes')
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
