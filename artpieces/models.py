@@ -141,7 +141,6 @@ class Artpiece(models.Model):
     def add_to_collection(self, collection_id):
         # Add the collection ID to the artpiece if not already added
         if collection_id != self.art_collection:
-            print("collection id: ", collection_id)
             self.art_collection = collection_id
             self.save()
 

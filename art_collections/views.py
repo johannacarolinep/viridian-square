@@ -3,8 +3,9 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.exceptions import PermissionDenied
 from .serializers import ArtCollectionSerializer
-from viridian_api.permissions import IsOwnerOrReadOnly
+from viridian_api.permissions import IsOwnerOrReadOnly, IsOwner
 from .models import ArtCollection
 from artpieces.models import Artpiece
 
@@ -38,33 +39,29 @@ class ArtCollectionList(generics.ListCreateAPIView):
 class ArtCollectionUpdateArtpieces(generics.GenericAPIView):
     queryset = ArtCollection.objects.all()
     serializer_class = ArtCollectionSerializer
+    permission_classes = [IsOwner]
 
     def post(self, request, *args, **kwargs):
         collection_id = kwargs.get('pk')
-        artpiece_ids = request.data.get('artpiece_ids', [])
+        new_artpiece_ids = request.data.get('artpiece_ids', [])
 
         try:
             art_collection = self.get_object()
-            print("collection id ", collection_id)
             existing_artpieces = Artpiece.objects.filter(art_collection=collection_id)
-            print("Existing artpieces", existing_artpieces)
-            # existing_artpieces = art_collection.artpieces.values_list('id', flat=True)
 
             # Remove artpieces that are no longer selected
-            for artpiece_id in existing_artpieces:
-                if artpiece_id not in artpiece_ids:
-                    print("Artpiece id = ", artpiece_id)
-                    artpiece = Artpiece.objects.get(id=artpiece_id.id)
-                    print("Artpiece ", artpiece)
-                    artpiece.remove_from_collection()
+            for artpiece in existing_artpieces:
+                if artpiece not in new_artpiece_ids:
+                    artpiece_to_remove = Artpiece.objects.get(id=artpiece.id)
+                    artpiece_to_remove.remove_from_collection()
 
             # Add artpieces that are not already in the collection
-            for artpiece_id in artpiece_ids:
-                # artpiece = Artpiece.objects.get(id=artpiece_id)
-                # artpiece.add_to_collection(art_collection)
+            for artpiece_id in new_artpiece_ids:
                 try:
-                    artpiece = Artpiece.objects.get(id=artpiece_id)
-                    artpiece.add_to_collection(art_collection)
+                    artpiece_to_add = Artpiece.objects.get(id=artpiece_id)
+                    if artpiece_to_add.owner != request.user:
+                        raise PermissionDenied(detail=f"You do not have permission to add artpiece {artpiece_id}.")
+                    artpiece_to_add.add_to_collection(art_collection)
                 except Artpiece.DoesNotExist:
                     # Handle case where artpiece doesn't exist
                     return Response({'detail': f'Artpiece with ID {artpiece_id} not found.'}, status=status.HTTP_404_NOT_FOUND)
@@ -80,3 +77,5 @@ class ArtCollectionUpdateArtpieces(generics.GenericAPIView):
             return Response({'detail': 'Art collection not found.'}, status=status.HTTP_404_NOT_FOUND)
         except Artpiece.DoesNotExist:
             return Response({'detail': 'One or more artpieces not found.'}, status=status.HTTP_404_NOT_FOUND)
+        except PermissionDenied as e:
+            return Response({'detail': str(e)}, status=status.HTTP_403_FORBIDDEN)
