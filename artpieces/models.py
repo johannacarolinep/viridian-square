@@ -54,7 +54,7 @@ class Artpiece(models.Model):
         predefined choices.
         - for_sale (IntegerField): The sale status of the art piece, chosen
         from predefined choices.
-        - art_collection_id (ForeignKey): Optional foreign key linking to a
+        - art_collection (ForeignKey): Optional foreign key linking to a
         ArtCollection. If the collection is deleted, this field is set to NULL.
         - hashtags (ManyToManyField): Optional many-to-many relationship with
         Hashtag. An art piece can have multiple hashtags, and a hashtag can be
@@ -121,9 +121,9 @@ class Artpiece(models.Model):
         null=False)
     art_medium = models.CharField(max_length=30, choices=ART_MEDIUM_CHOICES, default=0)
     for_sale = models.IntegerField(choices=FOR_SALE_CHOICES, default=0)
-    art_collection_id = models.ForeignKey(
+    art_collection = models.ForeignKey(
         ArtCollection,
-        related_name='art_collection',
+        related_name='collection_artpieces',
         on_delete=models.SET_NULL,
         null=True,
         blank=True)
@@ -137,6 +137,18 @@ class Artpiece(models.Model):
 
     def __str__(self):
         return f'{self.id} {self.title}'
+
+    def add_to_collection(self, collection_id):
+        # Add the collection ID to the artpiece if not already added
+        if collection_id != self.art_collection:
+            print("collection id: ", collection_id)
+            self.art_collection = collection_id
+            self.save()
+
+    def remove_from_collection(self):
+        # Remove the collection ID from the artpiece
+        self.art_collection = None
+        self.save()
 
 
 @receiver(m2m_changed, sender=Artpiece.hashtags.through)

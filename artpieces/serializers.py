@@ -108,5 +108,5 @@ class ArtpieceSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_on', 'updated_on',
             'title', 'description', 'image', 'image_url', 'art_medium',
-            'for_sale', 'art_collection_id', 'hashtags', 'likes_count',
+            'for_sale', 'art_collection', 'hashtags', 'likes_count',
         ]
