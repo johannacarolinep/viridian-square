@@ -1,5 +1,5 @@
 
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from rest_framework.response import Response
 from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
@@ -56,6 +56,8 @@ class ArtCollectionList(generics.ListCreateAPIView):
         queryset.
         filterset_fields (list): List of fields that can be used to filter the
         queryset.
+        ordering_fields (list): List of fields that can used for ordering the
+        queryset.
 
     Methods:
         perform_create(self, serializer):
@@ -66,10 +68,14 @@ class ArtCollectionList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = ArtCollection.objects.all()
     filter_backends = [
-        DjangoFilterBackend
+        DjangoFilterBackend,
+        filters.OrderingFilter,
     ]
     filterset_fields = [
         'owner__id'
+    ]
+    ordering_fields = [
+        'created_on'
     ]
 
     def perform_create(self, serializer):
