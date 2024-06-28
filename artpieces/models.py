@@ -50,7 +50,7 @@ class Artpiece(models.Model):
         - description (TextField): A brief description of the art piece.
         Optional, with a max length of 180 characters.
         - image (CloudinaryField): The image of the art piece. Mandatory field.
-        - art_medium (IntegerField): The medium of the art piece, chosen from
+        - art_medium (CharField): The medium of the art piece, chosen from
         predefined choices.
         - for_sale (IntegerField): The sale status of the art piece, chosen
         from predefined choices.
@@ -67,16 +67,16 @@ class Artpiece(models.Model):
             2 - Sold
 
         ART_MEDIUM_CHOICES: Defines the medium of the art piece.
-            0 - No medium selected
-            1 - Oil
-            2 - Watercolour
-            3 - Gouache
-            4 - Acrylic
-            5 - Charcoal
-            6 - Chalk
-            7 - Photography
-            8 - Mixed media
-            9 - Other
+            'noselection' - No medium selected
+            'oil' - Oil
+            'watercolour' - Watercolour
+            'gouache' - Gouache
+            'acrylic' - Acrylic
+            'charcoal' - Charcoal
+            'chalk' - Chalk
+            'photography' - Photography
+            'mixedmedia' - Mixed media
+            'other' - Other
 
     Meta:
         ordering (list): Specifies the default ordering of the Artpiece
@@ -85,6 +85,10 @@ class Artpiece(models.Model):
     Methods:
         __str__: Returns a string representation of the Artpiece instance,
         including its ID and title.
+        add_to_collection: Adds the art piece to the specified collection if
+        not already added.
+        remove_from_collection: Removes the art piece from its current
+        collection.
     """
     FOR_SALE_CHOICES = [
         (0, 'Not for sale'),
@@ -139,13 +143,18 @@ class Artpiece(models.Model):
         return f'{self.id} {self.title}'
 
     def add_to_collection(self, collection_id):
-        # Add the collection ID to the artpiece if not already added
+        """
+        Adds the art piece to the specified collection if not already added.
+
+        Args:
+        collection_id (int): The ID of the collection to add the art piece to.
+        """
         if collection_id != self.art_collection:
             self.art_collection = collection_id
             self.save()
 
     def remove_from_collection(self):
-        # Remove the collection ID from the artpiece
+        """ Removes the art piece from its current collection. """
         self.art_collection = None
         self.save()
 
