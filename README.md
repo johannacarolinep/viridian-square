@@ -58,10 +58,11 @@ The goal of the site is to help independent artists to increase their visibility
 | - | - | - | - | - | - | - | - |
 | users | users/<br>users/:id/ | Y | Y | Y | Y | N | N |
 | profiles | profiles/<br>profiles/:id/ | Y (signals) | Y | Y | Y (signals) | N | N |
-| artpieces | artpieces/<br>artpieces/:id/ | Y | Y | Y | Y | profile<br>liked<br>for_sale_status<br>collection<br>art_medium | title<br>collection title<br>profile name<br>hashtag |
-| likes | likes/<br>likes/:id/ | Y | Y | N | Y | user | N |
+| artpieces | artpieces/<br>artpieces/:id/ | Y | Y | Y | Y | owner<br>liked<br>for_sale_status<br>collection<br>art_medium | title<br>collection title<br>profile name<br>hashtag |
+| likes | likes/<br>likes/:id/ | Y | Y | N | Y | owner | N |
 | enquiries | enquiries/<br>enquiries/:id/ | Y | Y | Y | N | user<br>artpiece | N |
 | hashtags | n/a | N | N | N | N | N | N |
+| art_collections | collections/<br>collections/:id/<br>collections/:id/update-artpieces | Y | Y | Y | Y | owner | N |
 
 <a id="surface-plane-design"></a>
 ### Surface plane design
@@ -109,7 +110,7 @@ An additional wireframe was created to test out the colour scheme and intended s
 #### Sprint 1:
 ![Sprint 1 milestone](documentation/sprints/sprint1_milestone.png)
 
-##### Sprint 1 wrap up:
+##### Sprint 1 wrap-up:
 
 Project board at end of sprint 1:
 
@@ -124,6 +125,20 @@ Points completed: 12
 #### Sprint 2:
 
 ![Sprint 2 milestone](documentation/sprints/sprint2_milestone.png)
+
+##### Sprint 2 wrap-up:
+
+Project board at end of sprint 2:
+
+![End of sprint 2 project board](documentation/sprints/sprint2_board.png)
+
+Points completed: 34
+Velocity: 23
+
+Actions taken:
+- Added one new PBI to the backlog:
+    - `REFACTOR`: Review potential refactoring of code in artpieces/serializers.py.
+    - This action was added as I currently have methods relating to the Hashtag model in the serializer for the Artpiece model, and believe refactoring could lead to better separation of concerns and better adherence to best practice.
 
 <a id="user-stories"></a>
 ### User stories:
