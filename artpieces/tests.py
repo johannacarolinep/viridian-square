@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from io import BytesIO
 import requests
+import json
 
 
 class ArtpieceListTests(APITestCase):
@@ -33,6 +34,7 @@ class ArtpieceListTests(APITestCase):
 
         # Create a BytesIO object from the downloaded image content
         image_file = BytesIO(image_content)
+        image_file.name = 'test_image.jpg'
 
         data = {
             'title': 'a test title',
@@ -44,3 +46,10 @@ class ArtpieceListTests(APITestCase):
             format='multipart'
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        response_data = json.loads(response.content)
+
+        # Retrieve and delete the created artpiece
+        created_artpiece = Artpiece.objects.get(id=response_data['id'])
+        created_artpiece.delete()
+        with self.assertRaises(Artpiece.DoesNotExist):
+            Artpiece.objects.get(id=response_data['id'])
