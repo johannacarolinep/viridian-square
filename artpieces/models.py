@@ -1,7 +1,7 @@
 import re
 from django.db import models
 from django.core.validators import MaxLengthValidator
-from django.db.models.signals import m2m_changed
+from django.db.models.signals import m2m_changed, post_delete
 from django.dispatch import receiver
 from users.models import CustomUser
 from cloudinary.models import CloudinaryField
@@ -165,6 +165,9 @@ class Artpiece(models.Model):
         """
         Deletes the art piece's associated image from Cloudinary before
         deleting the artpiece instance.
+
+        Deletes any hashtags associated to the artpiece instance that are
+        orphaned after deletion.
         """
         if self.image:
             # Regular expression to extract public_id from image url
@@ -173,13 +176,24 @@ class Artpiece(models.Model):
                 public_id = match.group(1)
                 destroy(public_id)
 
+        # Save hashtag id's before deleting artpiece
+        hashtag_ids = list(self.hashtags.values_list('pk', flat=True))
+
+        # Delete the Artpiece instance
         super().delete(*args, **kwargs)
+
+        # Check and delete orphaned hashtags
+        for hashtag_id in hashtag_ids:
+            hashtag = Hashtag.objects.get(pk=hashtag_id)
+            if hashtag.hashed_artpieces.count() == 0:
+                hashtag.delete()
 
 
 @receiver(m2m_changed, sender=Artpiece.hashtags.through)
 def check_hashtags(sender, instance, action, reverse, pk_set, **kwargs):
     """
-    Signal handler delete unused hashtags.
+    Signal handler delete unused hashtags when an Artpiece instance's hashtags
+    field is updated.
 
     This function listens to the `m2m_changed` signal for the `hashtags`
     ManyToManyField on the `Artpiece` model. If a hashtag is about to be

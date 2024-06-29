@@ -134,7 +134,6 @@ class ArtpieceSerializer(serializers.ModelSerializer):
         """
         user = self.context['request'].user
         if value and not value.owner == user:
-            print("collection ", value)
             raise serializers.ValidationError(
                 "You can only add artpieces to your own collections.")
         return value
