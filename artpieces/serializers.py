@@ -46,6 +46,8 @@ class ArtpieceSerializer(serializers.ModelSerializer):
     Methods:
         - validate_image: Validates the image field.
         - validate_hashtags: Validates the hashtags field.
+        - validate_art_collection: Validated the collection field, ensuring
+        the user is the owner of the added collection.
         - get_is_owner: Returns whether the request user is the owner of the
             art piece.
         - get_image_url: Returns the URL of the art piece's image.
@@ -125,6 +127,17 @@ class ArtpieceSerializer(serializers.ModelSerializer):
                   + 'and separated by spaces.')}
             )
         return ' '.join(hashtags)
+
+    def validate_art_collection(self, value):
+        """
+        Validate that the user owns the specified art collection.
+        """
+        user = self.context['request'].user
+        if value and not value.owner == user:
+            print("collection ", value)
+            raise serializers.ValidationError(
+                "You can only add artpieces to your own collections.")
+        return value
 
     def get_is_owner(self, obj):
         """

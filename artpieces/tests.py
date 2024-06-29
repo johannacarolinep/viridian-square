@@ -62,3 +62,80 @@ class ArtpieceListTests(APITestCase):
         created_artpiece.delete()
         with self.assertRaises(Artpiece.DoesNotExist):
             Artpiece.objects.get(id=response_data['id'])
+
+
+class ArtpieceDetailTests(APITestCase):
+    def setUp(self):
+        self.test_user = CustomUser.objects.create_user(
+            email='test@test.com',
+            username='testname',
+            password='testpass')
+
+        hashtag1 = Hashtag.objects.create(name='hashtag1')
+        hashtag2 = Hashtag.objects.create(name='hashtag2')
+
+        self.test_artpiece = Artpiece.objects.create(
+            owner=self.test_user,
+            title='test title',
+            )
+
+        self.test_artpiece.hashtags.set([hashtag1, hashtag2])
+
+    def test_can_retrieve_artpiece(self):
+        """
+        Asserts an anonymous user can retreive an artpiece with an ID
+        """
+        response = self.client.get(f'/artpieces/{self.test_artpiece.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_can_update_title_and_description(self):
+        self.client.login(
+            email='test@test.com',
+            password='testpass')
+
+        data = {
+            'title': 'a new title',
+            'description': 'a new description',
+        }
+        response = self.client.put(
+            f'/artpieces/{self.test_artpiece.id}/',
+            data,
+            format='multipart'
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.test_artpiece.refresh_from_db()
+        self.assertEqual(self.test_artpiece.title, "a new title")
+        self.assertEqual(self.test_artpiece.description, "a new description")
+
+    def test_can_update_hashtags(self):
+        self.client.login(
+            email='test@test.com',
+            password='testpass')
+
+        data = {
+            'title': 'a new title',
+            'hashtags': '#hashtag2 #hashtag3',
+        }
+        response = self.client.put(
+            f'/artpieces/{self.test_artpiece.id}/',
+            data,
+            format='multipart'
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.test_artpiece.refresh_from_db()
+        updated_hashtags = set(
+            self.test_artpiece.hashtags.values_list('name', flat=True))
+        expected_hashtags = {'hashtag2', 'hashtag3'}
+        self.assertEqual(updated_hashtags, expected_hashtags)
+        self.assertFalse(Hashtag.objects.filter(name='hashtag1').exists())
+
+    def test_can_delete_artpiece(self):
+        self.client.login(
+            email='test@test.com',
+            password='testpass')
+
+        response = self.client.delete(
+            f'/artpieces/{self.test_artpiece.id}/')
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertTrue(self.test_artpiece.DoesNotExist)
