@@ -1,9 +1,11 @@
+import re
 from django.db import models
 from django.core.validators import MaxLengthValidator
 from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
 from users.models import CustomUser
 from cloudinary.models import CloudinaryField
+from cloudinary.uploader import destroy
 from art_collections.models import ArtCollection
 
 
@@ -89,6 +91,7 @@ class Artpiece(models.Model):
         not already added.
         remove_from_collection: Removes the art piece from its current
         collection.
+        delete: Deletes the image from Cloudinary before deleting the artpiece
     """
     FOR_SALE_CHOICES = [
         (0, 'Not for sale'),
@@ -157,6 +160,20 @@ class Artpiece(models.Model):
         """ Removes the art piece from its current collection. """
         self.art_collection = None
         self.save()
+
+    def delete(self, *args, **kwargs):
+        """
+        Deletes the art piece's associated image from Cloudinary before
+        deleting the artpiece instance.
+        """
+        if self.image:
+            # Regular expression to extract public_id from image url
+            match = re.search(r'/([^/]+)$', self.image.url)
+            if match:
+                public_id = match.group(1)
+                destroy(public_id)
+
+        super().delete(*args, **kwargs)
 
 
 @receiver(m2m_changed, sender=Artpiece.hashtags.through)
