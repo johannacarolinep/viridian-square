@@ -140,6 +140,11 @@ Actions taken:
     - `REFACTOR`: Review potential refactoring of code in artpieces/serializers.py.
     - This action was added as I currently have methods relating to the Hashtag model in the serializer for the Artpiece model, and believe refactoring could lead to better separation of concerns and better adherence to best practice.
 
+#### Sprint 3:
+
+![Sprint 3 milestone](documentation/sprints/sprint3_milestone.png)
+
+
 <a id="user-stories"></a>
 ### User stories:
 
