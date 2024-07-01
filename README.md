@@ -204,6 +204,43 @@ Actions taken:
 #### Accessibility
 - `Navigate the website with keyboard`: As a **Site User not able to utilise a mouse** I can **focus on and access all interactive elements on the website using a keyboard** so that I can **be included, navigate on the website, access the content, and use all core functionality**.
 
+
+<a id="planning"></a>
+## Bugs
+
+### BUG: 2024-07-01: Removing the `username` field from `CustomUser`.
+
+**Background:** 
+
+I wanted to remove the `username` field from my `CustomUser` model since I am using email for authentication and the `username` would not be used elsewhere in the app.
+
+**Issue:**
+
+After removing the `username` field and any references to it, I encountered the following error during migration:
+
+```
+django.core.exceptions.FieldDoesNotExist: CustomUser has no field named 'username'
+```
+
+**Steps taken:**
+
+1. Initially, I reset the database by deleting the `SQLite3` file, removing migration files, creating new migrations, and migrating. This did not resolve the issue.
+1. I identified that the errors were related to `dj_rest_auth` and `django-allauth` expecting a `username` field by default.
+1. Based on online research, I added the following configuration to `settings.py` (source: [StackOverflow - *How to remove username field in the register form on django admin?*](https://stackoverflow.com/questions/36094342/how-to-remove-username-field-in-the-register-form-on-django-admin)):
+
+```
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+```
+
+**Solution:**
+
+1. Adding the above configuration informed `django-allauth` not to expect a `username` field.
+1. After updating `settings.py`, I successfully ran migrations and confirmed the creation of `CustomUser` instances in the Django Admin panel.
+
+
 <a id="credits"></a>
 ## Credits
 
