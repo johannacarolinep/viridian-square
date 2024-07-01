@@ -9,7 +9,8 @@ class LikeSerializer(serializers.ModelSerializer):
 
     This serializer handles the serialization and deserialization of Like
     instances.
-    It catches IntegrityError exceptions to prevent duplicate likes.
+    It catches IntegrityError exceptions to prevent duplicate likes, and
+    validated that the user creating the like is not the owner of the artpiece.
 
     Fields:
         - id: Primary key of the like instance.
@@ -18,9 +19,21 @@ class LikeSerializer(serializers.ModelSerializer):
         - liked_piece: Field representing the liked artpiece (foreign key).
 
     Methods:
+        - validate(self, data): validates the user is not liking their own
+        artpiece.
         - create(self, validated_data): ensures no duplicate likes are created.
     """
     owner = serializers.ReadOnlyField(source='owner.email')
+
+    def validate(self, data):
+        """
+        Ensures a user cannot like their own art piece.
+        """
+        if data['liked_piece'].owner == self.context['request'].user:
+            raise serializers.ValidationError({
+                'detail': 'You cannot like your own art piece.'
+            })
+        return data
 
     def create(self, validated_data):
         """
