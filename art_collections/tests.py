@@ -18,7 +18,6 @@ class ArtCollectionListTests(APITestCase):
         """
         self.user = CustomUser.objects.create_user(
             email='test@test.com',
-            username='testuser',
             password='testpass'
         )
         self.client.login(email='test@test.com', password='testpass')
@@ -65,7 +64,6 @@ class ArtCollectionDetailTests(APITestCase):
         """
         self.user = CustomUser.objects.create_user(
             email='test@test.com',
-            username='testname',
             password='testpass')
 
         self.art_collection = ArtCollection.objects.create(
@@ -123,7 +121,6 @@ class ArtCollectionTests(APITestCase):
         """
         self.user = CustomUser.objects.create_user(
             email='test@test.com',
-            username='testname',
             password='testpass'
         )
 

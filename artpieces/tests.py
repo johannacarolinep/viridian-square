@@ -18,7 +18,6 @@ class ArtpieceListTests(APITestCase):
         """
         CustomUser.objects.create_user(
             email='test@test.com',
-            username='testname',
             password='testpass')
 
     def test_can_list_artpieces(self):
@@ -99,7 +98,6 @@ class ArtpieceDetailTests(APITestCase):
         """
         self.test_user = CustomUser.objects.create_user(
             email='test@test.com',
-            username='testname',
             password='testpass')
 
         hashtag1 = Hashtag.objects.create(name='hashtag1')

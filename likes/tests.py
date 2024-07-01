@@ -18,12 +18,10 @@ class LikeListTests(APITestCase):
         """
         self.user = CustomUser.objects.create_user(
             email='test@test.com',
-            username='testuser',
             password='testpass'
         )
         self.other_user = CustomUser.objects.create_user(
             email='other@test.com',
-            username='otheruser',
             password='otherpass'
         )
         self.artpiece = Artpiece.objects.create(
@@ -95,12 +93,10 @@ class LikeDetailTests(APITestCase):
         """
         self.user = CustomUser.objects.create_user(
             email='test@test.com',
-            username='testuser',
             password='testpass'
         )
         self.other_user = CustomUser.objects.create_user(
             email='other@test.com',
-            username='otheruser',
             password='otherpass'
         )
         self.artpiece = Artpiece.objects.create(
