@@ -18,6 +18,7 @@ class Like(models.Model):
     Meta:
         ordering (list): Specifies the default ordering of the Like objects.
         Ordered by creation date in descending order.
+        unique_together: Constraint to avoid duplicate likes
 
     Methods:
         __str__: Returns a string representation of the Like instance,
@@ -30,6 +31,7 @@ class Like(models.Model):
 
     class Meta:
         ordering = ['-created_on']
+        unique_together = ['owner', 'liked_piece']
 
     def __str__(self):
         return f'{self.owner} liked {self.liked_piece}'
