@@ -72,7 +72,7 @@ class ArtCollectionList(generics.ListCreateAPIView):
         filters.OrderingFilter,
     ]
     filterset_fields = [
-        'owner__id'
+        'owner'
     ]
     ordering_fields = [
         'created_on'

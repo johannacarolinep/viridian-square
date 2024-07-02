@@ -35,7 +35,8 @@ class ArtpieceList(generics.ListCreateAPIView):
 
     Filter Backends:
     - DjangoFilterBackend: Allows filtering of artpieces based on specified
-        fields ('art_medium', 'for_sale', 'art_collection_id', 'likes__owner').
+        fields ('art_medium', 'for_sale', 'art_collection_id', 'likes__owner',
+        'owner').
     - SearchFilter: Enables searching for artpieces based on fields
         ('title', 'owner__profile__name', 'hashtags__name',
         'art_collection_id__title').
@@ -60,7 +61,8 @@ class ArtpieceList(generics.ListCreateAPIView):
         'art_medium',
         'for_sale',
         'art_collection_id',
-        'likes__owner'
+        'likes__owner',
+        'owner'
     ]
     search_fields = [
         'title',
