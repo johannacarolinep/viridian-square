@@ -1,9 +1,11 @@
+import re
 import uuid
 from django.db import IntegrityError, models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from users.models import CustomUser
 from cloudinary.models import CloudinaryField
+from cloudinary.uploader import destroy
 
 
 class Profile(models.Model):
@@ -58,6 +60,22 @@ class Profile(models.Model):
                 break
             except IntegrityError:
                 continue
+
+    def delete(self, *args, **kwargs):
+        """
+        Deletes the profile's associated image from Cloudinary before
+        deleting the profile instance, unless it's the default image.
+        """
+        default_image_public_id = 'default_profile_shke8m'
+        # Regular expression to extract public_id from image url
+        match = re.search(r'/([^/]+)$', self.profile_image.url)
+        if match:
+            public_id = match.group(1).split('.')[0]
+            if public_id != default_image_public_id:
+                destroy(public_id)
+
+        # Delete the Profile instance
+        super().delete(*args, **kwargs)
 
     class Meta:
         ordering = ['-created_at']
