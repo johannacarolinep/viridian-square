@@ -6,6 +6,21 @@ from .serializers import ProfileSerializer
 
 
 class ProfileList(generics.ListAPIView):
+    """
+    API view for listing profiles.
+
+    Retrieves a list of profiles with associated counts of art pieces,
+    collections, and art pieces for sale.
+
+    Uses `ProfileSerializer` for serialization.
+
+    Annotations:
+    - artpiece_count: Number of art pieces associated with each profile.
+    - collection_count: Number of collections associated with each profile.
+    - for_sale_count: Number of art pieces marked for sale associated with each
+    profile.
+
+    """
     queryset = Profile.objects.annotate(
         artpiece_count=Count('owner__artpiece', distinct=True),
         collection_count=Count('owner__artcollection', distinct=True),
@@ -22,7 +37,20 @@ class ProfileList(generics.ListAPIView):
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
-    Retrieve or update a profile if you're the owner.
+    API view for retrieving and updating a profile.
+
+    Uses `ProfileSerializer` for serialization.
+
+    Permissions:
+    - IsOwnerOrReadOnly: Only allows the owner of the profile to update their
+    profile. Others have read-only access.
+
+    Annotations:
+    - artpiece_count: Number of art pieces associated with the profile.
+    - collection_count: Number of collections associated with the profile.
+    - for_sale_count: Number of art pieces marked for sale associated with
+    the profile.
+
     """
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.annotate(
