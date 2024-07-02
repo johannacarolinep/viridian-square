@@ -42,11 +42,27 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         """
         Overrides the save method to ensure a unique name is generated
-        if not provided.
+        if not provided. Checks if a new image has been uploaded. If so,
+        deletes the old image from Cloudinary, unless the old image was the
+        default image.
         """
         if not self.name:
             self._generate_unique_name()
+
+        old_image = None
+        if self.pk:
+            old_image = Profile.objects.get(pk=self.pk).profile_image
+
         super().save(*args, **kwargs)
+
+        if old_image and old_image != self.profile_image:
+            # Check if the old image is not the default image
+            default_image_public_id = 'default_profile_shke8m'
+            match = re.search(r'/([^/]+)$', old_image.url)
+            if match:
+                public_id = match.group(1).split('.')[0]
+                if public_id != default_image_public_id:
+                    destroy(public_id)
 
     def _generate_unique_name(self):
         """

@@ -91,6 +91,8 @@ class Artpiece(models.Model):
         not already added.
         remove_from_collection: Removes the art piece from its current
         collection.
+        save: Deletes the old image from Cloudinary if a new image has been
+        added
         delete: Deletes the image from Cloudinary before deleting the artpiece
     """
     FOR_SALE_CHOICES = [
@@ -160,6 +162,24 @@ class Artpiece(models.Model):
         """ Removes the art piece from its current collection. """
         self.art_collection = None
         self.save()
+
+    def save(self, *args, **kwargs):
+        """
+        Overrides the save method to handle image updates by deleting the old
+        image from Cloudinary.
+        """
+        old_image = None
+        if self.pk:
+            old_image = Artpiece.objects.get(pk=self.pk).image
+
+        super().save(*args, **kwargs)
+
+        if old_image and old_image != self.image:
+            # Check if the old image is not the default image
+            match = re.search(r'/([^/]+)$', old_image.url)
+            if match:
+                public_id = match.group(1).split('.')[0]
+                destroy(public_id)
 
     def delete(self, *args, **kwargs):
         """
