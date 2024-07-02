@@ -7,7 +7,20 @@ from django.utils import timezone
 
 
 class CustomUserManager(BaseUserManager):
+    """
+    Custom manager for the CustomUser model.
+
+    Methods:
+    - create_user(email, password=None, **extra_fields): Creates and returns a
+        new user with the provided email and password.
+    - create_superuser(email, password=None, **extra_fields): Creates and
+    returns a new superuser with the provided email and password.
+    """
     def create_user(self, email, password=None, **extra_fields):
+        """
+        Creates and returns a new user with the provided email and password.
+        Raises a ValueError if the email is not set.
+        """
         if not email:
             raise ValueError('The Email field must be set')
         email = self.normalize_email(email)
@@ -17,6 +30,10 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
+        """
+        Creates and returns a new superuser with the provided email and
+        password. Raises a ValueError if is_staff or is_superuser are not True.
+        """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -29,6 +46,19 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom user model where email is the unique identifier.
+
+    Attributes:
+    - USERNAME_FIELD (str): The field used for authentication, 'email'.
+    - REQUIRED_FIELDS (list): List of required fields besides the
+    USERNAME_FIELD, am empty list.
+    - objects (CustomUserManager): The manager for the CustomUser model.
+
+    Methods:
+    __str__(): Returns the email of the user.
+    update_email(new_email): Updates the user's email address and saves.
+    """
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

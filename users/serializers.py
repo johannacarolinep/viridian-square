@@ -4,9 +4,19 @@ from users.models import CustomUser
 
 
 class CustomRegisterSerializer(RegisterSerializer):
+    """
+    Serializer for user registration with email and password.
+
+    Fields:
+        email (EmailField): The email address of the user. Required.
+    """
     email = serializers.EmailField(required=True)
 
     def get_cleaned_data(self):
+        """
+        Retrieves and returns the cleaned data for email,
+        password1, and password2.
+        """
         return {
             'email': self.validated_data.get('email', ''),
             'password1': self.validated_data.get('password1', ''),
@@ -14,6 +24,10 @@ class CustomRegisterSerializer(RegisterSerializer):
         }
 
     def save(self, request):
+        """
+        Creates and returns a new user with the provided email
+        and password.
+        """
         cleaned_data = self.get_cleaned_data()
         user = CustomUser.objects.create_user(
             email=cleaned_data['email'],

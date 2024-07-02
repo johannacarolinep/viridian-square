@@ -5,6 +5,9 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
 class CustomUserAdmin(UserAdmin):
+    """
+    Admin interface for managing the CustomUser model.
+    """
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
