@@ -41,3 +41,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def str(self):
         return self.email
+
+    def update_email(self, new_email):
+        """
+        Update the user's email address.
+        """
+        self.email = new_email
+        self.save(update_fields=['email'])

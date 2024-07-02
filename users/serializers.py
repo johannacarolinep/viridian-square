@@ -20,3 +20,26 @@ class CustomRegisterSerializer(RegisterSerializer):
             password=cleaned_data['password1']
         )
         return user
+
+
+class EmailUpdateSerializer(serializers.Serializer):
+    """
+    Handles serialization for updating CustomUser's email field.
+    """
+    email = serializers.EmailField(required=True)
+
+    def validate_email(self, value):
+        """
+        Check that the email is not already in use.
+        """
+        if CustomUser.objects.filter(email=value).exists():
+            raise serializers.ValidationError("This email is already in use.")
+        return value
+
+    def update(self, instance, validated_data):
+        """
+        Update the user's email address.
+        """
+        instance.email = validated_data['email']
+        instance.save(update_fields=['email'])
+        return instance
