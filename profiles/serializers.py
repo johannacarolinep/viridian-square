@@ -3,6 +3,36 @@ from .models import Profile
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Profile model.
+
+    Attributes:
+        owner (ReadOnlyField): The profile owner's email.
+        is_owner (SerializerMethodField): Indicates if the request user is the
+        profile owner.
+        profile_image_url (SerializerMethodField): URL of the profile image.
+        profile_image (ImageField): Image data for profile image, write-only.
+        name (CharField): Name of the profile, optional and allow blank.
+        artpiece_count (ReadOnlyField): Number of art pieces associated with
+        the profile.
+        collection_count (ReadOnlyField): Number of collections associated with
+        the profile.
+        for_sale_count (ReadOnlyField): Number of art pieces marked for sale
+        associated with the profile.
+
+    Methods:
+        validate_name(value): Validates uniqueness and length constraints for
+        the name field.
+        validate_description(value): Validates length constraints for the
+        description field.
+        validate_location(value): Validates length constraints for the location
+        field.
+        validate_profile_image(data): Validates size and dimensions of the
+        profile image.
+        get_profile_image_url(obj): Retrieves the URL of the profile image.
+        get_is_owner(obj): Determines if the request user is the owner of the
+        profile.
+    """
     owner = serializers.ReadOnlyField(source='owner.email')
     is_owner = serializers.SerializerMethodField()
     profile_image_url = serializers.SerializerMethodField()
