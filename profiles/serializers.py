@@ -8,6 +8,9 @@ class ProfileSerializer(serializers.ModelSerializer):
     profile_image_url = serializers.SerializerMethodField()
     profile_image = serializers.ImageField(write_only=True, required=False)
     name = serializers.CharField(required=False, allow_blank=True)
+    artpiece_count = serializers.ReadOnlyField()
+    collection_count = serializers.ReadOnlyField()
+    for_sale_count = serializers.ReadOnlyField()
 
     def validate_name(self, value):
         """
@@ -103,4 +106,5 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'owner', 'is_owner', 'created_at', 'updated_at', 'name',
             'description', 'profile_image', 'profile_image_url', 'location',
+            'artpiece_count', 'collection_count', 'for_sale_count'
         ]
