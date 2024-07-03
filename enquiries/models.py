@@ -46,8 +46,18 @@ class Enquiry(models.Model):
         (1, 'Accepted'),
         (2, 'Declined')
     ]
-    buyer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    artpiece = models.ForeignKey(Artpiece, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(
+        CustomUser,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+        )
+    artpiece = models.ForeignKey(
+        Artpiece,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+        )
     initial_message = models.CharField(
         null=False,
         max_length=255,
