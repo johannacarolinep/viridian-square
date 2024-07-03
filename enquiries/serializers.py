@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Enquiry
+from artpieces.models import Artpiece
 
 
 class EnquirySerializer(serializers.ModelSerializer):
@@ -9,7 +10,7 @@ class EnquirySerializer(serializers.ModelSerializer):
     """
     buyer = serializers.ReadOnlyField(source='buyer.profile.name')
     is_buyer = serializers.SerializerMethodField()
-    artpiece = serializers.ReadOnlyField(source='artpiece.id')
+    artpiece = serializers.PrimaryKeyRelatedField(queryset=Artpiece.objects.all())
     artist = serializers.ReadOnlyField(source='artpiece.owner.profile.name')
     is_artist = serializers.SerializerMethodField()
     buyer_profile_id = serializers.ReadOnlyField(source='buyer.profile.id')
@@ -35,12 +36,13 @@ class EnquirySerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         """
-        Validate that buyer and artpiece are provided on creation.
+        Validate an artpiece not belonging to the requesting user is
+        provided on creation.
         """
+        request = self.context['request']
+
         if self.instance is None:
-            if data.get('buyer') is None:
-                raise serializers.ValidationError("Buyer field is required.")
-            if data.get('buyer') == data.get('artpiece').owner:
+            if request.user == data.get('artpiece').owner:
                 raise serializers.ValidationError(
                     "You cannot enquire about your own artpiece.")
             if data.get('artpiece') is None:
