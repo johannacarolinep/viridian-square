@@ -13,11 +13,11 @@ class EnquirySerializer(serializers.ModelSerializer):
     is_buyer = serializers.SerializerMethodField()
     buyer_profile_id = serializers.SerializerMethodField()
     buyer_profile_image = serializers.SerializerMethodField()
-    artpiece = serializers.PrimaryKeyRelatedField(queryset=Artpiece.objects.all())
-    artist = serializers.ReadOnlyField(source='artpiece.owner.profile.name')
+    artpiece = serializers.PrimaryKeyRelatedField(queryset=Artpiece.objects.all(), allow_null=True)
+    artist = serializers.SerializerMethodField()
     is_artist = serializers.SerializerMethodField()
-    artist_profile_id = serializers.ReadOnlyField(source='artpiece.owner.profile.id')
-    artist_profile_image = serializers.ReadOnlyField(source='artpiece.owner.profle.profile_image.url')
+    artist_profile_id = serializers.SerializerMethodField()
+    artist_profile_image = serializers.SerializerMethodField()
 
     def get_is_buyer(self, obj):
         """
@@ -85,14 +85,6 @@ class EnquirySerializer(serializers.ModelSerializer):
                 )
         return value
 
-    def validate_response_message(self, value):
-        """ Validates that the message is 255 characters or less. """
-        if len(value) > 255:
-            raise serializers.ValidationError(
-                'The message must be 255 characters or less.'
-                )
-        return value
-
     class Meta:
         model = Enquiry
         fields = [
@@ -102,3 +94,24 @@ class EnquirySerializer(serializers.ModelSerializer):
             'response_message', 'created_on', 'updated_on', 'status',
             'buyer_has_checked', 'artist_has_checked',
         ]
+
+
+class EnquiryResponseSerializer(serializers.ModelSerializer):
+
+    def validate_response_message(self, value):
+        """ Validates that the message is 255 characters or less. """
+        if len(value) > 255:
+            raise serializers.ValidationError(
+                'The message must be 255 characters or less.'
+                )
+        return value
+
+    def validate_status(self, value):
+        if value != 1 or value != 2:
+            raise serializers.ValidationError(
+                'Please either accept or decline the enquiry.'
+            )
+
+    class Meta:
+        model = Enquiry
+        fields = ['response_message', 'status']

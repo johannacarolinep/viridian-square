@@ -1,8 +1,9 @@
 from django.db.models import Q
 from rest_framework import generics, permissions, filters
 from rest_framework.response import Response
+from rest_framework.exceptions import ValidationError
 from django_filters.rest_framework import DjangoFilterBackend
-from .serializers import EnquirySerializer
+from .serializers import EnquirySerializer, EnquiryResponseSerializer
 from .models import Enquiry
 from .permissions import IsBuyerOrArtist
 
@@ -37,8 +38,12 @@ class EnquiryList(generics.ListCreateAPIView):
 
 class EnquiryDetail(generics.RetrieveUpdateAPIView):
     queryset = Enquiry.objects.all()
-    serializer_class = EnquirySerializer
     permission_classes = [IsBuyerOrArtist]
+
+    def get_serializer_class(self):
+        if self.request.method in ['PUT', 'PATCH']:
+            return EnquiryResponseSerializer
+        return EnquirySerializer
 
     def get(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -54,3 +59,27 @@ class EnquiryDetail(generics.RetrieveUpdateAPIView):
 
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        # Ensure PUT request is coming from the artist
+        if request.user != instance.artpiece.owner:
+            raise ValidationError(
+                "You do not have permission to update this enquiry."
+                )
+
+        # Ensure enquiry status is 'pending'
+        if instance.status != 0:
+            raise ValidationError("This enquiry has already been answered.")
+
+        serializer = self.get_serializer(instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        instance.buyer_has_checked = False
+        instance.save()
