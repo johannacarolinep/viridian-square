@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from users.models import CustomUser
 from artpieces.models import Artpiece
 
@@ -79,3 +81,12 @@ class Enquiry(models.Model):
 
     def __str__(self):
         return f'Enquiry re {self.artpiece} by {self.buyer}'
+
+
+@receiver(pre_save, sender=Enquiry)
+def delete_enquiry_if_null(sender, instance, **kwargs):
+    """
+    Deletes the Enquiry instance if both artpiece and buyer are null.
+    """
+    if instance.artpiece_id is None and instance.buyer_id is None:
+        instance.delete()
