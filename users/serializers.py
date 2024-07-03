@@ -57,3 +57,28 @@ class EmailUpdateSerializer(serializers.Serializer):
         instance.email = validated_data['email']
         instance.save(update_fields=['email'])
         return instance
+
+
+class DeleteUserSerializer(serializers.Serializer):
+    """
+    Serializer for deleting a user object.
+
+    Fields:
+    - password: Required. The user's password for validation.
+
+    Methods:
+    - validate_password: Ensures the provided password matches the user's
+    current password.
+    """
+    password = serializers.CharField(required=True)
+
+    def validate_password(self, value):
+        """
+        Validate that the provided password matches the user's password.
+        """
+        user = self.context['request'].user
+
+        if not user.check_password(value):
+            raise serializers.ValidationError("Incorrect password.")
+
+        return value
