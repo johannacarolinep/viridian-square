@@ -7,9 +7,10 @@ class EnquirySerializer(serializers.ModelSerializer):
     This serializer handles the serialization and deserialization of
     Enquiry objects, including validation of fields.
     """
-    buyer = serializers.ReadOnlyField(source='buyer.email')
+    buyer = serializers.ReadOnlyField(source='buyer.profile.name')
     is_buyer = serializers.SerializerMethodField()
     artpiece = serializers.ReadOnlyField(source='artpiece.id')
+    artist = serializers.ReadOnlyField(source='artpiece.owner.profile.name')
     is_artist = serializers.SerializerMethodField()
     buyer_profile_id = serializers.ReadOnlyField(source='buyer.profile.id')
     buyer_profile_image = serializers.ReadOnlyField(source='buyer.profile.profile_image.url')
@@ -32,6 +33,22 @@ class EnquirySerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.artpiece.owner
 
+    def validate(self, data):
+        """
+        Validate that buyer and artpiece are provided on creation.
+        """
+        if self.instance is None:
+            if data.get('buyer') is None:
+                raise serializers.ValidationError("Buyer field is required.")
+            if data.get('buyer') == data.get('artpiece').owner:
+                raise serializers.ValidationError(
+                    "You cannot enquire about your own artpiece.")
+            if data.get('artpiece') is None:
+                raise serializers.ValidationError(
+                    "Artpiece field is required."
+                    )
+        return data
+
     def validate_initial_message(self, value):
         """ Validates that the message is 255 characters or less. """
         if len(value) > 255:
@@ -52,7 +69,7 @@ class EnquirySerializer(serializers.ModelSerializer):
         model = Enquiry
         fields = [
             'id', 'buyer', 'is_buyer', 'buyer_profile_id',
-            'buyer_profile_image', 'artpiece', 'is_artist',
+            'buyer_profile_image', 'artpiece', 'artist', 'is_artist',
             'artist_profile_id', 'artist_profile_image', 'initial_message',
             'response_message', 'created_on', 'updated_on', 'status',
             'buyer_has_checked', 'artist_has_checked',
