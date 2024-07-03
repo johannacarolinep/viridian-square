@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Enquiry
 from artpieces.models import Artpiece
+from users.models import CustomUser
 
 
 class EnquirySerializer(serializers.ModelSerializer):
@@ -8,13 +9,13 @@ class EnquirySerializer(serializers.ModelSerializer):
     This serializer handles the serialization and deserialization of
     Enquiry objects, including validation of fields.
     """
-    buyer = serializers.ReadOnlyField(source='buyer.profile.name')
+    buyer = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all(), allow_null=True)
     is_buyer = serializers.SerializerMethodField()
+    buyer_profile_id = serializers.SerializerMethodField()
+    buyer_profile_image = serializers.SerializerMethodField()
     artpiece = serializers.PrimaryKeyRelatedField(queryset=Artpiece.objects.all())
     artist = serializers.ReadOnlyField(source='artpiece.owner.profile.name')
     is_artist = serializers.SerializerMethodField()
-    buyer_profile_id = serializers.ReadOnlyField(source='buyer.profile.id')
-    buyer_profile_image = serializers.ReadOnlyField(source='buyer.profile.profile_image.url')
     artist_profile_id = serializers.ReadOnlyField(source='artpiece.owner.profile.id')
     artist_profile_image = serializers.ReadOnlyField(source='artpiece.owner.profle.profile_image.url')
 
@@ -26,13 +27,38 @@ class EnquirySerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.buyer
 
+    def get_buyer_profile_id(self, obj):
+        if obj.buyer is None:
+            return None
+        return obj.buyer.profile.id
+
+    def get_buyer_profile_image(self, obj):
+        if obj.buyer is None:
+            return None
+        return obj.buyer.profile.profile_image.url
+
     def get_is_artist(self, obj):
         """
         Returns True if the requesting user is the owner of
         the collection.
         """
         request = self.context['request']
-        return request.user == obj.artpiece.owner
+        return obj.artpiece is not None and request.user == obj.artpiece.owner
+
+    def get_artist(self, obj):
+        if obj.artpiece is None:
+            return None
+        return obj.artpiece.owner.profile.name
+
+    def get_artist_profile_id(self, obj):
+        if obj.artpiece is None:
+            return None
+        return obj.artpiece.owner.profile.id
+
+    def get_artist_profile_image(self, obj):
+        if obj.artpiece is None:
+            return None
+        return obj.artpiece.owner.profile.profile_image.url
 
     def validate(self, data):
         """
