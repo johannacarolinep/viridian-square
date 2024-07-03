@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework import generics, permissions
+from django_filters.rest_framework import DjangoFilterBackend
+from .serializers import EnquirySerializer
+from .models import Enquiry
 
-# Create your views here.
+
+class EnquiryList(generics.ListCreateAPIView):
+    serializer_class = EnquirySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Enquiry.objects.all()

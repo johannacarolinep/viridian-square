@@ -31,4 +31,5 @@ urlpatterns = [
     path('', include('art_collections.urls')),
     path('', include('likes.urls')),
     path('', include('users.urls')),
+    path('', include('enquiries.urls')),
 ]
