@@ -14,7 +14,8 @@ class LikeSerializer(serializers.ModelSerializer):
 
     Fields:
         - id: Primary key of the like instance.
-        - owner: Read-only field displaying the email of the like's owner.
+        - owner: Read-only field, the id of the like's owner.
+        - name: Read-only field, the name of the like's owner.
         - created_on: DateTime field indicating when the like was created.
         - liked_piece: Field representing the liked artpiece (foreign key).
 
@@ -23,7 +24,8 @@ class LikeSerializer(serializers.ModelSerializer):
         artpiece.
         - create(self, validated_data): ensures no duplicate likes are created.
     """
-    owner = serializers.ReadOnlyField(source='owner.email')
+    owner = serializers.ReadOnlyField(source='owner.id')
+    name = serializers.ReadOnlyField(source='owner.profile.name')
 
     def validate(self, data):
         """
@@ -49,4 +51,4 @@ class LikeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Like
-        fields = ['id', 'created_on', 'owner', 'liked_piece']
+        fields = ['id', 'created_on', 'owner', 'name', 'liked_piece']

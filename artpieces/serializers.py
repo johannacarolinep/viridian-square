@@ -26,9 +26,10 @@ class ArtpieceSerializer(serializers.ModelSerializer):
 
     Fields:
         - id: Unique identifier of the art piece (PK).
-        - owner: Email of the owner (read-only).
+        - owner: ID of the owner (read-only).
         - is_owner: Boolean indicating if the request user is the owner.
         - profile_id: ID of the owner's profile (read-only).
+        - profile_name: The name as specified in the owner's profile.
         - profile_image: URL of the owner's profile image (read-only).
         - created_on: Time and date when the art piece was created (read-only).
         - updated_on: Time and date when the art piece was last updated
@@ -59,8 +60,9 @@ class ArtpieceSerializer(serializers.ModelSerializer):
         - to_representation: Customizes the representation of the Artpiece
         instance to include hashtags as a string.
     """
-    owner = serializers.ReadOnlyField(source='owner.email')
+    owner = serializers.ReadOnlyField(source='owner.id')
     is_owner = serializers.SerializerMethodField()
+    profile_name = serializers.ReadOnlyField(source='owner.profile.name')
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     image_url = serializers.SerializerMethodField()
@@ -271,7 +273,7 @@ class ArtpieceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artpiece
         fields = [
-            'id', 'owner', 'is_owner', 'profile_id',
+            'id', 'owner', 'is_owner', 'profile_id', 'profile_name',
             'profile_image', 'created_on', 'updated_on',
             'title', 'description', 'image', 'image_url', 'art_medium',
             'for_sale', 'art_collection', 'hashtags', 'likes_count',

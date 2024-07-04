@@ -22,9 +22,10 @@ class ArtCollectionSerializer(serializers.ModelSerializer):
         - model: Specifies the model class to serialize (ArtCollection).
         - fields: Lists the fields to be included in the serialized output.
     """
-    owner = serializers.ReadOnlyField(source='owner.email')
+    owner = serializers.ReadOnlyField(source='owner.id')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
+    profile_name = serializers.ReadOnlyField(source='owner.profile.name')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     artpieces = serializers.PrimaryKeyRelatedField(
         many=True,
@@ -58,6 +59,7 @@ class ArtCollectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = ArtCollection
         fields = [
-            'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
-            'created_on', 'updated_on', 'title', 'description', 'artpieces',
+            'id', 'owner', 'is_owner', 'profile_id', 'profile_name',
+            'profile_image', 'created_on', 'updated_on', 'title',
+            'description', 'artpieces',
         ]

@@ -51,3 +51,21 @@ class CustomUserTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertTrue(
             CustomUser.objects.filter(email='testuser@test.com').exists())
+
+    def test_signup(self):
+        """
+        Test an anonymous user can sign up and create a CustomUser.
+        """
+        url = reverse('rest_register')
+
+        data = {
+            'email': 'newuser@test.com',
+            'password1': 'YellowSubmarine',
+            'password2': 'YellowSubmarine',
+        }
+        response = self.client.post(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(
+            CustomUser.objects.filter(email='newuser@test.com').exists()
+            )

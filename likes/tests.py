@@ -125,7 +125,7 @@ class LikeDetailTests(APITestCase):
         response = self.client.get(self.url_detail)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['id'], self.like.id)
-        self.assertEqual(response.data['owner'], self.user.email)
+        self.assertEqual(response.data['owner'], self.user.id)
         self.assertEqual(response.data['liked_piece'], self.artpiece.id)
 
     def test_owner_can_delete_like(self):

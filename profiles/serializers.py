@@ -7,7 +7,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     Serializer for the Profile model.
 
     Attributes:
-        owner (ReadOnlyField): The profile owner's email.
+        owner (ReadOnlyField): The profile owner's object id
         is_owner (SerializerMethodField): Indicates if the request user is the
         profile owner.
         profile_image_url (SerializerMethodField): URL of the profile image.
@@ -33,7 +33,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         get_is_owner(obj): Determines if the request user is the owner of the
         profile.
     """
-    owner = serializers.ReadOnlyField(source='owner.email')
+    owner = serializers.ReadOnlyField(source='owner.id')
     is_owner = serializers.SerializerMethodField()
     profile_image_url = serializers.SerializerMethodField()
     profile_image = serializers.ImageField(write_only=True, required=False)
