@@ -126,6 +126,10 @@ class EnquirySerializer(serializers.ModelSerializer):
 
 
 class EnquiryResponseSerializer(serializers.ModelSerializer):
+    """
+    This serializer handles the serialization and deserialization of
+    Enquiry responses, including validation of fields.
+    """
 
     def validate_response_message(self, value):
         """ Validates that the message is 255 characters or less. """
@@ -136,6 +140,10 @@ class EnquiryResponseSerializer(serializers.ModelSerializer):
         return value
 
     def validate_status(self, value):
+        """
+        Validates that the enquiry status is either
+        1 (accepted) or 2 (declined).
+        """
         # Convert status to an integer if it's not already
         if isinstance(value, str):
             try:
@@ -143,6 +151,7 @@ class EnquiryResponseSerializer(serializers.ModelSerializer):
             except ValueError:
                 raise serializers.ValidationError(
                     'Incorrect format. Expected integer value.')
+        # Compares value to valid options for updating the status
         if value != 1 and value != 2:
             raise serializers.ValidationError(
                 'Please either accept or decline the enquiry.'
@@ -150,9 +159,7 @@ class EnquiryResponseSerializer(serializers.ModelSerializer):
         return value
 
     def validate(self, data):
-        """
-        Ensure a status value is included.
-        """
+        """ Ensure a status value is included. """
         if 'status' not in data:
             raise serializers.ValidationError(
                 "The only acceptable actions are Accept/Decline.")
