@@ -107,10 +107,27 @@ class EnquiryResponseSerializer(serializers.ModelSerializer):
         return value
 
     def validate_status(self, value):
-        if value != 1 or value != 2:
+        # Convert status to an integer if it's not already
+        if isinstance(value, str):
+            try:
+                value = int(value)
+            except ValueError:
+                raise serializers.ValidationError(
+                    'Incorrect format. Expected integer value.')
+        if value != 1 and value != 2:
             raise serializers.ValidationError(
                 'Please either accept or decline the enquiry.'
             )
+        return value
+
+    def validate(self, data):
+        """
+        Ensure a status value is included.
+        """
+        if 'status' not in data:
+            raise serializers.ValidationError(
+                "The only acceptable actions are Accept/Decline.")
+        return data
 
     class Meta:
         model = Enquiry
