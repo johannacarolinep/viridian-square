@@ -58,7 +58,13 @@ class EnquiryDetail(generics.RetrieveUpdateAPIView):
         instance.save()
 
         serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+        data = serializer.data
+
+        # Annotate artist_email if status is accepted
+        if instance.status == 1:
+            data['artist_email'] = instance.artpiece.owner.email
+
+        return Response(data)
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
