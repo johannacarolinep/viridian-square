@@ -36,7 +36,7 @@ class EnquiryList(generics.ListCreateAPIView):
         serializer.save(buyer=self.request.user)
 
 
-class EnquiryDetail(generics.RetrieveUpdateAPIView):
+class EnquiryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Enquiry.objects.all()
     permission_classes = [IsBuyerOrArtist]
 
@@ -89,3 +89,14 @@ class EnquiryDetail(generics.RetrieveUpdateAPIView):
         instance = serializer.save()
         instance.buyer_has_checked = False
         instance.save()
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        if request.user == instance.artpiece.owner:
+            instance.artpiece = None
+        elif request.user == instance.buyer:
+            instance.buyer = None
+
+        instance.save()
+        return Response(status=204)

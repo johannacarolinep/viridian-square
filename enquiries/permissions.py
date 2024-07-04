@@ -7,4 +7,6 @@ class IsBuyerOrArtist(permissions.BasePermission):
     """
 
     def has_object_permission(self, request, view, obj):
-        return request.user == obj.buyer or request.user == obj.artpiece.owner
+        is_buyer = obj.buyer and request.user == obj.buyer
+        is_artist = obj.artpiece and request.user == obj.artpiece.owner
+        return is_buyer or is_artist
