@@ -25,7 +25,7 @@ class Enquiry(models.Model):
         - status (IntegerField): The status of the enquiry, chosen from
             predefined choices. Default is Pending (0).
         - buyer_has_checked (BooleanField): Indicates whether the buyer has
-            checked the enquiry. Default is False.
+            checked the enquiry. Default is True.
         - artist_has_checked (BooleanField): Indicates whether the artist has
             checked the enquiry. Default is False.
 
@@ -73,7 +73,7 @@ class Enquiry(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS_CHOICES, default=0)
-    buyer_has_checked = models.BooleanField(default=False)
+    buyer_has_checked = models.BooleanField(default=True)
     artist_has_checked = models.BooleanField(default=False)
 
     class Meta:
