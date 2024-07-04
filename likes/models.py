@@ -1,4 +1,7 @@
+from datetime import timedelta
+from django.utils import timezone
 from django.db import models
+from django.db.models import Count
 from users.models import CustomUser
 from artpieces.models import Artpiece
 
@@ -23,6 +26,8 @@ class Like(models.Model):
     Methods:
         __str__: Returns a string representation of the Like instance,
         including the owner and the liked art piece.
+        top_trending_artpieces: classmethod, returns a queryset with
+        the most liked artpieces in the last 30 days
     """
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     liked_piece = models.ForeignKey(
@@ -35,3 +40,16 @@ class Like(models.Model):
 
     def __str__(self):
         return f'{self.owner} liked {self.liked_piece}'
+
+    @classmethod
+    def top_trending_artpieces(cls):
+        """
+        Returns a queryset of artpiece id's that have reveiced the highest
+        number of likes in the last 30 days, and the number of likes they
+        received.
+        """
+        last_30_days = timezone.now() - timedelta(days=30)
+        return (cls.objects.filter(created_on__gte=last_30_days)
+                .values('liked_piece')
+                .annotate(recent_likes=Count('liked_piece'))
+                .order_by('-recent_likes')[:4])
