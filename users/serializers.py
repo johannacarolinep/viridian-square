@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from dj_rest_auth.registration.serializers import RegisterSerializer
+from dj_rest_auth.serializers import UserDetailsSerializer
 from users.models import CustomUser
 
 
@@ -82,3 +83,27 @@ class DeleteUserSerializer(serializers.Serializer):
             raise serializers.ValidationError("Incorrect password.")
 
         return value
+
+
+class CurrentUserSerializer(UserDetailsSerializer):
+    """
+    Serializer for retreiving the current user's details, extending
+    UserDetailsSerializer.
+
+    Adds additional read-only fields related to the user's profile.
+
+    Fields:
+        profile_id (ReadOnlyField): The ID of the user's profile.
+        profile_name (ReadOnlyField): The name of the user's profile.
+        profile_image (ReadOnlyField): The URL of the user's profile image.
+    """
+    profile_id = serializers.ReadOnlyField(source='profile.id')
+    profile_name = serializers.ReadOnlyField(source='profile.name')
+    profile_image = serializers.ReadOnlyField(
+        source='profile.profile_image.url')
+
+    class Meta(UserDetailsSerializer.Meta):
+        model = CustomUser
+        fields = UserDetailsSerializer.Meta.fields + (
+            'profile_id', 'profile_name', 'profile_image'
+        )

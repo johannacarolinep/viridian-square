@@ -1,7 +1,8 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .serializers import EmailUpdateSerializer, DeleteUserSerializer
+from .serializers import EmailUpdateSerializer, DeleteUserSerializer, CurrentUserSerializer
+from dj_rest_auth.views import UserDetailsView
 
 
 class EmailUpdateView(generics.UpdateAPIView):
@@ -48,3 +49,18 @@ class DeleteUserView(generics.GenericAPIView):
             {"message": "Account deleted successfully."},
             status=status.HTTP_204_NO_CONTENT
         )
+
+
+class CustomUserDetailsView(UserDetailsView):
+    """
+    Custom view for retrieving user details with a custom serializer.
+
+    This view extends `UserDetailsView` and uses the `CurrentUserSerializer`
+    to provide additional user profile information.
+    """
+    serializer_class = CurrentUserSerializer
+
+    def get(self, request, *args, **kwargs):
+        """ Retrieve the current user's details """
+        response = super().get(request, *args, **kwargs)
+        return response
