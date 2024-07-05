@@ -76,11 +76,11 @@ The goal of the site is to help independent artists to increase their visibility
 | - | - | - | - | - | - | - |
 | dj-rest-auth/registration | - | Y | - | - | - | Sign up (creates CustomUser and Profile) |
 | dj-rest-auth/login | - | Y | - | - | - | Log in |
-| dj-rest-auth/logout | - | Y | - | - | - | Log out |
-| dj-rest-auth/user | Y | - | - | - | - | Retrieve user details |
-| dj-rest-auth/token/refresh | - | Y | - | - | - | Refresh token |
-| delete-user/ | - | - | - | Y | - | Delete user |
-| update-email/ | - | - | Y | - | - | Update user email |
+| dj-rest-auth/logout | - | Y | - | - | IsAuthenticated | Log out |
+| dj-rest-auth/user | Y | - | - | - | IsAuthenticated | Retrieve user details |
+| dj-rest-auth/token/refresh | - | Y | - | - | IsAuthenticated | Refresh token |
+| delete-user/ | - | - | - | Y | IsAuthenticated | Delete user |
+| update-email/ | - | - | Y | - | IsAuthenticated | Update user email |
 | profiles/ | Y | - | - | - | - | List profiles |
 | profiles/:id/ | Y | - | Y | - | IsOwnerOrReadOnly | Retrieve and update profile |
 | artpieces/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | List and create artpieces |
