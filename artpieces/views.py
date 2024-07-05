@@ -85,9 +85,28 @@ class ArtpieceList(generics.ListCreateAPIView):
 
 
 class ArtpieceTrendList(generics.ListAPIView):
+    """
+    API view for listing the top 4 'trending' art pieces.
+
+    Uses `ArtpieceSerializer` for serialization.
+
+    Methods:
+    - get_queryset: Retrieves the top 4 art pieces with the highest number of
+        likes in the last 30 days. If fewer than 4 art pieces have likes in the
+        last 30 days, it includes additional top-liked art pieces to make a
+        total of 4.
+
+    The queryset is ordered by the number of likes in descending order.
+    """
     serializer_class = ArtpieceSerializer
 
     def get_queryset(self):
+        """
+        Retrieves the top 4 art pieces with the highest number of
+        likes in the last 30 days. If fewer than 4 art pieces have likes in the
+        last 30 days, it includes additional top-liked art pieces to make a
+        total of 4.
+        """
         trending_artpieces = Like.top_trending_artpieces()
         trending_artpiece_ids = {
             artpiece['liked_piece'] for artpiece in trending_artpieces
