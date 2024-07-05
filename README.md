@@ -50,7 +50,7 @@ The goal of the site is to help independent artists to increase their visibility
 
 <a id="erd"></a>
 ### Database ERD
-![Database ERD](documentation/erd/viridian_erd.png)
+![Database ERD](documentation/erd/viridian_erd.webp)
 
 <a id="api-plan"></a>
 ### Plan for API
