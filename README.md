@@ -11,7 +11,8 @@ Named after a well known artist pigment, Viridian green, the platform is tailore
 - [Planning and methodology](#planning)
     - [Site goals and strategy](#strategy)
     - [Database ERD](#erd)
-    - [API plan](#api-plan)
+    - [Map of API CRUD functionality](#api-plan)
+    - [API endpoints](#api-endpoints)
     - [Surface plane Design](#surface-plane-design)
         - [Colours](#colours)
         - [Fonts](#fonts)
@@ -53,16 +54,46 @@ The goal of the site is to help independent artists to increase their visibility
 ![Database ERD](documentation/erd/viridian_erd.webp)
 
 <a id="api-plan"></a>
-### Plan for API
-| Model | Endpoint | Create | Read | Update | Delete | Filter | Text search |
+### Map of API CRUD functionality
+
+| Model | Endpoints | Create | Read | Update | Delete | Filter | Text search |
 | - | - | - | - | - | - | - | - |
-| users | users/<br>users/:id/ | Y | Y | Y | Y | N | N |
-| profiles | profiles/<br>profiles/:id/ | Y (signals) | Y | Y | Y (signals) | N | N |
-| artpieces | artpieces/<br>artpieces/:id/ | Y | Y | Y | Y | owner<br>liked<br>for_sale_status<br>collection<br>art_medium | title<br>collection title<br>profile name<br>hashtag |
-| likes | likes/<br>likes/:id/ | Y | Y | N | Y | owner | N |
-| enquiries | enquiries/<br>enquiries/:id/ | Y | Y | Y | N | user<br>artpiece | N |
-| hashtags | n/a | N | N | N | N | N | N |
-| art_collections | collections/<br>collections/:id/<br>collections/:id/update-artpieces | Y | Y | Y | Y | owner | N |
+| CustomUser | dj-rest-auth/registration<br>dj-rest-auth/user<br>update-email/<br>delete-user/ | Y | Y | Y | Y | N | N |
+| Profile | profiles/<br>profiles/:id/ | Y (signals) | Y | Y | Y (signals) | N | N |
+| Artpiece | artpieces/<br>artpieces/:id/<br>artpieces/trending/ | Y | Y | Y | Y | owner<br>liked<br>for_sale_status<br>collection<br>art_medium | title<br>collection title<br>profile_name<br>hashtag |
+| Like | likes/<br>likes/:id/ | Y | Y | N | Y | owner | N |
+| Enquiry | enquiries/<br>enquiries/:id/ | Y | Y | Y | Y | user (buyer)<br>user (artpiece owner) | N |
+| Hashtag | artpieces/<br>artpieces/:id/ | Y* | N | N | N | N | N |
+| ArtCollection | collections/<br>collections/:id/<br>collections/:id/update-artpieces | Y | Y | Y | Y | owner | N |
+
+*Hashtag creation is nested within Artpiece creation/updating
+
+
+<a id="api-endpoints"></a>
+### API Endpoints
+
+| Endpoint | GET | POST | PUT | DELETE | Permissions | Usage |
+| - | - | - | - | - | - | - |
+| dj-rest-auth/registration | - | Y | - | - | - | Sign up (creates CustomUser and Profile) |
+| dj-rest-auth/login | - | Y | - | - | - | Log in |
+| dj-rest-auth/logout | - | Y | - | - | - | Log out |
+| dj-rest-auth/user | Y | - | - | - | - | Retrieve user details |
+| dj-rest-auth/token/refresh | - | Y | - | - | - | Refresh token |
+| delete-user/ | - | - | - | Y | - | Delete user |
+| update-email/ | - | - | Y | - | - | Update user email |
+| profiles/ | Y | - | - | - | - | List profiles |
+| profiles/:id/ | Y | - | Y | - | IsOwnerOrReadOnly | Retrieve and update profile |
+| artpieces/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | List and create artpieces |
+| artpieces/:id/ | Y | - | Y | Y | IsOwnerOrReadOnly | Retrieve artpiece by id, update and delete artpiece |
+| artpieces/trending/ | Y | - | - | - | - | Retrieve artpieces with most likes in last 30 days |
+| likes/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | Retrieve a list of likes, create a like |
+| likes/:id/ | Y | - | - | Y | IsOwnerOrReadOnly | Retrieve a like by id, delete a like |
+| collections/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | Retrieve a list of collections, create a collection |
+| collections/:id/ | Y | - | Y | Y | IsOwnerOrReadOnly | Retrieve a collection by id, edit and delete a collection |
+| collections/:id/update-artpieces/ | - | Y | - | - | IsOwner | Bulk add artpieces to an art collection |
+| enquiries/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | Retrieve enquiries associated to the requesting user, create an enquiry |
+| enquiries/:id/ | Y | - | Y | Y | IsBuyerOrArtist | Retrieve an enquiry by id, update, and soft delete an enquiry |
+
 
 <a id="surface-plane-design"></a>
 ### Surface plane design
