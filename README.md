@@ -164,6 +164,7 @@ Project board at end of sprint 2:
 ![End of sprint 2 project board](documentation/sprints/sprint2_board.png)
 
 Points completed: 34
+
 Velocity: 23
 
 Actions taken:
@@ -175,6 +176,36 @@ Actions taken:
 
 ![Sprint 3 milestone](documentation/sprints/sprint3_milestone.png)
 
+##### Sprint 3 wrap-up:
+
+Project board at end of sprint 3:
+
+![End of sprint 3 project board](documentation/sprints/sprint3_board.png)
+
+Points completed: 22
+
+Velocity: 22.7
+
+Reflections/Notes:
+
+While working on a user story related to editing the user profile, I made several important changes:
+
+1. **Removed the 'Username' Field:**
+    - I eliminated the `username` field from the `CustomUser` model to prevent confusion with the `name` field in the `Profile` model.
+    - This meant better separation of concerns, where `CustomUser` is focused on authorisation, while `Profile` manages the user’s public “display information”.
+2. **Temporary generated value for `name`:**
+    - During user sign-up, a Profile is automatically created with a temporary `name` value of "Newuser" followed by the first 8 characters of a UUID.
+3. **New (unplanned) endpoints:**
+    - Implemented endpoints for updating the user’s email address and deleting a user to allow the user better control over their data.
+
+Due to time constraints, I did not create new user stories for these changes but directly implemented them within Sprint 3. Ideally, user stories should have been written and added to the backlog for future sprints. However, I felt this would impact my ability to finish the project on time and therefore made an exception.
+
+The ERD and API documentation have been updated to reflect these changes.
+
+
+Actions taken:
+- 5 PBI's moved back to the backlog
+- Reprioritised backlog in preparation for sprint 4.
 
 <a id="user-stories"></a>
 ### User stories:
