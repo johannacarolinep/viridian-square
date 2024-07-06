@@ -20,22 +20,25 @@ const NavBar = () => {
           <Nav className="ms-auto text-start">
             <NavLink
               to="/"
-              className={styles.NavLink}
-              activeClassName={styles.Active}
+              className={({ isActive }) =>
+                `${styles.NavLink} ${isActive ? styles.Active : ""}`
+              }
             >
               <i class="fa-solid fa-magnifying-glass"></i>Discover
             </NavLink>
             <NavLink
               to="/signin"
-              className={styles.NavLink}
-              activeClassName={styles.Active}
+              className={({ isActive }) =>
+                `${styles.NavLink} ${isActive ? styles.Active : ""}`
+              }
             >
               <i class="fa-solid fa-right-to-bracket"></i>Sign in
             </NavLink>
             <NavLink
               to="/signup"
-              className={styles.NavLink}
-              activeClassName={styles.Active}
+              className={({ isActive }) =>
+                `${styles.NavLink} ${isActive ? styles.Active : ""}`
+              }
             >
               <i class="fa-solid fa-user-plus"></i>Sign up
             </NavLink>
