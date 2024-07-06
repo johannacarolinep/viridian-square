@@ -1,0 +1,22 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Oswald:wght@200..700&display=swap');
+
+:root {
+    --clr-brand--primary: #40826d;
+    --clr-accent--light: #d0d1cb;
+    --clr-accent--dark: #3e504a;
+    --clr-light: #f4f6f6;
+    --clr-dark: #22252d;
+    --ff-primary: 'Heebo', sans-serif;
+    --ff-secondary: 'Oswald', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.App {
+    font-family: var(--ff-primary);
+    background-color: var(--clr-light);
+    min-height: 100vh;
+}

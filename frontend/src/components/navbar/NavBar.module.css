@@ -1,0 +1,38 @@
+.NavBar {
+    background-color: #ffffff;
+    border-bottom: 1px solid rgb(145, 139, 139)
+}
+
+.NavLink {
+    font-size: 1.1rem;
+}
+
+a {
+    color: var(--clr-dark);
+    transition: color ease-in-out 0.3s;
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover i,
+a:focus i,
+a:active i {
+    color: var(--clr-accent--dark);
+    transition: color ease-in-out 0.3s;
+}
+
+i {
+    color: var(--clr-accent--light);
+    font-size: 1.6rem;
+    padding: 7px;
+    vertical-align: middle;
+}
+
+.Active i {
+    color: vad(--clr-brand--primary);
+}
