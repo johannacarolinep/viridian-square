@@ -207,6 +207,11 @@ Actions taken:
 - 5 PBI's moved back to the backlog
 - Reprioritised backlog in preparation for sprint 4.
 
+#### Sprint 4
+
+![Sprint 4 milestone](documentation/sprints/sprint4_milestone.png)
+
+
 <a id="user-stories"></a>
 ### User stories:
 
