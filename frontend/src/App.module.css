@@ -20,3 +20,9 @@
     background-color: var(--clr-light);
     min-height: 100vh;
 }
+
+@media screen and (min-width: 992px) {
+    .Main {
+        padding-top: 72.5px;
+    }
+}
