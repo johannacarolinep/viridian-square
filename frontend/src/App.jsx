@@ -3,7 +3,7 @@ import NavBar from "./components/navbar/NavBar";
 import Container from "react-bootstrap/Container";
 import { Route, Routes } from "react-router-dom";
 import "./api/axiosDefaults";
-import SignUpForm from "./containers/auth/SignUpForm";
+import SignUpForm from "./containers/SignUpPage/SignUpPage";
 
 function App() {
   return (
