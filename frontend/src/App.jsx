@@ -3,7 +3,8 @@ import NavBar from "./components/navbar/NavBar";
 import Container from "react-bootstrap/Container";
 import { Route, Routes } from "react-router-dom";
 import "./api/axiosDefaults";
-import SignUpForm from "./containers/SignUpPage/SignUpPage";
+import SignUpPage from "./containers/SignUpPage/SignUpPage";
+import SignInPage from "./containers/SignInPage/SignInPage";
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
       <Container fluid className={styles.Main}>
         <Routes>
           <Route exact path="/" element={<h1>Discovery page</h1>} />
-          <Route exact path="/signup" element={<SignUpForm />} />
-          <Route exact path="/signin" element={<h1>Sign in page</h1>} />
+          <Route exact path="/signup" element={<SignUpPage />} />
+          <Route exact path="/signin" element={<SignInPage />} />
         </Routes>
       </Container>
     </div>

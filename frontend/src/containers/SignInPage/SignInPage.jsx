@@ -4,21 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-const SignUpForm = () => {
-  const [signUpData, setSignUpData] = useState({
+const SignInForm = () => {
+  const [signInData, setSignInData] = useState({
     email: "",
-    password1: "",
-    password2: "",
+    password: "",
   });
-  const { email, password1, password2 } = signUpData;
+  const { email, password } = signInData;
 
   const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    setSignUpData({
-      ...signUpData,
+    setSignInData({
+      ...signInData,
       [event.target.name]: event.target.value,
     });
   };
@@ -26,8 +25,8 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/dj-rest-auth/registration/", signUpData);
-      navigate("/signin");
+      await axios.post("/dj-rest-auth/login/", signInData);
+      navigate("/");
     } catch (err) {
       setErrors(err.response?.data);
     }
@@ -43,43 +42,26 @@ const SignUpForm = () => {
           value={email}
           onChange={handleChange}
         />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else without your express
-          permission.
-        </Form.Text>
       </Form.Group>
       {errors.email?.map((message, idx) => (
         <p key={idx}>{message}</p>
       ))}
 
-      <Form.Group className="mb-3" controlId="password1">
+      <Form.Group className="mb-3" controlId="password">
         <Form.Label>Password</Form.Label>
         <Form.Control
           type="password"
           placeholder="Password"
-          name="password1"
-          value={password1}
+          name="password"
+          value={password}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors.password1?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
-      <Form.Group className="mb-3" controlId="password2">
-        <Form.Label>Password again</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          name="password2"
-          value={password2}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors.password2?.map((message, idx) => (
+      {errors.password?.map((message, idx) => (
         <p key={idx}>{message}</p>
       ))}
       <Button variant="primary" type="submit">
-        Sign Up
+        Sign In
       </Button>
       {errors.non_field_errors?.map((message, idx) => (
         <p key={idx}>{message}</p>
@@ -88,4 +70,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignInForm;
