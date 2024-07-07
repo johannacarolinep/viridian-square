@@ -275,6 +275,33 @@ Actions taken:
 <a id="planning"></a>
 ## Bugs
 
+### BUG: 2024-07-07: Connection Refused error for POST request to live DB /dj-rest-auth/registration/.
+
+**Issue:**
+
+When making a POST request to the `/dj-rest-auth/registration/` endpoint on my live database, I encountered the following error:
+
+```
+ConnectionRefusedError: [Errno 61] Connection refused
+[07/Jul/2024 14:15:14] "POST /dj-rest-auth/registration/ HTTP/1.1" 500 199724
+```
+
+This issue did not occur when using the local SQLite3 database.
+
+**Steps taken:**
+
+Researching the issue online, I found this [thread](https://github.com/pennersr/django-allauth/issues/1843), which suggested that Django was attempting to send a verification email, causing the connection refused error. This seemed plausible as I had customised the user model and made the email field mandatory.
+
+**Solution:**
+Following the advice from the thread, I added the following setting to `settings.py`:
+
+```
+ACCOUNT_EMAIL_VERIFICATION = "none"
+```
+
+This resolved the issue, and I was able to successfully register a user without encountering the error.
+
+
 ### BUG: 2024-07-01: Removing the `username` field from `CustomUser`.
 
 **Background:** 
