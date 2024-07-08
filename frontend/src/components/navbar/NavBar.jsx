@@ -11,6 +11,7 @@ import {
 } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 import useClickOutsideToggle from "../../hooks/useClickOutsideToggle";
+import Avatar from "../avatar/Avatar";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -56,13 +57,8 @@ const NavBar = () => {
       <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>
         <i class="fa-solid fa-right-from-bracket"></i>Sign out
       </NavLink>
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          `${styles.NavLink} ${isActive ? styles.Active : ""}`
-        }
-      >
-        Profile
+      <NavLink to="/" className={styles.NavLink}>
+        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </NavLink>
     </>
   );
