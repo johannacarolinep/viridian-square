@@ -5,8 +5,76 @@ import Navbar from "react-bootstrap/Navbar";
 import logo from "../../assets/images/logo.webp";
 import styles from "./NavBar.module.css";
 import { NavLink } from "react-router-dom";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const NavBar = () => {
+  const currentUser = useCurrentUser();
+
+  const loggedInOptions = (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `${styles.NavLink} ${isActive ? styles.Active : ""}`
+        }
+      >
+        <i class="fa-solid fa-paintbrush"></i>Create
+      </NavLink>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `${styles.NavLink} ${isActive ? styles.Active : ""}`
+        }
+      >
+        <i class="fa-regular fa-envelope"></i>Enquiries
+      </NavLink>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `${styles.NavLink} ${isActive ? styles.Active : ""}`
+        }
+      >
+        <i class="fa-regular fa-heart"></i>Liked
+      </NavLink>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `${styles.NavLink} ${isActive ? styles.Active : ""}`
+        }
+      >
+        <i class="fa-solid fa-right-from-bracket"></i>Sign out
+      </NavLink>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `${styles.NavLink} ${isActive ? styles.Active : ""}`
+        }
+      >
+        Profile
+      </NavLink>
+    </>
+  );
+  const loggedOutOptions = (
+    <>
+      <NavLink
+        to="/signin"
+        className={({ isActive }) =>
+          `${styles.NavLink} ${isActive ? styles.Active : ""}`
+        }
+      >
+        <i class="fa-solid fa-right-to-bracket"></i>Sign in
+      </NavLink>
+      <NavLink
+        to="/signup"
+        className={({ isActive }) =>
+          `${styles.NavLink} ${isActive ? styles.Active : ""}`
+        }
+      >
+        <i class="fa-solid fa-user-plus"></i>Sign up
+      </NavLink>
+    </>
+  );
+
   return (
     <Navbar expand="lg" fixed="top" className={styles.NavBar}>
       <Container fluid="xl">
@@ -26,22 +94,7 @@ const NavBar = () => {
             >
               <i class="fa-solid fa-magnifying-glass"></i>Discover
             </NavLink>
-            <NavLink
-              to="/signin"
-              className={({ isActive }) =>
-                `${styles.NavLink} ${isActive ? styles.Active : ""}`
-              }
-            >
-              <i class="fa-solid fa-right-to-bracket"></i>Sign in
-            </NavLink>
-            <NavLink
-              to="/signup"
-              className={({ isActive }) =>
-                `${styles.NavLink} ${isActive ? styles.Active : ""}`
-              }
-            >
-              <i class="fa-solid fa-user-plus"></i>Sign up
-            </NavLink>
+            {currentUser ? loggedInOptions : loggedOutOptions}
           </Nav>
         </Navbar.Collapse>
       </Container>
