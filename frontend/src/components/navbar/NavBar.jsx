@@ -31,7 +31,7 @@ const NavBar = () => {
   const loggedInOptions = (
     <>
       <NavLink
-        to="/"
+        to="/create"
         className={({ isActive }) =>
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
