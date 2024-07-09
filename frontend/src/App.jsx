@@ -8,6 +8,7 @@ import SignInPage from "./containers/SignInPage/SignInPage";
 import CreatePage from "./containers/CreatePage/CreatePage";
 import CreateArtpiecePage from "./containers/CreateArtpiecePage/CreateArtpiecePage";
 import CreateCollectionPage from "./containers/CreateCollectionPage/CreateCollectionPage";
+import DiscoverPage from "./containers/DiscoverPage/DiscoverPage";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <NavBar />
       <Container fluid className={styles.Main}>
         <Routes>
-          <Route exact path="/" element={<h1>Discovery page</h1>} />
+          <Route exact path="/" element={<DiscoverPage />} />
           <Route exact path="/signup" element={<SignUpPage />} />
           <Route exact path="/signin" element={<SignInPage />} />
           <Route exact path="/create" element={<CreatePage />} />
