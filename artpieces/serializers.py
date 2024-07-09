@@ -124,10 +124,8 @@ class ArtpieceSerializer(serializers.ModelSerializer):
         hashtags = re.findall(pattern, value)
         if not hashtags:
             raise serializers.ValidationError(
-                {'hashtags':
-                 ('Hashtags must be in the format "#hashtag"'
-                  + 'and separated by spaces.')}
-            )
+                'Hashtags must be in the format "#hashtag"'
+                + 'and separated by spaces.')
         return ' '.join(hashtags)
 
     def validate_art_collection(self, value):
