@@ -12,6 +12,7 @@ const Discover = () => {
   const [query, setQuery] = useState("");
   const [filterMedium, setFilterMedium] = useState("");
   const [filterForSale, setFilterForSale] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
 
   const handleToggleForSale = () => {
     setFilterForSale((prevFilter) => (prevFilter === "" ? "1" : ""));
@@ -21,7 +22,7 @@ const Discover = () => {
     const fetchArtpieces = async () => {
       try {
         const { data } = await axiosReq.get(
-          `/artpieces/?search=${query}&art_medium=${filterMedium}&for_sale=${filterForSale}`
+          `/artpieces/?search=${query}&art_medium=${filterMedium}&for_sale=${filterForSale}&ordering=${sortOrder}`
         );
         setArtpieces(data);
         setHasLoaded(true);
@@ -37,7 +38,7 @@ const Discover = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [query, filterMedium, filterForSale]);
+  }, [query, filterMedium, filterForSale, sortOrder]);
 
   return (
     <>
@@ -69,6 +70,17 @@ const Discover = () => {
         <Button onClick={handleToggleForSale}>
           {filterForSale === "1" ? "Show all" : "For sale"}
         </Button>
+
+        <Form.Control
+          as="select"
+          value={sortOrder}
+          onChange={(event) => setSortOrder(event.target.value)}
+        >
+          <option value="">Sort by</option>
+          <option value="likes_count">Most Liked</option>
+          <option value="-created_on">Newest to Oldest</option>
+          <option value="created_on">Oldest to Newest</option>
+        </Form.Control>
       </Form>
 
       {hasLoaded ? (
@@ -80,6 +92,8 @@ const Discover = () => {
                 <p>{artpiece.for_sale}</p>
                 <p>{artpiece.art_medium}</p>
                 <p>{artpiece.hashtags}</p>
+                <p>{artpiece.likes_count}</p>
+                <p>{artpiece.created_on}</p>
               </div>
             ))
           ) : (
