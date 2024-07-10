@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import { axiosReq } from "../../api/axiosDefaults";
 import { Button } from "react-bootstrap";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
 
 const Discover = () => {
   const [artpieces, setArtpieces] = useState({ results: [] });
@@ -86,16 +88,24 @@ const Discover = () => {
       {hasLoaded ? (
         <>
           {artpieces.results.length ? (
-            artpieces.results.map((artpiece) => (
-              <div>
-                <h3>{artpiece.title}</h3>
-                <p>{artpiece.for_sale}</p>
-                <p>{artpiece.art_medium}</p>
-                <p>{artpiece.hashtags}</p>
-                <p>{artpiece.likes_count}</p>
-                <p>{artpiece.created_on}</p>
-              </div>
-            ))
+            <InfiniteScroll
+              dataLength={artpieces.results.length}
+              next={() => fetchMoreData(artpieces, setArtpieces)}
+              hasMore={!!artpieces.next}
+              loader={<p>Loading...</p>}
+              endMessage={<p>No more results</p>}
+            >
+              {artpieces.results.map((artpiece) => (
+                <div key={artpiece.id}>
+                  <h3>{artpiece.title}</h3>
+                  <p>{artpiece.for_sale}</p>
+                  <p>{artpiece.art_medium}</p>
+                  <p>{artpiece.hashtags}</p>
+                  <p>{artpiece.likes_count}</p>
+                  <p>{artpiece.created_on}</p>
+                </div>
+              ))}
+            </InfiniteScroll>
           ) : (
             <Container>
               <p>No results</p>
@@ -104,7 +114,7 @@ const Discover = () => {
         </>
       ) : (
         <Container>
-          <p>Loading</p>
+          <p>Has not loaded...</p>
         </Container>
       )}
     </>
