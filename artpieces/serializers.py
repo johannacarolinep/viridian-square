@@ -64,7 +64,7 @@ class ArtpieceSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_name = serializers.ReadOnlyField(source='owner.profile.name')
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
-    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
+    profile_image = serializers.ReadOnlyField(source='owner.profile.profile_image.url')
     image_url = serializers.SerializerMethodField()
     image = serializers.ImageField(write_only=True, required=False)
     hashtags = serializers.CharField(write_only=True, required=False)

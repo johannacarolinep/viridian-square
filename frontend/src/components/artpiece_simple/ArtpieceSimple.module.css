@@ -1,0 +1,16 @@
+.Card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.ImgCover {
+    object-fit: cover;
+    width: 100%;
+}
+
+.ImgContainer {
+    display: flex;
+    min-height: 150px;
+    aspect-ratio: 3/2;
+}
