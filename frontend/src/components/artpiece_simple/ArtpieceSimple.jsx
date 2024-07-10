@@ -2,6 +2,7 @@ import React from "react";
 import { Badge, Card } from "react-bootstrap";
 import styles from "./ArtpieceSimple.module.css";
 import Avatar from "../avatar/Avatar";
+import { Link } from "react-router-dom";
 
 const ArtpieceSimple = (props) => {
   const {
@@ -20,18 +21,20 @@ const ArtpieceSimple = (props) => {
 
   return (
     <Card className={styles.Card}>
-      <div className={styles.ImgContainer}>
-        <Card.Img
-          variant="top"
-          src={image_url}
-          alt={title}
-          className={styles.ImgCover}
-        />
-      </div>
+      <Link to={`/artpieces/${id}`}>
+        <div className={styles.ImgContainer}>
+          <Card.Img
+            variant="top"
+            src={image_url}
+            alt={title}
+            className={styles.ImgCover}
+          />
+        </div>
+      </Link>
       <Card.Body>
         <Card.Title>
           <span className="fw-bold">{title}</span>{" "}
-          {art_medium != 0 ? (
+          {art_medium !== 0 ? (
             <Badge className="ms-1" pill bg="dark">
               {art_medium}
             </Badge>
@@ -47,8 +50,10 @@ const ArtpieceSimple = (props) => {
           )}
         </Card.Title>
         <div className="text-end">
-          By: {profile_name} | {created_on}
-          <Avatar src={profile_image} height={40} />
+          <Link to={`/profiles/${profile_id}`}>
+            By: {profile_name} | {created_on}
+            <Avatar src={profile_image} height={40} />
+          </Link>
         </div>
       </Card.Body>
     </Card>

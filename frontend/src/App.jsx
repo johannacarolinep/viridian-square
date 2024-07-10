@@ -9,6 +9,8 @@ import CreatePage from "./containers/CreatePage/CreatePage";
 import CreateArtpiecePage from "./containers/CreateArtpiecePage/CreateArtpiecePage";
 import CreateCollectionPage from "./containers/CreateCollectionPage/CreateCollectionPage";
 import DiscoverPage from "./containers/DiscoverPage/DiscoverPage";
+import ArtpiecePage from "./containers/ArtpiecePage/ArtpiecePage";
+import ProfilePage from "./containers/ProfilePage/ProfilePage";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
             path="/create-collection"
             element={<CreateCollectionPage />}
           />
+          <Route exact path="/artpieces/:id" element={<ArtpiecePage />} />
+          <Route exact path="/profiles/:id" element={<ProfilePage />} />
         </Routes>
       </Container>
     </div>
