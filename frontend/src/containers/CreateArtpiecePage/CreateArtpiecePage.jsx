@@ -1,9 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Form, Button, Image } from "react-bootstrap";
 // import { useNavigate } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const CreateArtpiecePage = () => {
+  const currentUser = useCurrentUser();
+  const [artCollectionChoices, setArtCollectionChoices] = useState([]);
   const [errors, setErrors] = useState({});
 
   const [artpieceData, setArtpieceData] = useState({
@@ -27,6 +30,21 @@ const CreateArtpiecePage = () => {
   } = artpieceData;
 
   const imageInput = useRef(null);
+
+  useEffect(() => {
+    const handleMount = async () => {
+      try {
+        const { data } = await axiosReq.get(
+          `/collections/?owner=${currentUser.pk}`
+        );
+        setArtCollectionChoices(data.results);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    handleMount();
+  }, [currentUser]);
 
   const handleChange = (event) => {
     setArtpieceData({
@@ -59,11 +77,8 @@ const CreateArtpiecePage = () => {
 
     try {
       const { data } = await axiosReq.post("/artpieces/", formData);
-      console.log("Artpiece created!");
     } catch (err) {
-      console.log("ERROR RESPONSE ", err);
       if (err.response?.status !== 401) {
-        console.log("RESPONSE DATA", err.response.data);
         setErrors(err.response?.data);
       }
     }
@@ -87,8 +102,6 @@ const CreateArtpiecePage = () => {
     { value: 1, label: "For sale" },
     { value: 2, label: "Sold" },
   ];
-
-  // Note - Add artcollection choices (and input field)
 
   return (
     <main>
@@ -182,6 +195,26 @@ const CreateArtpiecePage = () => {
           />
         </Form.Group>
         {errors.hashtags?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
+
+        <Form.Group>
+          <Form.Label>Add to collection?</Form.Label>
+          <Form.Control
+            as="select"
+            name="art_collection"
+            value={art_collection}
+            onChange={handleChange}
+          >
+            <option value="">No collection selected</option>
+            {artCollectionChoices.map((choice) => (
+              <option key={choice.id} value={choice.id}>
+                {choice.title}
+              </option>
+            ))}
+          </Form.Control>
+        </Form.Group>
+        {errors.art_collection?.map((message, idx) => (
           <p key={idx}>{message}</p>
         ))}
 
