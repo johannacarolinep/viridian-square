@@ -231,6 +231,10 @@ Actions taken:
     - Added a PBI to adjust the ArtpieceSerializer, to more easily identify in the frontend whether an artpiece has been liked by the current user.
 - Repriotised backlog in preparation for sprint 5
 
+#### Sprint 5
+
+![Sprint 5](documentation/sprints/sprint5_milestone.png)
+
 <a id="user-stories"></a>
 ### User stories:
 
