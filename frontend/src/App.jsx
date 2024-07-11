@@ -14,29 +14,23 @@ import ProfilePage from "./containers/ProfilePage/ProfilePage";
 
 function App() {
   return (
-    <div className={styles.App}>
+    <>
       <NavBar />
-      <Container fluid className={styles.Main}>
-        <Routes>
-          <Route exact path="/" element={<DiscoverPage />} />
-          <Route exact path="/signup" element={<SignUpPage />} />
-          <Route exact path="/signin" element={<SignInPage />} />
-          <Route exact path="/create" element={<CreatePage />} />
-          <Route
-            exact
-            path="/create-artpiece"
-            element={<CreateArtpiecePage />}
-          />
-          <Route
-            exact
-            path="/create-collection"
-            element={<CreateCollectionPage />}
-          />
-          <Route exact path="/artpieces/:id" element={<ArtpiecePage />} />
-          <Route exact path="/profiles/:id" element={<ProfilePage />} />
-        </Routes>
-      </Container>
-    </div>
+      <Routes>
+        <Route exact path="/" element={<DiscoverPage />} />
+        <Route exact path="/signup" element={<SignUpPage />} />
+        <Route exact path="/signin" element={<SignInPage />} />
+        <Route exact path="/create" element={<CreatePage />} />
+        <Route exact path="/create-artpiece" element={<CreateArtpiecePage />} />
+        <Route
+          exact
+          path="/create-collection"
+          element={<CreateCollectionPage />}
+        />
+        <Route exact path="/artpieces/:id" element={<ArtpiecePage />} />
+        <Route exact path="/profiles/:id" element={<ProfilePage />} />
+      </Routes>
+    </>
   );
 }
 

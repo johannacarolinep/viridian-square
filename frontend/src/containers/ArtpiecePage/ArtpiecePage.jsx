@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
+import ArtpieceDetailed from "../../components/artpiece_detailed/ArtpieceDetailed";
+import { Container } from "react-bootstrap";
+import appStyles from "../../App.module.css";
 
 const ArtpiecePage = () => {
   const { id } = useParams();
@@ -20,10 +23,11 @@ const ArtpiecePage = () => {
   }, [id]);
 
   return (
-    <div>
-      ArtpiecePage:
-      <p>{artpiece.title}</p>
-    </div>
+    <main className={appStyles.bgWhite}>
+      <Container fluid="xl">
+        <ArtpieceDetailed {...artpiece} />
+      </Container>
+    </main>
   );
 };
 

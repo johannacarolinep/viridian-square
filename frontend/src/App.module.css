@@ -15,14 +15,55 @@
     box-sizing: border-box;
 }
 
-.App {
+body {
     font-family: var(--ff-primary);
     background-color: var(--clr-light);
-    min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--ff-secondary);
+}
+
+main {
+    flex: 1 0 auto;
+    padding-top: 57px;
+}
+
+/* -------------------------------- Colours */
+.bgWhite {
+    background-color: #ffffff;
+}
+
+.bgLight {
+    background-color: var(--clr-light);
+}
+
+.bgAccentLight {
+    background-color: var(--clr-accent--light);
+}
+
+.txtAccentDark {
+    color: var(--clr-brand--primary);
+}
+
+.txtDark {
+    color: var(--clr-dark);
+}
+
+/* -------------------------------- Dividing lines */
+.dividerPrimary {
+    background-color: var(--clr-brand--primary);
+    height: 5px;
+    width: 100%;
 }
 
 @media screen and (min-width: 992px) {
-    .Main {
+    main {
         padding-top: 72.5px;
     }
 }
