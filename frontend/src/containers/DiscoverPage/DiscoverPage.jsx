@@ -3,10 +3,10 @@ import Discover from "../../components/discover/Discover";
 
 const DiscoverPage = () => {
   return (
-    <div>
+    <main>
       DiscoverPage
       <Discover />
-    </div>
+    </main>
   );
 };
 

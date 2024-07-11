@@ -20,10 +20,10 @@ const ProfilePage = () => {
   }, [id]);
 
   return (
-    <div>
+    <main>
       ProfilePage
       <p>{profile.name}</p>
-    </div>
+    </main>
   );
 };
 

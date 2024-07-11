@@ -33,58 +33,60 @@ const SignUpForm = () => {
     }
   };
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="email">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else without your express
-          permission.
-        </Form.Text>
-      </Form.Group>
-      {errors.email?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
+    <main>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else without your express
+            permission.
+          </Form.Text>
+        </Form.Group>
+        {errors.email?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
 
-      <Form.Group className="mb-3" controlId="password1">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          name="password1"
-          value={password1}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors.password1?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
-      <Form.Group className="mb-3" controlId="password2">
-        <Form.Label>Password again</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          name="password2"
-          value={password2}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors.password2?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
-      <Button variant="primary" type="submit">
-        Sign Up
-      </Button>
-      {errors.non_field_errors?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
-    </Form>
+        <Form.Group className="mb-3" controlId="password1">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password1"
+            value={password1}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        {errors.password1?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
+        <Form.Group className="mb-3" controlId="password2">
+          <Form.Label>Password again</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password2"
+            value={password2}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        {errors.password2?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
+        <Button variant="primary" type="submit">
+          Sign Up
+        </Button>
+        {errors.non_field_errors?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
+      </Form>
+    </main>
   );
 };
 

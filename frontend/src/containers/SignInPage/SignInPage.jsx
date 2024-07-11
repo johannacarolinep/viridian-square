@@ -41,41 +41,43 @@ const SignInForm = () => {
     }
   };
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="email">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors.email?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
+    <main>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        {errors.email?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
 
-      <Form.Group className="mb-3" controlId="password">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors.password?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
-      <Button variant="primary" type="submit">
-        Sign In
-      </Button>
-      {errors.non_field_errors?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
-    </Form>
+        <Form.Group className="mb-3" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        {errors.password?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
+        <Button variant="primary" type="submit">
+          Sign In
+        </Button>
+        {errors.non_field_errors?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
+      </Form>
+    </main>
   );
 };
 

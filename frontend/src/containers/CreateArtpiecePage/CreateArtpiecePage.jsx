@@ -91,105 +91,107 @@ const CreateArtpiecePage = () => {
   // Note - Add artcollection choices (and input field)
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group>
-        <Form.Label htmlFor="image-upload">Image:</Form.Label>
-        <Form.Control
-          type="file"
-          id="image-upload"
-          accept="image/*"
-          onChange={handleChangeImage}
-          ref={imageInput}
-        />
-      </Form.Group>
-      {errors.image?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
+    <main>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Label htmlFor="image-upload">Image:</Form.Label>
+          <Form.Control
+            type="file"
+            id="image-upload"
+            accept="image/*"
+            onChange={handleChangeImage}
+            ref={imageInput}
+          />
+        </Form.Group>
+        {errors.image?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
 
-      <Form.Group>
-        <Form.Label>Title</Form.Label>
-        <Form.Control
-          type="text"
-          name="title"
-          value={title}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors.title?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
+        <Form.Group>
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+            type="text"
+            name="title"
+            value={title}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        {errors.title?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
 
-      <Form.Group>
-        <Form.Label>Description</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={6}
-          name="description"
-          value={description}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors.description?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
+        <Form.Group>
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={6}
+            name="description"
+            value={description}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        {errors.description?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
 
-      <Form.Group>
-        <Form.Label>Medium used:</Form.Label>
-        <Form.Control
-          as="select"
-          name="art_medium"
-          value={art_medium}
-          onChange={handleChange}
-        >
-          {artMediumChoices.map((choice) => (
-            <option key={choice.value} value={choice.value}>
-              {choice.label}
-            </option>
-          ))}
-        </Form.Control>
-      </Form.Group>
-      {errors.art_medium?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
+        <Form.Group>
+          <Form.Label>Medium used:</Form.Label>
+          <Form.Control
+            as="select"
+            name="art_medium"
+            value={art_medium}
+            onChange={handleChange}
+          >
+            {artMediumChoices.map((choice) => (
+              <option key={choice.value} value={choice.value}>
+                {choice.label}
+              </option>
+            ))}
+          </Form.Control>
+        </Form.Group>
+        {errors.art_medium?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
 
-      <Form.Group>
-        <Form.Label>For sale?:</Form.Label>
-        <Form.Control
-          as="select"
-          name="for_sale"
-          value={for_sale}
-          onChange={handleChange}
-        >
-          {forSaleChoices.map((choice) => (
-            <option key={choice.value} value={choice.value}>
-              {choice.label}
-            </option>
-          ))}
-        </Form.Control>
-      </Form.Group>
-      {errors.for_sale?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
+        <Form.Group>
+          <Form.Label>For sale?:</Form.Label>
+          <Form.Control
+            as="select"
+            name="for_sale"
+            value={for_sale}
+            onChange={handleChange}
+          >
+            {forSaleChoices.map((choice) => (
+              <option key={choice.value} value={choice.value}>
+                {choice.label}
+              </option>
+            ))}
+          </Form.Control>
+        </Form.Group>
+        {errors.for_sale?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
 
-      <Form.Group>
-        <Form.Label>Hashtags</Form.Label>
-        <Form.Control
-          type="text"
-          name="hashtags"
-          value={hashtags}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors.hashtags?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
+        <Form.Group>
+          <Form.Label>Hashtags</Form.Label>
+          <Form.Control
+            type="text"
+            name="hashtags"
+            value={hashtags}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        {errors.hashtags?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
 
-      <Button>cancel</Button>
-      <Button type="submit">create</Button>
-      {errors.non_field_errors?.map((message, idx) => (
-        <p key={idx}>{message}</p>
-      ))}
-    </Form>
+        <Button>cancel</Button>
+        <Button type="submit">create</Button>
+        {errors.non_field_errors?.map((message, idx) => (
+          <p key={idx}>{message}</p>
+        ))}
+      </Form>
+    </main>
   );
 };
 

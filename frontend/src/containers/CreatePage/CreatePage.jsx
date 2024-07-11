@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const CreatePage = () => {
   return (
-    <>
+    <main>
       <Link to="/create-collection">New collection</Link>
       <Link to="/create-artpiece">New artpiece</Link>
-    </>
+    </main>
   );
 };
 

@@ -1,7 +1,11 @@
 import React from "react";
 
 const CreateCollectionPage = () => {
-  return <div>CreateCollectionPage</div>;
+  return (
+    <main>
+      <div>CreateCollectionPage</div>
+    </main>
+  );
 };
 
 export default CreateCollectionPage;
