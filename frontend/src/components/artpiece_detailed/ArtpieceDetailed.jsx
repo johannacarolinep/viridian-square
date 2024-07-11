@@ -26,15 +26,22 @@ const ArtpieceDetailed = (props) => {
   } = props;
   return (
     <>
-      <Row className="mt-5">
-        <div className={`col-7 ${styles.ImageContainer}`}>
+      <Row className="mt-lg-5">
+        <div className={`col-lg-7 position-relative p-0`}>
           <Image
             src={image_url}
             alt={`${title}, artwork by artist ${profile_name}`}
             className={styles.Image}
           />
+          <div className="position-absolute top-0 end-0 p-3 fs-5">
+            <Badge pill bg="dark">
+              {for_sale === 0 && `Not for sale`}
+              {for_sale === 1 && `For sale`}
+              {for_sale === 2 && `Sold`}
+            </Badge>
+          </div>
         </div>
-        <div className="col-5 ps-4">
+        <div className="col-lg-5 mt-3 mt-lg-0 ps-4">
           <div className="d-flex justify-content-between">
             <Link to={`/profiles/${profile_id}`}>
               <Avatar src={profile_image} height={38} />
@@ -67,7 +74,7 @@ const ArtpieceDetailed = (props) => {
                 {hashtags}
               </p>
             )}
-            {(for_sale == 1 || art_collection) && (
+            {(for_sale === 1 || art_collection) && (
               <div className="fs-5">
                 {art_collection && (
                   <Link>
@@ -76,13 +83,13 @@ const ArtpieceDetailed = (props) => {
                     </Badge>
                   </Link>
                 )}
-                {for_sale == 1 && <Button>Make an enquiry</Button>}
+                {for_sale === 1 && <Button>Make an enquiry</Button>}
               </div>
             )}
             <p>
               <span className="fw-bold">Created: </span>
               {created_on}
-              {created_on != updated_on && `(Updated: ${updated_on})`}
+              {created_on !== updated_on && `(Updated: ${updated_on})`}
             </p>
           </div>
         </div>
