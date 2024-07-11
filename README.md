@@ -211,6 +211,25 @@ Actions taken:
 
 ![Sprint 4 milestone](documentation/sprints/sprint4_milestone.png)
 
+##### Sprint 4 wrap-up
+
+Project board at end of sprint 4:
+
+![Project board at end of sprint 4](documentation/sprints/sprint4_board.png)
+
+Points completed: 26
+Velocity: 23.5
+
+Notes/Reflections:
+- During this sprint, I focused on making progress on functionality, rather than producing "finished" features. Due to time constraints and inexperience with React, I wanted to ensure I could get the expected results in terms of functionality and interaction between the frontend and backend. As a result, several of the containers and components created so far are functional but lack a good HTML structure, styles, and user feedback for interactions.
+
+Actions taken:
+- 6 PBI's moved back to the backlog
+- New User Stories and other PBI's in the backlog:
+    - Added several new user stories to address the current lack of structure, semantic HTML, user feedback, and styles across existing containers and components.
+    - Added a PBI to prepare and test deployment
+    - Added a PBI to adjust the ArtpieceSerializer, to more easily identify in the frontend whether an artpiece has been liked by the current user.
+- Repriotised backlog in preparation for sprint 5
 
 <a id="user-stories"></a>
 ### User stories:
@@ -243,7 +262,9 @@ Actions taken:
 - `Updating art pieces`: As a **logged-in user**, I can **update my own art piece**, so that I can **manage my own content**.
 - `Deleting art pieces`: As a **logged-in user**, I can **delete my own art piece**, so that I can **manage and be in control of my own content.**
 - `CRUD collections`: As a **logged-in user**, I can **create, update and delete collections**, so that I can **group related art pieces and present my art in a way that makes sense to me.**
-- `Adding tags to art pieces`: As a **logged-in user**, I can **add tags to my own art piece**, so that I can **increase the searchability of my art**.
+- `Adding hashtags to art pieces`: As a **logged-in user**, I can **add hashtags to my own art piece**, so that I can **increase the searchability of my art**.
+- `Intuitive forms for creating/updating artpieces`: As a **logged-in user who is creating/updating an artpiece**, I can **easily use and understand the form**, so that **the process does not feel like a burden**. 
+- `Intuitive forms for creating/updating art collections`: As a **logged-in user who is creating/updating an art collection**, I can **easily use and understand the form**, so that **the process does not feel like a burden**. 
 
 #### Discovering art
 - `Viewing an artist's profile/gallery page`: As a **Site User**, I can **visit an artist's profile page/gallery page**, so that I can **view all art pieces and collections published by the artist in one place.**
@@ -252,8 +273,9 @@ Actions taken:
 - `Infinite scrolling for listed art pieces`: As a **Site User viewing a large number of art pieces in a list, the list is shown using infinite scroll**, so that **I do not need to navigate to separate pages**.
 - `Filtering art pieces`: As a **Site User**, I can **filter the art pieces in a list view** so that I can **more easily find the pieces I am looking for and narrow down the results.**
 - `Sorting art pieces`: As a **Site User**, I can **sort the art pieces in a list view (search results)** so that I can **more easily find the pieces I am looking for.**
-- `Viewing art piece collection`: As a **Site User viewing an individual art piece**, I can **see if the art piece belongs to a collection**, so that I can **easily find art pieces similar to the one I am viewing.**
+- `Viewing art piece collection`: As a **Site User viewing an individual art piece**, I can **see if the art piece belongs to a collection** so that I can **easily find art pieces similar to the one I am viewing.**
 - `Viewing a single art piece`: As a **Site User**, I can **click on an art piece in a list** so that I can **see a detailed view of the art piece.**
+- `Visually pleasing and informative presentation of art`: As a **Site User**, I can **view art pieces, collections, and related information presented in a structured and logical way**, so that I can **consume the information and enjoy the art with as little effort as possible**.
 
 #### Liking art pieces
 - `Liking an art piece`: As a **logged-in site user**, I can **like an art piece**, so that I can **show appreciation to the artist and so that I can more easily find my way back to art pieces I enjoy.**
@@ -267,6 +289,7 @@ Actions taken:
 
 #### Customising profile
 - `Customising the profile page:` As a **logged-in user**, I can **customise my profile page/gallery page**, so that I can **better present who I am as an artist/art buyer.**
+- `Well structured profile page:` As a **Site User visiting an artist's profile**, I can **view well structured and clearly defined sub-parts of the page** so that I can **easily consume and sort through the content**.
 
 #### Accessibility
 - `Navigate the website with keyboard`: As a **Site User not able to utilise a mouse** I can **focus on and access all interactive elements on the website using a keyboard** so that I can **be included, navigate on the website, access the content, and use all core functionality**.
