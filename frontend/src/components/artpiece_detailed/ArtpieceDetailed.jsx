@@ -21,6 +21,7 @@ const ArtpieceDetailed = (props) => {
     art_medium,
     for_sale,
     likes_count,
+    like_id,
     hashtags,
     art_collection,
   } = props;
