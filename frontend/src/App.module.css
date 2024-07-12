@@ -47,6 +47,10 @@ main {
     background-color: var(--clr-accent--light);
 }
 
+.bgPrimary {
+    background-color: var(--clr-brand--primary);
+}
+
 .txtAccentDark {
     color: var(--clr-brand--primary);
 }
@@ -55,11 +59,20 @@ main {
     color: var(--clr-dark);
 }
 
+.txtWhite {
+    color: #ffffff;
+}
+
 /* -------------------------------- Dividing lines */
 .dividerPrimary {
     background-color: var(--clr-brand--primary);
     height: 5px;
     width: 100%;
+}
+
+/* ------------------------------------ Utilities */
+.txtLarger {
+    font-size: 1.3em;
 }
 
 /* ---------------------------------- Buttons/icons/links */

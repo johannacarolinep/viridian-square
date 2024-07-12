@@ -1,0 +1,17 @@
+.HeroSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    color: white;
+    padding: 50px 20px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+@media screen and (min-width: 992px) {
+    .HeroSection h1 {
+        font-size: 3rem;
+        padding: 70px 20px;
+    }
+}
