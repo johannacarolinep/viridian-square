@@ -1,7 +1,16 @@
 import React from "react";
+import Discover from "../../components/discover/Discover";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const LikedPage = () => {
-  return <main>LikedPage</main>;
+  const currentUser = useCurrentUser();
+
+  return (
+    <main>
+      <h1>LikedPage</h1>
+      <Discover likesFilter={`likes__owner=${currentUser?.pk || ""}&`} />
+    </main>
+  );
 };
 
 export default LikedPage;

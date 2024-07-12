@@ -8,7 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import ArtpieceSimple from "../artpiece_simple/ArtpieceSimple";
 
-const Discover = () => {
+const Discover = ({ likesFilter = "" }) => {
   const [artpieces, setArtpieces] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
 
@@ -25,7 +25,7 @@ const Discover = () => {
     const fetchArtpieces = async () => {
       try {
         const { data } = await axiosReq.get(
-          `/artpieces/?search=${query}&art_medium=${filterMedium}&for_sale=${filterForSale}&ordering=${sortOrder}`
+          `/artpieces/?${likesFilter}search=${query}&art_medium=${filterMedium}&for_sale=${filterForSale}&ordering=${sortOrder}`
         );
         setArtpieces(data);
         setHasLoaded(true);
