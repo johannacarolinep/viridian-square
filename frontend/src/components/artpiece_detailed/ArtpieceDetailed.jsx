@@ -1,5 +1,12 @@
 import React from "react";
-import { Badge, Button, Image, Row } from "react-bootstrap";
+import {
+  Badge,
+  Button,
+  Image,
+  OverlayTrigger,
+  Row,
+  Tooltip,
+} from "react-bootstrap";
 import Avatar from "../avatar/Avatar";
 import appStyles from "../../App.module.css";
 import styles from "./ArtpieceDetailed.module.css";
@@ -28,6 +35,8 @@ const ArtpieceDetailed = (props) => {
     art_collection,
     setArtpiece,
   } = props;
+
+  const currentUser = useCurrentUser();
 
   const handleLike = async () => {
     try {
@@ -80,18 +89,38 @@ const ArtpieceDetailed = (props) => {
             </Link>
             <div>
               {likes_count}
-              {like_id ? (
+              {is_owner ? (
+                <OverlayTrigger
+                  placement="left"
+                  overlay={<Tooltip>You can't like your own artpiece</Tooltip>}
+                >
+                  <i
+                    class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
+                  />
+                </OverlayTrigger>
+              ) : like_id ? (
                 <button className={appStyles.IconBtn} onClick={handleUnlike} n>
                   <i
                     class={`${appStyles.txtAccentDark} fa-solid fa-heart ms-1`}
                   />
                 </button>
-              ) : (
+              ) : currentUser ? (
                 <button className={appStyles.IconBtn} onClick={handleLike}>
                   <i
                     class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
                   />
                 </button>
+              ) : (
+                <OverlayTrigger
+                  placement="left"
+                  overlay={
+                    <Tooltip>You need to log in to like artpieces</Tooltip>
+                  }
+                >
+                  <i
+                    class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
+                  />
+                </OverlayTrigger>
               )}
             </div>
           </div>
