@@ -25,7 +25,7 @@ const ArtpiecePage = () => {
   return (
     <main className={appStyles.bgWhite}>
       <Container fluid="xl">
-        <ArtpieceDetailed {...artpiece} />
+        <ArtpieceDetailed {...artpiece} setArtpiece={setArtpiece} />
       </Container>
     </main>
   );

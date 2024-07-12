@@ -4,6 +4,8 @@ import Avatar from "../avatar/Avatar";
 import appStyles from "../../App.module.css";
 import styles from "./ArtpieceDetailed.module.css";
 import { Link } from "react-router-dom";
+import { axiosRes } from "../../api/axiosDefaults";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const ArtpieceDetailed = (props) => {
   const {
@@ -24,7 +26,35 @@ const ArtpieceDetailed = (props) => {
     like_id,
     hashtags,
     art_collection,
+    setArtpiece,
   } = props;
+
+  const handleLike = async () => {
+    try {
+      const { data } = await axiosRes.post("/likes/", { liked_piece: id });
+      setArtpiece((prevArtpiece) => ({
+        ...prevArtpiece,
+        likes_count: prevArtpiece.likes_count + 1,
+        like_id: data.id,
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleUnlike = async () => {
+    try {
+      const { data } = await axiosRes.delete(`/likes/${like_id}`);
+      setArtpiece((prevArtpiece) => ({
+        ...prevArtpiece,
+        likes_count: prevArtpiece.likes_count - 1,
+        like_id: null,
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <Row className="mt-lg-5">
@@ -51,13 +81,17 @@ const ArtpieceDetailed = (props) => {
             <div>
               {likes_count}
               {like_id ? (
-                <i
-                  class={`${appStyles.txtAccentDark} fa-solid fa-heart ms-1`}
-                ></i>
+                <button className={appStyles.IconBtn} onClick={handleUnlike} n>
+                  <i
+                    class={`${appStyles.txtAccentDark} fa-solid fa-heart ms-1`}
+                  />
+                </button>
               ) : (
-                <i
-                  class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
-                ></i>
+                <button className={appStyles.IconBtn} onClick={handleLike}>
+                  <i
+                    class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
+                  />
+                </button>
               )}
             </div>
           </div>
