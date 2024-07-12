@@ -50,9 +50,15 @@ const ArtpieceDetailed = (props) => {
             </Link>
             <div>
               {likes_count}
-              <i
-                class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
-              ></i>
+              {like_id ? (
+                <i
+                  class={`${appStyles.txtAccentDark} fa-solid fa-heart ms-1`}
+                ></i>
+              ) : (
+                <i
+                  class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
+                ></i>
+              )}
             </div>
           </div>
           <div className={`my-3 ${appStyles.dividerPrimary}`}></div>
