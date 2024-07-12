@@ -7,10 +7,12 @@ import { Button, Col, Row } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import ArtpieceSimple from "../artpiece_simple/ArtpieceSimple";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const Discover = ({ likesFilter = "" }) => {
   const [artpieces, setArtpieces] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
+  const currentUser = useCurrentUser();
 
   const [query, setQuery] = useState("");
   const [filterMedium, setFilterMedium] = useState("");
@@ -41,7 +43,7 @@ const Discover = ({ likesFilter = "" }) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [query, filterMedium, filterForSale, sortOrder]);
+  }, [query, filterMedium, filterForSale, sortOrder, currentUser]);
 
   return (
     <>
