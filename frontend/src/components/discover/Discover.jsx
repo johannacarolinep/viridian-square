@@ -100,7 +100,10 @@ const Discover = () => {
                 <Row xs={1} md={2} lg={2} className="g-5 mt-2">
                   {artpieces.results.map((artpiece) => (
                     <Col key={artpiece.id} className="h-100">
-                      <ArtpieceSimple {...artpiece} />
+                      <ArtpieceSimple
+                        {...artpiece}
+                        setArtpieces={setArtpieces}
+                      />
                     </Col>
                   ))}
                 </Row>

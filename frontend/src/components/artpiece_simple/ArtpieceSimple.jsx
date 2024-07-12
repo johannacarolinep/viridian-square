@@ -1,8 +1,11 @@
 import React from "react";
-import { Badge, Card } from "react-bootstrap";
+import { Badge, Card, OverlayTrigger, Tooltip } from "react-bootstrap";
 import styles from "./ArtpieceSimple.module.css";
 import Avatar from "../avatar/Avatar";
 import { Link } from "react-router-dom";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import appStyles from "../../App.module.css";
+import { axiosRes } from "../../api/axiosDefaults";
 
 const ArtpieceSimple = (props) => {
   const {
@@ -17,7 +20,52 @@ const ArtpieceSimple = (props) => {
     image_url,
     art_medium,
     for_sale,
+    like_id,
+    likes_count,
+    setArtpieces,
   } = props;
+
+  const currentUser = useCurrentUser();
+
+  const handleLike = async () => {
+    try {
+      const { data } = await axiosRes.post("/likes/", { liked_piece: id });
+      setArtpieces((prevArtpieces) => ({
+        ...prevArtpieces,
+        results: prevArtpieces.results.map((artpiece) => {
+          return artpiece.id === id
+            ? {
+                ...artpiece,
+                likes_count: artpiece.likes_count + 1,
+                like_id: data.id,
+              }
+            : artpiece;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleUnlike = async () => {
+    try {
+      await axiosRes.delete(`/likes/${like_id}`);
+      setArtpieces((prevArtpieces) => ({
+        ...prevArtpieces,
+        results: prevArtpieces.results.map((artpiece) => {
+          return artpiece.id === id
+            ? {
+                ...artpiece,
+                likes_count: artpiece.likes_count - 1,
+                like_id: null,
+              }
+            : artpiece;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Card className={styles.Card}>
@@ -49,6 +97,38 @@ const ArtpieceSimple = (props) => {
             ""
           )}
         </Card.Title>
+        <div>
+          {likes_count}
+          {is_owner ? (
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>You can't like your own artpiece</Tooltip>}
+            >
+              <i
+                class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
+              />
+            </OverlayTrigger>
+          ) : like_id ? (
+            <button className={appStyles.IconBtn} onClick={handleUnlike} n>
+              <i class={`${appStyles.txtAccentDark} fa-solid fa-heart ms-1`} />
+            </button>
+          ) : currentUser ? (
+            <button className={appStyles.IconBtn} onClick={handleLike}>
+              <i
+                class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
+              />
+            </button>
+          ) : (
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>You need to log in to like artpieces</Tooltip>}
+            >
+              <i
+                class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
+              />
+            </OverlayTrigger>
+          )}
+        </div>
         <div className="text-end">
           <Link to={`/profiles/${profile_id}`}>
             By: {profile_name} | {created_on}
