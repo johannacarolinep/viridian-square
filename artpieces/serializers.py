@@ -1,6 +1,7 @@
 import re
 from rest_framework import serializers
 from .models import Artpiece, Hashtag
+from likes.models import Like
 import cloudinary.uploader
 
 
@@ -43,6 +44,8 @@ class ArtpieceSerializer(serializers.ModelSerializer):
         - art_collection: Collection to which the art piece belongs.
         - hashtags: Hashtags associated with the art piece (write-only).
         - likes_count: Number of likes on the art piece (read-only).
+        - like_id: The ID of the like object if the requesting user has liked
+        the artpiece.
 
     Methods:
         - validate_image: Validates the image field.
@@ -51,6 +54,8 @@ class ArtpieceSerializer(serializers.ModelSerializer):
         the user is the owner of the added collection.
         - get_is_owner: Returns whether the request user is the owner of the
             art piece.
+        - get_like_id: Returns the like ID if the requesting user has liked the
+        artpiece.
         - get_image_url: Returns the URL of the art piece's image.
         - create: Handles creation of a new Artpiece instance.
         - update: Handles updating an existing Artpiece instance.
@@ -64,11 +69,13 @@ class ArtpieceSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_name = serializers.ReadOnlyField(source='owner.profile.name')
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
-    profile_image = serializers.ReadOnlyField(source='owner.profile.profile_image.url')
+    profile_image = serializers.ReadOnlyField(
+        source='owner.profile.profile_image.url')
     image_url = serializers.SerializerMethodField()
     image = serializers.ImageField(write_only=True, required=False)
     hashtags = serializers.CharField(write_only=True, required=False)
     likes_count = serializers.ReadOnlyField()
+    like_id = serializers.SerializerMethodField()
 
     def validate_image(self, data):
         """
@@ -150,6 +157,25 @@ class ArtpieceSerializer(serializers.ModelSerializer):
         """
         request = self.context['request']
         return request.user == obj.owner
+
+    def get_like_id(self, obj):
+        """
+        Returns the id of the 'like' object if the requesting user owns a
+        'like' associated to the artpiece.
+
+        Args:
+            obj: The Artpiece instance.
+
+        Returns:
+            integer: The ID of the 'like' object (or None).
+        """
+        user = self.context['request'].user
+        if user.is_authenticated:
+            like = Like.objects.filter(
+                owner=user, post=obj
+            ).first()
+            return like.id if like else None
+        return None
 
     def get_image_url(self, obj):
         """
@@ -274,5 +300,5 @@ class ArtpieceSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id', 'profile_name',
             'profile_image', 'created_on', 'updated_on',
             'title', 'description', 'image', 'image_url', 'art_medium',
-            'for_sale', 'art_collection', 'hashtags', 'likes_count',
+            'for_sale', 'art_collection', 'hashtags', 'likes_count', 'like_id',
         ]
