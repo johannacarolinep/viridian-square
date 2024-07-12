@@ -8,6 +8,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import ArtpieceSimple from "../artpiece_simple/ArtpieceSimple";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import appStyles from "../../App.module.css";
+import styles from "./Discover.module.css";
 
 const Discover = ({ likesFilter = "" }) => {
   const [artpieces, setArtpieces] = useState({ results: [] });
@@ -48,46 +50,65 @@ const Discover = ({ likesFilter = "" }) => {
   return (
     <>
       <Container fluid="xl">
-        <Form onSubmit={(event) => event.preventDefault()}>
-          <Form.Control
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            type="text"
-            className="mr-sm-2"
-            placeholder="Search posts"
-          />
-          <Form.Control
-            as="select"
-            value={filterMedium}
-            onChange={(event) => setFilterMedium(event.target.value)}
-          >
-            <option value="">All mediums</option>
-            <option value="oil">Oil</option>
-            <option value="watercolour">Watercolour</option>
-            <option value="gouache">Gouache</option>
-            <option value="acrylic">Acrylic</option>
-            <option value="charcoal">Charcoal</option>
-            <option value="chalk">Chalk</option>
-            <option value="photography">Photography</option>
-            <option value="mixedmedia">Mixed media</option>
-            <option value="other">Other</option>
-          </Form.Control>
+        <Form className="mt-4" onSubmit={(event) => event.preventDefault()}>
+          <Row className="m-0 g-3">
+            <Col sm={12} lg={6} className="ps-lg-0">
+              <div className={`${styles.Search} ps-2 h-100`}>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <Form.Control
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  type="search"
+                  className={styles.SearchInput}
+                  placeholder="Search and you shall find"
+                />
+              </div>
+            </Col>
 
-          <Button onClick={handleToggleForSale}>
-            {filterForSale === "1" ? "Show all" : "For sale"}
-          </Button>
-
-          <Form.Control
-            as="select"
-            value={sortOrder}
-            onChange={(event) => setSortOrder(event.target.value)}
-          >
-            <option value="">Sort by</option>
-            <option value="likes_count">Most Liked</option>
-            <option value="-created_on">Newest to Oldest</option>
-            <option value="created_on">Oldest to Newest</option>
-          </Form.Control>
+            <Col sm={4} lg={2}>
+              <Form.Select
+                value={filterMedium}
+                onChange={(event) => setFilterMedium(event.target.value)}
+                className={`h-100 ${styles.Select}`}
+              >
+                <option value="">All mediums</option>
+                <option value="oil">Oil</option>
+                <option value="watercolour">Watercolour</option>
+                <option value="gouache">Gouache</option>
+                <option value="acrylic">Acrylic</option>
+                <option value="charcoal">Charcoal</option>
+                <option value="chalk">Chalk</option>
+                <option value="photography">Photography</option>
+                <option value="mixedmedia">Mixed media</option>
+                <option value="other">Other</option>
+              </Form.Select>
+            </Col>
+            <Col sm={4} lg={2}>
+              <Form.Select
+                value={sortOrder}
+                onChange={(event) => setSortOrder(event.target.value)}
+                className={`h-100 ${styles.Select}`}
+              >
+                <option value="">Sort by</option>
+                <option value="likes_count">Most Liked</option>
+                <option value="-created_on">Newest to Oldest</option>
+                <option value="created_on">Oldest to Newest</option>
+              </Form.Select>
+            </Col>
+            <Col sm={4} lg={2}>
+              <Button
+                variant="dark"
+                onClick={handleToggleForSale}
+                className={`h-100`}
+              >
+                {filterForSale === "1"
+                  ? "Showing: For sale"
+                  : "Incl. 'Not for sale'"}
+              </Button>
+            </Col>
+          </Row>
         </Form>
+        <div className={`${appStyles.dividerPrimary} mt-4`}></div>
 
         {hasLoaded ? (
           <>
@@ -99,10 +120,11 @@ const Discover = ({ likesFilter = "" }) => {
                 loader={<p>Loading...</p>}
                 endMessage={<p>No more results</p>}
               >
-                <Row xs={1} md={2} lg={2} className="g-5 mt-2">
+                <Row xs={1} md={2} lg={2} className="g-5 mt-1">
                   {artpieces.results.map((artpiece) => (
-                    <Col key={artpiece.id} className="h-100">
+                    <Col key={artpiece.id}>
                       <ArtpieceSimple
+                        className="h-100"
                         {...artpiece}
                         setArtpieces={setArtpieces}
                       />

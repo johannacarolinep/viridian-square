@@ -1,0 +1,17 @@
+.Search {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid var(--clr-accent--dark);
+    border-radius: 5px;
+}
+
+.SearchInput {
+    border: none;
+    outline: none;
+    padding: 10px 5px;
+}
+
+.Select {
+    border: 1px solid var(--clr-accent--dark);
+}
