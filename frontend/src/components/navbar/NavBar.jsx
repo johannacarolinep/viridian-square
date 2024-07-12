@@ -47,7 +47,7 @@ const NavBar = () => {
         <i class="fa-regular fa-envelope"></i>Enquiries
       </NavLink>
       <NavLink
-        to="/"
+        to="/liked"
         className={({ isActive }) =>
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
