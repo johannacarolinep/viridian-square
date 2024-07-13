@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Badge,
   Button,
   Image,
+  Modal,
   OverlayTrigger,
   Row,
   Tooltip,
@@ -10,7 +11,7 @@ import {
 import Avatar from "../avatar/Avatar";
 import appStyles from "../../App.module.css";
 import styles from "./ArtpieceDetailed.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { MoreDropdown } from "../moredropdown/MoreDropdown";
@@ -38,6 +39,10 @@ const ArtpieceDetailed = (props) => {
   } = props;
 
   const currentUser = useCurrentUser();
+  const navigate = useNavigate();
+
+  const [showDelete, setShowDelete] = useState(false);
+  const handleCloseDelete = () => setShowDelete(false);
 
   const handleLike = async () => {
     try {
@@ -69,8 +74,18 @@ const ArtpieceDetailed = (props) => {
     console.log("Clicked edit");
   };
 
+  const handleDeleteConfirm = () => {
+    setShowDelete(true);
+  };
+
   const handleDelete = async () => {
-    console.log("Clicked delete");
+    setShowDelete(false);
+    try {
+      await axiosRes.delete(`/artpieces/${id}/`);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -136,7 +151,7 @@ const ArtpieceDetailed = (props) => {
               <div className="d-flex align-items-center">
                 <MoreDropdown
                   handleEdit={handleEdit}
-                  handleDelete={handleDelete}
+                  handleDeleteConfirm={handleDeleteConfirm}
                 />
               </div>
             )}
@@ -181,6 +196,24 @@ const ArtpieceDetailed = (props) => {
           </div>
         </div>
       </Row>
+      <Modal show={showDelete} onHide={handleCloseDelete} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Please confirm deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete the artpiece?
+          <br />
+          The artpiece will be permanently removed.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDelete}>
+            Cancel
+          </Button>
+          <Button variant="dark" onClick={handleDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
