@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Form, Button, Image } from "react-bootstrap";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import appStyles from "../../App.module.css";
+import styles from "./CreateArtpiecePage.module.css";
+import logo from "../../assets/images/logo.webp";
 
 const CreateArtpiecePage = () => {
   const currentUser = useCurrentUser();
+  const navigate = useNavigate();
   const [artCollectionChoices, setArtCollectionChoices] = useState([]);
   const [errors, setErrors] = useState({});
 
@@ -60,6 +64,11 @@ const CreateArtpiecePage = () => {
         ...artpieceData,
         image: URL.createObjectURL(event.target.files[0]),
       });
+    } else {
+      setArtpieceData({
+        ...artpieceData,
+        image: null,
+      });
     }
   };
 
@@ -77,6 +86,7 @@ const CreateArtpiecePage = () => {
 
     try {
       const { data } = await axiosReq.post("/artpieces/", formData);
+      navigate(`/artpieces/${data.id}`);
     } catch (err) {
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
@@ -107,18 +117,32 @@ const CreateArtpiecePage = () => {
     <main>
       <Form onSubmit={handleSubmit}>
         <Form.Group>
-          <Form.Label htmlFor="image-upload">Image:</Form.Label>
-          <Form.Control
-            type="file"
-            id="image-upload"
-            accept="image/*"
-            onChange={handleChangeImage}
-            ref={imageInput}
-          />
+          <div className={`${appStyles.bgAccentLight} p-4`}>
+            <Form.Label htmlFor="image-upload" className="mb-0">
+              <h2>Image:</h2>
+            </Form.Label>
+            <div className={`${appStyles.dividerPrimary} mb-3`}></div>
+            <div className={`${appStyles.ImageContain} ${styles.ImageUpload}`}>
+              {image ? (
+                <Image src={image} rounded />
+              ) : (
+                <Image src={logo} rounded />
+              )}
+            </div>
+
+            <Form.Control
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              onChange={handleChangeImage}
+              ref={imageInput}
+              className="mt-3"
+            />
+            {errors.image?.map((message, idx) => (
+              <p key={idx}>{message}</p>
+            ))}
+          </div>
         </Form.Group>
-        {errors.image?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
 
         <Form.Group>
           <Form.Label>Title</Form.Label>
