@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Form, Button, Image } from "react-bootstrap";
+import { Form, Button, Image, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
@@ -115,139 +115,161 @@ const CreateArtpiecePage = () => {
 
   return (
     <main>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group>
-          <div className={`${appStyles.bgAccentLight} p-4`}>
-            <Form.Label htmlFor="image-upload" className="mb-0">
-              <h2>Image:</h2>
-            </Form.Label>
-            <div className={`${appStyles.dividerPrimary} mb-3`}></div>
-            <div className={`${appStyles.ImageContain} ${styles.ImageUpload}`}>
-              {image ? (
-                <Image src={image} rounded />
-              ) : (
-                <Image src={logo} rounded />
-              )}
-            </div>
+      <Container fluid="xl">
+        <h1 className="my-3">Create artpiece:</h1>
+        <Form onSubmit={handleSubmit} className="my-3">
+          <Row className="m-0">
+            <Col lg={6} className={appStyles.bgAccentLight}>
+              <Form.Group>
+                <div className={`${appStyles.bgAccentLight} p-4`}>
+                  <Form.Label htmlFor="image-upload" className="mb-0">
+                    <h2>Image:</h2>
+                  </Form.Label>
+                  <div className={`${appStyles.dividerPrimary} mb-3`}></div>
+                  <div
+                    className={`${appStyles.ImageContain} ${styles.ImageUpload}`}
+                  >
+                    {image ? (
+                      <Image src={image} rounded />
+                    ) : (
+                      <Image src={logo} rounded />
+                    )}
+                  </div>
 
-            <Form.Control
-              type="file"
-              id="image-upload"
-              accept="image/*"
-              onChange={handleChangeImage}
-              ref={imageInput}
-              className="mt-3"
-            />
-            {errors.image?.map((message, idx) => (
-              <p key={idx}>{message}</p>
-            ))}
-          </div>
-        </Form.Group>
+                  <Form.Control
+                    type="file"
+                    id="image-upload"
+                    accept="image/*"
+                    onChange={handleChangeImage}
+                    ref={imageInput}
+                    className="mt-3"
+                  />
+                  {errors.image?.map((message, idx) => (
+                    <p key={idx}>{message}</p>
+                  ))}
+                </div>
+              </Form.Group>
+            </Col>
 
-        <Form.Group>
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            name="title"
-            value={title}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        {errors.title?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
+            <Col lg={6} className={appStyles.bgWhite}>
+              <div className={`${appStyles.bgWhite} p-4`}>
+                <h2>Details:</h2>
+                <div className={`${appStyles.dividerPrimary} mb-3`}></div>
+                <Form.Group>
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={title}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                {errors.title?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
 
-        <Form.Group>
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={6}
-            name="description"
-            value={description}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        {errors.description?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
+                <Form.Group>
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={6}
+                    name="description"
+                    value={description}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                {errors.description?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
 
-        <Form.Group>
-          <Form.Label>Medium used:</Form.Label>
-          <Form.Control
-            as="select"
-            name="art_medium"
-            value={art_medium}
-            onChange={handleChange}
-          >
-            {artMediumChoices.map((choice) => (
-              <option key={choice.value} value={choice.value}>
-                {choice.label}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        {errors.art_medium?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
+                <Form.Group>
+                  <Form.Label>Medium used:</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="art_medium"
+                    value={art_medium}
+                    onChange={handleChange}
+                  >
+                    {artMediumChoices.map((choice) => (
+                      <option key={choice.value} value={choice.value}>
+                        {choice.label}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                {errors.art_medium?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
 
-        <Form.Group>
-          <Form.Label>For sale?:</Form.Label>
-          <Form.Control
-            as="select"
-            name="for_sale"
-            value={for_sale}
-            onChange={handleChange}
-          >
-            {forSaleChoices.map((choice) => (
-              <option key={choice.value} value={choice.value}>
-                {choice.label}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        {errors.for_sale?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
+                <Form.Group>
+                  <Form.Label>For sale?:</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="for_sale"
+                    value={for_sale}
+                    onChange={handleChange}
+                  >
+                    {forSaleChoices.map((choice) => (
+                      <option key={choice.value} value={choice.value}>
+                        {choice.label}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                {errors.for_sale?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
 
-        <Form.Group>
-          <Form.Label>Hashtags</Form.Label>
-          <Form.Control
-            type="text"
-            name="hashtags"
-            value={hashtags}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        {errors.hashtags?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
+                <Form.Group>
+                  <Form.Label>Hashtags</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="hashtags"
+                    value={hashtags}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                {errors.hashtags?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
 
-        <Form.Group>
-          <Form.Label>Add to collection?</Form.Label>
-          <Form.Control
-            as="select"
-            name="art_collection"
-            value={art_collection}
-            onChange={handleChange}
-          >
-            <option value="">No collection selected</option>
-            {artCollectionChoices.map((choice) => (
-              <option key={choice.id} value={choice.id}>
-                {choice.title}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        {errors.art_collection?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
+                <Form.Group>
+                  <Form.Label>Add to collection?</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="art_collection"
+                    value={art_collection}
+                    onChange={handleChange}
+                  >
+                    <option value="">No collection selected</option>
+                    {artCollectionChoices.map((choice) => (
+                      <option key={choice.id} value={choice.id}>
+                        {choice.title}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                {errors.art_collection?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
 
-        <Button>cancel</Button>
-        <Button type="submit">create</Button>
-        {errors.non_field_errors?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
-      </Form>
+                <Button className={`my-3 me-3`} variant="secondary">
+                  Cancel
+                </Button>
+                <Button
+                  className={`my-3 me-3 ${appStyles.btnPrimary}`}
+                  type="submit"
+                >
+                  Create
+                </Button>
+                {errors.non_field_errors?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
+              </div>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
     </main>
   );
 };
