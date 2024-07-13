@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Button, Form, Image } from "react-bootstrap";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
+import appStyles from "../../App.module.css";
+import styles from "./EditArtpiecePage.module.css";
 
 const EditArtpiecePage = () => {
   const navigate = useNavigate();
@@ -62,11 +63,6 @@ const EditArtpiecePage = () => {
     handleMount();
   }, [id, navigate]);
 
-  useEffect(() => {
-    console.log("Image ", image);
-    console.log("Image URL ", image_url);
-  }, [image]);
-
   const handleChange = (event) => {
     setArtpieceData({
       ...artpieceData,
@@ -75,7 +71,6 @@ const EditArtpiecePage = () => {
   };
 
   const handleChangeImage = (event) => {
-    console.log("files", event.target.files);
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
       setArtpieceData({
@@ -135,111 +130,139 @@ const EditArtpiecePage = () => {
 
   return (
     <main>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Label htmlFor="image-upload">Image:</Form.Label>
-          {image ? (
-            <Image src={image} rounded />
-          ) : (
-            <Image src={image_url} rounded />
-          )}
+      <Container fluid="xl">
+        <h1 className="my-3">Edit artpiece:</h1>
+        <Form onSubmit={handleSubmit} className="my-3">
+          <Row className="m-0">
+            <Col lg={6} className={appStyles.bgAccentLight}>
+              <Form.Group>
+                <div className={`${appStyles.bgAccentLight} p-4`}>
+                  <Form.Label htmlFor="image-upload" className="mb-0">
+                    <h2>Image:</h2>
+                  </Form.Label>
+                  <div className={`${appStyles.dividerPrimary} mb-3`}></div>
+                  <div
+                    className={`${appStyles.ImageContain} ${styles.ImageUpload}`}
+                  >
+                    {image ? (
+                      <Image src={image} rounded />
+                    ) : (
+                      <Image src={image_url} rounded />
+                    )}
+                  </div>
 
-          <Form.Control
-            type="file"
-            id="image-upload"
-            accept="image/*"
-            onChange={handleChangeImage}
-            ref={imageInput}
-          />
-        </Form.Group>
-        {errors.image?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
+                  <Form.Control
+                    type="file"
+                    id="image-upload"
+                    accept="image/*"
+                    onChange={handleChangeImage}
+                    ref={imageInput}
+                    className="mt-3"
+                  />
+                  {errors.image?.map((message, idx) => (
+                    <p key={idx}>{message}</p>
+                  ))}
+                </div>
+              </Form.Group>
+            </Col>
+            <Col lg={6} className={appStyles.bgWhite}>
+              <div className={`${appStyles.bgWhite} p-4`}>
+                <h2>Details:</h2>
+                <div className={`${appStyles.dividerPrimary} mb-3`}></div>
+                <Form.Group>
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={title}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                {errors.title?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
 
-        <Form.Group>
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            name="title"
-            value={title}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        {errors.title?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
+                <Form.Group>
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={6}
+                    name="description"
+                    value={description}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                {errors.description?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
 
-        <Form.Group>
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={6}
-            name="description"
-            value={description}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        {errors.description?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
+                <Form.Group>
+                  <Form.Label>Medium used:</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="art_medium"
+                    value={art_medium}
+                    onChange={handleChange}
+                  >
+                    {artMediumChoices.map((choice) => (
+                      <option key={choice.value} value={choice.value}>
+                        {choice.label}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                {errors.art_medium?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
 
-        <Form.Group>
-          <Form.Label>Medium used:</Form.Label>
-          <Form.Control
-            as="select"
-            name="art_medium"
-            value={art_medium}
-            onChange={handleChange}
-          >
-            {artMediumChoices.map((choice) => (
-              <option key={choice.value} value={choice.value}>
-                {choice.label}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        {errors.art_medium?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
+                <Form.Group>
+                  <Form.Label>For sale?:</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="for_sale"
+                    value={for_sale}
+                    onChange={handleChange}
+                  >
+                    {forSaleChoices.map((choice) => (
+                      <option key={choice.value} value={choice.value}>
+                        {choice.label}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                {errors.for_sale?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
 
-        <Form.Group>
-          <Form.Label>For sale?:</Form.Label>
-          <Form.Control
-            as="select"
-            name="for_sale"
-            value={for_sale}
-            onChange={handleChange}
-          >
-            {forSaleChoices.map((choice) => (
-              <option key={choice.value} value={choice.value}>
-                {choice.label}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        {errors.for_sale?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
-
-        <Form.Group>
-          <Form.Label>Hashtags</Form.Label>
-          <Form.Control
-            type="text"
-            name="hashtags"
-            value={hashtags}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        {errors.hashtags?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
-
-        <Button>Cancel</Button>
-        <Button type="submit">Update</Button>
-        {errors.non_field_errors?.map((message, idx) => (
-          <p key={idx}>{message}</p>
-        ))}
-      </Form>
+                <Form.Group>
+                  <Form.Label>Hashtags</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="hashtags"
+                    value={hashtags}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                {errors.hashtags?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
+                <Button className={`my-3 me-3`} variant="secondary">
+                  Cancel
+                </Button>
+                <Button
+                  className={`my-3 me-3 ${appStyles.btnPrimary}`}
+                  type="submit"
+                >
+                  Update
+                </Button>
+                {errors.non_field_errors?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
+              </div>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
     </main>
   );
 };
