@@ -13,6 +13,7 @@ import styles from "./ArtpieceDetailed.module.css";
 import { Link } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { MoreDropdown } from "../moredropdown/MoreDropdown";
 
 const ArtpieceDetailed = (props) => {
   const {
@@ -62,6 +63,14 @@ const ArtpieceDetailed = (props) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleEdit = async () => {
+    console.log("Clicked edit");
+  };
+
+  const handleDelete = async () => {
+    console.log("Clicked delete");
   };
 
   return (
@@ -123,6 +132,14 @@ const ArtpieceDetailed = (props) => {
                 </OverlayTrigger>
               )}
             </div>
+            {is_owner && (
+              <div className="d-flex align-items-center">
+                <MoreDropdown
+                  handleEdit={handleEdit}
+                  handleDelete={handleDelete}
+                />
+              </div>
+            )}
           </div>
           <div className={`my-3 ${appStyles.dividerPrimary}`}></div>
           <div>
