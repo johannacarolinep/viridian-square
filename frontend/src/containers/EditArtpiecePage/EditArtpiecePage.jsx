@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Image } from "react-bootstrap";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const EditArtpiecePage = () => {
@@ -14,10 +14,18 @@ const EditArtpiecePage = () => {
     art_medium: "",
     for_sale: "",
     hashtags: "",
+    image_url: "",
   });
 
-  const { title, description, image, art_medium, for_sale, hashtags } =
-    artpieceData;
+  const {
+    title,
+    description,
+    image,
+    art_medium,
+    for_sale,
+    hashtags,
+    image_url,
+  } = artpieceData;
 
   const [errors, setErrors] = useState({});
   const imageInput = useRef(null);
@@ -54,6 +62,11 @@ const EditArtpiecePage = () => {
     handleMount();
   }, [id, navigate]);
 
+  useEffect(() => {
+    console.log("Image ", image);
+    console.log("Image URL ", image_url);
+  }, [image]);
+
   const handleChange = (event) => {
     setArtpieceData({
       ...artpieceData,
@@ -62,11 +75,17 @@ const EditArtpiecePage = () => {
   };
 
   const handleChangeImage = (event) => {
+    console.log("files", event.target.files);
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
       setArtpieceData({
         ...artpieceData,
         image: URL.createObjectURL(event.target.files[0]),
+      });
+    } else {
+      setArtpieceData({
+        ...artpieceData,
+        image: null,
       });
     }
   };
@@ -119,6 +138,12 @@ const EditArtpiecePage = () => {
       <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label htmlFor="image-upload">Image:</Form.Label>
+          {image ? (
+            <Image src={image} rounded />
+          ) : (
+            <Image src={image_url} rounded />
+          )}
+
           <Form.Control
             type="file"
             id="image-upload"
