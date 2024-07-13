@@ -12,6 +12,7 @@ import DiscoverPage from "./containers/DiscoverPage/DiscoverPage";
 import ArtpiecePage from "./containers/ArtpiecePage/ArtpiecePage";
 import ProfilePage from "./containers/ProfilePage/ProfilePage";
 import LikedPage from "./containers/LikedPage/LikedPage";
+import EditArtpiecePage from "./containers/EditArtpiecePage/EditArtpiecePage";
 
 function App() {
   return (
@@ -23,6 +24,11 @@ function App() {
         <Route exact path="/signin" element={<SignInPage />} />
         <Route exact path="/create" element={<CreatePage />} />
         <Route exact path="/create-artpiece" element={<CreateArtpiecePage />} />
+        <Route
+          exact
+          path="/artpieces/:id/edit"
+          element={<EditArtpiecePage />}
+        />
         <Route
           exact
           path="/create-collection"

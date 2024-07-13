@@ -70,8 +70,8 @@ const ArtpieceDetailed = (props) => {
     }
   };
 
-  const handleEdit = async () => {
-    console.log("Clicked edit");
+  const handleEdit = () => {
+    navigate(`/artpieces/${id}/edit`);
   };
 
   const handleDeleteConfirm = () => {
