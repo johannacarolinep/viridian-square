@@ -13,6 +13,7 @@ import ArtpiecePage from "./containers/ArtpiecePage/ArtpiecePage";
 import ProfilePage from "./containers/ProfilePage/ProfilePage";
 import LikedPage from "./containers/LikedPage/LikedPage";
 import EditArtpiecePage from "./containers/EditArtpiecePage/EditArtpiecePage";
+import EditProfilePage from "./containers/EditProfilePage/EditProfilePage";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route exact path="/artpieces/:id" element={<ArtpiecePage />} />
         <Route exact path="/liked" element={<LikedPage />} />
         <Route exact path="/profiles/:id" element={<ProfilePage />} />
+        <Route exact path="/profiles/:id/edit" element={<EditProfilePage />} />
       </Routes>
     </>
   );

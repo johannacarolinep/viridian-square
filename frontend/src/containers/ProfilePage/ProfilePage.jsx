@@ -34,7 +34,7 @@ const ProfilePage = () => {
   }, [id]);
 
   const handleEdit = () => {
-    navigate(`/`);
+    navigate(`/profiles/${profile.id}/edit`);
   };
 
   return (
