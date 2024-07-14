@@ -44,6 +44,7 @@ if 'DEV' not in os.environ:
 
 REST_AUTH = {
     'USE_JWT': True,
+    'JWT_AUTH_HTTPONLY': False,
     'JWT_AUTH_SECURE': True,
     'JWT_AUTH_COOKIE': 'viridian-auth',
     'JWT_AUTH_REFRESH_COOKIE': 'viridian-refresh-token',
