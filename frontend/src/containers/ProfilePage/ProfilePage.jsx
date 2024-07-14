@@ -37,6 +37,10 @@ const ProfilePage = () => {
     navigate(`/profiles/${profile.id}/edit`);
   };
 
+  const handleAccountChange = () => {
+    navigate(`/account`);
+  };
+
   return (
     <main>
       <Container fluid="xl" className={`my-4 ${appStyles.bgWhite}`}>
@@ -48,7 +52,10 @@ const ProfilePage = () => {
             <h1>{profile.name}</h1>
             {profile.is_owner && (
               <div className="d-flex align-items-center">
-                <MoreDropdown handleEdit={handleEdit} />
+                <MoreDropdown
+                  handleEdit={handleEdit}
+                  handleAccountChange={handleAccountChange}
+                />
               </div>
             )}
             <p>{profile.description}</p>

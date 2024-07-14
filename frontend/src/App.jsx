@@ -14,6 +14,7 @@ import ProfilePage from "./containers/ProfilePage/ProfilePage";
 import LikedPage from "./containers/LikedPage/LikedPage";
 import EditArtpiecePage from "./containers/EditArtpiecePage/EditArtpiecePage";
 import EditProfilePage from "./containers/EditProfilePage/EditProfilePage";
+import AccountPage from "./containers/AccountPage/AccountPage";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route exact path="/liked" element={<LikedPage />} />
         <Route exact path="/profiles/:id" element={<ProfilePage />} />
         <Route exact path="/profiles/:id/edit" element={<EditProfilePage />} />
+        <Route exact path="/account" element={<AccountPage />} />
       </Routes>
     </>
   );

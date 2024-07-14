@@ -12,7 +12,11 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   />
 ));
 
-export const MoreDropdown = ({ handleEdit, handleDeleteConfirm }) => {
+export const MoreDropdown = ({
+  handleEdit,
+  handleDeleteConfirm,
+  handleAccountChange,
+}) => {
   return (
     <Dropdown className="ms-auto" drop="left">
       <Dropdown.Toggle as={ThreeDots} />
@@ -21,9 +25,19 @@ export const MoreDropdown = ({ handleEdit, handleDeleteConfirm }) => {
         <Dropdown.Item onClick={handleEdit} aria-label="edit">
           <i className="fas fa-edit" /> Edit
         </Dropdown.Item>
-        <Dropdown.Item onClick={handleDeleteConfirm} aria-label="delete">
-          <i className="fas fa-trash-alt" /> Delete
-        </Dropdown.Item>
+        {handleDeleteConfirm && (
+          <Dropdown.Item onClick={handleDeleteConfirm} aria-label="delete">
+            <i className="fas fa-trash-alt" /> Delete
+          </Dropdown.Item>
+        )}
+        {handleAccountChange && (
+          <Dropdown.Item
+            onClick={handleAccountChange}
+            aria-label="make account changes"
+          >
+            <i class="fa-solid fa-user-pen"></i> Edit account details
+          </Dropdown.Item>
+        )}
       </Dropdown.Menu>
     </Dropdown>
   );
