@@ -46,8 +46,15 @@ REST_AUTH = {
     'USE_JWT': True,
     'JWT_AUTH_SECURE': True,
     'JWT_AUTH_COOKIE': 'viridian-auth',
-    'JWT_AUTH_REFRESH_COOKIE': 'viridian-refresh-token'
+    'JWT_AUTH_REFRESH_COOKIE': 'viridian-refresh-token',
+    'JWT_AUTH_SAMESITE': 'None',
 }
+
+# REST_USE_JWT = True
+# JWT_AUTH_SECURE = True
+# JWT_AUTH_COOKIE = 'viridian-auth'
+# JWT_AUTH_REFRESH_COOKIE = 'viridian-refresh-token'
+# JWT_AUTH_SAMESITE = 'None'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/

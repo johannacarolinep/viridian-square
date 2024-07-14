@@ -3,7 +3,6 @@ import { axiosReq } from "../api/axiosDefaults";
 export const fetchMoreData = async (resource, setResource) => {
   try {
     const relativeURL = getRelativeURL(resource.next);
-    console.log("Relative", relativeURL);
     const { data } = await axiosReq.get(relativeURL);
     setResource((prevResource) => ({
       ...prevResource,
