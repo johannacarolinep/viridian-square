@@ -14,24 +14,33 @@ import appStyles from "../../App.module.css";
 import Avatar from "../../components/avatar/Avatar";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { MoreDropdown } from "../../components/moredropdown/MoreDropdown";
+import ArtpieceSimple from "../../components/artpiece_simple/ArtpieceSimple";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
 
 const ProfilePage = () => {
   const { id } = useParams();
-  const [profile, setProfile] = useState({ results: [] });
+  const currentUser = useCurrentUser();
+  const [profile, setProfile] = useState([]);
+  const [artpieces, setArtpieces] = useState({ results: [] });
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleMount = async () => {
+    const fetchData = async () => {
       try {
-        const { data } = await axiosReq.get(`/profiles/${id}`);
-        setProfile(data);
+        const { data: profileData } = await axiosReq.get(`/profiles/${id}`);
+        setProfile(profileData);
+        const { data: artpieceData } = await axiosReq.get(
+          `/artpieces/?owner=${profileData.owner}`
+        );
+        setArtpieces(artpieceData);
       } catch (err) {
         console.log(err);
       }
     };
 
-    handleMount();
-  }, [id]);
+    fetchData();
+  }, [id, navigate]);
 
   const handleEdit = () => {
     navigate(`/profiles/${profile.id}/edit`);
@@ -68,6 +77,33 @@ const ProfilePage = () => {
               </Badge>
             )}
           </Col>
+        </Row>
+        <Row>
+          {artpieces.results.length ? (
+            <InfiniteScroll
+              dataLength={artpieces.results.length}
+              next={() => fetchMoreData(artpieces, setArtpieces)}
+              hasMore={!!artpieces.next}
+              loader={<p>Loading...</p>}
+              endMessage={<p>No more results</p>}
+            >
+              <Row xs={2} md={3} lg={4} className="g-1 mt-1">
+                {artpieces.results.map((artpiece) => (
+                  <Col key={artpiece.id}>
+                    <ArtpieceSimple
+                      className="h-100"
+                      {...artpiece}
+                      setArtpieces={setArtpieces}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            </InfiniteScroll>
+          ) : (
+            <Container>
+              <p>No results</p>
+            </Container>
+          )}
         </Row>
       </Container>
     </main>
