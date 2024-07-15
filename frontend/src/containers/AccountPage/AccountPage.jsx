@@ -29,19 +29,15 @@ const AccountPage = () => {
   const [accountDeleted, setAccountDeleted] = useState(false);
 
   useEffect(() => {
-    const handleMount = async () => {
-      if (currentUser) {
-        setUserData({
-          ...userData,
-          email: currentUser.email,
-          current_email: currentUser.email,
-        });
-      } else if (!setAccountDeleted) {
-        navigate("/signin");
-      }
-    };
-
-    handleMount();
+    if (currentUser) {
+      setUserData({
+        ...userData,
+        email: currentUser.email,
+        current_email: currentUser.email,
+      });
+    } else if (!accountDeleted) {
+      navigate("/signin");
+    }
   }, [currentUser, navigate]);
 
   const handleChange = (event) => {
