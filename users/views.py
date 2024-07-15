@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import EmailUpdateSerializer, DeleteUserSerializer, CurrentUserSerializer
 from dj_rest_auth.views import UserDetailsView
+from django.contrib.auth import logout
 
 
 class EmailUpdateView(generics.UpdateAPIView):
@@ -34,21 +35,31 @@ class DeleteUserView(generics.GenericAPIView):
     - IsAuthenticated: Only authenticated users can delete their account.
 
     Methods:
-    - delete: Validates the provided password and deletes the user's account.
+    - delete: Validates the provided password and deletes the user's account,
+    logs the user out and deletes cookies.
     """
     permission_classes = [IsAuthenticated]
     serializer_class = DeleteUserSerializer
 
     def delete(self, request, *args, **kwargs):
+        """
+        Validates the user's password, logs the user out, deletes the user,
+        and deletes authentication cookies.
+        """
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = request.user
+        logout(request)
         user.delete()
 
-        return Response(
+        response = Response(
             {"message": "Account deleted successfully."},
             status=status.HTTP_204_NO_CONTENT
         )
+        response.delete_cookie('viridian-auth')
+        response.delete_cookie('viridian-refresh-token')
+
+        return response
 
 
 class CustomUserDetailsView(UserDetailsView):
