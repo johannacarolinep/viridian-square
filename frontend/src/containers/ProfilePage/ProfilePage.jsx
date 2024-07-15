@@ -24,6 +24,7 @@ const ProfilePage = () => {
   const [profile, setProfile] = useState([]);
   const [artpieces, setArtpieces] = useState({ results: [] });
   const navigate = useNavigate();
+  const [displayContent, setDisplayContent] = useState("artpieces");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +49,10 @@ const ProfilePage = () => {
 
   const handleAccountChange = () => {
     navigate(`/account`);
+  };
+
+  const handleDisplayContentChange = (content) => {
+    setDisplayContent(content);
   };
 
   return (
@@ -79,30 +84,47 @@ const ProfilePage = () => {
           </Col>
         </Row>
         <Row>
-          {artpieces.results.length ? (
-            <InfiniteScroll
-              dataLength={artpieces.results.length}
-              next={() => fetchMoreData(artpieces, setArtpieces)}
-              hasMore={!!artpieces.next}
-              loader={<p>Loading...</p>}
-              endMessage={<p>No more results</p>}
-            >
-              <Row xs={2} md={3} lg={4} className="g-1 mt-1">
-                {artpieces.results.map((artpiece) => (
-                  <Col key={artpiece.id}>
-                    <ArtpieceSimple
-                      className="h-100"
-                      {...artpiece}
-                      setArtpieces={setArtpieces}
-                    />
-                  </Col>
-                ))}
-              </Row>
-            </InfiniteScroll>
+          <div>
+            <Button onClick={() => handleDisplayContentChange("artpieces")}>
+              Artpieces
+            </Button>
+            <Button onClick={() => handleDisplayContentChange("collections")}>
+              Collections
+            </Button>
+          </div>
+        </Row>
+        <Row>
+          <h2>Display Area:</h2>
+          {displayContent === "artpieces" ? (
+            <div>
+              {artpieces.results.length ? (
+                <InfiniteScroll
+                  dataLength={artpieces.results.length}
+                  next={() => fetchMoreData(artpieces, setArtpieces)}
+                  hasMore={!!artpieces.next}
+                  loader={<p>Loading...</p>}
+                  endMessage={<p>No more results</p>}
+                >
+                  <Row xs={2} md={3} lg={4} className="g-1 mt-1">
+                    {artpieces.results.map((artpiece) => (
+                      <Col key={artpiece.id}>
+                        <ArtpieceSimple
+                          className="h-100"
+                          {...artpiece}
+                          setArtpieces={setArtpieces}
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+                </InfiniteScroll>
+              ) : (
+                <Container>
+                  <p>No results</p>
+                </Container>
+              )}
+            </div>
           ) : (
-            <Container>
-              <p>No results</p>
-            </Container>
+            <p>Displaying collections</p>
           )}
         </Row>
       </Container>
