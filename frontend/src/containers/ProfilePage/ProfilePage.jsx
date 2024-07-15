@@ -178,6 +178,7 @@ const ProfilePage = () => {
                         <Col key={artpiece.id}>
                           <ArtpieceSimple
                             className="h-100"
+                            basic
                             {...artpiece}
                             setArtpieces={setArtpieces}
                           />

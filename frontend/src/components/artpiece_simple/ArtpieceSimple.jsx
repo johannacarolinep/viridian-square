@@ -23,6 +23,7 @@ const ArtpieceSimple = (props) => {
     like_id,
     likes_count,
     setArtpieces,
+    basic,
   } = props;
 
   const currentUser = useCurrentUser();
@@ -70,71 +71,83 @@ const ArtpieceSimple = (props) => {
   return (
     <Card className={styles.Card}>
       <Link to={`/artpieces/${id}`}>
-        <div className={styles.ImgContainer}>
+        <div className={`${styles.ImgContainer} position-relative`}>
           <Card.Img
             variant="top"
             src={image_url}
             alt={title}
             className={styles.ImgCover}
           />
+          {for_sale === 1 ? (
+            <div className="position-absolute top-0 end-0 p-1 fs-5">
+              <Badge className="ms-1" pill bg="dark">
+                For sale
+              </Badge>
+            </div>
+          ) : for_sale === 2 ? (
+            <div className="position-absolute top-0 end-0 p-1 fs-5">
+              <Badge className="ms-1" pill bg="dark">
+                Sold
+              </Badge>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </Link>
-      <Card.Body>
-        <Card.Title>
-          <span className="fw-bold">{title}</span>{" "}
-          {art_medium !== 0 ? (
-            <Badge className="ms-1" pill bg="dark">
-              {art_medium}
-            </Badge>
-          ) : (
-            ""
-          )}{" "}
-          {for_sale === 1 ? (
-            <Badge className="ms-1" pill bg="dark">
-              For sale
-            </Badge>
-          ) : (
-            ""
-          )}
-        </Card.Title>
-        <div>
-          {likes_count}
-          {is_owner ? (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>You can't like your own artpiece</Tooltip>}
-            >
-              <i
-                class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
-              />
-            </OverlayTrigger>
-          ) : like_id ? (
-            <button className={appStyles.IconBtn} onClick={handleUnlike} n>
-              <i class={`${appStyles.txtAccentDark} fa-solid fa-heart ms-1`} />
-            </button>
-          ) : currentUser ? (
-            <button className={appStyles.IconBtn} onClick={handleLike}>
-              <i
-                class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
-              />
-            </button>
-          ) : (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>You need to log in to like artpieces</Tooltip>}
-            >
-              <i
-                class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
-              />
-            </OverlayTrigger>
-          )}
+      <Card.Body className="px-3 pt-1 pb-2">
+        <div className="d-flex justify-content-between align-items-center">
+          <h5 className="mb-0 py-1">{title}</h5>
+          <div>
+            {is_owner ? (
+              <OverlayTrigger
+                placement="top"
+                overlay={<Tooltip>You can't like your own artpiece</Tooltip>}
+              >
+                <i
+                  class={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
+                />
+              </OverlayTrigger>
+            ) : like_id ? (
+              <button className={appStyles.IconBtn} onClick={handleUnlike} n>
+                <i class={`${appStyles.txtAccentDark} fa-solid fa-heart p-1`} />
+              </button>
+            ) : currentUser ? (
+              <button className={appStyles.IconBtn} onClick={handleLike}>
+                <i
+                  class={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
+                />
+              </button>
+            ) : (
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip>You need to log in to like artpieces</Tooltip>
+                }
+              >
+                <i
+                  class={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
+                />
+              </OverlayTrigger>
+            )}
+          </div>
         </div>
-        <div className="text-end">
-          <Link to={`/profiles/${profile_id}`}>
-            By: {profile_name} | {created_on}
-            <Avatar src={profile_image} height={40} />
-          </Link>
-        </div>
+        <p className="small mb-0">{likes_count} likes</p>
+
+        {!basic && art_medium !== "0" && (
+          <Badge className="ms-1" pill bg="dark">
+            {art_medium}
+          </Badge>
+        )}
+
+        {!basic && (
+          <div className="text-end">
+            <Link to={`/profiles/${profile_id}`}>
+              By: {profile_name} | {created_on}
+              <Avatar src={profile_image} height={40} />
+            </Link>
+          </div>
+        )}
       </Card.Body>
     </Card>
   );
