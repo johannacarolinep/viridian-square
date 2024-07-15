@@ -17,6 +17,7 @@ import { MoreDropdown } from "../../components/moredropdown/MoreDropdown";
 import ArtpieceSimple from "../../components/artpiece_simple/ArtpieceSimple";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
+import CollectionsDisplay from "../CollectionsDisplay/CollectionsDisplay";
 
 const ProfilePage = () => {
   const { id } = useParams();
@@ -53,6 +54,7 @@ const ProfilePage = () => {
 
   const handleDisplayContentChange = (content) => {
     setDisplayContent(content);
+    console.log("CONTENT ", content);
   };
 
   return (
@@ -91,6 +93,10 @@ const ProfilePage = () => {
             <Button onClick={() => handleDisplayContentChange("collections")}>
               Collections
             </Button>
+            {displayContent !== "artpieces" &&
+              displayContent !== "collections" && (
+                <span>Displaying {displayContent.title}</span>
+              )}
           </div>
         </Row>
         <Row>
@@ -123,8 +129,26 @@ const ProfilePage = () => {
                 </Container>
               )}
             </div>
+          ) : displayContent === "collections" ? (
+            <CollectionsDisplay
+              owner={profile.owner}
+              handleDisplayContentChange={handleDisplayContentChange}
+            />
           ) : (
-            <p>Displaying collections</p>
+            <>
+              <p>Showing collection with title {displayContent.title}</p>
+              <div>
+                {artpieces.results
+                  .filter((artpiece) =>
+                    displayContent.artpieces.includes(artpiece.id)
+                  )
+                  .map((artpiece) => (
+                    <Col key={artpiece.id}>
+                      <ArtpieceSimple className="h-100" {...artpiece} />
+                    </Col>
+                  ))}
+              </div>
+            </>
           )}
         </Row>
       </Container>
