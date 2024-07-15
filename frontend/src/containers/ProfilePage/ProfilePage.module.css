@@ -4,8 +4,59 @@
     margin: auto;
 }
 
+.TabButton {
+    background-color: var(--clr-accent--light);
+    color: var(--clr-dark);
+    border-radius: 0;
+    border: none;
+    margin: 5px;
+}
+
+.TabButtonSelected {
+    background-color: var(--clr-accent--dark);
+    color: #ffffff;
+    border-radius: 0;
+    border: none;
+    margin: 5px;
+}
+
+.TabButton:hover,
+.TabButton:active.TabButton:active,
+.TabButton:focus,
+.TabButtonSelected:hover,
+.TabButtonSelected:active.TabButtonSelected:active,
+.TabButtonSelected:focus {
+    background-color: var(--clr-accent--dark);
+    color: #ffffff;
+    border: none;
+}
+
+.Tab {
+    padding: 6px 12px;
+    line-height: 1.5;
+    display: flex;
+    flex: 1 0 auto;
+    margin: 5px;
+}
+
 @media screen and (min-width: 768px) {
     .ProfileImage {
         width: 100%;
     }
+
+    .TabButton {
+        margin: 0;
+        border-right: 1px solid var(--clr-accent--dark);
+    }
+
+    .TabButtonSelected {
+        margin: 0;
+        border-right: 1px solid var(--clr-accent--dark);
+    }
+
+    .Tab {
+        margin: 0;
+    }
 }
+
+@media screen and (min-width: 992px) {}

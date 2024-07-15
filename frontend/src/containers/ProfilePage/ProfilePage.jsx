@@ -130,72 +130,90 @@ const ProfilePage = () => {
             </Col>
           </Row>
         </section>
-        <Row>
-          <div>
-            <Button onClick={() => handleDisplayContentChange("artpieces")}>
-              Artpieces
-            </Button>
-            <Button onClick={() => handleDisplayContentChange("collections")}>
-              Collections
-            </Button>
-            {displayContent !== "artpieces" &&
-              displayContent !== "collections" && (
-                <span>Displaying {displayContent.title}</span>
-              )}
-          </div>
-        </Row>
-        <Row>
-          <h2>Display Area:</h2>
-          {displayContent === "artpieces" ? (
-            <div>
-              {artpieces.results.length ? (
-                <InfiniteScroll
-                  dataLength={artpieces.results.length}
-                  next={() => fetchMoreData(artpieces, setArtpieces)}
-                  hasMore={!!artpieces.next}
-                  loader={<p>Loading...</p>}
-                  endMessage={<p>No more results</p>}
-                >
-                  <Row xs={2} md={3} lg={4} className="g-1 mt-1">
-                    {artpieces.results.map((artpiece) => (
+        <section className={`${appStyles.bgAccentDark} my-3 p-2`}>
+          <Row className="m-0">
+            <div className={`${appStyles.bgLight} p-0 d-flex flex-wrap`}>
+              <Button
+                onClick={() => handleDisplayContentChange("artpieces")}
+                className={
+                  displayContent === "artpieces"
+                    ? styles.TabButtonSelected
+                    : styles.TabButton
+                }
+              >
+                Artpieces
+              </Button>
+
+              <Button
+                onClick={() => handleDisplayContentChange("collections")}
+                className={
+                  displayContent === "collections"
+                    ? styles.TabButtonSelected
+                    : styles.TabButton
+                }
+              >
+                Collections
+              </Button>
+              {displayContent !== "artpieces" &&
+                displayContent !== "collections" && (
+                  <div className={`${styles.Tab} ${styles.TabButtonSelected}`}>
+                    {displayContent.title}
+                  </div>
+                )}
+            </div>
+          </Row>
+          <Row>
+            {displayContent === "artpieces" ? (
+              <div>
+                {artpieces.results.length ? (
+                  <InfiniteScroll
+                    dataLength={artpieces.results.length}
+                    next={() => fetchMoreData(artpieces, setArtpieces)}
+                    hasMore={!!artpieces.next}
+                    loader={<p>Loading...</p>}
+                    endMessage={<p>No more results</p>}
+                  >
+                    <Row xs={2} md={3} lg={4} className="g-1 mt-1">
+                      {artpieces.results.map((artpiece) => (
+                        <Col key={artpiece.id}>
+                          <ArtpieceSimple
+                            className="h-100"
+                            {...artpiece}
+                            setArtpieces={setArtpieces}
+                          />
+                        </Col>
+                      ))}
+                    </Row>
+                  </InfiniteScroll>
+                ) : (
+                  <Container>
+                    <p>No results</p>
+                  </Container>
+                )}
+              </div>
+            ) : displayContent === "collections" ? (
+              <CollectionsDisplay
+                owner={profile.owner}
+                handleDisplayContentChange={handleDisplayContentChange}
+              />
+            ) : (
+              <>
+                <p>Showing collection with title {displayContent.title}</p>
+                <div>
+                  {artpieces.results
+                    .filter((artpiece) =>
+                      displayContent.artpieces.includes(artpiece.id)
+                    )
+                    .map((artpiece) => (
                       <Col key={artpiece.id}>
-                        <ArtpieceSimple
-                          className="h-100"
-                          {...artpiece}
-                          setArtpieces={setArtpieces}
-                        />
+                        <ArtpieceSimple className="h-100" {...artpiece} />
                       </Col>
                     ))}
-                  </Row>
-                </InfiniteScroll>
-              ) : (
-                <Container>
-                  <p>No results</p>
-                </Container>
-              )}
-            </div>
-          ) : displayContent === "collections" ? (
-            <CollectionsDisplay
-              owner={profile.owner}
-              handleDisplayContentChange={handleDisplayContentChange}
-            />
-          ) : (
-            <>
-              <p>Showing collection with title {displayContent.title}</p>
-              <div>
-                {artpieces.results
-                  .filter((artpiece) =>
-                    displayContent.artpieces.includes(artpiece.id)
-                  )
-                  .map((artpiece) => (
-                    <Col key={artpiece.id}>
-                      <ArtpieceSimple className="h-100" {...artpiece} />
-                    </Col>
-                  ))}
-              </div>
-            </>
-          )}
-        </Row>
+                </div>
+              </>
+            )}
+          </Row>
+        </section>
       </Container>
     </main>
   );
