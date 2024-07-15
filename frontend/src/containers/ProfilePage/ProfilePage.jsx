@@ -11,6 +11,7 @@ import {
   Row,
 } from "react-bootstrap";
 import appStyles from "../../App.module.css";
+import styles from "./ProfilePage.module.css";
 import Avatar from "../../components/avatar/Avatar";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { MoreDropdown } from "../../components/moredropdown/MoreDropdown";
@@ -44,7 +45,9 @@ const ProfilePage = () => {
           const { data: collectionData } = await axiosReq.get(
             `/collections/${collectionId}`
           );
-          setDisplayContent(collectionData);
+          if (collectionData.owner === profileData.owner) {
+            setDisplayContent(collectionData);
+          }
         }
       } catch (err) {
         console.log(err);
@@ -68,33 +71,65 @@ const ProfilePage = () => {
   };
 
   return (
-    <main>
-      <Container fluid="xl" className={`my-4 ${appStyles.bgWhite}`}>
-        <Row className={`m-0`}>
-          <Col xl={3}>
-            <Avatar src={profile.profile_image_url} height={150} />
-          </Col>
-          <Col xl={9}>
-            <h1>{profile.name}</h1>
-            {profile.is_owner && (
-              <div className="d-flex align-items-center">
-                <MoreDropdown
-                  handleEdit={handleEdit}
-                  handleAccountChange={handleAccountChange}
+    <main className={appStyles.bgAccentLight}>
+      <Container fluid="xl" className={`my-xl-4 ${appStyles.bgWhite}`}>
+        <section className="p-lg-3">
+          <Row className={`m-0 g-4`}>
+            <Col md={4} lg={3}>
+              <div
+                className={`${appStyles.ImageCover} ${appStyles.Round} ${styles.ProfileImage}`}
+              >
+                <Image
+                  src={profile?.profile_image_url}
+                  alt={`${profile?.name}'s profile image`}
                 />
               </div>
-            )}
-            <p>{profile.description}</p>
-            <p>Artpieces: {profile.artpiece_count}</p>
-            <p>Collections: {profile.collection_count}</p>
-            <p>Location: {profile.location}</p>
-            {profile.for_sale_count !== 0 && (
-              <Badge pill bg="dark">
-                Has artpieces for sale
-              </Badge>
-            )}
-          </Col>
-        </Row>
+            </Col>
+            <Col md={8} lg={9}>
+              <div className="d-flex justify-content-between">
+                <h1 className="mb-3">{profile?.name}</h1>
+                {profile.is_owner && (
+                  <MoreDropdown
+                    handleEdit={handleEdit}
+                    handleAccountChange={handleAccountChange}
+                  />
+                )}
+              </div>
+              {profile?.description && <p>{profile.description}</p>}
+              {profile?.location && (
+                <p>
+                  <i class="fa-solid fa-location-dot ps-0"></i>{" "}
+                  {profile.location}
+                </p>
+              )}
+              <div className="fs-4 mt-4">
+                {profile?.artpiece_count !== 0 && (
+                  <Badge pill className={`me-1 my-1 ${appStyles.bgDark}`} bg="">
+                    #Artpieces: {profile.artpiece_count}
+                  </Badge>
+                )}
+                {profile?.collection_count !== 0 && (
+                  <Badge
+                    pill
+                    className={`me-1 my-1 ${appStyles.bgPrimary}`}
+                    bg=""
+                  >
+                    #Collections: {profile.collection_count}
+                  </Badge>
+                )}
+                {profile?.for_sale_count !== 0 && (
+                  <Badge
+                    pill
+                    className={`me-1 my-1 ${appStyles.bgAccentDark}`}
+                    bg=""
+                  >
+                    Has artpieces for sale
+                  </Badge>
+                )}
+              </div>
+            </Col>
+          </Row>
+        </section>
         <Row>
           <div>
             <Button onClick={() => handleDisplayContentChange("artpieces")}>

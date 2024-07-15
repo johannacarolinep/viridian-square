@@ -1,0 +1,11 @@
+.ProfileImage {
+    width: 70%;
+    max-width: 350px;
+    margin: auto;
+}
+
+@media screen and (min-width: 768px) {
+    .ProfileImage {
+        width: 100%;
+    }
+}
