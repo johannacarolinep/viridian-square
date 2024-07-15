@@ -179,7 +179,9 @@ const ArtpieceDetailed = (props) => {
             {(for_sale === 1 || art_collection) && (
               <div className="fs-5">
                 {art_collection && (
-                  <Link>
+                  <Link
+                    to={`/profiles/${profile_id}?collectionId=${art_collection}`}
+                  >
                     <Badge pill bg="dark">
                       Visit collection
                     </Badge>

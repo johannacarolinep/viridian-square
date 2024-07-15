@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import {
   Badge,
@@ -21,6 +21,7 @@ import CollectionsDisplay from "../CollectionsDisplay/CollectionsDisplay";
 
 const ProfilePage = () => {
   const { id } = useParams();
+  const { search } = useLocation();
   const currentUser = useCurrentUser();
   const [profile, setProfile] = useState([]);
   const [artpieces, setArtpieces] = useState({ results: [] });
@@ -36,6 +37,15 @@ const ProfilePage = () => {
           `/artpieces/?owner=${profileData.owner}`
         );
         setArtpieces(artpieceData);
+        const queryParams = new URLSearchParams(search);
+        const collectionId = queryParams.get("collectionId");
+
+        if (collectionId) {
+          const { data: collectionData } = await axiosReq.get(
+            `/collections/${collectionId}`
+          );
+          setDisplayContent(collectionData);
+        }
       } catch (err) {
         console.log(err);
       }
