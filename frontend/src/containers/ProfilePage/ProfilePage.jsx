@@ -61,6 +61,7 @@ const ProfilePage = () => {
             <p>{profile.description}</p>
             <p>Artpieces: {profile.artpiece_count}</p>
             <p>Collections: {profile.collection_count}</p>
+            <p>Location: {profile.location}</p>
             {profile.for_sale_count !== 0 && (
               <Badge pill bg="dark">
                 Has artpieces for sale

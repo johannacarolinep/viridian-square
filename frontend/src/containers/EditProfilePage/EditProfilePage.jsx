@@ -11,11 +11,13 @@ const EditProfilePage = () => {
   const [profileData, setProfileData] = useState({
     name: "",
     description: "",
+    location: "",
     profile_image: "",
     profile_image_url: "",
   });
 
-  const { name, description, profile_image, profile_image_url } = profileData;
+  const { name, description, profile_image, profile_image_url, location } =
+    profileData;
 
   const [errors, setErrors] = useState({});
   const imageInput = useRef(null);
@@ -24,13 +26,15 @@ const EditProfilePage = () => {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/profiles/${id}/`);
-        const { is_owner, name, description, profile_image_url } = data;
+        const { is_owner, name, description, profile_image_url, location } =
+          data;
 
         is_owner
           ? setProfileData({
               name,
               description,
               profile_image_url,
+              location,
             })
           : navigate("/");
       } catch (err) {
@@ -69,6 +73,7 @@ const EditProfilePage = () => {
 
     formData.append("name", name);
     formData.append("description", description);
+    formData.append("location", location);
 
     if (imageInput?.current?.files[0]) {
       formData.append("profile_image", imageInput.current.files[0]);
@@ -149,6 +154,19 @@ const EditProfilePage = () => {
                   />
                 </Form.Group>
                 {errors.description?.map((message, idx) => (
+                  <p key={idx}>{message}</p>
+                ))}
+
+                <Form.Group>
+                  <Form.Label>Location:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="location"
+                    value={location}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                {errors.location?.map((message, idx) => (
                   <p key={idx}>{message}</p>
                 ))}
                 <Button className={`my-3 me-3`} variant="secondary">
