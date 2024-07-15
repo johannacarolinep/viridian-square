@@ -52,7 +52,7 @@ main {
 }
 
 .txtAccentDark {
-    color: var(--clr-brand--primary);
+    color: var(--clr-accent--dark);
 }
 
 .txtDark {

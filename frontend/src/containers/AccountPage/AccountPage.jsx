@@ -8,7 +8,6 @@ import { Accordion, Button, Container, Form } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { removeTokenTimestamp } from "../../utils/utils";
-import axios from "axios";
 
 const AccountPage = () => {
   const currentUser = useCurrentUser();
@@ -25,6 +24,9 @@ const AccountPage = () => {
   const { email, current_email, new_password1, new_password2, password } =
     userData;
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
+  const [activeAccordion, setActiveAccordion] = useState(null);
+  const [accountDeleted, setAccountDeleted] = useState(false);
 
   useEffect(() => {
     const handleMount = async () => {
@@ -34,7 +36,7 @@ const AccountPage = () => {
           email: currentUser.email,
           current_email: currentUser.email,
         });
-      } else {
+      } else if (!setAccountDeleted) {
         navigate("/signin");
       }
     };
@@ -59,6 +61,8 @@ const AccountPage = () => {
         ...prevUser,
         email,
       }));
+      setSuccessMessage("Email successfully updated.");
+      setActiveAccordion(null);
     } catch (err) {
       //   console.log(err);
       setErrors(err.response?.data);
@@ -72,6 +76,8 @@ const AccountPage = () => {
         new_password1,
         new_password2,
       });
+      setSuccessMessage("Password successfully updated.");
+      setActiveAccordion(null);
     } catch (err) {
       //   console.log(err);
       setErrors(err.response?.data);
@@ -88,10 +94,17 @@ const AccountPage = () => {
         data: { password },
       });
 
-      // Clear client state
+      setAccountDeleted(true);
       setCurrentUser(null);
       removeTokenTimestamp();
-      navigate("/");
+
+      setSuccessMessage(
+        "Account deleted successfully. You will be redirected shortly."
+      );
+      setActiveAccordion(null);
+      setTimeout(() => {
+        navigate("/");
+      }, 5000);
     } catch (err) {
       console.log("Error during account deletion:", err);
       setErrors(err.response?.data);
@@ -107,7 +120,14 @@ const AccountPage = () => {
             You are logged in as{" "}
             <span className="fw-bold">{current_email}</span>
           </p>
-          <Accordion defaultActiveKey="">
+          {successMessage && (
+            <p className="text-success fw-bolder">{successMessage}</p>
+          )}
+          <Accordion
+            defaultActiveKey=""
+            activeKey={activeAccordion}
+            onSelect={(eventKey) => setActiveAccordion(eventKey)}
+          >
             <Accordion.Item eventKey="0">
               <Accordion.Header>
                 <h2>Change email address:</h2>
