@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { axiosReq } from "../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import {
   Badge,
   Button,
   Col,
   Container,
-  Form,
   Image,
+  Modal,
   Row,
 } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import styles from "./ProfilePage.module.css";
-import Avatar from "../../components/avatar/Avatar";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { MoreDropdown } from "../../components/moredropdown/MoreDropdown";
 import ArtpieceSimple from "../../components/artpiece_simple/ArtpieceSimple";
@@ -27,8 +26,11 @@ const ProfilePage = () => {
   const currentUser = useCurrentUser();
   const [profile, setProfile] = useState([]);
   const [artpieces, setArtpieces] = useState({ results: [] });
+  const [collections, setCollections] = useState({ results: [] });
   const navigate = useNavigate();
   const [displayContent, setDisplayContent] = useState("artpieces");
+  const [showDelete, setShowDelete] = useState(false);
+  const [collectionToDelete, setCollectionToDelete] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,15 +41,20 @@ const ProfilePage = () => {
           `/artpieces/?owner=${profileData.owner}`
         );
         setArtpieces(artpieceData);
+
+        const { data: collectionsData } = await axiosReq.get(
+          `/collections/?owner=${profileData.owner}`
+        );
+        setCollections(collectionsData);
+
         const queryParams = new URLSearchParams(search);
         const collectionId = queryParams.get("collectionId");
-
         if (collectionId) {
-          const { data: collectionData } = await axiosReq.get(
-            `/collections/${collectionId}`
+          const matchedCollection = collectionsData.results.find(
+            (collection) => collection.id === parseInt(collectionId)
           );
-          if (collectionData.owner === profileData.owner) {
-            setDisplayContent(collectionData);
+          if (matchedCollection) {
+            setDisplayContent(matchedCollection);
           }
         }
       } catch (err) {
@@ -69,6 +76,31 @@ const ProfilePage = () => {
   const handleDisplayContentChange = (content) => {
     setDisplayContent(content);
     console.log("CONTENT ", content);
+  };
+
+  const handleDeleteConfirm = (collectionId) => {
+    setShowDelete(true);
+    setCollectionToDelete(collectionId);
+  };
+
+  const handleCloseDelete = () => {
+    setShowDelete(false);
+    setCollectionToDelete(null);
+  };
+
+  const handleDelete = async () => {
+    setShowDelete(false);
+    console.log("Collection ID ", collectionToDelete);
+    try {
+      await axiosRes.delete(`/collections/${collectionToDelete}/`);
+      setCollections((prevCollections) => ({
+        results: prevCollections.results.filter(
+          (collection) => collection.id !== collectionToDelete
+        ),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -196,6 +228,9 @@ const ProfilePage = () => {
               <CollectionsDisplay
                 owner={profile.owner}
                 handleDisplayContentChange={handleDisplayContentChange}
+                handleDeleteConfirm={handleDeleteConfirm}
+                collections={collections}
+                setCollections={setCollections}
               />
             ) : (
               <div className={`p-0 mt-2 ${appStyles.bgLight}`}>
@@ -203,6 +238,7 @@ const ProfilePage = () => {
                   <CollectionCard
                     collection={displayContent}
                     handleDisplayContentChange={handleDisplayContentChange}
+                    handleDeleteConfirm={handleDeleteConfirm}
                   />
                 </Row>
                 {displayContent.artpieces.length ? (
@@ -232,6 +268,24 @@ const ProfilePage = () => {
           </Row>
         </section>
       </Container>
+      <Modal show={showDelete} onHide={handleCloseDelete} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Please confirm deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete the artpiece?
+          <br />
+          The artpiece will be permanently removed.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDelete}>
+            Cancel
+          </Button>
+          <Button variant="dark" onClick={handleDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </main>
   );
 };

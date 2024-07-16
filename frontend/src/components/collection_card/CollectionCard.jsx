@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const CollectionCard = ({
   collection,
   handleDisplayContentChange,
+  handleDeleteConfirm,
   listPage,
 }) => {
   const {
@@ -58,7 +59,11 @@ const CollectionCard = ({
         )}
         {is_owner && (
           <div className="position-absolute top-0 end-0 py-2">
-            <MoreDropdown handleEdit={handleEdit} />
+            <MoreDropdown
+              handleEdit={handleEdit}
+              handleDeleteConfirm={handleDeleteConfirm}
+              collectionId={id}
+            />
           </div>
         )}
       </Card.Body>

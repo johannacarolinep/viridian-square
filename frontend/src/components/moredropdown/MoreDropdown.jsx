@@ -16,6 +16,7 @@ export const MoreDropdown = ({
   handleEdit,
   handleDeleteConfirm,
   handleAccountChange,
+  collectionId,
 }) => {
   return (
     <Dropdown className="ms-auto" drop="left">
@@ -26,7 +27,10 @@ export const MoreDropdown = ({
           <i className="fas fa-edit" /> Edit
         </Dropdown.Item>
         {handleDeleteConfirm && (
-          <Dropdown.Item onClick={handleDeleteConfirm} aria-label="delete">
+          <Dropdown.Item
+            onClick={() => handleDeleteConfirm(collectionId)}
+            aria-label="delete"
+          >
             <i className="fas fa-trash-alt" /> Delete
           </Dropdown.Item>
         )}
