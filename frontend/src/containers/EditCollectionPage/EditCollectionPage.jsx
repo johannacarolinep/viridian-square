@@ -17,7 +17,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import styles from "./EditCollectionPage.module.css";
 
-const EditCollectionPage = () => {
+const EditCollectionPage = ({ newCollection }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const currentUser = useCurrentUser();
@@ -113,66 +113,72 @@ const EditCollectionPage = () => {
   return (
     <main>
       <Container fluid="xl">
-        <h1 className="my-3">Edit collection:</h1>
-        <Form onSubmit={handleSubmit} className="my-3">
-          <Row className={`${appStyles.bgWhite} p-4 m-0`}>
-            <Col lg={6} className={appStyles.bgWhite}>
-              <h2>Details:</h2>
-              <div className={`${appStyles.dividerPrimary} mb-3`}></div>
-            </Col>
-            <Col lg={6} className={appStyles.bgWhite}>
-              <Form.Group>
-                <Form.Label>Title</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="title"
-                  value={title}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              {errors.title?.map((message, idx) => (
-                <p key={idx}>{message}</p>
-              ))}
+        {!newCollection ? (
+          <>
+            <h1 className="my-3">Edit collection:</h1>
+            <Form onSubmit={handleSubmit} className="my-3">
+              <Row className={`${appStyles.bgWhite} p-4 m-0`}>
+                <Col lg={6} className={appStyles.bgWhite}>
+                  <h2>Details:</h2>
+                  <div className={`${appStyles.dividerPrimary} mb-3`}></div>
+                </Col>
+                <Col lg={6} className={appStyles.bgWhite}>
+                  <Form.Group>
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="title"
+                      value={title}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                  {errors.title?.map((message, idx) => (
+                    <p key={idx}>{message}</p>
+                  ))}
 
-              <Form.Group>
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={6}
-                  name="description"
-                  value={description}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              {errors.description?.map((message, idx) => (
-                <p key={idx}>{message}</p>
-              ))}
-              <Button
-                className={`my-3 me-3`}
-                variant="secondary"
-                onClick={() =>
-                  navigate(
-                    `/profiles/${currentUser.profile_id}/?collectionId=${id}`
-                  )
-                }
-              >
-                Cancel
-              </Button>
-              <Button
-                className={`my-3 me-3 ${appStyles.btnPrimary}`}
-                type="submit"
-              >
-                Update
-              </Button>
-              {errors.non_field_errors?.map((message, idx) => (
-                <p key={idx}>{message}</p>
-              ))}
-              {successMessage && (
-                <p className="text-success fw-bolder">{successMessage}</p>
-              )}
-            </Col>
-          </Row>
-        </Form>
+                  <Form.Group>
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={6}
+                      name="description"
+                      value={description}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                  {errors.description?.map((message, idx) => (
+                    <p key={idx}>{message}</p>
+                  ))}
+                  <Button
+                    className={`my-3 me-3`}
+                    variant="secondary"
+                    onClick={() =>
+                      navigate(
+                        `/profiles/${currentUser.profile_id}/?collectionId=${id}`
+                      )
+                    }
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    className={`my-3 me-3 ${appStyles.btnPrimary}`}
+                    type="submit"
+                  >
+                    Update
+                  </Button>
+                  {errors.non_field_errors?.map((message, idx) => (
+                    <p key={idx}>{message}</p>
+                  ))}
+                  {successMessage && (
+                    <p className="text-success fw-bolder">{successMessage}</p>
+                  )}
+                </Col>
+              </Row>
+            </Form>
+          </>
+        ) : (
+          <h1 className="my-3">Add artpieces to your new collection:</h1>
+        )}
 
         <Form onSubmit={handleSubmitSelection} className="my-3">
           <Row className={`${appStyles.bgWhite} p-4 m-0`}>

@@ -42,6 +42,11 @@ function App() {
           path="/collections/:id/edit"
           element={<EditCollectionPage />}
         />
+        <Route
+          exact
+          path="/collections/:id/edit/new"
+          element={<EditCollectionPage newCollection="y" />}
+        />
         <Route exact path="/artpieces/:id" element={<ArtpiecePage />} />
         <Route exact path="/liked" element={<LikedPage />} />
         <Route exact path="/profiles/:id" element={<ProfilePage />} />
