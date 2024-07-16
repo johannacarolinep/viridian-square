@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Button } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import appStyles from "../../App.module.css";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
+import CollectionCard from "../../components/collection_card/CollectionCard";
 
 const CollectionsDisplay = ({ owner, handleDisplayContentChange }) => {
   const [collections, setCollections] = useState({ results: [] });
@@ -22,18 +26,29 @@ const CollectionsDisplay = ({ owner, handleDisplayContentChange }) => {
     fetchCollections();
   }, [owner]);
   return (
-    <div>
-      CollectionsDisplay
-      <div>
-        {collections.results.map((collection) => (
-          <div key={collection.id}>
-            <p>{collection.title}</p>
-            <Button onClick={() => handleDisplayContentChange(collection)}>
-              Show
-            </Button>
-          </div>
-        ))}
-      </div>
+    <div className={`p-0 mt-2 ${appStyles.bgLight}`}>
+      {collections.results.length ? (
+        <InfiniteScroll
+          dataLength={collections.results.length}
+          next={() => fetchMoreData(collections, setCollections)}
+          hasMore={!!collections.next}
+          loader={<p>Loading...</p>}
+        >
+          {collections.results.map((collection) => (
+            <Row className="m-0 py-2 px-3">
+              <CollectionCard
+                key={collection.id}
+                collection={collection}
+                handleDisplayContentChange={handleDisplayContentChange}
+              />
+            </Row>
+          ))}
+        </InfiniteScroll>
+      ) : (
+        <Container>
+          <p>No results</p>
+        </Container>
+      )}
     </div>
   );
 };

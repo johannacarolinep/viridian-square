@@ -72,7 +72,7 @@ const ProfilePage = () => {
 
   return (
     <main className={appStyles.bgAccentLight}>
-      <Container fluid="xl" className={`my-xl-4 ${appStyles.bgWhite}`}>
+      <Container fluid="xl" className={`my-xl-4 pb-3 ${appStyles.bgWhite}`}>
         <section className="p-lg-3">
           <Row className={`m-0 g-4`}>
             <Col md={4} lg={3}>
@@ -130,7 +130,7 @@ const ProfilePage = () => {
             </Col>
           </Row>
         </section>
-        <section className={`${appStyles.bgAccentDark} my-3 p-2`}>
+        <section className={`${appStyles.bgAccentDark} mt-3 p-2 rounded`}>
           <Row className="m-0">
             <div className={`${appStyles.bgLight} p-0 d-flex flex-wrap`}>
               <Button
@@ -162,18 +162,17 @@ const ProfilePage = () => {
                 )}
             </div>
           </Row>
-          <Row>
+          <Row className="m-0">
             {displayContent === "artpieces" ? (
-              <div>
+              <div className="p-0">
                 {artpieces.results.length ? (
                   <InfiniteScroll
                     dataLength={artpieces.results.length}
                     next={() => fetchMoreData(artpieces, setArtpieces)}
                     hasMore={!!artpieces.next}
                     loader={<p>Loading...</p>}
-                    endMessage={<p>No more results</p>}
                   >
-                    <Row xs={2} md={3} lg={4} className="g-1 mt-1">
+                    <Row xs={2} md={3} lg={4} className="g-1 m-0 mt-1">
                       {artpieces.results.map((artpiece) => (
                         <Col key={artpiece.id}>
                           <ArtpieceSimple
