@@ -16,6 +16,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import styles from "./EditCollectionPage.module.css";
+import Asset from "../../components/asset/Asset";
 
 const EditCollectionPage = ({ newCollection }) => {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const EditCollectionPage = ({ newCollection }) => {
 
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const handleMount = async () => {
@@ -48,12 +50,14 @@ const EditCollectionPage = ({ newCollection }) => {
         );
         setOwnedArtpieces(artpieceData);
         setSelectedArtpieces(collection.artpieces);
+        setHasLoaded(true);
       } catch (err) {
         console.log(err);
       }
     };
 
     handleMount();
+    setHasLoaded(false);
   }, [id, navigate]);
 
   const handleChange = (event) => {
@@ -184,60 +188,66 @@ const EditCollectionPage = ({ newCollection }) => {
           <Row className={`${appStyles.bgWhite} p-4 m-0`}>
             <h2>Update artpieces in collection:</h2>
             <div className={`${appStyles.dividerPrimary} mb-3`}></div>
-
-            <div className="p-0">
-              {ownedArtpieces.results.length ? (
-                <InfiniteScroll
-                  dataLength={ownedArtpieces.results.length}
-                  next={() => fetchMoreData(ownedArtpieces, setOwnedArtpieces)}
-                  hasMore={!!ownedArtpieces.next}
-                  loader={<p>Loading...</p>}
-                >
-                  <Row xs={3} md={4} lg={6} className="g-1 m-0 mt-1">
-                    {ownedArtpieces.results.map((artpiece) => (
-                      <Col key={artpiece.id}>
-                        {selectedArtpieces.includes(artpiece.id) ? (
-                          <div
-                            onClick={() => handleDeselect(artpiece.id)}
-                            className={`${styles.Selected} ${appStyles.ImageCover} ${appStyles.Square}`}
-                          >
-                            <Image src={artpiece.image_url} />
-                          </div>
-                        ) : artpiece.art_collection &&
-                          artpiece.art_collection !== parseInt(id) ? (
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={
-                              <Tooltip>
-                                Already included in other collection
-                              </Tooltip>
-                            }
-                          >
+            {hasLoaded ? (
+              <div className="p-0">
+                {ownedArtpieces.results.length ? (
+                  <InfiniteScroll
+                    dataLength={ownedArtpieces.results.length}
+                    next={() =>
+                      fetchMoreData(ownedArtpieces, setOwnedArtpieces)
+                    }
+                    hasMore={!!ownedArtpieces.next}
+                    loader={<Asset spinner />}
+                  >
+                    <Row xs={3} md={4} lg={6} className="g-1 m-0 mt-1">
+                      {ownedArtpieces.results.map((artpiece) => (
+                        <Col key={artpiece.id}>
+                          {selectedArtpieces.includes(artpiece.id) ? (
                             <div
-                              className={`position-relative ${appStyles.ImageCover} ${appStyles.Square}`}
+                              onClick={() => handleDeselect(artpiece.id)}
+                              className={`${styles.Selected} ${appStyles.ImageCover} ${appStyles.Square}`}
                             >
                               <Image src={artpiece.image_url} />
-                              <div className={styles.Unavailable}></div>
                             </div>
-                          </OverlayTrigger>
-                        ) : (
-                          <div
-                            onClick={() => handleSelect(artpiece.id)}
-                            className={`${appStyles.ImageCover} ${appStyles.Square}`}
-                          >
-                            <Image src={artpiece.image_url} />
-                          </div>
-                        )}
-                      </Col>
-                    ))}
-                  </Row>
-                </InfiniteScroll>
-              ) : (
-                <Container>
-                  <p>No results</p>
-                </Container>
-              )}
-            </div>
+                          ) : artpiece.art_collection &&
+                            artpiece.art_collection !== parseInt(id) ? (
+                            <OverlayTrigger
+                              placement="top"
+                              overlay={
+                                <Tooltip>
+                                  Already included in other collection
+                                </Tooltip>
+                              }
+                            >
+                              <div
+                                className={`position-relative ${appStyles.ImageCover} ${appStyles.Square}`}
+                              >
+                                <Image src={artpiece.image_url} />
+                                <div className={styles.Unavailable}></div>
+                              </div>
+                            </OverlayTrigger>
+                          ) : (
+                            <div
+                              onClick={() => handleSelect(artpiece.id)}
+                              className={`${appStyles.ImageCover} ${appStyles.Square}`}
+                            >
+                              <Image src={artpiece.image_url} />
+                            </div>
+                          )}
+                        </Col>
+                      ))}
+                    </Row>
+                  </InfiniteScroll>
+                ) : (
+                  <Container>
+                    <p>No results</p>
+                  </Container>
+                )}
+              </div>
+            ) : (
+              <Asset spinner />
+            )}
+
             <div className="d-flex flex-column flex-md-row justify-content-end p-0 pt-2">
               <Button
                 onClick={() =>

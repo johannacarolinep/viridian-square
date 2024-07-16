@@ -10,6 +10,7 @@ import ArtpieceSimple from "../artpiece_simple/ArtpieceSimple";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import appStyles from "../../App.module.css";
 import styles from "./Discover.module.css";
+import Asset from "../asset/Asset";
 
 const Discover = ({ likesFilter = "" }) => {
   const [artpieces, setArtpieces] = useState({ results: [] });
@@ -117,7 +118,7 @@ const Discover = ({ likesFilter = "" }) => {
                 dataLength={artpieces.results.length}
                 next={() => fetchMoreData(artpieces, setArtpieces)}
                 hasMore={!!artpieces.next}
-                loader={<p>Loading...</p>}
+                loader={<Asset spinner />}
                 endMessage={<p>No more results</p>}
               >
                 <Row xs={1} md={2} lg={2} className="g-5 mt-1">
@@ -140,7 +141,7 @@ const Discover = ({ likesFilter = "" }) => {
           </>
         ) : (
           <Container>
-            <p>Has not loaded...</p>
+            <Asset spinner />
           </Container>
         )}
       </Container>
