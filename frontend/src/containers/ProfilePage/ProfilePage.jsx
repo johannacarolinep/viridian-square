@@ -19,6 +19,7 @@ import ArtpieceSimple from "../../components/artpiece_simple/ArtpieceSimple";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import CollectionsDisplay from "../CollectionsDisplay/CollectionsDisplay";
+import CollectionCard from "../../components/collection_card/CollectionCard";
 
 const ProfilePage = () => {
   const { id } = useParams();
@@ -197,20 +198,36 @@ const ProfilePage = () => {
                 handleDisplayContentChange={handleDisplayContentChange}
               />
             ) : (
-              <>
-                <p>Showing collection with title {displayContent.title}</p>
-                <div>
-                  {artpieces.results
-                    .filter((artpiece) =>
-                      displayContent.artpieces.includes(artpiece.id)
-                    )
-                    .map((artpiece) => (
-                      <Col key={artpiece.id}>
-                        <ArtpieceSimple className="h-100" {...artpiece} />
-                      </Col>
-                    ))}
-                </div>
-              </>
+              <div className={`p-0 mt-2 ${appStyles.bgLight}`}>
+                <Row className="m-0 pt-2 px-3">
+                  <CollectionCard
+                    collection={displayContent}
+                    handleDisplayContentChange={handleDisplayContentChange}
+                  />
+                </Row>
+                {displayContent.artpieces.length ? (
+                  <Row xs={2} md={3} lg={4} className="g-1 m-0 px-3 my-1">
+                    {artpieces.results
+                      .filter((artpiece) =>
+                        displayContent.artpieces.includes(artpiece.id)
+                      )
+                      .map((artpiece) => (
+                        <Col key={artpiece.id}>
+                          <ArtpieceSimple
+                            className="h-100"
+                            basic
+                            {...artpiece}
+                            setArtpieces={setArtpieces}
+                          />
+                        </Col>
+                      ))}
+                  </Row>
+                ) : (
+                  <Container>
+                    <p>No results</p>
+                  </Container>
+                )}
+              </div>
             )}
           </Row>
         </section>

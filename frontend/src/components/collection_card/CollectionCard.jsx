@@ -3,7 +3,11 @@ import { Button, Card } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import { MoreDropdown } from "../moredropdown/MoreDropdown";
 
-const CollectionCard = ({ collection, handleDisplayContentChange }) => {
+const CollectionCard = ({
+  collection,
+  handleDisplayContentChange,
+  listPage,
+}) => {
   const {
     owner,
     is_owner,
@@ -34,16 +38,18 @@ const CollectionCard = ({ collection, handleDisplayContentChange }) => {
             <p className="small fst-italic">Last updated: {updated_on}</p>
           )}
         </div>
-        <div className={`d-flex align-items-end`}>
-          <Button
-            className={`${appStyles.btnPrimary} ms-auto`}
-            onClick={() => handleDisplayContentChange(collection)}
-          >
-            Show
-          </Button>
-        </div>
+        {listPage && (
+          <div className={`d-flex align-items-end`}>
+            <Button
+              className={`${appStyles.btnPrimary} ms-auto`}
+              onClick={() => handleDisplayContentChange(collection)}
+            >
+              Show
+            </Button>
+          </div>
+        )}
         {is_owner && (
-          <div className="position-absolute top-0 end-0 p-1">
+          <div className="position-absolute top-0 end-0 py-2">
             <MoreDropdown />
           </div>
         )}

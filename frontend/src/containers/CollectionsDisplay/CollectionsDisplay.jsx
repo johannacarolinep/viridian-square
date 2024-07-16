@@ -40,6 +40,7 @@ const CollectionsDisplay = ({ owner, handleDisplayContentChange }) => {
                 key={collection.id}
                 collection={collection}
                 handleDisplayContentChange={handleDisplayContentChange}
+                listPage
               />
             </Row>
           ))}
