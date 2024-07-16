@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Card } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import { MoreDropdown } from "../moredropdown/MoreDropdown";
+import { useNavigate } from "react-router-dom";
 
 const CollectionCard = ({
   collection,
@@ -9,6 +10,7 @@ const CollectionCard = ({
   listPage,
 }) => {
   const {
+    id,
     owner,
     is_owner,
     title,
@@ -17,6 +19,12 @@ const CollectionCard = ({
     updated_on,
     artpieces,
   } = { ...collection };
+  const navigate = useNavigate();
+
+  const handleEdit = () => {
+    navigate(`/collections/${id}/edit`);
+  };
+
   return (
     <Card>
       <Card.Body className="position-relative d-md-flex justify-content-between">
@@ -50,7 +58,7 @@ const CollectionCard = ({
         )}
         {is_owner && (
           <div className="position-absolute top-0 end-0 py-2">
-            <MoreDropdown />
+            <MoreDropdown handleEdit={handleEdit} />
           </div>
         )}
       </Card.Body>
