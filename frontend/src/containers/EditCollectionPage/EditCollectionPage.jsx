@@ -147,7 +147,15 @@ const EditCollectionPage = () => {
               {errors.description?.map((message, idx) => (
                 <p key={idx}>{message}</p>
               ))}
-              <Button className={`my-3 me-3`} variant="secondary">
+              <Button
+                className={`my-3 me-3`}
+                variant="secondary"
+                onClick={() =>
+                  navigate(
+                    `/profiles/${currentUser.profile_id}/?collectionId=${id}`
+                  )
+                }
+              >
                 Cancel
               </Button>
               <Button
@@ -224,18 +232,25 @@ const EditCollectionPage = () => {
                 </Container>
               )}
             </div>
-            <Button className={`my-3 me-3`} variant="secondary">
-              Cancel
-            </Button>
-            <Button
-              className={`my-3 me-3 ${appStyles.btnPrimary}`}
-              type="submit"
-            >
-              Save selection
-            </Button>
-            {errors.non_field_errors?.map((message, idx) => (
-              <p key={idx}>{message}</p>
-            ))}
+            <div className="d-flex flex-column flex-md-row justify-content-end p-0 pt-2">
+              <Button
+                onClick={() =>
+                  navigate(
+                    `/profiles/${currentUser.profile_id}/?collectionId=${id}`
+                  )
+                }
+                className={`my-2 mx-md-2`}
+                variant="secondary"
+              >
+                Skip this step
+              </Button>
+              <Button className={`my-2 ${appStyles.btnPrimary}`} type="submit">
+                Save selection
+              </Button>
+              {errors.non_field_errors?.map((message, idx) => (
+                <p key={idx}>{message}</p>
+              ))}
+            </div>
           </Row>
         </Form>
       </Container>
