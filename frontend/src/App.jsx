@@ -15,6 +15,7 @@ import LikedPage from "./containers/LikedPage/LikedPage";
 import EditArtpiecePage from "./containers/EditArtpiecePage/EditArtpiecePage";
 import EditProfilePage from "./containers/EditProfilePage/EditProfilePage";
 import AccountPage from "./containers/AccountPage/AccountPage";
+import EditCollectionPage from "./containers/EditCollectionPage/EditCollectionPage";
 
 function App() {
   return (
@@ -35,6 +36,11 @@ function App() {
           exact
           path="/create-collection"
           element={<CreateCollectionPage />}
+        />
+        <Route
+          exact
+          path="/collections/:id/edit"
+          element={<EditCollectionPage />}
         />
         <Route exact path="/artpieces/:id" element={<ArtpiecePage />} />
         <Route exact path="/liked" element={<LikedPage />} />
