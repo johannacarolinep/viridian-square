@@ -1,4 +1,5 @@
 
+import json
 from rest_framework import generics, permissions, filters
 from rest_framework.response import Response
 from rest_framework import status
@@ -122,7 +123,7 @@ class ArtCollectionUpdateArtpieces(generics.GenericAPIView):
 
             # Remove artpieces that are no longer selected
             for artpiece in existing_artpieces:
-                if artpiece not in new_artpiece_ids:
+                if artpiece.id not in new_artpiece_ids:
                     artpiece_to_remove = Artpiece.objects.get(id=artpiece.id)
                     artpiece_to_remove.remove_from_collection()
 

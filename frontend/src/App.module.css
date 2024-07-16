@@ -92,6 +92,10 @@ main {
     border-radius: 50%;
 }
 
+.Square {
+    aspect-ratio: 1/1;
+}
+
 /* ----------------------------------- Images */
 .ImageCover,
 .ImageContain {
