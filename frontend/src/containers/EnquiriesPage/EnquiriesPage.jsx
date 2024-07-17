@@ -102,31 +102,29 @@ const EnquiriesPage = () => {
   };
 
   const handleClick = async (enquiry) => {
+    setSelectedEnquiry(enquiry);
     try {
-      if (enquiry.is_buyer && !enquiry.buyer_has_checked) {
-        await axiosReq.put(`/enquiries/${enquiry.artpiece}/`, {
-          buyer_has_checked: true,
-        });
+      if (
+        (enquiry.is_buyer && !enquiry.buyer_has_checked) ||
+        (enquiry.is_artist && !enquiry.artist_has_checked)
+      ) {
+        const { data } = await axiosReq.get(`/enquiries/${enquiry.id}/`);
+        console.log("data", data);
         setEnquiries((prevEnquiries) =>
           prevEnquiries.map((e) =>
-            e.id === enquiry.id ? { ...e, buyer_has_checked: true } : e
-          )
-        );
-      } else if (enquiry.is_artist && !enquiry.artist_has_checked) {
-        await axiosReq.put(`/enquiries/${enquiry.id}/`, {
-          artist_has_checked: true,
-        });
-        setEnquiries((prevEnquiries) =>
-          prevEnquiries.map((e) =>
-            e.id === enquiry.id ? { ...e, artist_has_checked: true } : e
+            e.id === enquiry.id
+              ? {
+                  ...e,
+                  buyer_has_checked: data.buyer_has_checked,
+                  artist_has_checked: data.artist_has_checked,
+                }
+              : e
           )
         );
       }
     } catch (err) {
       console.error("Error updating enquiry:", err);
     }
-    setSelectedEnquiry(enquiry);
-    console.log("ENQUIRY", enquiry);
   };
 
   return (
@@ -144,12 +142,11 @@ const EnquiriesPage = () => {
           {enquiries.length > 0 ? (
             <ListGroup as="ol" numbered>
               {enquiries.map((enquiry) => (
-                <>
+                <Row key={enquiry.id}>
                   <ListGroup.Item
                     as="li"
                     className={`${appStyles.enquiryItem} d-flex justify-content-between align-items-start`}
                     onClick={() => handleClick(enquiry)}
-                    key={enquiry.id}
                   >
                     <div className="ms-2 me-auto">
                       <div className="fw-bold">
@@ -161,12 +158,12 @@ const EnquiriesPage = () => {
                       </div>
                       Date: {enquiry.created_on}
                     </div>
-                    {(enquiry.is_buyer && !enquiry.buyer_has_checked) ||
-                      (enquiry.is_artist && !enquiry.artist_has_checked && (
-                        <Badge bg="" pill className={appStyles.bgPrimary}>
-                          New
-                        </Badge>
-                      ))}
+                    {((enquiry.is_buyer && !enquiry.buyer_has_checked) ||
+                      (enquiry.is_artist && !enquiry.artist_has_checked)) && (
+                      <Badge bg="" pill className={appStyles.bgPrimary}>
+                        New
+                      </Badge>
+                    )}
                   </ListGroup.Item>
                   {selectedEnquiry?.id === enquiry.id && (
                     <div className={`${appStyles.bgLight} p-3`}>
@@ -304,7 +301,7 @@ const EnquiriesPage = () => {
                       </Row>
                     </div>
                   )}
-                </>
+                </Row>
               ))}
             </ListGroup>
           ) : (
