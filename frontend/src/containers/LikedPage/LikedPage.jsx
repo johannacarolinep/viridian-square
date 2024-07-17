@@ -3,8 +3,10 @@ import Discover from "../../components/discover/Discover";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import appStyles from "../../App.module.css";
 import styles from "./LikedPage.module.css";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const LikedPage = () => {
+  useRedirect("loggedOut", "/");
   const currentUser = useCurrentUser();
 
   return (

@@ -4,8 +4,10 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import styles from "./EditProfilePage.module.css";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const EditProfilePage = () => {
+  useRedirect("loggedOut", "/");
   const navigate = useNavigate();
   const { id } = useParams();
   const [profileData, setProfileData] = useState({

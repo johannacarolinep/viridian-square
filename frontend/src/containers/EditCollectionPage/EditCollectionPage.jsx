@@ -18,8 +18,10 @@ import { fetchMoreData } from "../../utils/utils";
 import styles from "./EditCollectionPage.module.css";
 import Asset from "../../components/asset/Asset";
 import NoResults from "../../assets/images/noresults.webp";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const EditCollectionPage = ({ newCollection }) => {
+  useRedirect("loggedOut", "/");
   const navigate = useNavigate();
   const { id } = useParams();
   const currentUser = useCurrentUser();

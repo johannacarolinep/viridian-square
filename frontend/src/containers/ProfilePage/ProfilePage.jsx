@@ -297,9 +297,9 @@ const ProfilePage = () => {
           <Modal.Title>Please confirm deletion</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to delete the artpiece?
+          Are you sure you want to delete this collection?
           <br />
-          The artpiece will be permanently removed.
+          FYI: Deleting a collection will not delete the artpieces in it.
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseDelete}>

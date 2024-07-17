@@ -6,8 +6,10 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import appStyles from "../../App.module.css";
 import styles from "./CreateArtpiecePage.module.css";
 import logo from "../../assets/images/logo.webp";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const CreateArtpiecePage = () => {
+  useRedirect("loggedOut", "/");
   const currentUser = useCurrentUser();
   const navigate = useNavigate();
   const [artCollectionChoices, setArtCollectionChoices] = useState([]);

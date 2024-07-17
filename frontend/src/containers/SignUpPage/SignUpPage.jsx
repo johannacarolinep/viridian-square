@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const SignUpForm = () => {
+  useRedirect("loggedIn", "/");
   const [signUpData, setSignUpData] = useState({
     email: "",
     password1: "",

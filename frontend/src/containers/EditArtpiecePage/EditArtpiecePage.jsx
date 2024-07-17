@@ -4,8 +4,10 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import styles from "./EditArtpiecePage.module.css";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const EditArtpiecePage = () => {
+  useRedirect("loggedOut", "/");
   const navigate = useNavigate();
   const { id } = useParams();
   const [artpieceData, setArtpieceData] = useState({

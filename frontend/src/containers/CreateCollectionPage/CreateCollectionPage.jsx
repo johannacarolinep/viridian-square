@@ -5,8 +5,10 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import appStyles from "../../App.module.css";
 import { useNavigate } from "react-router-dom";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const CreateCollectionPage = () => {
+  useRedirect("loggedOut", "/");
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 

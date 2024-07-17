@@ -8,8 +8,10 @@ import { Accordion, Button, Container, Form } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { removeTokenTimestamp } from "../../utils/utils";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const AccountPage = () => {
+  useRedirect("loggedOut", "/");
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
   const navigate = useNavigate();
@@ -26,18 +28,13 @@ const AccountPage = () => {
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [activeAccordion, setActiveAccordion] = useState(null);
-  const [accountDeleted, setAccountDeleted] = useState(false);
 
   useEffect(() => {
-    if (currentUser) {
-      setUserData({
-        ...userData,
-        email: currentUser.email,
-        current_email: currentUser.email,
-      });
-    } else if (!accountDeleted) {
-      navigate("/");
-    }
+    setUserData({
+      ...userData,
+      email: currentUser?.email,
+      current_email: currentUser?.email,
+    });
   }, [currentUser, navigate]);
 
   const handleChange = (event) => {
@@ -90,7 +87,6 @@ const AccountPage = () => {
         data: { password },
       });
 
-      setAccountDeleted(true);
       setCurrentUser(null);
       removeTokenTimestamp();
 
