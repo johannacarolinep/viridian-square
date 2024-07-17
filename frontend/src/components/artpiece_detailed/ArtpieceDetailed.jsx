@@ -7,12 +7,13 @@ import {
   OverlayTrigger,
   Row,
   Tooltip,
+  Form,
 } from "react-bootstrap";
 import Avatar from "../avatar/Avatar";
 import appStyles from "../../App.module.css";
 import styles from "./ArtpieceDetailed.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { axiosRes } from "../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { MoreDropdown } from "../moredropdown/MoreDropdown";
 
@@ -43,6 +44,32 @@ const ArtpieceDetailed = (props) => {
 
   const [showDelete, setShowDelete] = useState(false);
   const handleCloseDelete = () => setShowDelete(false);
+  const [showEnquiry, setShowEnquiry] = useState(false);
+  const [errors, setErrors] = useState({});
+  const handleCloseEnquiry = () => setShowEnquiry(false);
+  const handleShowEnquiry = () => setShowEnquiry(true);
+  const [initialMessage, setInitialMessage] = useState("");
+
+  const handleSubmitEnquiry = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("initial_message", initialMessage);
+    formData.append("artpiece", id);
+
+    try {
+      const response = await axiosReq.post("/enquiries/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("Enquiry submitted successfully:", response.data);
+      handleCloseEnquiry();
+    } catch (err) {
+      console.log(err);
+      setErrors(err.response?.data);
+    }
+  };
 
   const handleLike = async () => {
     try {
@@ -187,7 +214,29 @@ const ArtpieceDetailed = (props) => {
                     </Badge>
                   </Link>
                 )}
-                {for_sale === 1 && <Button>Make an enquiry</Button>}
+                {for_sale === 1 && is_owner ? (
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip>
+                        You cannot enquire about your own artpiece
+                      </Tooltip>
+                    }
+                  >
+                    <Button className={appStyles.btnPrimary}>
+                      Make an enquiry
+                    </Button>
+                  </OverlayTrigger>
+                ) : for_sale === 1 ? (
+                  <Button
+                    className={appStyles.btnPrimary}
+                    onClick={handleShowEnquiry}
+                  >
+                    Make an enquiry
+                  </Button>
+                ) : (
+                  ""
+                )}
               </div>
             )}
             <p>
@@ -215,6 +264,39 @@ const ArtpieceDetailed = (props) => {
             Delete
           </Button>
         </Modal.Footer>
+      </Modal>
+
+      <Modal show={showEnquiry} onHide={handleCloseEnquiry}>
+        <Modal.Header closeButton>
+          <Modal.Title>Make an Enquiry</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Your message to the artist:</Modal.Body>
+        <Form onSubmit={handleSubmitEnquiry}>
+          <Form.Group className="mb-3">
+            <Form.Label>Message to seller</Form.Label>
+            <Form.Control
+              name="initial_message"
+              placeholder="Write your message here"
+              value={initialMessage}
+              onChange={(e) => setInitialMessage(e.target.value)}
+            />
+            {errors.initial_message?.map((message, idx) => (
+              <p key={idx}>{message}</p>
+            ))}
+          </Form.Group>
+          {errors.non_field_errors?.map((message, idx) => (
+            <p key={idx}>{message}</p>
+          ))}
+
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseEnquiry}>
+              Close
+            </Button>
+            <Button variant="primary" type="submit">
+              Send
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );
