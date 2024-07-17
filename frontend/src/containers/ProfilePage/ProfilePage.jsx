@@ -67,7 +67,7 @@ const ProfilePage = () => {
 
     fetchData();
     setHasLoaded(false);
-  }, [id, navigate]);
+  }, [id, navigate, currentUser]);
 
   const handleEdit = () => {
     navigate(`/profiles/${profile.id}/edit`);
@@ -79,7 +79,6 @@ const ProfilePage = () => {
 
   const handleDisplayContentChange = (content) => {
     setDisplayContent(content);
-    console.log("CONTENT ", content);
   };
 
   const handleDeleteConfirm = (collectionId) => {

@@ -189,7 +189,7 @@ const EditCollectionPage = ({ newCollection }) => {
             <h2>Update artpieces in collection:</h2>
             <div className={`${appStyles.dividerPrimary} mb-3`}></div>
             {hasLoaded ? (
-              <div className="p-0">
+              <div className={`p-2 ${styles.SelectionBox}`}>
                 {ownedArtpieces.results.length ? (
                   <InfiniteScroll
                     dataLength={ownedArtpieces.results.length}
@@ -199,7 +199,7 @@ const EditCollectionPage = ({ newCollection }) => {
                     hasMore={!!ownedArtpieces.next}
                     loader={<Asset spinner />}
                   >
-                    <Row xs={3} md={4} lg={6} className="g-1 m-0 mt-1">
+                    <Row xs={3} md={4} lg={6} className="g-1 m-0">
                       {ownedArtpieces.results.map((artpiece) => (
                         <Col key={artpiece.id}>
                           {selectedArtpieces.includes(artpiece.id) ? (
@@ -229,7 +229,7 @@ const EditCollectionPage = ({ newCollection }) => {
                           ) : (
                             <div
                               onClick={() => handleSelect(artpiece.id)}
-                              className={`${appStyles.ImageCover} ${appStyles.Square}`}
+                              className={`${styles.Available} ${appStyles.ImageCover} ${appStyles.Square}`}
                             >
                               <Image src={artpiece.image_url} />
                             </div>

@@ -36,7 +36,7 @@ const AccountPage = () => {
         current_email: currentUser.email,
       });
     } else if (!accountDeleted) {
-      navigate("/signin");
+      navigate("/");
     }
   }, [currentUser, navigate]);
 
