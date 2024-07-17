@@ -18,6 +18,7 @@ class EnquirySerializer(serializers.ModelSerializer):
     is_artist = serializers.SerializerMethodField()
     artist_profile_id = serializers.SerializerMethodField()
     artist_profile_image = serializers.SerializerMethodField()
+    artist_email = serializers.SerializerMethodField()
 
     def get_buyer_name(self, obj):
         """
@@ -85,6 +86,15 @@ class EnquirySerializer(serializers.ModelSerializer):
             return None
         return obj.artpiece.owner.profile.profile_image.url
 
+    def get_artist_email(self, obj):
+        """
+        Returns email address of the artist if the enquiry
+        has been accepted (status is 1)
+        """
+        if obj.status == 1 and obj.artpiece:
+            return obj.artpiece.owner.email
+        return None
+
     def validate(self, data):
         """
         Validate an artpiece not belonging to the requesting user is
@@ -121,7 +131,7 @@ class EnquirySerializer(serializers.ModelSerializer):
             'buyer_profile_image', 'artpiece', 'artist_name', 'is_artist',
             'artist_profile_id', 'artist_profile_image', 'initial_message',
             'response_message', 'created_on', 'updated_on', 'status',
-            'buyer_has_checked', 'artist_has_checked',
+            'buyer_has_checked', 'artist_has_checked', 'artist_email',
         ]
 
 
