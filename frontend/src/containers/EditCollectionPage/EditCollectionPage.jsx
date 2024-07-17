@@ -17,6 +17,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import styles from "./EditCollectionPage.module.css";
 import Asset from "../../components/asset/Asset";
+import NoResults from "../../assets/images/noresults.webp";
 
 const EditCollectionPage = ({ newCollection }) => {
   const navigate = useNavigate();
@@ -240,7 +241,7 @@ const EditCollectionPage = ({ newCollection }) => {
                   </InfiniteScroll>
                 ) : (
                   <Container>
-                    <p>No results</p>
+                    <Asset src={NoResults} message={"No results"} />
                   </Container>
                 )}
               </div>

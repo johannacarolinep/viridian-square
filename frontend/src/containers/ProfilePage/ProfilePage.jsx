@@ -20,6 +20,7 @@ import { fetchMoreData } from "../../utils/utils";
 import CollectionsDisplay from "../CollectionsDisplay/CollectionsDisplay";
 import CollectionCard from "../../components/collection_card/CollectionCard";
 import Asset from "../../components/asset/Asset";
+import NoResults from "../../assets/images/noresults.webp";
 
 const ProfilePage = () => {
   const { id } = useParams();
@@ -36,6 +37,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("FETCHING PROFILE DATA");
       try {
         const { data: profileData } = await axiosReq.get(`/profiles/${id}`);
         setProfile(profileData);
@@ -230,7 +232,10 @@ const ProfilePage = () => {
                     </InfiniteScroll>
                   ) : (
                     <Container>
-                      <p>No results</p>
+                      <Asset
+                        src={NoResults}
+                        message={`No artpieces to display`}
+                      />
                     </Container>
                   )}
                 </div>
@@ -270,7 +275,10 @@ const ProfilePage = () => {
                     </Row>
                   ) : (
                     <Container>
-                      <p>No results</p>
+                      <Asset
+                        src={NoResults}
+                        message={"No artpieces to display"}
+                      />
                     </Container>
                   )}
                 </div>

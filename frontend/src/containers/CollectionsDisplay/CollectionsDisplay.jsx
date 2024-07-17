@@ -5,6 +5,8 @@ import appStyles from "../../App.module.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import CollectionCard from "../../components/collection_card/CollectionCard";
+import NoResults from "../../assets/images/noresults.webp";
+import Asset from "../../components/asset/Asset";
 
 const CollectionsDisplay = ({
   owner,
@@ -53,7 +55,7 @@ const CollectionsDisplay = ({
         </InfiniteScroll>
       ) : (
         <Container>
-          <p>No results</p>
+          <Asset src={NoResults} message={`No collections to display`} />
         </Container>
       )}
     </div>

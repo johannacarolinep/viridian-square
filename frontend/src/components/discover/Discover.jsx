@@ -11,6 +11,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import appStyles from "../../App.module.css";
 import styles from "./Discover.module.css";
 import Asset from "../asset/Asset";
+import NoResults from "../../assets/images/noresults.webp";
 
 const Discover = ({ likesFilter = "" }) => {
   const [artpieces, setArtpieces] = useState({ results: [] });
@@ -135,7 +136,7 @@ const Discover = ({ likesFilter = "" }) => {
               </InfiniteScroll>
             ) : (
               <Container>
-                <p>No results</p>
+                <Asset src={NoResults} message={"Nothing to display"} />
               </Container>
             )}
           </>
