@@ -41,7 +41,7 @@ const NavBar = () => {
         <i class="fa-solid fa-paintbrush"></i>Create
       </NavLink>
       <NavLink
-        to="/"
+        to="/enquiries"
         className={({ isActive }) =>
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
