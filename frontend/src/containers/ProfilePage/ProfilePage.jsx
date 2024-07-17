@@ -95,7 +95,6 @@ const ProfilePage = () => {
 
   const handleDelete = async () => {
     setShowDelete(false);
-    console.log("Collection ID ", collectionToDelete);
     try {
       await axiosRes.delete(`/collections/${collectionToDelete}/`);
       setCollections((prevCollections) => ({
@@ -103,6 +102,9 @@ const ProfilePage = () => {
           (collection) => collection.id !== collectionToDelete
         ),
       }));
+      if (displayContent.id) {
+        setDisplayContent("collections");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -151,13 +153,13 @@ const ProfilePage = () => {
                       #Artpieces: {profile.artpiece_count}
                     </Badge>
                   )}
-                  {profile?.collection_count !== 0 && (
+                  {collections.results.length > 0 && (
                     <Badge
                       pill
                       className={`me-1 my-1 ${appStyles.bgPrimary}`}
                       bg=""
                     >
-                      #Collections: {profile.collection_count}
+                      #Collections: {collections.results.length}
                     </Badge>
                   )}
                   {profile?.for_sale_count !== 0 && (
