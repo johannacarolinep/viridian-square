@@ -227,7 +227,7 @@ const ArtpieceDetailed = (props) => {
                       Make an enquiry
                     </Button>
                   </OverlayTrigger>
-                ) : for_sale === 1 ? (
+                ) : for_sale === 1 && currentUser ? (
                   <Button
                     className={appStyles.btnPrimary}
                     onClick={handleShowEnquiry}
@@ -235,7 +235,16 @@ const ArtpieceDetailed = (props) => {
                     Make an enquiry
                   </Button>
                 ) : (
-                  ""
+                  for_sale === 1 && (
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Log in to make enquiries</Tooltip>}
+                    >
+                      <Button className={appStyles.btnPrimary}>
+                        Make an enquiry
+                      </Button>
+                    </OverlayTrigger>
+                  )
                 )}
               </div>
             )}
