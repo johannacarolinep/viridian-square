@@ -2,9 +2,10 @@ import React from "react";
 import Discover from "../../components/discover/Discover";
 import appStyles from "../../App.module.css";
 import styles from "./DiscoverPage.module.css";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import TrendingDisplay from "../../components/trending_display/TrendingDisplay";
 
 const DiscoverPage = () => {
   const currentUser = useCurrentUser();
@@ -44,6 +45,14 @@ const DiscoverPage = () => {
           </Row>
         </section>
       )}
+      <section className={appStyles.bgAccentLight}>
+        <Container fluid="xl" className="py-4">
+          <h2>Trending:</h2>
+          <Row xs={2} md={4} className="m-0 py-3 g-2">
+            <TrendingDisplay />
+          </Row>
+        </Container>
+      </section>
       <Discover />
     </main>
   );

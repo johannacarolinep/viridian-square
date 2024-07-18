@@ -18,21 +18,6 @@ const CollectionsDisplay = ({
   // const [collections, setCollections] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
 
-  // useEffect(() => {
-  //   const fetchCollections = async () => {
-  //     try {
-  //       const { data } = await axiosReq.get(`/collections/?owner=${owner}`);
-  //       console.log("collections data", data);
-  //       setCollections(data);
-  //       setHasLoaded(true);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-
-  //   setHasLoaded(false);
-  //   fetchCollections();
-  // }, [owner]);
   return (
     <div className={`p-0 mt-2 ${appStyles.bgLight}`}>
       {collections.results.length ? (
