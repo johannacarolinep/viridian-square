@@ -49,14 +49,16 @@ const EnquiriesPage = () => {
 
   useEffect(() => {
     const fetchArtpiece = async () => {
-      try {
-        const { data } = await axiosReq.get(
-          `/artpieces/${selectedEnquiry.artpiece}`
-        );
-        setArtpiece(data);
-        setArtpieceHasLoaded(true);
-      } catch (err) {
-        console.log(err);
+      if (selectedEnquiry) {
+        try {
+          const { data } = await axiosReq.get(
+            `/artpieces/${selectedEnquiry.artpiece}`
+          );
+          setArtpiece(data);
+          setArtpieceHasLoaded(true);
+        } catch (err) {
+          console.log(err);
+        }
       }
     };
 
@@ -67,9 +69,6 @@ const EnquiriesPage = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    console.log("status", status);
-    console.log("responseMessage", responseMessage);
-    console.log("Enquiry ID ", selectedEnquiry.id);
     if (selectedEnquiry) {
       try {
         await axiosReq.put(`/enquiries/${selectedEnquiry.id}/`, {
@@ -140,9 +139,8 @@ const EnquiriesPage = () => {
               onSelect={(eventKey) => setActiveAccordion(eventKey)}
             >
               {enquiries.map((enquiry) => (
-                // Check if enquiry.artpiece exists/is not null
                 <Accordion.Item eventKey={enquiry.id} key={enquiry.id}>
-                  {enquiry.artpiece ? (
+                  {enquiry.artpiece && enquiry.buyer ? (
                     <>
                       <Accordion.Header onClick={() => handleClick(enquiry)}>
                         <div className="ms-2 me-3 w-100 d-flex justify-content-between">
@@ -448,15 +446,23 @@ const EnquiriesPage = () => {
                     <>
                       <Accordion.Header>
                         <div className={`${appStyles.txtInactive} ms-2`}>
-                          Enquiry inactive: Artpiece no longer exists
+                          Enquiry inactive: Artpiece or enquirer no longer
+                          exists
                         </div>
                       </Accordion.Header>
                       <Accordion.Body>
                         <Row className={`${appStyles.bgLight} p-3 m-0`}>
-                          <p className="my-2">
-                            This enquiry has been deactivated since the artpiece
-                            for which it was made no longer exists.
-                          </p>
+                          {!enquiry.artpiece ? (
+                            <p className="my-2">
+                              The artpiece for which this enquiry was made no
+                              longer exists.
+                            </p>
+                          ) : (
+                            <p className="my-2">
+                              The user who opened this enquiry is no longer
+                              active on the platform.
+                            </p>
+                          )}
                         </Row>
                       </Accordion.Body>
                     </>
