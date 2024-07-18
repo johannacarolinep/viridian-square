@@ -302,6 +302,76 @@ Actions taken:
 <a id="planning"></a>
 ## Bugs
 
+### BUG: 2024-07-18: Custom serializers 'REGISTER_SERIALIZER' and 'USER_DETAILS_SERIALIZER' not used by dj-rest-auth register and login views.
+
+**Background:**
+
+I had previously noticed that the code was not using my custom `USER_DETAILS_SERIALIZER` for the `dj-rest-auth` LoginView. When working on the user login in the frontend, I worked around this by first posting to `dj-rest-auth/login/` to sign the user in, then make a GET request to `dj-rest-auth/user/` and set the `currentUser` with the response from this endpoint (for which I had managed to use the custom serializer by writing a custom view):
+
+```python
+const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+      setTokenTimestamo(data);
+    } catch (err) {
+      setErrors(err.response?.data);
+    }
+
+    try {
+      const { data } = await axios.get("/dj-rest-auth/user/");
+      setCurrentUser(data);
+      navigate("/");
+    } catch (err) {
+      setErrors(err.response?.data);
+    }
+  };
+
+```
+
+**Issue:**
+
+Testing user registration in the frontend and receiving a 500 error instead of a custom 400 error I had set in the `REGISTER_SERIALIZER` later made me realize that my custom serializer for registration was not in use either, and made me revisit the issue.
+
+**Steps taken:**
+
+After searching online forums I came across [this post](https://stackoverflow.com/questions/62291394/django-rest-auth-dj-rest-auth-custom-user-registration) on Stackoverflow, leading to the dj-rest-auth documents [here](https://dj-rest-auth.readthedocs.io/en/latest/configuration.html).
+
+The bug was due to referencing the custom serializers in the old, deprecated, way instead of registering them in the `REST_AUTH` object in settings.py.
+
+**Solution:**
+
+I registered both custom serializers in the `REST_AUTH` object:
+```python
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_HTTPONLY': False,
+    'JWT_AUTH_SECURE': True,
+    'JWT_AUTH_COOKIE': 'viridian-auth',
+    'JWT_AUTH_REFRESH_COOKIE': 'viridian-refresh-token',
+    'JWT_AUTH_SAMESITE': 'None',
+    'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
+    'USER_DETAILS_SERIALIZER': 'users.serializers.CurrentUserSerializer',
+}
+```
+
+I then confirmed that I now receive the correct 400 errors, caught by validation methods in the serializer, instead of the 500 error previously mentioned.
+
+After confirming this, I went on to update how I handle sign in as well, given that I was now able to use the custom `USER_DETAILS_SERIALIZER` for the login endpoint:
+```python
+const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+      setCurrentUser(data.user);
+      setTokenTimestamp(data);
+      navigate("/");
+    } catch (err) {
+      setErrors(err.response?.data);
+    }
+  };
+``````
+
 ### BUG: 2024-07-07: Connection Refused error for POST request to live DB /dj-rest-auth/registration/.
 
 **Issue:**
