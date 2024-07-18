@@ -32,14 +32,9 @@ const SignInForm = () => {
     event.preventDefault();
     try {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+      setCurrentUser(data.user);
       setTokenTimestamp(data);
-      try {
-        const { data } = await axios.get("/dj-rest-auth/user/");
-        setCurrentUser(data);
-        navigate("/");
-      } catch (err) {
-        console.log(err);
-      }
+      navigate("/");
     } catch (err) {
       setErrors(err.response?.data);
     }
