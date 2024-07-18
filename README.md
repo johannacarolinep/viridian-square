@@ -235,6 +235,23 @@ Actions taken:
 
 ![Sprint 5](documentation/sprints/sprint5_milestone.png)
 
+##### Sprint 5 wrap-up:
+
+Project board at end of sprint 5:
+
+![Project board end of sprint 5](documentation/sprints/sprint5_board.png)
+
+**Points completed:** 34
+
+**Velocity:** 25.6 
+
+Actions taken:
+- 7 PBI's moved back to the backlog
+    - This included 1 PBI with *Must Have* status: `PROJECT SETUP`: Deploy with React. Unfortunately, due to a widespread issue with *Code Institute*'s live database cluster this week, I was not able to action this PBI (see screenshot below from *Code Institute's* Slack Community *Announcements* channel).
+    ![Screenshot from Code Institute slack community announcements channel](documentation/sprints/sprint5_db_issue.png)
+- Added new PBI's relating to documentation to the backlog.
+- Reprioritised backlog.
+
 <a id="user-stories"></a>
 ### User stories:
 
