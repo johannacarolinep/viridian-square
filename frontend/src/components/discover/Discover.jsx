@@ -122,7 +122,7 @@ const Discover = ({ likesFilter = "" }) => {
                 loader={<Asset spinner />}
                 endMessage={<p>No more results</p>}
               >
-                <Row xs={1} md={2} lg={2} className="g-5 mt-1">
+                <Row xs={1} md={2} lg={2} className="g-5 m-0 mt-1">
                   {artpieces.results.map((artpiece) => (
                     <Col key={artpiece.id}>
                       <ArtpieceSimple
