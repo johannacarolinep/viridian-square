@@ -13,6 +13,7 @@ import {
   Form,
   Button,
   Image,
+  Accordion,
 } from "react-bootstrap";
 import { useRedirect } from "../../hooks/useRedirect";
 import NoResults from "../../assets/images/noresults.webp";
@@ -31,6 +32,7 @@ const EnquiriesPage = () => {
   const [artpieceHasLoaded, setArtpieceHasLoaded] = useState(false);
   const [artpiece, setArtpiece] = useState();
   const [errors, setErrors] = useState({});
+  const [activeAccordion, setActiveAccordion] = useState(null);
 
   useEffect(() => {
     const fetchEnquiries = async () => {
@@ -140,14 +142,14 @@ const EnquiriesPage = () => {
       <Container fluid="xl" className={`${appStyles.bgAccentLight} my-3 p-3`}>
         <div className={`${appStyles.bgWhite} p-2`}>
           {enquiries.length > 0 ? (
-            <ListGroup as="ol" numbered>
+            <Accordion
+              defaultActiveKey=""
+              activeKey={activeAccordion}
+              onSelect={(eventKey) => setActiveAccordion(eventKey)}
+            >
               {enquiries.map((enquiry) => (
-                <Row key={enquiry.id}>
-                  <ListGroup.Item
-                    as="li"
-                    className={`${appStyles.enquiryItem} d-flex justify-content-between align-items-start`}
-                    onClick={() => handleClick(enquiry)}
-                  >
+                <Accordion.Item eventKey={enquiry.id} key={enquiry.id}>
+                  <Accordion.Header onClick={() => handleClick(enquiry)}>
                     <div className="ms-2 me-auto">
                       <div className="fw-bold">
                         {currentUser.profile_name === enquiry.buyer_name ? (
@@ -164,146 +166,152 @@ const EnquiriesPage = () => {
                         New
                       </Badge>
                     )}
-                  </ListGroup.Item>
-                  {selectedEnquiry?.id === enquiry.id && (
-                    <div className={`${appStyles.bgLight} p-3`}>
-                      <Row>
-                        <Col sm={12} md={7}>
-                          <p className={`fw-bold`}>
-                            Enquiry by{" "}
-                            {enquiry.is_buyer ? (
-                              <span>You</span>
-                            ) : (
-                              <Link
-                                to={`/profiles/${enquiry.buyer_profile_id}`}
-                              >
-                                {enquiry.buyer_name}
-                              </Link>
-                            )}
-                          </p>
-                          <div>
-                            <Avatar
-                              src={enquiry.buyer_profile_image}
-                              height={40}
-                            />
-                            {enquiry.is_buyer ? (
-                              <span>You said:</span>
-                            ) : (
-                              <span>
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    {selectedEnquiry?.id === enquiry.id && (
+                      <div className={`${appStyles.bgLight} p-3`}>
+                        <Row>
+                          <Col sm={12} md={7}>
+                            <p className={`fw-bold`}>
+                              Enquiry by{" "}
+                              {enquiry.is_buyer ? (
+                                <span>You</span>
+                              ) : (
                                 <Link
                                   to={`/profiles/${enquiry.buyer_profile_id}`}
                                 >
                                   {enquiry.buyer_name}
-                                </Link>{" "}
-                                said:
-                              </span>
-                            )}
-                          </div>
-                          <div className={`${appStyles.bgWhite}`}>
-                            <p>{enquiry.initial_message}</p>
-                            <p>Sent: {enquiry.created_on}</p>
-                          </div>
-                        </Col>
-                        <Col>
-                          {artpieceHasLoaded ? (
-                            <div className={`p-3 ${appStyles.bgAccentLight}`}>
-                              <div className={`${appStyles.ImageCover}`}>
-                                <Image src={artpiece.image_url} />
+                                </Link>
+                              )}
+                            </p>
+                            <div>
+                              <Avatar
+                                src={enquiry.buyer_profile_image}
+                                height={40}
+                              />
+                              {enquiry.is_buyer ? (
+                                <span>You said:</span>
+                              ) : (
+                                <span>
+                                  <Link
+                                    to={`/profiles/${enquiry.buyer_profile_id}`}
+                                  >
+                                    {enquiry.buyer_name}
+                                  </Link>{" "}
+                                  said:
+                                </span>
+                              )}
+                            </div>
+                            <div className={`${appStyles.bgWhite}`}>
+                              <p>{enquiry.initial_message}</p>
+                              <p>Sent: {enquiry.created_on}</p>
+                            </div>
+                          </Col>
+                          <Col>
+                            {artpieceHasLoaded ? (
+                              <div className={`p-3 ${appStyles.bgAccentLight}`}>
+                                <div className={`${appStyles.ImageCover}`}>
+                                  <Image src={artpiece.image_url} />
+                                </div>
+                                <p>Title: {artpiece.title}</p>
+                                {artpiece.art_medium && (
+                                  <p>Medium: {artpiece.art_medium}</p>
+                                )}
                               </div>
-                              <p>Title: {artpiece.title}</p>
-                              {artpiece.art_medium && (
-                                <p>Medium: {artpiece.art_medium}</p>
+                            ) : (
+                              <Asset spinner />
+                            )}
+                          </Col>
+                        </Row>
+                        <Row>
+                          {enquiry.is_buyer && enquiry.status === 0 ? (
+                            <p>
+                              You are the buyer and waiting for response from
+                              artist
+                            </p>
+                          ) : enquiry.is_buyer && enquiry.status !== 0 ? (
+                            <div>
+                              The artist has responsed.
+                              <p>Response: {enquiry.response_message}</p>
+                              {enquiry.status === 1 ? (
+                                <p>
+                                  The artist accepted. Their email is:{" "}
+                                  {enquiry.artist_email}
+                                </p>
+                              ) : (
+                                <p>The artist declined.</p>
+                              )}
+                            </div>
+                          ) : enquiry.is_artist && enquiry.status !== 0 ? (
+                            <div>
+                              <p>You responded: {enquiry.response_message} </p>
+                              {enquiry.status === 1 ? (
+                                <p>You accepted this enquiry</p>
+                              ) : (
+                                <p>You declined this enquiry</p>
                               )}
                             </div>
                           ) : (
-                            <Asset spinner />
-                          )}
-                        </Col>
-                      </Row>
-                      <Row>
-                        {enquiry.is_buyer && enquiry.status === 0 ? (
-                          <p>
-                            You are the buyer and waiting for response from
-                            artist
-                          </p>
-                        ) : enquiry.is_buyer && enquiry.status !== 0 ? (
-                          <div>
-                            The artist has responsed.
-                            <p>Response: {enquiry.response_message}</p>
-                            {enquiry.status === 1 ? (
-                              <p>
-                                The artist accepted. Their email is:{" "}
-                                {enquiry.artist_email}
-                              </p>
-                            ) : (
-                              <p>The artist declined.</p>
-                            )}
-                          </div>
-                        ) : enquiry.is_artist && enquiry.status !== 0 ? (
-                          <div>
-                            <p>You responded: {enquiry.response_message} </p>
-                            {enquiry.status === 1 ? (
-                              <p>You accepted this enquiry</p>
-                            ) : (
-                              <p>You declined this enquiry</p>
-                            )}
-                          </div>
-                        ) : (
-                          <div>
-                            <p>Respond to this enquiry:</p>
-                            <Form onSubmit={handleFormSubmit}>
-                              <Form.Group
-                                className="mb-3"
-                                controlId="statusSelect"
-                              >
-                                <Form.Label>Select Decision</Form.Label>
-                                <Form.Select
-                                  aria-label="Select a decision"
-                                  name="status"
-                                  value={status}
-                                  onChange={(e) => setStatus(e.target.value)}
+                            <div>
+                              <p>Respond to this enquiry:</p>
+                              <Form onSubmit={handleFormSubmit}>
+                                <Form.Group
+                                  className="mb-3"
+                                  controlId="statusSelect"
                                 >
-                                  <option>Open this select menu</option>
-                                  <option value="1">Accept</option>
-                                  <option value="2">Decline</option>
-                                </Form.Select>
-                              </Form.Group>
-                              {errors.status?.map((message, idx) => (
-                                <p key={idx}>{message}</p>
-                              ))}
-                              <Form.Group
-                                className="mb-3"
-                                controlId="responseTextarea"
-                              >
-                                <Form.Label>Response Message</Form.Label>
-                                <Form.Control
-                                  as="textarea"
-                                  rows={3}
-                                  name="response_message"
-                                  value={responseMessage}
-                                  onChange={(e) =>
-                                    setResponseMessage(e.target.value)
-                                  }
-                                />
-                              </Form.Group>
-                              {errors.response_message?.map((message, idx) => (
-                                <p key={idx}>{message}</p>
-                              ))}
-                              <Button variant="primary" type="submit">
-                                Send
-                              </Button>
-                              {errors.non_field_errors?.map((message, idx) => (
-                                <p key={idx}>{message}</p>
-                              ))}
-                            </Form>
-                          </div>
-                        )}
-                      </Row>
-                    </div>
-                  )}
-                </Row>
+                                  <Form.Label>Select Decision</Form.Label>
+                                  <Form.Select
+                                    aria-label="Select a decision"
+                                    name="status"
+                                    value={status}
+                                    onChange={(e) => setStatus(e.target.value)}
+                                  >
+                                    <option>Open this select menu</option>
+                                    <option value="1">Accept</option>
+                                    <option value="2">Decline</option>
+                                  </Form.Select>
+                                </Form.Group>
+                                {errors.status?.map((message, idx) => (
+                                  <p key={idx}>{message}</p>
+                                ))}
+                                <Form.Group
+                                  className="mb-3"
+                                  controlId="responseTextarea"
+                                >
+                                  <Form.Label>Response Message</Form.Label>
+                                  <Form.Control
+                                    as="textarea"
+                                    rows={3}
+                                    name="response_message"
+                                    value={responseMessage}
+                                    onChange={(e) =>
+                                      setResponseMessage(e.target.value)
+                                    }
+                                  />
+                                </Form.Group>
+                                {errors.response_message?.map(
+                                  (message, idx) => (
+                                    <p key={idx}>{message}</p>
+                                  )
+                                )}
+                                <Button variant="primary" type="submit">
+                                  Send
+                                </Button>
+                                {errors.non_field_errors?.map(
+                                  (message, idx) => (
+                                    <p key={idx}>{message}</p>
+                                  )
+                                )}
+                              </Form>
+                            </div>
+                          )}
+                        </Row>
+                      </div>
+                    )}
+                  </Accordion.Body>
+                </Accordion.Item>
               ))}
-            </ListGroup>
+            </Accordion>
           ) : (
             <Asset src={NoResults} />
           )}
