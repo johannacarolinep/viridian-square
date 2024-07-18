@@ -147,6 +147,19 @@ textarea {
 .btnPrimary {
     background-color: var(--clr-brand--primary);
     border-color: var(--clr-brand--primary);
+    color: white;
+}
+
+.btnAccentLight {
+    background-color: var(--clr-accent--light);
+    border-color: var(--clr-accent--light);
+}
+
+.btnAccentLight:hover,
+.btnAccentLight:focus,
+.btnAccentLight:active {
+    background-color: #a2a39d;
+    border-color: #a2a39d;
 }
 
 .btnPrimary:hover,
@@ -154,6 +167,13 @@ textarea {
 .btnPrimary:active.btnPrimary:active {
     background-color: var(--clr-accent--dark);
     border-color: var(--clr-brand--primary);
+    color: white;
+}
+
+.linkBtn {
+    padding: 6px 12px;
+    line-height: var(--bs-btn-line-height);
+    cursor: pointer;
 }
 
 @media screen and (min-width: 992px) {
