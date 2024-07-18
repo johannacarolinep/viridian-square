@@ -74,19 +74,14 @@ const EnquiriesPage = () => {
     console.log("Enquiry ID ", selectedEnquiry.id);
     if (selectedEnquiry) {
       try {
-        const response = await axiosReq.put(
-          `/enquiries/${selectedEnquiry.id}/`,
-          {
-            status: parseInt(status),
-            response_message: responseMessage,
-          }
-        );
-        let tempId = selectedEnquiry.id;
-        setSelectedEnquiry(null);
+        await axiosReq.put(`/enquiries/${selectedEnquiry.id}/`, {
+          status: parseInt(status),
+          response_message: responseMessage,
+        });
 
         setEnquiries((prevEnquiries) =>
           prevEnquiries.map((enquiry) =>
-            enquiry.id === tempId
+            enquiry.id === selectedEnquiry.id
               ? {
                   ...enquiry,
                   status: parseInt(status),
@@ -95,7 +90,6 @@ const EnquiriesPage = () => {
               : enquiry
           )
         );
-        console.log("response", response);
       } catch (err) {
         console.log("Error updating enquiry:", err);
         setErrors(err.response?.data);
@@ -361,13 +355,26 @@ const EnquiriesPage = () => {
                             </div>
                           ) : (
                             <div>
-                              <p>Respond to this enquiry:</p>
+                              <p className="fw-bold">
+                                Respond to this enquiry:
+                              </p>
                               <Form onSubmit={handleFormSubmit}>
                                 <Form.Group
                                   className="mb-3"
                                   controlId="statusSelect"
                                 >
-                                  <Form.Label>Select Decision</Form.Label>
+                                  <Form.Label>Select Decision:</Form.Label>
+                                  <p>
+                                    If you accept the enquiry, your email
+                                    address,{" "}
+                                    <span className="fw-bold">
+                                      {currentUser?.email}
+                                    </span>
+                                    , will be shared with{" "}
+                                    <span className="fw-bold">
+                                      {enquiry.buyer_name}
+                                    </span>
+                                  </p>
                                   <Form.Select
                                     aria-label="Select a decision"
                                     name="status"
@@ -386,7 +393,9 @@ const EnquiriesPage = () => {
                                   className="mb-3"
                                   controlId="responseTextarea"
                                 >
-                                  <Form.Label>Response Message</Form.Label>
+                                  <Form.Label>
+                                    Do you wish to pass along a message?
+                                  </Form.Label>
                                   <Form.Control
                                     as="textarea"
                                     rows={3}
@@ -402,7 +411,10 @@ const EnquiriesPage = () => {
                                     <p key={idx}>{message}</p>
                                   )
                                 )}
-                                <Button variant="primary" type="submit">
+                                <Button
+                                  className={appStyles.btnPrimary}
+                                  type="submit"
+                                >
                                   Send
                                 </Button>
                                 {errors.non_field_errors?.map(
