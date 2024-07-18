@@ -1,0 +1,20 @@
+.Icon,
+.Icon:hover,
+.Icon:focus,
+.Icon:active {
+    text-decoration: none;
+}
+
+.Icon:hover i,
+.Icon:focus i,
+.Icon:active i {
+    color: rgb(220, 223, 221);
+    transition: color ease-in-out 0.3s;
+}
+
+.Icon i {
+    color: rgb(255, 255, 255);
+    font-size: 2rem;
+    padding: 7px;
+    vertical-align: middle;
+}

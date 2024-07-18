@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-
 import appStyles from "../../App.module.css";
+import styles from "./Footer.module.css";
 
 const Footer = () => {
   return (
@@ -23,18 +23,18 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit my Github page. Link will open in a new tab."
-              className={`text-decoration-none ${appStyles.txtWhite} fs-2 me-3`}
+              className={`text-decoration-none ${appStyles.txtWhite} ${styles.Icon} fs-2 me-3`}
             >
-              <i class="fa-brands fa-github"></i>
+              <i className="fa-brands fa-github"></i>
             </a>
             <a
               href="https://www.linkedin.com/in/johannapetersson/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit my Linkedin profile. Link will open in a new tab."
-              className={`text-decoration-none ${appStyles.txtWhite} fs-2`}
+              className={`text-decoration-none ${appStyles.txtWhite} fs-2 ${styles.Icon}`}
             >
-              <i class="fa-brands fa-linkedin"></i>
+              <i className="fa-brands fa-linkedin"></i>
             </a>
           </Col>
         </Row>
