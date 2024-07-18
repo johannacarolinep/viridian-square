@@ -198,9 +198,14 @@ const EnquiriesPage = () => {
                   </Accordion.Header>
                   <Accordion.Body>
                     {selectedEnquiry?.id === enquiry.id && (
-                      <div className={`${appStyles.bgLight} p-3`}>
-                        <Row>
-                          <Col sm={12} md={7}>
+                      <>
+                        <Row className={`${appStyles.bgLight} p-3 m-0`}>
+                          <Col
+                            sm={12}
+                            md={7}
+                            lg={8}
+                            className={`d-flex flex-column`}
+                          >
                             <p className={`fw-bold`}>
                               Enquiry by{" "}
                               {enquiry.is_buyer ? (
@@ -213,7 +218,7 @@ const EnquiriesPage = () => {
                                 </Link>
                               )}
                             </p>
-                            <div>
+                            <div className={`${appStyles.bgWhite} p-3 h-100`}>
                               <Avatar
                                 src={enquiry.buyer_profile_image}
                                 height={40}
@@ -221,35 +226,50 @@ const EnquiriesPage = () => {
                               {enquiry.is_buyer ? (
                                 <span>You said:</span>
                               ) : (
-                                <span>
-                                  <Link
-                                    to={`/profiles/${enquiry.buyer_profile_id}`}
-                                  >
-                                    {enquiry.buyer_name}
-                                  </Link>{" "}
-                                  said:
-                                </span>
+                                <span>{enquiry.buyer_name} said:</span>
                               )}
-                            </div>
-                            <div className={`${appStyles.bgWhite}`}>
-                              <p>{enquiry.initial_message}</p>
-                              <p>Sent: {enquiry.created_on}</p>
+                              <p className={`mt-3 ${appStyles.txtAccentDark}`}>
+                                {enquiry.initial_message}
+                              </p>
+                              <p className={appStyles.txtAccentDark}>
+                                Sent: {enquiry.created_on}
+                              </p>
                             </div>
                           </Col>
-                          <Col>
-                            {artpieceHasLoaded ? (
-                              <div className={`p-3 ${appStyles.bgAccentLight}`}>
-                                <div className={`${appStyles.ImageCover}`}>
-                                  <Image src={artpiece.image_url} />
+                          <Col sm={12} md={5} lg={4}>
+                            <div
+                              className={`p-3 h-100 d-flex flex-column ${appStyles.bgWhite}`}
+                            >
+                              {artpieceHasLoaded ? (
+                                <div
+                                  className={`h-100 p-2 d-flex flex-column ${appStyles.bgAccentLight}`}
+                                >
+                                  <div
+                                    className={`${appStyles.bgAccentLight} ${styles.ImgContainer} mb-1`}
+                                  >
+                                    <Image src={artpiece.image_url} />
+                                  </div>
+                                  <p>
+                                    <span className="fw-bold">Title:</span>{" "}
+                                    {artpiece.title}
+                                    {artpiece.art_medium && (
+                                      <>
+                                        <br />
+                                        <span className="fw-bold">
+                                          Medium:
+                                        </span>{" "}
+                                        {artpiece.art_medium}
+                                      </>
+                                    )}
+                                    <br />
+                                    <span className="fw-bold">By: </span>
+                                    {artpiece.profile_name}
+                                  </p>
                                 </div>
-                                <p>Title: {artpiece.title}</p>
-                                {artpiece.art_medium && (
-                                  <p>Medium: {artpiece.art_medium}</p>
-                                )}
-                              </div>
-                            ) : (
-                              <Asset spinner />
-                            )}
+                              ) : (
+                                <Asset spinner />
+                              )}
+                            </div>
                           </Col>
                         </Row>
                         <Row>
@@ -335,7 +355,7 @@ const EnquiriesPage = () => {
                             </div>
                           )}
                         </Row>
-                      </div>
+                      </>
                     )}
                   </Accordion.Body>
                 </Accordion.Item>

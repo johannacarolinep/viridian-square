@@ -9,6 +9,18 @@
     text-align: center;
 }
 
+.ImgContainer {
+    max-height: 150px;
+    width: 100%;
+    display: flex;
+}
+
+.ImgContainer img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
 @media screen and (min-width: 992px) {
     .HeroSection h1 {
         font-size: 3rem;
