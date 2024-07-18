@@ -75,6 +75,10 @@ main {
     color: #ffffff;
 }
 
+.txtInactive {
+    color: #757474;
+}
+
 /* -------------------------------- Dividing lines */
 .dividerPrimary {
     background-color: var(--clr-brand--primary);

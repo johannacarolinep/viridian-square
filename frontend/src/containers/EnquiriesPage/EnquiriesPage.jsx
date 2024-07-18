@@ -5,11 +5,9 @@ import styles from "./EnquiriesPage.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import {
   Badge,
-  ListGroup,
   Container,
   Row,
   Col,
-  Card,
   Form,
   Button,
   Image,
@@ -142,293 +140,327 @@ const EnquiriesPage = () => {
               onSelect={(eventKey) => setActiveAccordion(eventKey)}
             >
               {enquiries.map((enquiry) => (
+                // Check if enquiry.artpiece exists/is not null
                 <Accordion.Item eventKey={enquiry.id} key={enquiry.id}>
-                  <Accordion.Header onClick={() => handleClick(enquiry)}>
-                    <div className="ms-2 me-3 w-100 d-flex justify-content-between">
-                      <div
-                        className={`${
-                          (enquiry.is_buyer && !enquiry.buyer_has_checked) ||
-                          (enquiry.is_artist && !enquiry.artist_has_checked)
-                            ? "fw-bold"
-                            : ""
-                        }`}
-                      >
-                        <span className="me-2">
-                          {currentUser.profile_name === enquiry.buyer_name ? (
-                            <>Enquiry sent to: {enquiry.artist_name}</>
-                          ) : (
-                            <>Enquiry received from: {enquiry.buyer_name}</>
-                          )}
-                        </span>
-                        {enquiry.status === 0 ? (
-                          <Badge bg="warning" text="dark" pill>
-                            Pending
-                          </Badge>
-                        ) : enquiry.status === 1 ? (
-                          <Badge bg="" className={appStyles.bgPrimary} pill>
-                            Accepted
-                          </Badge>
-                        ) : (
-                          <Badge bg="dark" pill>
-                            Declined
-                          </Badge>
-                        )}
-                        <br />
-                        Date: {enquiry.created_on}
-                      </div>
-                      {((enquiry.is_buyer && !enquiry.buyer_has_checked) ||
-                        (enquiry.is_artist && !enquiry.artist_has_checked)) && (
-                        <div className="d-flex align-items-center">
-                          <Badge
-                            bg=""
-                            pill
-                            className={`ms-auto ${appStyles.bgPrimary}`}
+                  {enquiry.artpiece ? (
+                    <>
+                      <Accordion.Header onClick={() => handleClick(enquiry)}>
+                        <div className="ms-2 me-3 w-100 d-flex justify-content-between">
+                          <div
+                            className={`${
+                              (enquiry.is_buyer &&
+                                !enquiry.buyer_has_checked) ||
+                              (enquiry.is_artist && !enquiry.artist_has_checked)
+                                ? "fw-bold"
+                                : ""
+                            }`}
                           >
-                            New
-                          </Badge>
+                            <span className="me-2">
+                              {currentUser.profile_name ===
+                              enquiry.buyer_name ? (
+                                <>Enquiry sent to: {enquiry.artist_name}</>
+                              ) : (
+                                <>Enquiry received from: {enquiry.buyer_name}</>
+                              )}
+                            </span>
+                            {enquiry.status === 0 ? (
+                              <Badge bg="warning" text="dark" pill>
+                                Pending
+                              </Badge>
+                            ) : enquiry.status === 1 ? (
+                              <Badge bg="" className={appStyles.bgPrimary} pill>
+                                Accepted
+                              </Badge>
+                            ) : (
+                              <Badge bg="dark" pill>
+                                Declined
+                              </Badge>
+                            )}
+                            <br />
+                            Date: {enquiry.created_on}
+                          </div>
+                          {((enquiry.is_buyer && !enquiry.buyer_has_checked) ||
+                            (enquiry.is_artist &&
+                              !enquiry.artist_has_checked)) && (
+                            <div className="d-flex align-items-center">
+                              <Badge
+                                bg=""
+                                pill
+                                className={`ms-auto ${appStyles.bgPrimary}`}
+                              >
+                                New
+                              </Badge>
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    {selectedEnquiry?.id === enquiry.id && (
-                      <>
-                        <Row className={`${appStyles.bgLight} p-3 m-0`}>
-                          <Col
-                            sm={12}
-                            md={7}
-                            lg={8}
-                            className={`d-flex flex-column`}
-                          >
-                            <p className={`fw-bold`}>
-                              Enquiry by{" "}
-                              {enquiry.is_buyer ? (
-                                <span>You</span>
-                              ) : (
-                                <Link
-                                  to={`/profiles/${enquiry.buyer_profile_id}`}
-                                >
-                                  {enquiry.buyer_name}
-                                </Link>
-                              )}
-                            </p>
-                            <div className={`${appStyles.bgWhite} p-3 h-100`}>
-                              <Avatar
-                                src={enquiry.buyer_profile_image}
-                                height={40}
-                              />
-                              {enquiry.is_buyer ? (
-                                <span>You said:</span>
-                              ) : (
-                                <span>{enquiry.buyer_name} said:</span>
-                              )}
-                              <p className={`mt-3 ${appStyles.txtAccentDark}`}>
-                                {enquiry.initial_message}
-                              </p>
-                              <p className={appStyles.txtAccentDark}>
-                                Sent: {enquiry.created_on}
-                              </p>
-                            </div>
-                          </Col>
-                          <Col sm={12} md={5} lg={4}>
-                            <div
-                              className={`p-3 h-100 d-flex flex-column ${appStyles.bgWhite}`}
-                            >
-                              {artpieceHasLoaded ? (
-                                <div
-                                  className={`h-100 p-2 d-flex flex-column ${appStyles.bgAccentLight}`}
-                                >
-                                  <div
-                                    className={`${appStyles.bgAccentLight} ${styles.ImgContainer} mb-1`}
-                                  >
-                                    <Image src={artpiece.image_url} />
-                                  </div>
-                                  <p>
-                                    <span className="fw-bold">Title:</span>{" "}
-                                    {artpiece.title}
-                                    {artpiece.art_medium && (
-                                      <>
-                                        <br />
-                                        <span className="fw-bold">
-                                          Medium:
-                                        </span>{" "}
-                                        {artpiece.art_medium}
-                                      </>
-                                    )}
-                                    <br />
-                                    <span className="fw-bold">By: </span>
-                                    {artpiece.profile_name}
-                                  </p>
-                                </div>
-                              ) : (
-                                <Asset spinner />
-                              )}
-                            </div>
-                          </Col>
-                        </Row>
-                        <Row className={`${appStyles.bgLight} p-3 m-0 mt-2`}>
-                          {enquiry.is_buyer && enquiry.status === 0 ? (
-                            <p className="fw-bold text-center my-3">
-                              The artist has not yet responded to your enquiry:
-                            </p>
-                          ) : enquiry.is_buyer && enquiry.status !== 0 ? (
-                            <div>
-                              <Avatar src={enquiry.artist_profile_image} />
-                              <Link
-                                to={`/profiles/${enquiry.artist_profile_id}`}
+                      </Accordion.Header>
+                      <Accordion.Body>
+                        {selectedEnquiry?.id === enquiry.id && (
+                          <>
+                            <Row className={`${appStyles.bgLight} p-3 m-0`}>
+                              <Col
+                                sm={12}
+                                md={7}
+                                lg={8}
+                                className={`d-flex flex-column`}
                               >
-                                {enquiry.artist_name}
-                              </Link>{" "}
-                              has responded to your enquiry:
-                              {enquiry.response_message && (
-                                <div
-                                  className={`${appStyles.bgWhite} p-3 mt-3 ${appStyles.txtAccentDark}`}
-                                >
-                                  <p className="m-0">
-                                    {enquiry.response_message}
-                                  </p>
-                                </div>
-                              )}
-                              {enquiry.status === 1 ? (
-                                <p className="mt-3">
-                                  The artist has{" "}
-                                  <span
-                                    className={`fw-bold ${appStyles.txtPrimary} ${appStyles.txtLarger}`}
-                                  >
-                                    accepted
-                                  </span>{" "}
-                                  your enquiry. Their email is:{" "}
-                                  <span
-                                    className={`fw-bold ${appStyles.txtPrimary} ${appStyles.txtLarger}`}
-                                  >
-                                    {enquiry.artist_email}
-                                  </span>
-                                </p>
-                              ) : (
-                                <p>
-                                  Unfortunately, the artist has{" "}
-                                  <span className="fw-bold">declined</span> your
-                                  enquiry.
-                                </p>
-                              )}
-                            </div>
-                          ) : enquiry.is_artist && enquiry.status !== 0 ? (
-                            <div>
-                              <Avatar src={enquiry.artist_profile_image} />
-                              You{" "}
-                              {enquiry.status === 1 ? (
-                                <span className="fw-bold">accepted</span>
-                              ) : enquiry.status === 2 ? (
-                                <span className="fw-bold">declined</span>
-                              ) : (
-                                ""
-                              )}{" "}
-                              <Link
-                                to={`/profiles/${enquiry.artist_profile_id}`}
-                              >
-                                {enquiry.artist_name}'s
-                              </Link>{" "}
-                              enquiry.
-                              {enquiry.response_message && (
-                                <div
-                                  className={`${appStyles.bgWhite} p-3 my-3 ${appStyles.txtAccentDark}`}
-                                >
-                                  <p className="m-0">
-                                    <span className="fw-bold">
-                                      You responded:{" "}
-                                    </span>
-                                    {enquiry.response_message}
-                                  </p>
-                                </div>
-                              )}
-                              {enquiry.status === 1 ? (
-                                <p>
-                                  Your email address, {enquiry.artist_email},
-                                  has been shared with {enquiry.buyer_name}
-                                </p>
-                              ) : (
-                                <p>
-                                  Your email address will not be shared with{" "}
-                                  {enquiry.buyer_name}.
-                                </p>
-                              )}
-                            </div>
-                          ) : (
-                            <div>
-                              <p className="fw-bold">
-                                Respond to this enquiry:
-                              </p>
-                              <Form onSubmit={handleFormSubmit}>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="statusSelect"
-                                >
-                                  <Form.Label>Select Decision:</Form.Label>
-                                  <p>
-                                    If you accept the enquiry, your email
-                                    address,{" "}
-                                    <span className="fw-bold">
-                                      {currentUser?.email}
-                                    </span>
-                                    , will be shared with{" "}
-                                    <span className="fw-bold">
+                                <p className={`fw-bold`}>
+                                  Enquiry by{" "}
+                                  {enquiry.is_buyer ? (
+                                    <span>You</span>
+                                  ) : (
+                                    <Link
+                                      to={`/profiles/${enquiry.buyer_profile_id}`}
+                                    >
                                       {enquiry.buyer_name}
-                                    </span>
-                                  </p>
-                                  <Form.Select
-                                    aria-label="Select a decision"
-                                    name="status"
-                                    value={status}
-                                    onChange={(e) => setStatus(e.target.value)}
-                                  >
-                                    <option>Open this select menu</option>
-                                    <option value="1">Accept</option>
-                                    <option value="2">Decline</option>
-                                  </Form.Select>
-                                </Form.Group>
-                                {errors.status?.map((message, idx) => (
-                                  <p key={idx}>{message}</p>
-                                ))}
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="responseTextarea"
+                                    </Link>
+                                  )}
+                                </p>
+                                <div
+                                  className={`${appStyles.bgWhite} p-3 h-100`}
                                 >
-                                  <Form.Label>
-                                    Do you wish to pass along a message?
-                                  </Form.Label>
-                                  <Form.Control
-                                    as="textarea"
-                                    rows={3}
-                                    name="response_message"
-                                    value={responseMessage}
-                                    onChange={(e) =>
-                                      setResponseMessage(e.target.value)
-                                    }
+                                  <Avatar
+                                    src={enquiry.buyer_profile_image}
+                                    height={40}
                                   />
-                                </Form.Group>
-                                {errors.response_message?.map(
-                                  (message, idx) => (
-                                    <p key={idx}>{message}</p>
-                                  )
-                                )}
-                                <Button
-                                  className={appStyles.btnPrimary}
-                                  type="submit"
+                                  {enquiry.is_buyer ? (
+                                    <span>You said:</span>
+                                  ) : (
+                                    <span>{enquiry.buyer_name} said:</span>
+                                  )}
+                                  <p
+                                    className={`mt-3 ${appStyles.txtAccentDark}`}
+                                  >
+                                    {enquiry.initial_message}
+                                  </p>
+                                  <p className={appStyles.txtAccentDark}>
+                                    Sent: {enquiry.created_on}
+                                  </p>
+                                </div>
+                              </Col>
+                              <Col sm={12} md={5} lg={4}>
+                                <div
+                                  className={`p-3 h-100 d-flex flex-column ${appStyles.bgWhite}`}
                                 >
-                                  Send
-                                </Button>
-                                {errors.non_field_errors?.map(
-                                  (message, idx) => (
-                                    <p key={idx}>{message}</p>
-                                  )
-                                )}
-                              </Form>
-                            </div>
-                          )}
+                                  {artpieceHasLoaded ? (
+                                    <div
+                                      className={`h-100 p-2 d-flex flex-column ${appStyles.bgAccentLight}`}
+                                    >
+                                      <div
+                                        className={`${appStyles.bgAccentLight} ${styles.ImgContainer} mb-1`}
+                                      >
+                                        <Image src={artpiece.image_url} />
+                                      </div>
+                                      <p>
+                                        <span className="fw-bold">Title:</span>{" "}
+                                        {artpiece.title}
+                                        {artpiece.art_medium && (
+                                          <>
+                                            <br />
+                                            <span className="fw-bold">
+                                              Medium:
+                                            </span>{" "}
+                                            {artpiece.art_medium}
+                                          </>
+                                        )}
+                                        <br />
+                                        <span className="fw-bold">By: </span>
+                                        {artpiece.profile_name}
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <Asset spinner />
+                                  )}
+                                </div>
+                              </Col>
+                            </Row>
+                            <Row
+                              className={`${appStyles.bgLight} p-3 m-0 mt-2`}
+                            >
+                              {enquiry.is_buyer && enquiry.status === 0 ? (
+                                <p className="fw-bold text-center my-3">
+                                  The artist has not yet responded to your
+                                  enquiry:
+                                </p>
+                              ) : enquiry.is_buyer && enquiry.status !== 0 ? (
+                                <div>
+                                  <Avatar src={enquiry.artist_profile_image} />
+                                  <Link
+                                    to={`/profiles/${enquiry.artist_profile_id}`}
+                                  >
+                                    {enquiry.artist_name}
+                                  </Link>{" "}
+                                  has responded to your enquiry:
+                                  {enquiry.response_message && (
+                                    <div
+                                      className={`${appStyles.bgWhite} p-3 mt-3 ${appStyles.txtAccentDark}`}
+                                    >
+                                      <p className="m-0">
+                                        {enquiry.response_message}
+                                      </p>
+                                    </div>
+                                  )}
+                                  {enquiry.status === 1 ? (
+                                    <p className="mt-3">
+                                      The artist has{" "}
+                                      <span
+                                        className={`fw-bold ${appStyles.txtPrimary} ${appStyles.txtLarger}`}
+                                      >
+                                        accepted
+                                      </span>{" "}
+                                      your enquiry. Their email is:{" "}
+                                      <span
+                                        className={`fw-bold ${appStyles.txtPrimary} ${appStyles.txtLarger}`}
+                                      >
+                                        {enquiry.artist_email}
+                                      </span>
+                                    </p>
+                                  ) : (
+                                    <p>
+                                      Unfortunately, the artist has{" "}
+                                      <span className="fw-bold">declined</span>{" "}
+                                      your enquiry.
+                                    </p>
+                                  )}
+                                </div>
+                              ) : enquiry.is_artist && enquiry.status !== 0 ? (
+                                <div>
+                                  <Avatar src={enquiry.artist_profile_image} />
+                                  You{" "}
+                                  {enquiry.status === 1 ? (
+                                    <span className="fw-bold">accepted</span>
+                                  ) : enquiry.status === 2 ? (
+                                    <span className="fw-bold">declined</span>
+                                  ) : (
+                                    ""
+                                  )}{" "}
+                                  <Link
+                                    to={`/profiles/${enquiry.artist_profile_id}`}
+                                  >
+                                    {enquiry.artist_name}'s
+                                  </Link>{" "}
+                                  enquiry.
+                                  {enquiry.response_message && (
+                                    <div
+                                      className={`${appStyles.bgWhite} p-3 my-3 ${appStyles.txtAccentDark}`}
+                                    >
+                                      <p className="m-0">
+                                        <span className="fw-bold">
+                                          You responded:{" "}
+                                        </span>
+                                        {enquiry.response_message}
+                                      </p>
+                                    </div>
+                                  )}
+                                  {enquiry.status === 1 ? (
+                                    <p>
+                                      Your email address, {enquiry.artist_email}
+                                      , has been shared with{" "}
+                                      {enquiry.buyer_name}
+                                    </p>
+                                  ) : (
+                                    <p>
+                                      Your email address will not be shared with{" "}
+                                      {enquiry.buyer_name}.
+                                    </p>
+                                  )}
+                                </div>
+                              ) : (
+                                <div>
+                                  <p className="fw-bold">
+                                    Respond to this enquiry:
+                                  </p>
+                                  <Form onSubmit={handleFormSubmit}>
+                                    <Form.Group
+                                      className="mb-3"
+                                      controlId="statusSelect"
+                                    >
+                                      <Form.Label>Select Decision:</Form.Label>
+                                      <p>
+                                        If you accept the enquiry, your email
+                                        address,{" "}
+                                        <span className="fw-bold">
+                                          {currentUser?.email}
+                                        </span>
+                                        , will be shared with{" "}
+                                        <span className="fw-bold">
+                                          {enquiry.buyer_name}
+                                        </span>
+                                      </p>
+                                      <Form.Select
+                                        aria-label="Select a decision"
+                                        name="status"
+                                        value={status}
+                                        onChange={(e) =>
+                                          setStatus(e.target.value)
+                                        }
+                                      >
+                                        <option>Open this select menu</option>
+                                        <option value="1">Accept</option>
+                                        <option value="2">Decline</option>
+                                      </Form.Select>
+                                    </Form.Group>
+                                    {errors.status?.map((message, idx) => (
+                                      <p key={idx}>{message}</p>
+                                    ))}
+                                    <Form.Group
+                                      className="mb-3"
+                                      controlId="responseTextarea"
+                                    >
+                                      <Form.Label>
+                                        Do you wish to pass along a message?
+                                      </Form.Label>
+                                      <Form.Control
+                                        as="textarea"
+                                        rows={3}
+                                        name="response_message"
+                                        value={responseMessage}
+                                        onChange={(e) =>
+                                          setResponseMessage(e.target.value)
+                                        }
+                                      />
+                                    </Form.Group>
+                                    {errors.response_message?.map(
+                                      (message, idx) => (
+                                        <p key={idx}>{message}</p>
+                                      )
+                                    )}
+                                    <Button
+                                      className={appStyles.btnPrimary}
+                                      type="submit"
+                                    >
+                                      Send
+                                    </Button>
+                                    {errors.non_field_errors?.map(
+                                      (message, idx) => (
+                                        <p key={idx}>{message}</p>
+                                      )
+                                    )}
+                                  </Form>
+                                </div>
+                              )}
+                            </Row>
+                          </>
+                        )}
+                      </Accordion.Body>
+                    </>
+                  ) : (
+                    <>
+                      <Accordion.Header>
+                        <div className={`${appStyles.txtInactive} ms-2`}>
+                          Enquiry inactive: Artpiece no longer exists
+                        </div>
+                      </Accordion.Header>
+                      <Accordion.Body>
+                        <Row className={`${appStyles.bgLight} p-3 m-0`}>
+                          <p className="my-2">
+                            This enquiry has been deactivated since the artpiece
+                            for which it was made no longer exists.
+                          </p>
                         </Row>
-                      </>
-                    )}
-                  </Accordion.Body>
+                      </Accordion.Body>
+                    </>
+                  )}
                 </Accordion.Item>
               ))}
             </Accordion>
