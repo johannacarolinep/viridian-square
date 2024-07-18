@@ -252,6 +252,11 @@ Actions taken:
 - Added new PBI's relating to documentation to the backlog.
 - Reprioritised backlog.
 
+#### Sprint 6:
+
+![Sprint 6 milestone](documentation/sprints/sprint6_milestone.png)
+
+
 <a id="user-stories"></a>
 ### User stories:
 
