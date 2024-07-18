@@ -150,22 +150,51 @@ const EnquiriesPage = () => {
               {enquiries.map((enquiry) => (
                 <Accordion.Item eventKey={enquiry.id} key={enquiry.id}>
                   <Accordion.Header onClick={() => handleClick(enquiry)}>
-                    <div className="ms-2 me-auto">
-                      <div className="fw-bold">
-                        {currentUser.profile_name === enquiry.buyer_name ? (
-                          <>Enquiry sent to: {enquiry.artist_name}</>
+                    <div className="ms-2 me-3 w-100 d-flex justify-content-between">
+                      <div
+                        className={`${
+                          (enquiry.is_buyer && !enquiry.buyer_has_checked) ||
+                          (enquiry.is_artist && !enquiry.artist_has_checked)
+                            ? "fw-bold"
+                            : ""
+                        }`}
+                      >
+                        <span className="me-2">
+                          {currentUser.profile_name === enquiry.buyer_name ? (
+                            <>Enquiry sent to: {enquiry.artist_name}</>
+                          ) : (
+                            <>Enquiry received from: {enquiry.buyer_name}</>
+                          )}
+                        </span>
+                        {enquiry.status === 0 ? (
+                          <Badge bg="warning" text="dark" pill>
+                            Pending
+                          </Badge>
+                        ) : enquiry.status === 1 ? (
+                          <Badge bg="" className={appStyles.bgPrimary} pill>
+                            Accepted
+                          </Badge>
                         ) : (
-                          <>Enquiry received from: {enquiry.buyer_name}</>
+                          <Badge bg="dark" pill>
+                            Declined
+                          </Badge>
                         )}
+                        <br />
+                        Date: {enquiry.created_on}
                       </div>
-                      Date: {enquiry.created_on}
+                      {((enquiry.is_buyer && !enquiry.buyer_has_checked) ||
+                        (enquiry.is_artist && !enquiry.artist_has_checked)) && (
+                        <div className="d-flex align-items-center">
+                          <Badge
+                            bg=""
+                            pill
+                            className={`ms-auto ${appStyles.bgPrimary}`}
+                          >
+                            New
+                          </Badge>
+                        </div>
+                      )}
                     </div>
-                    {((enquiry.is_buyer && !enquiry.buyer_has_checked) ||
-                      (enquiry.is_artist && !enquiry.artist_has_checked)) && (
-                      <Badge bg="" pill className={appStyles.bgPrimary}>
-                        New
-                      </Badge>
-                    )}
                   </Accordion.Header>
                   <Accordion.Body>
                     {selectedEnquiry?.id === enquiry.id && (
