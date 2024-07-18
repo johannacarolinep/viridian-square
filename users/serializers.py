@@ -24,6 +24,14 @@ class CustomRegisterSerializer(RegisterSerializer):
             'password2': self.validated_data.get('password2', ''),
         }
 
+    def validate_email(self, value):
+        """
+        Check that the email is not already in use.
+        """
+        if CustomUser.objects.filter(email=value).exists():
+            raise serializers.ValidationError("This email is already in use.")
+        return value
+
     def save(self, request):
         """
         Creates and returns a new user with the provided email
