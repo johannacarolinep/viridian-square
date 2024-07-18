@@ -60,18 +60,3 @@ class DeleteUserView(generics.GenericAPIView):
         response.delete_cookie('viridian-refresh-token')
 
         return response
-
-
-class CustomUserDetailsView(UserDetailsView):
-    """
-    Custom view for retrieving user details with a custom serializer.
-
-    This view extends `UserDetailsView` and uses the `CurrentUserSerializer`
-    to provide additional user profile information.
-    """
-    serializer_class = CurrentUserSerializer
-
-    def get(self, request, *args, **kwargs):
-        """ Retrieve the current user's details """
-        response = super().get(request, *args, **kwargs)
-        return response
