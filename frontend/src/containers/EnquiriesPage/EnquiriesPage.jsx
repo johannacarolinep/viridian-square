@@ -272,32 +272,91 @@ const EnquiriesPage = () => {
                             </div>
                           </Col>
                         </Row>
-                        <Row>
+                        <Row className={`${appStyles.bgLight} p-3 m-0 mt-2`}>
                           {enquiry.is_buyer && enquiry.status === 0 ? (
-                            <p>
-                              You are the buyer and waiting for response from
-                              artist
+                            <p className="fw-bold text-center my-3">
+                              The artist has not yet responded to your enquiry:
                             </p>
                           ) : enquiry.is_buyer && enquiry.status !== 0 ? (
                             <div>
-                              The artist has responsed.
-                              <p>Response: {enquiry.response_message}</p>
+                              <Avatar src={enquiry.artist_profile_image} />
+                              <Link
+                                to={`/profiles/${enquiry.artist_profile_id}`}
+                              >
+                                {enquiry.artist_name}
+                              </Link>{" "}
+                              has responded to your enquiry:
+                              {enquiry.response_message && (
+                                <div
+                                  className={`${appStyles.bgWhite} p-3 mt-3 ${appStyles.txtAccentDark}`}
+                                >
+                                  <p className="m-0">
+                                    {enquiry.response_message}
+                                  </p>
+                                </div>
+                              )}
                               {enquiry.status === 1 ? (
-                                <p>
-                                  The artist accepted. Their email is:{" "}
-                                  {enquiry.artist_email}
+                                <p className="mt-3">
+                                  The artist has{" "}
+                                  <span
+                                    className={`fw-bold ${appStyles.txtPrimary} ${appStyles.txtLarger}`}
+                                  >
+                                    accepted
+                                  </span>{" "}
+                                  your enquiry. Their email is:{" "}
+                                  <span
+                                    className={`fw-bold ${appStyles.txtPrimary} ${appStyles.txtLarger}`}
+                                  >
+                                    {enquiry.artist_email}
+                                  </span>
                                 </p>
                               ) : (
-                                <p>The artist declined.</p>
+                                <p>
+                                  Unfortunately, the artist has{" "}
+                                  <span className="fw-bold">declined</span> your
+                                  enquiry.
+                                </p>
                               )}
                             </div>
                           ) : enquiry.is_artist && enquiry.status !== 0 ? (
                             <div>
-                              <p>You responded: {enquiry.response_message} </p>
+                              <Avatar src={enquiry.artist_profile_image} />
+                              You{" "}
                               {enquiry.status === 1 ? (
-                                <p>You accepted this enquiry</p>
+                                <span className="fw-bold">accepted</span>
+                              ) : enquiry.status === 2 ? (
+                                <span className="fw-bold">declined</span>
                               ) : (
-                                <p>You declined this enquiry</p>
+                                ""
+                              )}{" "}
+                              <Link
+                                to={`/profiles/${enquiry.artist_profile_id}`}
+                              >
+                                {enquiry.artist_name}'s
+                              </Link>{" "}
+                              enquiry.
+                              {enquiry.response_message && (
+                                <div
+                                  className={`${appStyles.bgWhite} p-3 my-3 ${appStyles.txtAccentDark}`}
+                                >
+                                  <p className="m-0">
+                                    <span className="fw-bold">
+                                      You responded:{" "}
+                                    </span>
+                                    {enquiry.response_message}
+                                  </p>
+                                </div>
+                              )}
+                              {enquiry.status === 1 ? (
+                                <p>
+                                  Your email address, {enquiry.artist_email},
+                                  has been shared with {enquiry.buyer_name}
+                                </p>
+                              ) : (
+                                <p>
+                                  Your email address will not be shared with{" "}
+                                  {enquiry.buyer_name}.
+                                </p>
                               )}
                             </div>
                           ) : (

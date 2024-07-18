@@ -59,6 +59,10 @@ main {
     background-color: var(--clr-dark);
 }
 
+.txtPrimary {
+    color: var(--clr-brand--primary);
+}
+
 .txtAccentDark {
     color: var(--clr-accent--dark);
 }
