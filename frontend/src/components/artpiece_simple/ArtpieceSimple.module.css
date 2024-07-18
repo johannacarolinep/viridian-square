@@ -2,15 +2,22 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
 }
 
-.ImgCover {
-    object-fit: cover;
-    width: 100%;
+.CardFooter {
+    background-color: white;
+    border-top: none;
 }
 
 .ImgContainer {
     display: flex;
-    min-height: 150px;
-    aspect-ratio: 3/2;
+    aspect-ratio: 5/4;
+    width: 100%;
+}
+
+.ImgContainer img {
+    display: flex;
+    object-fit: cover;
+    width: 100%;
 }

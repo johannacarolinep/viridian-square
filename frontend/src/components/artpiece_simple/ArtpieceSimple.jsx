@@ -10,13 +10,11 @@ import { axiosRes } from "../../api/axiosDefaults";
 const ArtpieceSimple = (props) => {
   const {
     id,
-    owner,
     is_owner,
     profile_id,
     profile_name,
     profile_image,
     title,
-    created_on,
     image_url,
     art_medium,
     for_sale,
@@ -71,13 +69,8 @@ const ArtpieceSimple = (props) => {
   return (
     <Card className={styles.Card}>
       <Link to={`/artpieces/${id}`}>
-        <div className={`${styles.ImgContainer} position-relative`}>
-          <Card.Img
-            variant="top"
-            src={image_url}
-            alt={title}
-            className={styles.ImgCover}
-          />
+        <div className={`${styles.ImgContainer} position-relative p-2`}>
+          <Card.Img variant="top" src={image_url} alt={title} />
           {for_sale === 1 ? (
             <div className="position-absolute top-0 end-0 p-1 fs-5">
               <Badge className="ms-1" pill bg="dark">
@@ -95,10 +88,10 @@ const ArtpieceSimple = (props) => {
           )}
         </div>
       </Link>
-      <Card.Body className="px-3 pt-1 pb-2">
-        <div className="d-flex justify-content-between align-items-center">
+      <Card.Body className="px-2 pt-1 pb-2 px-md-3 pb-md-3">
+        <div className="d-flex justify-content-between align-items-start">
           <h5 className="mb-0 py-1">{title}</h5>
-          <div>
+          <div className="d-flex">
             {is_owner ? (
               <OverlayTrigger
                 placement="top"
@@ -132,23 +125,23 @@ const ArtpieceSimple = (props) => {
             )}
           </div>
         </div>
-        <p className="small mb-0">{likes_count} likes</p>
-
-        {!basic && art_medium !== "0" && (
-          <Badge className="ms-1" pill bg="dark">
-            {art_medium}
-          </Badge>
-        )}
-
-        {!basic && (
-          <div className="text-end">
-            <Link to={`/profiles/${profile_id}`}>
-              By: {profile_name} | {created_on}
-              <Avatar src={profile_image} height={40} />
-            </Link>
-          </div>
-        )}
+        <div className="d-flex">
+          <span className="small mb-0">{likes_count} likes</span>
+          {!basic && art_medium !== "0" && (
+            <Badge className="ms-2" pill bg="dark">
+              {art_medium}
+            </Badge>
+          )}
+        </div>
       </Card.Body>
+      {!basic && (
+        <Card.Footer className={`text-end px-2 ${styles.CardFooter}`}>
+          <Link to={`/profiles/${profile_id}`}>
+            <span className="me-2">{profile_name}</span>
+            <Avatar src={profile_image} height={35} />
+          </Link>
+        </Card.Footer>
+      )}
     </Card>
   );
 };

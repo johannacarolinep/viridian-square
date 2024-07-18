@@ -48,7 +48,7 @@ const DiscoverPage = () => {
       <section className={appStyles.bgAccentLight}>
         <Container fluid="xl" className="py-4">
           <h2>Trending:</h2>
-          <Row xs={2} md={4} className="m-0 py-3 g-2">
+          <Row xs={1} md={2} lg={4} className="m-0 py-3 g-2">
             <TrendingDisplay />
           </Row>
         </Container>
