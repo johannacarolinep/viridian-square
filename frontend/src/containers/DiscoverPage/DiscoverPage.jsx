@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Discover from "../../components/discover/Discover";
 import appStyles from "../../App.module.css";
 import styles from "./DiscoverPage.module.css";
@@ -6,9 +6,27 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import TrendingDisplay from "../../components/trending_display/TrendingDisplay";
+import { useLocation } from "react-router-dom";
+import UpdateProfileModal from "../../components/update_profile_modal/UpdateProfileModal";
 
 const DiscoverPage = () => {
   const currentUser = useCurrentUser();
+  const location = useLocation();
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (
+      location.state?.needsProfileCompletion &&
+      currentUser?.profile_name.startsWith("newuser")
+    ) {
+      setShowModal(true);
+    }
+  }, [location.state, currentUser]);
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
   return (
     <main>
       {!currentUser && (
@@ -59,6 +77,14 @@ const DiscoverPage = () => {
           <Discover />
         </Container>
       </section>
+      {location.state?.needsProfileCompletion &&
+        currentUser?.profile_name.startsWith("newuser") && (
+          <UpdateProfileModal
+            show={showModal}
+            handleClose={handleClose}
+            user={currentUser}
+          />
+        )}
     </main>
   );
 };

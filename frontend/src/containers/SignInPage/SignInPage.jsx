@@ -36,11 +36,16 @@ const SignInForm = () => {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
       setTokenTimestamp(data);
-      navigate("/");
+      if (data.user.profile_name.startsWith("newuser")) {
+        navigate("/", { state: { needsProfileCompletion: true } });
+      } else {
+        navigate("/");
+      }
     } catch (err) {
       setErrors(err.response?.data);
     }
   };
+
   return (
     <main className="d-flex align-items-center">
       <Container fluid="xl" className="p-0 p-md-4 p-lg-5">
