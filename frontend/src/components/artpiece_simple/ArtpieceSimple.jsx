@@ -99,16 +99,25 @@ const ArtpieceSimple = (props) => {
                 placement="top"
                 overlay={<Tooltip>You can't like your own artpiece</Tooltip>}
               >
-                <i
-                  class={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
-                />
+                <button className={`p-0 ${appStyles.IconBtn}`}>
+                  <i
+                    class={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
+                  />
+                </button>
               </OverlayTrigger>
             ) : like_id ? (
-              <button className={appStyles.IconBtn} onClick={handleUnlike} n>
+              <button
+                className={`p-0 ${appStyles.IconBtn}`}
+                onClick={handleUnlike}
+                n
+              >
                 <i class={`${appStyles.txtAccentDark} fa-solid fa-heart p-1`} />
               </button>
             ) : currentUser ? (
-              <button className={appStyles.IconBtn} onClick={handleLike}>
+              <button
+                className={`p-0 ${appStyles.IconBtn}`}
+                onClick={handleLike}
+              >
                 <i
                   class={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
                 />
@@ -120,9 +129,11 @@ const ArtpieceSimple = (props) => {
                   <Tooltip>You need to log in to like artpieces</Tooltip>
                 }
               >
-                <i
-                  class={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
-                />
+                <button className={`p-0 ${appStyles.IconBtn}`}>
+                  <i
+                    class={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
+                  />
+                </button>
               </OverlayTrigger>
             )}
           </div>

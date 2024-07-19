@@ -1,15 +1,19 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
+import appStyles from "../../App.module.css";
+import { Button } from "react-bootstrap";
 
 const ThreeDots = React.forwardRef(({ onClick }, ref) => (
-  <i
-    className="fa-solid fa-ellipsis-vertical"
-    ref={ref}
+  <button
+    className={appStyles.IconBtn}
     onClick={(event) => {
       event.preventDefault();
       onClick(event);
     }}
-  />
+    ref={ref}
+  >
+    <i className="fa-solid fa-ellipsis-vertical" />
+  </button>
 ));
 
 export const MoreDropdown = ({

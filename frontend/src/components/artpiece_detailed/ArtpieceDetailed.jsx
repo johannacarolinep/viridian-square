@@ -133,7 +133,7 @@ const ArtpieceDetailed = (props) => {
           </div>
         </div>
         <div className="col-lg-5 mt-3 mt-lg-0 ps-4">
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between align-items-center">
             <Link
               to={`/profiles/${profile_id}`}
               className={appStyles.LinkStandard}
@@ -141,42 +141,7 @@ const ArtpieceDetailed = (props) => {
               <Avatar src={profile_image} height={38} />
               {profile_name}
             </Link>
-            <div>
-              {likes_count}
-              {is_owner ? (
-                <OverlayTrigger
-                  placement="left"
-                  overlay={<Tooltip>You can't like your own artpiece</Tooltip>}
-                >
-                  <i
-                    class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
-                  />
-                </OverlayTrigger>
-              ) : like_id ? (
-                <button className={appStyles.IconBtn} onClick={handleUnlike} n>
-                  <i
-                    class={`${appStyles.txtAccentDark} fa-solid fa-heart ms-1`}
-                  />
-                </button>
-              ) : currentUser ? (
-                <button className={appStyles.IconBtn} onClick={handleLike}>
-                  <i
-                    class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
-                  />
-                </button>
-              ) : (
-                <OverlayTrigger
-                  placement="left"
-                  overlay={
-                    <Tooltip>You need to log in to like artpieces</Tooltip>
-                  }
-                >
-                  <i
-                    class={`${appStyles.txtAccentDark} fa-regular fa-heart ms-1`}
-                  />
-                </OverlayTrigger>
-              )}
-            </div>
+
             {is_owner && (
               <div className="d-flex align-items-center">
                 <MoreDropdown
@@ -190,6 +155,53 @@ const ArtpieceDetailed = (props) => {
           <div>
             <h1>{title}</h1>
             <div className={`my-3 ${appStyles.dividerPrimary}`}></div>
+            <div className="my-3">
+              {is_owner ? (
+                <OverlayTrigger
+                  placement="bottom"
+                  overlay={<Tooltip>You can't like your own artpiece</Tooltip>}
+                >
+                  <button className={`${appStyles.IconBtn} ps-0`}>
+                    <i
+                      class={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
+                    />
+                  </button>
+                </OverlayTrigger>
+              ) : like_id ? (
+                <button
+                  className={`${appStyles.IconBtn} ps-0`}
+                  onClick={handleUnlike}
+                  n
+                >
+                  <i
+                    class={`${appStyles.txtAccentDark} fa-solid fa-heart ps-0`}
+                  />
+                </button>
+              ) : currentUser ? (
+                <button
+                  className={`${appStyles.IconBtn} ps-0`}
+                  onClick={handleLike}
+                >
+                  <i
+                    class={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
+                  />
+                </button>
+              ) : (
+                <OverlayTrigger
+                  placement="bottom"
+                  overlay={
+                    <Tooltip>You need to log in to like artpieces</Tooltip>
+                  }
+                >
+                  <button className={`${appStyles.IconBtn} ps-0`}>
+                    <i
+                      class={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
+                    />
+                  </button>
+                </OverlayTrigger>
+              )}
+              {likes_count} {likes_count === 1 ? <>like</> : <>likes</>}
+            </div>
             {description && (
               <p>
                 <span className="fw-bold">Description: </span> {description}
