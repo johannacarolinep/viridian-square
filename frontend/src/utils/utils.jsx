@@ -3,8 +3,8 @@ import { jwtDecode } from "jwt-decode";
 
 export const fetchMoreData = async (resource, setResource) => {
   try {
-    const relativeURL = getRelativeURL(resource.next);
-    const { data } = await axiosReq.get(relativeURL);
+    // const relativeURL = getRelativeURL(resource.next);
+    const { data } = await axiosReq.get(resource.next);
     setResource((prevResource) => ({
       ...prevResource,
       next: data.next,
@@ -19,10 +19,10 @@ export const fetchMoreData = async (resource, setResource) => {
   }
 };
 
-const getRelativeURL = (fullURL) => {
-  const urlParts = fullURL.split("/");
-  return `/${urlParts.slice(3).join("/")}`;
-};
+// const getRelativeURL = (fullURL) => {
+//   const urlParts = fullURL.split("/");
+//   return `/${urlParts.slice(3).join("/")}`;
+// };
 
 export const setTokenTimestamp = (data) => {
   const refreshTokenTimestamp = jwtDecode(data?.refresh).exp;
