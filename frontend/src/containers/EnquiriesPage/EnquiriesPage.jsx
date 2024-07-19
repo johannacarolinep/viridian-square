@@ -39,7 +39,7 @@ const EnquiriesPage = () => {
         setEnquiries(data.results);
         setHasLoaded(true);
       } catch (error) {
-        console.error("Error fetching enquiries:", error);
+        // console.error("Error fetching enquiries:", error);
       }
     };
 
@@ -52,7 +52,7 @@ const EnquiriesPage = () => {
       if (selectedEnquiry) {
         try {
           const { data } = await axiosReq.get(
-            `/artpieces/${selectedEnquiry.artpiece}`
+            `/artpieces/${selectedEnquiry.artpiece}/`
           );
           setArtpiece(data);
           setArtpieceHasLoaded(true);

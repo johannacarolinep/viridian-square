@@ -6,6 +6,7 @@ import { Container } from "react-bootstrap";
 import appStyles from "../../App.module.css";
 import Asset from "../../components/asset/Asset";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import axios from "axios";
 
 const ArtpiecePage = () => {
   const { id } = useParams();
@@ -16,7 +17,7 @@ const ArtpiecePage = () => {
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const { data } = await axiosReq.get(`/artpieces/${id}`);
+        const { data } = await axiosReq.get(`/artpieces/${id}/`);
         setArtpiece(data);
         setHasLoaded(true);
       } catch (err) {

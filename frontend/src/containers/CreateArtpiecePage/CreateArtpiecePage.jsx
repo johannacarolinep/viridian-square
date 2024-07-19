@@ -41,7 +41,7 @@ const CreateArtpiecePage = () => {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(
-          `/collections/?owner=${currentUser.pk}`
+          `/collections/?owner=${currentUser.pk}/`
         );
         setArtCollectionChoices(data.results);
       } catch (err) {
