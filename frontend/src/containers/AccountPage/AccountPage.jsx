@@ -98,7 +98,7 @@ const AccountPage = () => {
         navigate("/");
       }, 5000);
     } catch (err) {
-      console.log("Error during account deletion:", err);
+      // console.log(err);
       setErrors(err.response?.data);
     }
   };

@@ -56,7 +56,7 @@ const Discover = ({ likesFilter = "" }) => {
           <Row className="m-0 g-3">
             <Col sm={12} lg={6} className="ps-0">
               <div className={`${styles.Search} ps-2 h-100`}>
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i className="fa-solid fa-magnifying-glass"></i>
                 <Form.Control
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}

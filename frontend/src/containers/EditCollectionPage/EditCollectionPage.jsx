@@ -55,7 +55,7 @@ const EditCollectionPage = ({ newCollection }) => {
         setSelectedArtpieces(collection.artpieces);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 
@@ -80,7 +80,6 @@ const EditCollectionPage = ({ newCollection }) => {
     try {
       await axiosReq.put(`/collections/${id}/`, formData);
       setSuccessMessage("Collection details updated");
-      //   navigate(`/artpieces/${id}`);
     } catch (err) {
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);

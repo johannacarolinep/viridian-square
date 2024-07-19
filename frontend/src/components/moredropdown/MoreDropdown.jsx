@@ -43,7 +43,7 @@ export const MoreDropdown = ({
             onClick={handleAccountChange}
             aria-label="make account changes"
           >
-            <i class="fa-solid fa-user-pen"></i> Edit account details
+            <i className="fa-solid fa-user-pen"></i> Edit account details
           </Dropdown.Item>
         )}
       </Dropdown.Menu>

@@ -42,7 +42,7 @@ const ArtpieceSimple = (props) => {
         }),
       }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -62,7 +62,7 @@ const ArtpieceSimple = (props) => {
         }),
       }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -101,7 +101,7 @@ const ArtpieceSimple = (props) => {
               >
                 <button className={`p-0 ${appStyles.IconBtn}`}>
                   <i
-                    class={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
+                    className={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
                   />
                 </button>
               </OverlayTrigger>
@@ -111,7 +111,9 @@ const ArtpieceSimple = (props) => {
                 onClick={handleUnlike}
                 n
               >
-                <i class={`${appStyles.txtAccentDark} fa-solid fa-heart p-1`} />
+                <i
+                  className={`${appStyles.txtAccentDark} fa-solid fa-heart p-1`}
+                />
               </button>
             ) : currentUser ? (
               <button
@@ -119,7 +121,7 @@ const ArtpieceSimple = (props) => {
                 onClick={handleLike}
               >
                 <i
-                  class={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
+                  className={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
                 />
               </button>
             ) : (
@@ -131,7 +133,7 @@ const ArtpieceSimple = (props) => {
               >
                 <button className={`p-0 ${appStyles.IconBtn}`}>
                   <i
-                    class={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
+                    className={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
                   />
                 </button>
               </OverlayTrigger>

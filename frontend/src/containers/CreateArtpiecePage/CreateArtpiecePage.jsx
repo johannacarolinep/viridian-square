@@ -45,7 +45,7 @@ const CreateArtpiecePage = () => {
         );
         setArtCollectionChoices(data.results);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 

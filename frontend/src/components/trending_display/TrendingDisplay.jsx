@@ -14,11 +14,10 @@ const TrendingDisplay = () => {
     const fetchArtpieces = async () => {
       try {
         const { data } = await axios.get(`/artpieces/trending/`);
-        console.log("trending artpieces", data);
         setArtpieces(data);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 

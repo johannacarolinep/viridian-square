@@ -37,7 +37,6 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("FETCHING PROFILE DATA");
       try {
         const { data: profileData } = await axiosReq.get(`/profiles/${id}`);
         setProfile(profileData);
@@ -63,7 +62,7 @@ const ProfilePage = () => {
         }
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 
@@ -106,7 +105,7 @@ const ProfilePage = () => {
         setDisplayContent("collections");
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -139,7 +138,7 @@ const ProfilePage = () => {
                 {profile?.description && <p>{profile.description}</p>}
                 {profile?.location && (
                   <p>
-                    <i class="fa-solid fa-location-dot ps-0"></i>{" "}
+                    <i className="fa-solid fa-location-dot ps-0"></i>{" "}
                     {profile.location}
                   </p>
                 )}

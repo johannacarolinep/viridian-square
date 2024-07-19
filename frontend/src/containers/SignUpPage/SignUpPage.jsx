@@ -35,7 +35,6 @@ const SignUpForm = () => {
         "/dj-rest-auth/registration/",
         signUpData
       );
-      console.log("data", data);
       navigate("/signin");
     } catch (err) {
       setErrors(err.response?.data);

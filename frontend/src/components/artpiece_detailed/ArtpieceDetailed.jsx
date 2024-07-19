@@ -20,7 +20,6 @@ import { MoreDropdown } from "../moredropdown/MoreDropdown";
 const ArtpieceDetailed = (props) => {
   const {
     id,
-    owner,
     is_owner,
     profile_id,
     profile_name,
@@ -63,10 +62,8 @@ const ArtpieceDetailed = (props) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Enquiry submitted successfully:", response.data);
       handleCloseEnquiry();
     } catch (err) {
-      console.log(err);
       setErrors(err.response?.data);
     }
   };
@@ -80,7 +77,7 @@ const ArtpieceDetailed = (props) => {
         like_id: data.id,
       }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -93,7 +90,7 @@ const ArtpieceDetailed = (props) => {
         like_id: null,
       }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -111,7 +108,7 @@ const ArtpieceDetailed = (props) => {
       await axiosRes.delete(`/artpieces/${id}/`);
       navigate("/");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -163,7 +160,7 @@ const ArtpieceDetailed = (props) => {
                 >
                   <button className={`${appStyles.IconBtn} ps-0`}>
                     <i
-                      class={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
+                      className={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
                     />
                   </button>
                 </OverlayTrigger>
@@ -174,7 +171,7 @@ const ArtpieceDetailed = (props) => {
                   n
                 >
                   <i
-                    class={`${appStyles.txtAccentDark} fa-solid fa-heart ps-0`}
+                    className={`${appStyles.txtAccentDark} fa-solid fa-heart ps-0`}
                   />
                 </button>
               ) : currentUser ? (
@@ -183,7 +180,7 @@ const ArtpieceDetailed = (props) => {
                   onClick={handleLike}
                 >
                   <i
-                    class={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
+                    className={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
                   />
                 </button>
               ) : (
@@ -195,7 +192,7 @@ const ArtpieceDetailed = (props) => {
                 >
                   <button className={`${appStyles.IconBtn} ps-0`}>
                     <i
-                      class={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
+                      className={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
                     />
                   </button>
                 </OverlayTrigger>

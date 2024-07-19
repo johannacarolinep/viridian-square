@@ -57,7 +57,7 @@ const EnquiriesPage = () => {
           setArtpiece(data);
           setArtpieceHasLoaded(true);
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       }
     };
@@ -88,7 +88,7 @@ const EnquiriesPage = () => {
           )
         );
       } catch (err) {
-        console.log("Error updating enquiry:", err);
+        // console.log(err);
         setErrors(err.response?.data);
       }
     }
@@ -102,7 +102,6 @@ const EnquiriesPage = () => {
         (enquiry.is_artist && !enquiry.artist_has_checked)
       ) {
         const { data } = await axiosReq.get(`/enquiries/${enquiry.id}/`);
-        console.log("data", data);
         setEnquiries((prevEnquiries) =>
           prevEnquiries.map((e) =>
             e.id === enquiry.id

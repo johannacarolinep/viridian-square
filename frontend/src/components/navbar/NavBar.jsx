@@ -26,7 +26,7 @@ const NavBar = () => {
       setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -38,7 +38,7 @@ const NavBar = () => {
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
       >
-        <i class="fa-solid fa-paintbrush"></i>Create
+        <i className="fa-solid fa-paintbrush"></i>Create
       </NavLink>
       <NavLink
         to="/enquiries"
@@ -46,7 +46,7 @@ const NavBar = () => {
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
       >
-        <i class="fa-regular fa-envelope"></i>Enquiries
+        <i className="fa-regular fa-envelope"></i>Enquiries
       </NavLink>
       <NavLink
         to="/liked"
@@ -54,10 +54,10 @@ const NavBar = () => {
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
       >
-        <i class="fa-regular fa-heart"></i>Liked
+        <i className="fa-regular fa-heart"></i>Liked
       </NavLink>
       <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>
-        <i class="fa-solid fa-right-from-bracket"></i>Sign out
+        <i className="fa-solid fa-right-from-bracket"></i>Sign out
       </NavLink>
       <NavLink
         to={`/profiles/${currentUser?.profile_id}`}
@@ -75,7 +75,7 @@ const NavBar = () => {
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
       >
-        <i class="fa-solid fa-right-to-bracket"></i>Sign in
+        <i className="fa-solid fa-right-to-bracket"></i>Sign in
       </NavLink>
       <NavLink
         to="/signup"
@@ -83,7 +83,7 @@ const NavBar = () => {
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
       >
-        <i class="fa-solid fa-user-plus"></i>Sign up
+        <i className="fa-solid fa-user-plus"></i>Sign up
       </NavLink>
     </>
   );
@@ -114,7 +114,7 @@ const NavBar = () => {
                 `${styles.NavLink} ${isActive ? styles.Active : ""}`
               }
             >
-              <i class="fa-solid fa-magnifying-glass"></i>Discover
+              <i className="fa-solid fa-magnifying-glass"></i>Discover
             </NavLink>
             {currentUser ? loggedInOptions : loggedOutOptions}
           </Nav>
