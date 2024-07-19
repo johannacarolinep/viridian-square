@@ -18,6 +18,7 @@ import AccountPage from "./containers/AccountPage/AccountPage";
 import EditCollectionPage from "./containers/EditCollectionPage/EditCollectionPage";
 import EnquiriesPage from "./containers/EnquiriesPage/EnquiriesPage";
 import Footer from "./components/footer/Footer";
+import NotFound from "./components/not_found/NotFound";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
         <Route exact path="/profiles/:id/edit" element={<EditProfilePage />} />
         <Route exact path="/account" element={<AccountPage />} />
         <Route exact path="/enquiries" element={<EnquiriesPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </>
