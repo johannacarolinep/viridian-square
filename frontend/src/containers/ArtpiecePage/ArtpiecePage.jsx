@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import ArtpieceDetailed from "../../components/artpiece_detailed/ArtpieceDetailed";
-import { Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 import appStyles from "../../App.module.css";
 import Asset from "../../components/asset/Asset";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import axios from "axios";
 
 const ArtpiecePage = () => {
   const { id } = useParams();

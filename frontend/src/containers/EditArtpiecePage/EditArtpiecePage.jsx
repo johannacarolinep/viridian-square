@@ -1,10 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
+import { useRedirect } from "../../hooks/useRedirect";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Image from "react-bootstrap/Image";
+import Row from "react-bootstrap/Row";
 import appStyles from "../../App.module.css";
 import styles from "./EditArtpiecePage.module.css";
-import { useRedirect } from "../../hooks/useRedirect";
 
 const EditArtpiecePage = () => {
   useRedirect("loggedOut", "/");

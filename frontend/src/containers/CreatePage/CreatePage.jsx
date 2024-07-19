@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useRedirect } from "../../hooks/useRedirect";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
+import Row from "react-bootstrap/Row";
 import Frame from "../../assets/images/frame.webp";
 import Collection from "../../assets/images/collection.webp";
 import appStyles from "../../App.module.css";

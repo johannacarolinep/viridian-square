@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Discover from "../../components/discover/Discover";
-import appStyles from "../../App.module.css";
-import styles from "./DiscoverPage.module.css";
-import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import TrendingDisplay from "../../components/trending_display/TrendingDisplay";
 import { useLocation } from "react-router-dom";
+import Discover from "../../components/discover/Discover";
+import TrendingDisplay from "../../components/trending_display/TrendingDisplay";
 import UpdateProfileModal from "../../components/update_profile_modal/UpdateProfileModal";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import appStyles from "../../App.module.css";
+import styles from "./DiscoverPage.module.css";
 
 const DiscoverPage = () => {
   const currentUser = useCurrentUser();

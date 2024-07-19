@@ -1,10 +1,10 @@
 import React from "react";
-import Discover from "../../components/discover/Discover";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import appStyles from "../../App.module.css";
 import styles from "./LikedPage.module.css";
 import { useRedirect } from "../../hooks/useRedirect";
-import { Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Discover from "../../components/discover/Discover";
 
 const LikedPage = () => {
   useRedirect("loggedOut", "/");

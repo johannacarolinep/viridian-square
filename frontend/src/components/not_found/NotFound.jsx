@@ -1,7 +1,7 @@
 import React from "react";
 import NoResults from "../../assets/images/noresults.webp";
 import styles from "./NotFound.module.css";
-import { Image } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 import { Link, useNavigate } from "react-router-dom";
 import appStyles from "../../App.module.css";
 

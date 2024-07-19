@@ -1,11 +1,14 @@
 import React from "react";
-import { Badge, Card, OverlayTrigger, Tooltip } from "react-bootstrap";
-import styles from "./ArtpieceSimple.module.css";
+import Badge from "react-bootstrap/Badge";
+import Card from "react-bootstrap/Card";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import Avatar from "../avatar/Avatar";
 import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import appStyles from "../../App.module.css";
 import { axiosRes } from "../../api/axiosDefaults";
+import appStyles from "../../App.module.css";
+import styles from "./ArtpieceSimple.module.css";
 
 const ArtpieceSimple = (props) => {
   const {

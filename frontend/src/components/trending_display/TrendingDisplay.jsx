@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
-import { Col } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
 import Asset from "../asset/Asset";
 import NoResults from "../../assets/images/noresults.webp";
 import ArtpieceSimple from "../artpiece_simple/ArtpieceSimple";

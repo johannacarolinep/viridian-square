@@ -4,7 +4,10 @@ import {
   useSetCurrentUser,
 } from "../../contexts/CurrentUserContext";
 import { useNavigate } from "react-router-dom";
-import { Accordion, Button, Container, Form } from "react-bootstrap";
+import Accordion from "react-bootstrap/Accordion";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
 import appStyles from "../../App.module.css";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { removeTokenTimestamp } from "../../utils/utils";

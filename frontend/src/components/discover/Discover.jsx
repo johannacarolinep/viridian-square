@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Button, Col, Row } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import ArtpieceSimple from "../artpiece_simple/ArtpieceSimple";

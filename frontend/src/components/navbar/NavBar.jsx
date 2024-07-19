@@ -2,6 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import Image from "react-bootstrap/esm/Image";
 import logo from "../../assets/images/logo.webp";
 import styles from "./NavBar.module.css";
 import { NavLink } from "react-router-dom";
@@ -98,7 +99,7 @@ const NavBar = () => {
       <Container fluid="xl">
         <NavLink to="/">
           <Navbar.Brand>
-            <img src={logo} alt="Viridian Square logo" height="40" />
+            <Image src={logo} alt="Viridian Square logo" height="40" />
           </Navbar.Brand>
         </NavLink>
         <Navbar.Toggle

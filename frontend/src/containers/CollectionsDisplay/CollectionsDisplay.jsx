@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { axiosReq } from "../../api/axiosDefaults";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 import appStyles from "../../App.module.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
@@ -9,7 +9,6 @@ import NoResults from "../../assets/images/noresults.webp";
 import Asset from "../../components/asset/Asset";
 
 const CollectionsDisplay = ({
-  owner,
   handleDisplayContentChange,
   handleDeleteConfirm,
   collections,

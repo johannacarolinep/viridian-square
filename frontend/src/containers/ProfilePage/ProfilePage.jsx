@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
-import {
-  Badge,
-  Button,
-  Col,
-  Container,
-  Image,
-  Modal,
-  Row,
-} from "react-bootstrap";
-import appStyles from "../../App.module.css";
-import styles from "./ProfilePage.module.css";
+import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
+import Modal from "react-bootstrap/Modal";
+import Row from "react-bootstrap/Row";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { MoreDropdown } from "../../components/moredropdown/MoreDropdown";
 import ArtpieceSimple from "../../components/artpiece_simple/ArtpieceSimple";
@@ -21,6 +17,8 @@ import CollectionsDisplay from "../CollectionsDisplay/CollectionsDisplay";
 import CollectionCard from "../../components/collection_card/CollectionCard";
 import Asset from "../../components/asset/Asset";
 import NoResults from "../../assets/images/noresults.webp";
+import appStyles from "../../App.module.css";
+import styles from "./ProfilePage.module.css";
 
 const ProfilePage = () => {
   const { id } = useParams();
@@ -68,7 +66,7 @@ const ProfilePage = () => {
 
     fetchData();
     setHasLoaded(false);
-  }, [id, navigate, currentUser]);
+  }, [id, navigate, currentUser, search]);
 
   const handleEdit = () => {
     navigate(`/profiles/${profile.id}/edit`);

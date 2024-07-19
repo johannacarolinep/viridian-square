@@ -1,24 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  Image,
-  OverlayTrigger,
-  Row,
-  Tooltip,
-} from "react-bootstrap";
-import appStyles from "../../App.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
+import { useRedirect } from "../../hooks/useRedirect";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Image from "react-bootstrap/Image";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Row from "react-bootstrap/Row";
+import Tooltip from "react-bootstrap/Tooltip";
+import InfiniteScroll from "react-infinite-scroll-component";
+import appStyles from "../../App.module.css";
 import styles from "./EditCollectionPage.module.css";
 import Asset from "../../components/asset/Asset";
 import NoResults from "../../assets/images/noresults.webp";
-import { useRedirect } from "../../hooks/useRedirect";
 
 const EditCollectionPage = ({ newCollection }) => {
   useRedirect("loggedOut", "/");
@@ -29,7 +27,7 @@ const EditCollectionPage = ({ newCollection }) => {
     title: "",
     description: "",
   });
-  const { title, description, is_owner, artpieces } = collectionData;
+  const { title, description } = collectionData;
   const [ownedArtpieces, setOwnedArtpieces] = useState({ results: [] });
   const [selectedArtpieces, setSelectedArtpieces] = useState([]);
 

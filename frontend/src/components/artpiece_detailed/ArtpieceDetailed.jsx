@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import {
-  Badge,
-  Button,
-  Image,
-  Modal,
-  OverlayTrigger,
-  Row,
-  Tooltip,
-  Form,
-} from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
+import Modal from "react-bootstrap/Modal";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Row from "react-bootstrap/Row";
+import Tooltip from "react-bootstrap/Tooltip";
+import Form from "react-bootstrap/Form";
 import Avatar from "../avatar/Avatar";
 import appStyles from "../../App.module.css";
 import styles from "./ArtpieceDetailed.module.css";

@@ -1,7 +1,6 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import appStyles from "../../App.module.css";
-import { Button } from "react-bootstrap";
 
 const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   <button

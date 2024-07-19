@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Card } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import appStyles from "../../App.module.css";
 import { MoreDropdown } from "../moredropdown/MoreDropdown";
 import { useNavigate } from "react-router-dom";

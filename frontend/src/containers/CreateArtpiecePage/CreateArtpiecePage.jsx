@@ -1,8 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Form, Button, Image, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import appStyles from "../../App.module.css";
 import styles from "./CreateArtpiecePage.module.css";
 import logo from "../../assets/images/logo.webp";
