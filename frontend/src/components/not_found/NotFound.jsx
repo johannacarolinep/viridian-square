@@ -3,6 +3,7 @@ import NoResults from "../../assets/images/noresults.webp";
 import styles from "./NotFound.module.css";
 import { Image } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import appStyles from "../../App.module.css";
 
 const NotFound = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const NotFound = () => {
       <div className={`${styles.NotFound} m-4 p-4`}>
         <div>
           <h1>Sorry, page not found</h1>
-          <Link to={navigate(-1)} className="fs-4">
+          <Link to={navigate(-1)} className={`fs-4 ${appStyles.LinkStandard}`}>
             &laquo; Take me back!
           </Link>
         </div>

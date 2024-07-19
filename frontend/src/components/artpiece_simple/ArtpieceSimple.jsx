@@ -72,13 +72,13 @@ const ArtpieceSimple = (props) => {
         <div className={`${styles.ImgContainer} position-relative p-2`}>
           <Card.Img variant="top" src={image_url} alt={title} />
           {for_sale === 1 ? (
-            <div className="position-absolute top-0 end-0 p-1 fs-5">
+            <div className="position-absolute top-0 end-0 p-3 pt-2 fs-5">
               <Badge className="ms-1" pill bg="dark">
                 For sale
               </Badge>
             </div>
           ) : for_sale === 2 ? (
-            <div className="position-absolute top-0 end-0 p-1 fs-5">
+            <div className="position-absolute top-0 end-0 p-3 pt-2 fs-5">
               <Badge className="ms-1" pill bg="dark">
                 Sold
               </Badge>
@@ -90,7 +90,9 @@ const ArtpieceSimple = (props) => {
       </Link>
       <Card.Body className="px-2 pt-1 pb-2 px-md-3 pb-md-3">
         <div className="d-flex justify-content-between align-items-start">
-          <h5 className="mb-0 py-1">{title}</h5>
+          <Link to={`/artpieces/${id}`} className={appStyles.LinkStandard}>
+            <h5 className="mb-0 py-1">{title}</h5>
+          </Link>
           <div className="d-flex">
             {is_owner ? (
               <OverlayTrigger
@@ -137,7 +139,9 @@ const ArtpieceSimple = (props) => {
       {!basic && (
         <Card.Footer className={`text-end px-2 ${styles.CardFooter}`}>
           <Link to={`/profiles/${profile_id}`}>
-            <span className="me-2">{profile_name}</span>
+            <span className={`me-2 ${appStyles.LinkStandard}`}>
+              {profile_name}
+            </span>
             <Avatar src={profile_image} height={35} />
           </Link>
         </Card.Footer>

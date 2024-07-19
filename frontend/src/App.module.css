@@ -176,6 +176,15 @@ textarea {
     cursor: pointer;
 }
 
+.LinkStandard {
+    font-weight: 500;
+}
+
+.LinkStandard:hover {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
 @media screen and (min-width: 992px) {
     main {
         padding-top: 72.5px;

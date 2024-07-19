@@ -117,7 +117,7 @@ const ArtpieceDetailed = (props) => {
 
   return (
     <>
-      <Row className="mt-lg-5">
+      <Row className="my-lg-5">
         <div className={`col-lg-7 position-relative p-0`}>
           <Image
             src={image_url}
@@ -134,7 +134,10 @@ const ArtpieceDetailed = (props) => {
         </div>
         <div className="col-lg-5 mt-3 mt-lg-0 ps-4">
           <div className="d-flex justify-content-between">
-            <Link to={`/profiles/${profile_id}`}>
+            <Link
+              to={`/profiles/${profile_id}`}
+              className={appStyles.LinkStandard}
+            >
               <Avatar src={profile_image} height={38} />
               {profile_name}
             </Link>
@@ -248,10 +251,15 @@ const ArtpieceDetailed = (props) => {
                 )}
               </div>
             )}
-            <p>
+            <p className="mt-4">
               <span className="fw-bold">Created: </span>
               {created_on}
-              {created_on !== updated_on && `(Updated: ${updated_on})`}
+              {created_on !== updated_on && (
+                <>
+                  <br />
+                  <span className="fst-italic">(Updated: ${updated_on})</span>
+                </>
+              )}
             </p>
           </div>
         </div>

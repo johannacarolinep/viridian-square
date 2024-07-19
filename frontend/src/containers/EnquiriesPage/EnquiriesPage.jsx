@@ -140,7 +140,7 @@ const EnquiriesPage = () => {
             >
               {enquiries.map((enquiry) => (
                 <Accordion.Item eventKey={enquiry.id} key={enquiry.id}>
-                  {enquiry.artpiece && enquiry.buyer ? (
+                  {enquiry.artpiece && enquiry.buyer_profile_id ? (
                     <>
                       <Accordion.Header onClick={() => handleClick(enquiry)}>
                         <div className="ms-2 me-3 w-100 d-flex justify-content-between">
@@ -209,6 +209,7 @@ const EnquiriesPage = () => {
                                   ) : (
                                     <Link
                                       to={`/profiles/${enquiry.buyer_profile_id}`}
+                                      className={`${appStyles.txtPrimary}`}
                                     >
                                       {enquiry.buyer_name}
                                     </Link>
@@ -249,7 +250,7 @@ const EnquiriesPage = () => {
                                       >
                                         <Image src={artpiece.image_url} />
                                       </div>
-                                      <p>
+                                      <p className="mb-0">
                                         <span className="fw-bold">Title:</span>{" "}
                                         {artpiece.title}
                                         {artpiece.art_medium && (
@@ -261,10 +262,15 @@ const EnquiriesPage = () => {
                                             {artpiece.art_medium}
                                           </>
                                         )}
-                                        <br />
-                                        <span className="fw-bold">By: </span>
-                                        {artpiece.profile_name}
                                       </p>
+                                      <div>
+                                        <span className="fw-bold">By: </span>
+                                        <Link
+                                          className={appStyles.LinkStandard}
+                                        >
+                                          {artpiece.profile_name}
+                                        </Link>
+                                      </div>
                                     </div>
                                   ) : (
                                     <Asset spinner />
@@ -285,6 +291,7 @@ const EnquiriesPage = () => {
                                   <Avatar src={enquiry.artist_profile_image} />
                                   <Link
                                     to={`/profiles/${enquiry.artist_profile_id}`}
+                                    className={appStyles.txtPrimary}
                                   >
                                     {enquiry.artist_name}
                                   </Link>{" "}
@@ -333,9 +340,10 @@ const EnquiriesPage = () => {
                                     ""
                                   )}{" "}
                                   <Link
-                                    to={`/profiles/${enquiry.artist_profile_id}`}
+                                    to={`/profiles/${enquiry.buyer_profile_id}`}
+                                    className={`${appStyles.txtPrimary}`}
                                   >
-                                    {enquiry.artist_name}'s
+                                    {enquiry.buyer_name}'s
                                   </Link>{" "}
                                   enquiry.
                                   {enquiry.response_message && (
@@ -352,7 +360,10 @@ const EnquiriesPage = () => {
                                   )}
                                   {enquiry.status === 1 ? (
                                     <p>
-                                      Your email address, {enquiry.artist_email}
+                                      Your email address,{" "}
+                                      <span className="fw-bold">
+                                        {currentUser?.email}
+                                      </span>
                                       , has been shared with{" "}
                                       {enquiry.buyer_name}
                                     </p>
