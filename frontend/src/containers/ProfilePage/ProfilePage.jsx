@@ -294,18 +294,27 @@ const ProfilePage = () => {
 
       <Modal show={showDelete} onHide={handleCloseDelete} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Please confirm deletion</Modal.Title>
+          <Modal.Title>
+            <h1 className="fs-3 mb-0">Confirm deletion</h1>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to delete this collection?
-          <br />
-          FYI: Deleting a collection will not delete the artpieces in it.
+          <p>
+            Are you sure you want to delete this collection?
+            <br />
+            <br />
+            FYI: Deleting a collection will not delete the artpieces in it.
+          </p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseDelete}>
             Cancel
           </Button>
-          <Button variant="dark" onClick={handleDelete}>
+          <Button
+            variant=""
+            onClick={handleDelete}
+            className={appStyles.btnPrimary}
+          >
             Delete
           </Button>
         </Modal.Footer>

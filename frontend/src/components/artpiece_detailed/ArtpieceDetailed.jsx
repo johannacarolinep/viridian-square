@@ -258,12 +258,16 @@ const ArtpieceDetailed = (props) => {
       </Row>
       <Modal show={showDelete} onHide={handleCloseDelete} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Please confirm deletion</Modal.Title>
+          <Modal.Title>
+            <h1 className="fs-3 mb-0">Confirm deletion</h1>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to delete the artpiece?
-          <br />
-          The artpiece will be permanently removed.
+          <p>
+            Are you sure you want to delete the artpiece?
+            <br />
+            The artpiece will be permanently removed.
+          </p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseDelete}>
@@ -275,37 +279,55 @@ const ArtpieceDetailed = (props) => {
         </Modal.Footer>
       </Modal>
 
-      <Modal show={showEnquiry} onHide={handleCloseEnquiry}>
+      <Modal show={showEnquiry} onHide={handleCloseEnquiry} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Make an Enquiry</Modal.Title>
+          <Modal.Title>
+            <h1 className="fs-3 mb-0">Enquire about this artpiece</h1>
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>Your message to the artist:</Modal.Body>
-        <Form onSubmit={handleSubmitEnquiry}>
-          <Form.Group className="mb-3">
-            <Form.Label>Message to seller</Form.Label>
-            <Form.Control
-              name="initial_message"
-              placeholder="Write your message here"
-              value={initialMessage}
-              onChange={(e) => setInitialMessage(e.target.value)}
-            />
-            {errors.initial_message?.map((message, idx) => (
+        <Modal.Body>
+          <p>
+            If the artist approves your enquiry, their contact details will be
+            shared with you.
+          </p>
+          <p className="small">
+            Please note, approval of enquiries are by not to be seen as a
+            contract.
+          </p>
+          <Form onSubmit={handleSubmitEnquiry}>
+            <Form.Group className="mb-3">
+              <Form.Label>Your message to the artist:</Form.Label>
+              <Form.Control
+                name="initial_message"
+                placeholder="Write your message here"
+                value={initialMessage}
+                onChange={(e) => setInitialMessage(e.target.value)}
+              />
+              {errors.initial_message?.map((message, idx) => (
+                <p key={idx}>{message}</p>
+              ))}
+            </Form.Group>
+            {errors.non_field_errors?.map((message, idx) => (
               <p key={idx}>{message}</p>
             ))}
-          </Form.Group>
-          {errors.non_field_errors?.map((message, idx) => (
-            <p key={idx}>{message}</p>
-          ))}
-
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseEnquiry}>
-              Close
-            </Button>
-            <Button variant="primary" type="submit">
-              Send
-            </Button>
-          </Modal.Footer>
-        </Form>
+            <div className={`d-flex justify-content-end`}>
+              <Button
+                variant="secondary"
+                onClick={handleCloseEnquiry}
+                className="me-2"
+              >
+                Close
+              </Button>
+              <Button
+                variant="primary"
+                type="submit"
+                className={appStyles.btnPrimary}
+              >
+                Send
+              </Button>
+            </div>
+          </Form>
+        </Modal.Body>
       </Modal>
     </>
   );

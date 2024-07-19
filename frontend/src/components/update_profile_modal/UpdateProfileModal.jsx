@@ -34,7 +34,7 @@ const UpdateProfileModal = ({ show, handleClose, user }) => {
         </Button>
         <Button
           className={appStyles.btnPrimary}
-          variant="primary"
+          variant=""
           onClick={directToProfile}
         >
           Complete profile
