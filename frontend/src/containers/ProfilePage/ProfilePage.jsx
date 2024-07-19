@@ -41,12 +41,12 @@ const ProfilePage = () => {
         const { data: profileData } = await axiosReq.get(`/profiles/${id}/`);
         setProfile(profileData);
         const { data: artpieceData } = await axiosReq.get(
-          `/artpieces/?owner=${profileData.owner}/`
+          `/artpieces/?owner=${profileData.owner}`
         );
         setArtpieces(artpieceData);
 
         const { data: collectionsData } = await axiosReq.get(
-          `/collections/?owner=${profileData.owner}/`
+          `/collections/?owner=${profileData.owner}`
         );
         setCollections(collectionsData);
 

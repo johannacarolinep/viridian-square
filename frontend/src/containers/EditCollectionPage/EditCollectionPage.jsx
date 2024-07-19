@@ -49,7 +49,7 @@ const EditCollectionPage = ({ newCollection }) => {
             })
           : navigate("/");
         const { data: artpieceData } = await axiosReq.get(
-          `/artpieces/?owner=${collection.owner}/`
+          `/artpieces/?owner=${collection.owner}`
         );
         setOwnedArtpieces(artpieceData);
         setSelectedArtpieces(collection.artpieces);
