@@ -51,10 +51,10 @@ const Discover = ({ likesFilter = "" }) => {
 
   return (
     <>
-      <Container fluid="xl">
-        <Form className="mt-4" onSubmit={(event) => event.preventDefault()}>
+      <Row className="m-0 p-0 g-1">
+        <Form className="mt-4 p-0" onSubmit={(event) => event.preventDefault()}>
           <Row className="m-0 g-3">
-            <Col sm={12} lg={6} className="ps-lg-0">
+            <Col sm={12} lg={6} className="ps-0">
               <div className={`${styles.Search} ps-2 h-100`}>
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <Form.Control
@@ -67,7 +67,7 @@ const Discover = ({ likesFilter = "" }) => {
               </div>
             </Col>
 
-            <Col sm={4} lg={2}>
+            <Col sm={4} lg={2} className="ps-0 ps-lg-2">
               <Form.Select
                 value={filterMedium}
                 onChange={(event) => setFilterMedium(event.target.value)}
@@ -111,41 +111,40 @@ const Discover = ({ likesFilter = "" }) => {
           </Row>
         </Form>
         <div className={`${appStyles.dividerPrimary} mt-4`}></div>
-
-        {hasLoaded ? (
-          <>
-            {artpieces.results.length ? (
-              <InfiniteScroll
-                dataLength={artpieces.results.length}
-                next={() => fetchMoreData(artpieces, setArtpieces)}
-                hasMore={!!artpieces.next}
-                loader={<Asset spinner />}
-                endMessage={<p>No more results</p>}
-              >
-                <Row xs={1} md={2} lg={2} className="g-5 m-0 mt-1">
-                  {artpieces.results.map((artpiece) => (
-                    <Col key={artpiece.id}>
-                      <ArtpieceSimple
-                        className="h-100"
-                        {...artpiece}
-                        setArtpieces={setArtpieces}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-              </InfiniteScroll>
-            ) : (
-              <Container>
-                <Asset src={NoResults} message={"Nothing to display"} />
-              </Container>
-            )}
-          </>
-        ) : (
-          <Container>
-            <Asset spinner />
-          </Container>
-        )}
-      </Container>
+      </Row>
+      {hasLoaded ? (
+        <>
+          {artpieces.results.length ? (
+            <InfiniteScroll
+              dataLength={artpieces.results.length}
+              next={() => fetchMoreData(artpieces, setArtpieces)}
+              hasMore={!!artpieces.next}
+              loader={<Asset spinner />}
+              endMessage={<p>No more results</p>}
+            >
+              <Row xs={1} md={2} lg={2} className="g-4 m-0 mt-1">
+                {artpieces.results.map((artpiece) => (
+                  <Col key={artpiece.id}>
+                    <ArtpieceSimple
+                      className="h-100"
+                      {...artpiece}
+                      setArtpieces={setArtpieces}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            </InfiniteScroll>
+          ) : (
+            <Container>
+              <Asset src={NoResults} message={"Nothing to display"} />
+            </Container>
+          )}
+        </>
+      ) : (
+        <Container>
+          <Asset spinner />
+        </Container>
+      )}
     </>
   );
 };

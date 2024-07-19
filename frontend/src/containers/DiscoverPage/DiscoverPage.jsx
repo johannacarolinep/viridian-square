@@ -53,7 +53,12 @@ const DiscoverPage = () => {
           </Row>
         </Container>
       </section>
-      <Discover />
+      <section>
+        <Container fluid="xl" className="py-4">
+          <h2 className="mb-0 mt-3">Discover great art and artists</h2>
+          <Discover />
+        </Container>
+      </section>
     </main>
   );
 };

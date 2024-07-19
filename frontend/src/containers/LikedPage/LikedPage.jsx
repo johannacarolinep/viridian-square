@@ -4,6 +4,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import appStyles from "../../App.module.css";
 import styles from "./LikedPage.module.css";
 import { useRedirect } from "../../hooks/useRedirect";
+import { Container } from "react-bootstrap";
 
 const LikedPage = () => {
   useRedirect("loggedOut", "/");
@@ -17,7 +18,12 @@ const LikedPage = () => {
           className={`fa-solid fa-heart ${appStyles.txtWhite} ${appStyles.txtLarger}`}
         ></i>
       </section>
-      <Discover likesFilter={`likes__owner=${currentUser?.pk || ""}&`} />
+      <section>
+        <Container fluid="xl" className="py-4">
+          <h2 className="mb-0 mt-3">Your liked artpieces:</h2>
+          <Discover likesFilter={`likes__owner=${currentUser?.pk || ""}&`} />
+        </Container>
+      </section>
     </main>
   );
 };
