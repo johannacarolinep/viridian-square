@@ -13,6 +13,40 @@ import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { removeTokenTimestamp } from "../../utils/utils";
 import { useRedirect } from "../../hooks/useRedirect";
 
+/**
+ * AccountPage Container
+ *
+ * The AccountPage container provides a user interface for managing account-related actions such as updating email,
+ * changing password, and deleting the account. It uses various hooks and components from React and Bootstrap to handle
+ * state management, form submissions, and UI rendering.
+ *
+ * Features:
+ * - Display current user's email and allow them to update it.
+ * - Provide forms for changing the user's password.
+ * - Enable users to delete their accounts.
+ * - Show success messages and handle form errors.
+ * - Use accordion panels to organize the different account actions.
+ * - Redirect logged-out users to the home page.
+ *
+ * State:
+ * - userData: Holds the user's email, current email, new password, and current password.
+ * - errors: Stores any validation or submission errors for the forms.
+ * - successMessage: Displays a success message when an action is successfully completed.
+ * - activeAccordion: Keeps track of the currently active accordion panel.
+ *
+ * Hooks:
+ * - useRedirect: Redirects users if they are logged out.
+ * - useCurrentUser: Retrieves the current user's information.
+ * - useSetCurrentUser: Updates the current user's information.
+ * - useNavigate: Navigates to different routes.
+ *
+ * API Calls:
+ * - axiosRes.put("/update-email/"): Updates the user's email.
+ * - axiosRes.post("/dj-rest-auth/password/change/"): Changes the user's password.
+ * - axiosReq.request({ method: "delete", url: "/delete-user/", data: { password } }): Deletes the user's account.
+ *
+ * @returns {JSX.Element} The AccountPage component.
+ */
 const AccountPage = () => {
   useRedirect("loggedOut", "/");
   const currentUser = useCurrentUser();
