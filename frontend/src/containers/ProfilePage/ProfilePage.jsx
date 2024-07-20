@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
@@ -19,6 +19,7 @@ import Asset from "../../components/asset/Asset";
 import NoResults from "../../assets/images/noresults.webp";
 import appStyles from "../../App.module.css";
 import styles from "./ProfilePage.module.css";
+import ImageHolder from "../../components/image_holder/ImageHolder";
 
 /**
  * ProfilePage container
@@ -274,12 +275,24 @@ const ProfilePage = () => {
                       </Row>
                     </InfiniteScroll>
                   ) : (
-                    <Container>
-                      <Asset
-                        src={NoResults}
-                        message={`No artpieces to display`}
-                      />
-                    </Container>
+                    <Row className={`m-0 mt-2 p-2 ${appStyles.bgLight}`}>
+                      <div
+                        className={`d-flex justify-content-center align-items-center flex-column flex-md-row`}
+                      >
+                        <Link
+                          to="/create-artpiece"
+                          className={`${appStyles.btnPrimary} ${appStyles.linkBtn} rounded d-block mt-3`}
+                        >
+                          Create your first artpiece
+                        </Link>
+                        <div className={styles.ImgContainer}>
+                          <ImageHolder
+                            src={NoResults}
+                            alt={`No artpieces to display`}
+                          />
+                        </div>
+                      </div>
+                    </Row>
                   )}
                 </div>
               ) : displayContent === "collections" ? (

@@ -2,11 +2,13 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import appStyles from "../../App.module.css";
+import styles from "./CollectionsDisplay.module.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import CollectionCard from "../../components/collection_card/CollectionCard";
 import NoResults from "../../assets/images/noresults.webp";
-import Asset from "../../components/asset/Asset";
+import { Link } from "react-router-dom";
+import ImageHolder from "../../components/image_holder/ImageHolder";
 
 /**
  * CollectionsDisplay Container
@@ -64,9 +66,21 @@ const CollectionsDisplay = ({
           ))}
         </InfiniteScroll>
       ) : (
-        <Container>
-          <Asset src={NoResults} message={`No collections to display`} />
-        </Container>
+        <Row className={`m-3 ${appStyles.bgLight}`}>
+          <div
+            className={`d-flex justify-content-center align-items-center flex-column flex-md-row`}
+          >
+            <Link
+              to="/create-collection"
+              className={`${appStyles.btnPrimary} ${appStyles.linkBtn} rounded d-block mt-3`}
+            >
+              Create your first collection
+            </Link>
+            <div className={styles.ImgContainer}>
+              <ImageHolder src={NoResults} alt={`No collections to display`} />
+            </div>
+          </div>
+        </Row>
       )}
     </div>
   );

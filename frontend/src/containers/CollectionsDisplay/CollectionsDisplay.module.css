@@ -1,0 +1,16 @@
+.ImgContainer {
+    width: 60%;
+}
+
+@media screen and (min-width: 768px) {
+    .ImgContainer {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+
+    .ImgContainer {
+        width: 20%;
+    }
+}
