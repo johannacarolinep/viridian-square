@@ -12,6 +12,32 @@ import appStyles from "../../App.module.css";
 import styles from "./SignUpPage.module.css";
 import Napoleon from "../../assets/images/napoleon.webp";
 
+/**
+ * SignUpPage Container
+ *
+ * The SignUpForm container provides a user interface for creating a new account. It includes form fields for email and password,
+ * and handles form submission to register a new user. If the user is already logged in, they are redirected to the home page.
+ *
+ * Features:
+ * - Redirect logged-in users to the home page using the useRedirect hook.
+ * - Display a signup form with fields for email, password, and password confirmation.
+ * - Handle form input changes and submission.
+ * - Display validation errors returned from the backend API.
+ *
+ * State:
+ * - signUpData: Holds the email, password, and password confirmation input values.
+ * - errors: Stores any validation or submission errors for the form.
+ *
+ * Hooks:
+ * - useRedirect: Redirects logged-in users to the specified route.
+ * - useState: Manages the component's local state.
+ * - useNavigate: Allows navigation to different routes.
+ *
+ * API Calls:
+ * - axios.post("/dj-rest-auth/registration/", signUpData): Submits the signup data to the backend API for user registration.
+ *
+ * @returns {JSX.Element} The SignUpForm component.
+ */
 const SignUpForm = () => {
   useRedirect("loggedIn", "/");
   const [signUpData, setSignUpData] = useState({
@@ -35,10 +61,7 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post(
-        "/dj-rest-auth/registration/",
-        signUpData
-      );
+      await axios.post("/dj-rest-auth/registration/", signUpData);
       navigate("/signin");
     } catch (err) {
       setErrors(err.response?.data);

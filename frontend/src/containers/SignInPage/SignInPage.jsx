@@ -14,6 +14,35 @@ import appStyles from "../../App.module.css";
 import styles from "./SignInPage.module.css";
 import SignIn from "../../assets/images/signin.webp";
 
+/**
+ * SignInPage Container
+ *
+ * The SignInPage container provides a user interface for logging into an existing account.
+ * It includes form fields for email and password, and handles form submission to authenticate the user.
+ * If the user is logged in, they are redirected to the home page.
+ *
+ * Features:
+ * - Redirect logged-in users to the home page using the useRedirect hook.
+ * - Display a sign-in form with fields for email and password.
+ * - Handle form input changes and submission.
+ * - Display validation errors returned from the backend API.
+ * - Navigate to the home page or prompt the user to complete their profile if their profile name starts with "newuser".
+ *
+ * State:
+ * - signInData: Holds the email and password input values.
+ * - errors: Stores any validation or submission errors for the form.
+ *
+ * Hooks:
+ * - useRedirect: Redirects logged-in users to the specified route.
+ * - useState: Manages the component's local state.
+ * - useNavigate: Allows navigation to different routes.
+ * - useSetCurrentUser: Updates the current user's information in the context.
+ *
+ * API Calls:
+ * - axios.post("/dj-rest-auth/login/", signInData): Submits the sign-in data to the backend API for user authentication.
+ *
+ * @returns {JSX.Element} The SignInForm component.
+ */
 const SignInForm = () => {
   useRedirect("loggedIn", "/");
   const setCurrentUser = useSetCurrentUser();

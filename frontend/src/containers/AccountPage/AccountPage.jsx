@@ -67,11 +67,11 @@ const AccountPage = () => {
   const [activeAccordion, setActiveAccordion] = useState(null);
 
   useEffect(() => {
-    setUserData({
-      ...userData,
+    setUserData((prevUserData) => ({
+      ...prevUserData,
       email: currentUser?.email,
       current_email: currentUser?.email,
-    });
+    }));
   }, [currentUser, navigate]);
 
   const handleChange = (event) => {

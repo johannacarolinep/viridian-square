@@ -387,8 +387,11 @@ The following are found in the root frontend directory:
 
 </details>
 
+<a id="testing"></a>
+## Testing
+All documentation related to testing of the project can be found in [TESTING.md](./TESTING.md).
 
-<a id="planning"></a>
+<a id="bugs"></a>
 ## Bugs
 
 ### BUG: 2024-07-18: Custom serializers 'REGISTER_SERIALIZER' and 'USER_DETAILS_SERIALIZER' not used by dj-rest-auth register and login views.

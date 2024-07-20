@@ -20,6 +20,45 @@ import NoResults from "../../assets/images/noresults.webp";
 import appStyles from "../../App.module.css";
 import styles from "./ProfilePage.module.css";
 
+/**
+ * ProfilePage container
+ *
+ * The ProfilePage container is responsible for displaying a user's profile, including their art pieces and collections.
+ * It fetches the profile data, art pieces, and collections associated with the user and allows the user to edit their profile,
+ * view details, and delete collections.
+ *
+ * Features:
+ * - Fetch and display the user's profile information, including their profile image, name, description, location, and stats.
+ * - Display tabs for switching between the user's art pieces and collections.
+ * - Infinite scrolling to load more art pieces as the user scrolls down.
+ * - Modal for confirming the deletion of a collection.
+ * - Redirect to edit profile and account settings pages.
+ * - Handle display content changes between art pieces and collections.
+ *
+ * State:
+ * - profile: Stores the user's profile data.
+ * - artpieces: Stores the user's art pieces data with support for infinite scrolling.
+ * - collections: Stores the user's collections data.
+ * - displayContent: Determines whether to show art pieces, collections, or a specific collection's details.
+ * - showDelete: Controls the visibility of the delete confirmation modal.
+ * - collectionToDelete: Has the ID of the collection to be deleted.
+ * - hasLoaded: Indicates whether the data has finished loading.
+ *
+ * Hooks:
+ * - useParams: Retrieves the user ID from the URL parameters.
+ * - useLocation: Accesses the location object for query parameters.
+ * - useCurrentUser: Retrieves the current user's information.
+ * - useNavigate: Allows navigation to different routes.
+ * - useEffect: Fetches data when the component mounts or when dependencies change.
+ *
+ * API Calls:
+ * - axiosReq.get(`/profiles/${id}/`): Fetches the user's profile data.
+ * - axiosReq.get(`/artpieces/?owner=${profileData.owner}`): Fetches the user's art pieces.
+ * - axiosReq.get(`/collections/?owner=${profileData.owner}`): Fetches the user's collections.
+ * - axiosRes.delete(`/collections/${collectionToDelete}/`): Deletes the specified collection.
+ *
+ * @returns {JSX.Element} The ProfilePage component.
+ */
 const ProfilePage = () => {
   const { id } = useParams();
   const { search } = useLocation();
