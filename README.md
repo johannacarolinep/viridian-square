@@ -320,6 +320,73 @@ Actions taken:
 #### Accessibility
 - `Navigate the website with keyboard`: As a **Site User not able to utilise a mouse** I can **focus on and access all interactive elements on the website using a keyboard** so that I can **be included, navigate on the website, access the content, and use all core functionality**.
 
+<a id="repo-description"></a>
+## Repository description
+
+### Backend
+
+<details>
+<summary>Click for outline of repository structure and files</summary>
+
+This is not an exhaustive list of all folders and files in the project, but is meant as a helping guide to understand how the project back-end is structured.
+
+The repository and the django project are both named viridian-square. In the project folder the following can be found:
+
+- settings.py: contains project level configuration settings and parameters.
+- urls.py: project level url configuration
+
+In the repo I have created seven apps, called *art_collections*, *art_pieces*, *enquiries*, *likes*, *profiles*, *users*, and the main app *viridian_api*. This was due to the design choice of wanting to have separation of concerns. Each app focuses on a specific aspect of the project, making the codebase easier to manage and maintain. By isolating different functionalities into separate apps, I can ensure modularity and promote reusability across different parts of the application.
+
+Each app contains the following folders/files:
+1. __migrations:__ This folder contains all the migrations done to the models inside of the app. These files are added in automatically when the command `python manage.py makemigrations` is executed. The folders contain SQL commands for the PostgreSQL database to be able to convert edits to the models into rows and tables.
+2. __models.py:__ This file contains models for the app. These files is responsible for holding one model each.
+3. __tests.py:__ The tests files hold all the tests for the methods found in the model.py and views.py file. These tests are run through the Django unittest package.
+4. __views.py:__ This file contains the files used for serving the API endpoints.
+5. __admin.py:__ Used to register models in the Django admin panel, and to customise how they appear in the admin panel.
+6. __urls.py:__ App-level url configuration. Defines specific URL patterns for the specific app.
+7. __serializers.py:__ Contains serializer classes, these are used to convert complex data types such as querysets and model instances into native Python data types that can then be easily rendered into JSON, XML, or other content types. Serializers are also used for deserialization, allowing parsed data to be converted back into complex types, and are crucial for creating APIs with Django REST Framework.
+8. __apps.py:__ The AppConfig class defined in this file includes metadata for the app, such as its name and the label Django uses to refer to it. This file is essential for Django to recognize and include the app in the project.
+   
+The following are found in the root directory:
+    
+9. __staticfiles:__ The staticfiles folder is where the static files are collected from the static folder and are then able to be served in the live server. Before deployment of changes the command `python manage.py collectstatic` needs to have been run so any changes to the static folder are correctly added in the staticfiles folder.
+
+10. __Procfile__  This file is needed by Heroku to be able to know where the root folder of the project is and to successfully build the project for live deployment.
+
+
+</details>
+
+### Frontend
+
+<details>
+<summary>Click for outline of repository structure and files</summary>
+
+This is not an exhaustive list of all folders and files in the project, but is meant as a helping guide to understand how the project front-end is structured.
+
+The react app is hosted in the frontend folder in the root folder of the repository.
+
+The src folder contains the following folders and files:
+1. __api:__ Contains code for communicating with the backend API, including functions to fetch and update data.
+2. __assets:__ Holds a folder for images.
+3. __components:__ Folder where the reusable UI components that are used throughout the application, such as buttons, modals, and layout components. The folder also stores the tests into those components denoted as ComponentName.test.jsx
+4. __containers:__ Higher-level components that manage state and contain other components. These often correspond to pages of the app.
+5. __contexts:__A folder for storing custom context definitions and providers for managing global state. The custom context CurrentUserContext.jsx is placed here. 
+6. __hooks:__ Folder for storing custom hooks that encapsulate reusable logic. The useClickOutsideToggle.jsx defining a custom hook is stored in this folder.
+7. __utils:__ A folder for storing utility functions and helpers used throughout the app.
+8. __App.jsx:__ The root component of the React application, setting up routing and providing global context providers.
+9. __setupTests.js:__ Configuration file for setting up testing utilities and environments for jest tests.
+
+The following are found in the root frontend directory:
+    
+10. __.babelrc:__ Configuration file for Babel, used to transpile JavaScript code.
+11. __jest.config.js:__ Configuration file for Jest, used for running tests.
+12. __package.json:__ Contains metadata about the project and dependencies needed to run the app.
+13. __node_modules:__ Directory where npm packages are installed.
+14. __public:__ Directory for static files that can be directly served by the web server.
+15. __Procfile__ 
+
+</details>
+
 
 <a id="planning"></a>
 ## Bugs
