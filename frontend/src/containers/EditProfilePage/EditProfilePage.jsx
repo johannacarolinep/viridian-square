@@ -10,6 +10,8 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import appStyles from "../../App.module.css";
 import styles from "./EditProfilePage.module.css";
+import Asset from "../../components/asset/Asset";
+import ImageHolder from "../../components/image_holder/ImageHolder";
 
 /**
  * EditProfilePage Component
@@ -52,12 +54,11 @@ const EditProfilePage = () => {
     profile_image: "",
     profile_image_url: "",
   });
-
   const { name, description, profile_image, profile_image_url, location } =
     profileData;
-
   const [errors, setErrors] = useState({});
   const imageInput = useRef(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const handleMount = async () => {
@@ -74,12 +75,14 @@ const EditProfilePage = () => {
               location,
             })
           : navigate("/");
+        setHasLoaded(true);
       } catch (err) {
         // console.log(err);
       }
     };
 
     handleMount();
+    setHasLoaded(false);
   }, [id, navigate]);
 
   const handleChange = (event) => {
@@ -139,22 +142,28 @@ const EditProfilePage = () => {
                     <h2>Profile image:</h2>
                   </Form.Label>
                   <div className={`${appStyles.dividerPrimary} mb-3`}></div>
-                  <div
-                    className={`${appStyles.ImageContain} ${styles.ImageUpload}`}
-                  >
-                    {profile_image ? (
-                      <Image
-                        src={profile_image}
-                        rounded
-                        alt="Your new profile image"
-                      />
-                    ) : (
-                      <Image
-                        src={profile_image_url}
-                        rounded
-                        alt="Your existing profile image"
-                      />
-                    )}
+                  <div>
+                    <div className={`${styles.ImageUpload} my-3`}>
+                      {hasLoaded ? (
+                        <>
+                          {profile_image ? (
+                            <ImageHolder
+                              round
+                              src={profile_image}
+                              alt="Your new profile image"
+                            />
+                          ) : (
+                            <ImageHolder
+                              round
+                              src={profile_image_url}
+                              alt="Your existing profile image"
+                            />
+                          )}
+                        </>
+                      ) : (
+                        <Asset spinner />
+                      )}
+                    </div>
                   </div>
 
                   <Form.Control

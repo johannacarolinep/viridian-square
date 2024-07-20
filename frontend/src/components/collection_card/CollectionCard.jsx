@@ -13,7 +13,6 @@ const CollectionCard = ({
 }) => {
   const {
     id,
-    owner,
     is_owner,
     title,
     description,
