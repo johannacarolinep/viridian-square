@@ -10,7 +10,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import appStyles from "../../App.module.css";
 import styles from "./CreateArtpiecePage.module.css";
-import logo from "../../assets/images/logo.webp";
+import DefaultImg from "../../assets/images/default.webp";
 import { useRedirect } from "../../hooks/useRedirect";
 
 /**
@@ -169,7 +169,7 @@ const CreateArtpiecePage = () => {
                     {image ? (
                       <Image src={image} rounded alt="Your uploaded image" />
                     ) : (
-                      <Image src={logo} rounded alt="" />
+                      <Image src={DefaultImg} rounded alt="Placeholder image" />
                     )}
                   </div>
 
