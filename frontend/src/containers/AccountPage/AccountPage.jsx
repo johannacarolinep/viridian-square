@@ -144,6 +144,7 @@ const AccountPage = () => {
                   <Button
                     className={`my-3 me-3 ${appStyles.btnPrimary}`}
                     type="submit"
+                    aria-label="Submit form to update email"
                   >
                     Update
                   </Button>
@@ -184,6 +185,7 @@ const AccountPage = () => {
                   <Button
                     className={`my-3 me-3 ${appStyles.btnPrimary}`}
                     type="submit"
+                    aria-label="Submit form to update password"
                   >
                     Update password
                   </Button>
@@ -211,6 +213,7 @@ const AccountPage = () => {
                   <Button
                     className={`my-3 me-3 ${appStyles.btnPrimary}`}
                     type="submit"
+                    aria-label="Submit form to delete the account permanently."
                   >
                     Delete account
                   </Button>

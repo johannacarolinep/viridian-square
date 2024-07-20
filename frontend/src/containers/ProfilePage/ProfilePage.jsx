@@ -136,7 +136,10 @@ const ProfilePage = () => {
                 {profile?.description && <p>{profile.description}</p>}
                 {profile?.location && (
                   <p>
-                    <i className="fa-solid fa-location-dot ps-0"></i>{" "}
+                    <i
+                      className="fa-solid fa-location-dot ps-0"
+                      aria-label="Location"
+                    ></i>{" "}
                     {profile.location}
                   </p>
                 )}
@@ -182,6 +185,7 @@ const ProfilePage = () => {
                       ? styles.TabButtonSelected
                       : styles.TabButton
                   }
+                  aria-label="Show all artpieces by this artist"
                 >
                   Artpieces
                 </Button>
@@ -193,6 +197,7 @@ const ProfilePage = () => {
                       ? styles.TabButtonSelected
                       : styles.TabButton
                   }
+                  aria-label="Show all collections of this artist"
                 >
                   Collections
                 </Button>
@@ -311,6 +316,7 @@ const ProfilePage = () => {
             variant=""
             onClick={handleDelete}
             className={appStyles.btnPrimary}
+            aria-label="Confirm collection deletion"
           >
             Delete
           </Button>

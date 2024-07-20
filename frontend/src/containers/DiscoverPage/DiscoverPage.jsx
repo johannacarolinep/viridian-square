@@ -52,11 +52,15 @@ const DiscoverPage = () => {
               <div className="fs-5 d-flex flex-wrap justify-content-center mt-3">
                 <Link
                   className={`${appStyles.btnAccentLight} ${appStyles.linkBtn} rounded me-3`}
+                  to="/signin"
+                  aria-label="Go to the sign in page"
                 >
                   Sign In
                 </Link>
                 <Link
                   className={`${appStyles.btnPrimary} ${appStyles.linkBtn} rounded`}
+                  to="/signup"
+                  aria-label="Go to the sign up page"
                 >
                   Sign Up
                 </Link>

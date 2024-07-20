@@ -266,6 +266,7 @@ const CreateArtpiecePage = () => {
                 <Button
                   className={`my-3 me-3 ${appStyles.btnPrimary}`}
                   type="submit"
+                  aria-label="Submit form to create artpiece"
                 >
                   Create
                 </Button>

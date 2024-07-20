@@ -267,6 +267,7 @@ const EditArtpiecePage = () => {
                 <Button
                   className={`my-3 me-3 ${appStyles.btnPrimary}`}
                   type="submit"
+                  aria-label="Submit changes to artpiece"
                 >
                   Update
                 </Button>

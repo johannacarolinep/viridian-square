@@ -207,6 +207,7 @@ const EnquiriesPage = () => {
                                     <Link
                                       to={`/profiles/${enquiry.buyer_profile_id}`}
                                       className={`${appStyles.txtPrimary}`}
+                                      aria-label={`Go to ${enquiry.buyer_name}'s profile`}
                                     >
                                       {enquiry.buyer_name}
                                     </Link>
@@ -267,6 +268,7 @@ const EnquiriesPage = () => {
                                         <span className="fw-bold">By: </span>
                                         <Link
                                           className={appStyles.LinkStandard}
+                                          aria-label={`Go to ${artpiece.profile}'s name`}
                                         >
                                           {artpiece.profile_name}
                                         </Link>
@@ -292,6 +294,7 @@ const EnquiriesPage = () => {
                                   <Link
                                     to={`/profiles/${enquiry.artist_profile_id}`}
                                     className={appStyles.txtPrimary}
+                                    aria-label={`Go to ${enquiry.artist_name}'s profile page`}
                                   >
                                     {enquiry.artist_name}
                                   </Link>{" "}
@@ -342,6 +345,7 @@ const EnquiriesPage = () => {
                                   <Link
                                     to={`/profiles/${enquiry.buyer_profile_id}`}
                                     className={`${appStyles.txtPrimary}`}
+                                    aria-label={`Go to ${enquiry.buyer_name}'s profile page`}
                                   >
                                     {enquiry.buyer_name}'s
                                   </Link>{" "}
@@ -437,6 +441,7 @@ const EnquiriesPage = () => {
                                     <Button
                                       className={appStyles.btnPrimary}
                                       type="submit"
+                                      aria-label="Submit enquiry response"
                                     >
                                       Send
                                     </Button>

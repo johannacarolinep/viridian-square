@@ -132,6 +132,7 @@ const ArtpieceDetailed = (props) => {
             <Link
               to={`/profiles/${profile_id}`}
               className={appStyles.LinkStandard}
+              aria-label={`Go to ${profile_name}'s profile page`}
             >
               <Avatar src={profile_image} height={38} />
               {profile_name}
@@ -156,7 +157,10 @@ const ArtpieceDetailed = (props) => {
                   placement="bottom"
                   overlay={<Tooltip>You can't like your own artpiece</Tooltip>}
                 >
-                  <button className={`${appStyles.IconBtn} ps-0`}>
+                  <button
+                    className={`${appStyles.IconBtn} ps-0`}
+                    aria-label="Like button, not active since you can't like your own artpiece"
+                  >
                     <i
                       className={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
                     />
@@ -166,7 +170,7 @@ const ArtpieceDetailed = (props) => {
                 <button
                   className={`${appStyles.IconBtn} ps-0`}
                   onClick={handleUnlike}
-                  n
+                  aria-label="Remove like"
                 >
                   <i
                     className={`${appStyles.txtAccentDark} fa-solid fa-heart ps-0`}
@@ -176,6 +180,7 @@ const ArtpieceDetailed = (props) => {
                 <button
                   className={`${appStyles.IconBtn} ps-0`}
                   onClick={handleLike}
+                  aria-label="Like this artpiece"
                 >
                   <i
                     className={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
@@ -188,7 +193,10 @@ const ArtpieceDetailed = (props) => {
                     <Tooltip>You need to log in to like artpieces</Tooltip>
                   }
                 >
-                  <button className={`${appStyles.IconBtn} ps-0`}>
+                  <button
+                    className={`${appStyles.IconBtn} ps-0`}
+                    aria-label="Inactive like-button. You need to log in first."
+                  >
                     <i
                       className={`${appStyles.txtAccentDark} fa-regular fa-heart ps-0`}
                     />
@@ -218,6 +226,7 @@ const ArtpieceDetailed = (props) => {
                 {art_collection && (
                   <Link
                     to={`/profiles/${profile_id}?collectionId=${art_collection}`}
+                    aria-label="Visit the collection the artpiece is part of, on the artists profile page"
                   >
                     <Badge pill bg="dark">
                       Visit collection
@@ -233,7 +242,10 @@ const ArtpieceDetailed = (props) => {
                       </Tooltip>
                     }
                   >
-                    <Button className={appStyles.btnPrimary}>
+                    <Button
+                      className={appStyles.btnPrimary}
+                      aria-label="Make an enquiry. Inactive since you can't enquire about your own artpiece."
+                    >
                       Make an enquiry
                     </Button>
                   </OverlayTrigger>
@@ -241,6 +253,7 @@ const ArtpieceDetailed = (props) => {
                   <Button
                     className={appStyles.btnPrimary}
                     onClick={handleShowEnquiry}
+                    aria-label="Make an enquiry."
                   >
                     Make an enquiry
                   </Button>
@@ -250,7 +263,10 @@ const ArtpieceDetailed = (props) => {
                       placement="top"
                       overlay={<Tooltip>Log in to make enquiries</Tooltip>}
                     >
-                      <Button className={appStyles.btnPrimary}>
+                      <Button
+                        className={appStyles.btnPrimary}
+                        aria-label="Make an enquiry. Inactive since you need to log in first."
+                      >
                         Make an enquiry
                       </Button>
                     </OverlayTrigger>
@@ -285,10 +301,18 @@ const ArtpieceDetailed = (props) => {
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseDelete}>
+          <Button
+            variant="secondary"
+            onClick={handleCloseDelete}
+            aria-label="Cancel deletion of artpiece"
+          >
             Cancel
           </Button>
-          <Button variant="dark" onClick={handleDelete}>
+          <Button
+            variant="dark"
+            onClick={handleDelete}
+            aria-label="Confirm deletion of artpiece"
+          >
             Delete
           </Button>
         </Modal.Footer>
@@ -330,6 +354,7 @@ const ArtpieceDetailed = (props) => {
                 variant="secondary"
                 onClick={handleCloseEnquiry}
                 className="me-2"
+                aria-label="Close"
               >
                 Close
               </Button>
@@ -337,6 +362,7 @@ const ArtpieceDetailed = (props) => {
                 variant="primary"
                 type="submit"
                 className={appStyles.btnPrimary}
+                aria-label="Send enquiry"
               >
                 Send
               </Button>

@@ -167,6 +167,7 @@ const EditCollectionPage = ({ newCollection }) => {
                   <Button
                     className={`my-3 me-3 ${appStyles.btnPrimary}`}
                     type="submit"
+                    aria-label="Submit changes to collection"
                   >
                     Update
                   </Button>
@@ -206,6 +207,7 @@ const EditCollectionPage = ({ newCollection }) => {
                             <div
                               onClick={() => handleDeselect(artpiece.id)}
                               className={`${styles.Selected} ${appStyles.ImageCover} ${appStyles.Square}`}
+                              aria-label="Deselect artpiece"
                             >
                               <Image
                                 src={artpiece.image_url}
@@ -224,6 +226,7 @@ const EditCollectionPage = ({ newCollection }) => {
                             >
                               <div
                                 className={`position-relative ${appStyles.ImageCover} ${appStyles.Square}`}
+                                aria-label="Cannot be selected since it's alrady part of a different collection"
                               >
                                 <Image
                                   src={artpiece.image_url}
@@ -236,6 +239,7 @@ const EditCollectionPage = ({ newCollection }) => {
                             <div
                               onClick={() => handleSelect(artpiece.id)}
                               className={`${styles.Available} ${appStyles.ImageCover} ${appStyles.Square}`}
+                              aria-label="Select artpiece"
                             >
                               <Image
                                 src={artpiece.image_url}
@@ -269,7 +273,11 @@ const EditCollectionPage = ({ newCollection }) => {
               >
                 Skip this step
               </Button>
-              <Button className={`my-2 ${appStyles.btnPrimary}`} type="submit">
+              <Button
+                className={`my-2 ${appStyles.btnPrimary}`}
+                type="submit"
+                aria-label="Save association of artpieces to the collection"
+              >
                 Save selection
               </Button>
               {errors.non_field_errors?.map((message, idx) => (

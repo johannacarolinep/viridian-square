@@ -38,6 +38,7 @@ const NavBar = () => {
         className={({ isActive }) =>
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
+        aria-label="Go to page to create artpieces and collections"
       >
         <i className="fa-solid fa-paintbrush"></i>Create
       </NavLink>
@@ -46,6 +47,7 @@ const NavBar = () => {
         className={({ isActive }) =>
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
+        aria-label="Go to the enquiries page"
       >
         <i className="fa-regular fa-envelope"></i>Enquiries
       </NavLink>
@@ -54,15 +56,22 @@ const NavBar = () => {
         className={({ isActive }) =>
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
+        aria-label="Go to the liked page"
       >
         <i className="fa-regular fa-heart"></i>Liked
       </NavLink>
-      <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>
+      <NavLink
+        to="/"
+        className={styles.NavLink}
+        onClick={handleSignOut}
+        aria-label="Sign out"
+      >
         <i className="fa-solid fa-right-from-bracket"></i>Sign out
       </NavLink>
       <NavLink
         to={`/profiles/${currentUser?.profile_id}`}
         className={styles.NavLink}
+        aria-label="Go to your profile page"
       >
         <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </NavLink>
@@ -75,6 +84,7 @@ const NavBar = () => {
         className={({ isActive }) =>
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
+        aria-label="Go to the sign in page"
       >
         <i className="fa-solid fa-right-to-bracket"></i>Sign in
       </NavLink>
@@ -83,6 +93,7 @@ const NavBar = () => {
         className={({ isActive }) =>
           `${styles.NavLink} ${isActive ? styles.Active : ""}`
         }
+        aria-label="Go to the sign up page"
       >
         <i className="fa-solid fa-user-plus"></i>Sign up
       </NavLink>
@@ -97,7 +108,7 @@ const NavBar = () => {
       className={styles.NavBar}
     >
       <Container fluid="xl">
-        <NavLink to="/">
+        <NavLink to="/" aria-label="Logo linking to discovery page">
           <Navbar.Brand>
             <Image src={logo} alt="Viridian Square logo" height="40" />
           </Navbar.Brand>
@@ -114,6 +125,7 @@ const NavBar = () => {
               className={({ isActive }) =>
                 `${styles.NavLink} ${isActive ? styles.Active : ""}`
               }
+              aria-label="Go to the Discovery page"
             >
               <i className="fa-solid fa-magnifying-glass"></i>Discover
             </NavLink>

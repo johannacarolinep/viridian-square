@@ -53,6 +53,7 @@ const CollectionCard = ({
             <Button
               className={`${appStyles.btnPrimary} ms-auto`}
               onClick={() => handleDisplayContentChange(collection)}
+              aria-label="Show collection"
             >
               Show
             </Button>

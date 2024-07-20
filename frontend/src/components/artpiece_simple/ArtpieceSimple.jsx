@@ -93,7 +93,11 @@ const ArtpieceSimple = (props) => {
       </Link>
       <Card.Body className="px-2 pt-1 pb-2 px-md-3 pb-md-3">
         <div className="d-flex justify-content-between align-items-start">
-          <Link to={`/artpieces/${id}`} className={appStyles.LinkStandard}>
+          <Link
+            to={`/artpieces/${id}`}
+            className={appStyles.LinkStandard}
+            aria-label={`Go to detailed page for artpiece ${title}`}
+          >
             <h5 className="mb-0 py-1">{title}</h5>
           </Link>
           <div className="d-flex">
@@ -102,7 +106,10 @@ const ArtpieceSimple = (props) => {
                 placement="top"
                 overlay={<Tooltip>You can't like your own artpiece</Tooltip>}
               >
-                <button className={`p-0 ${appStyles.IconBtn}`}>
+                <button
+                  className={`p-0 ${appStyles.IconBtn}`}
+                  aria-label="Inactive like-button. You can't like your own artpiece."
+                >
                   <i
                     className={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
                   />
@@ -112,7 +119,7 @@ const ArtpieceSimple = (props) => {
               <button
                 className={`p-0 ${appStyles.IconBtn}`}
                 onClick={handleUnlike}
-                n
+                aria-label="Remove like"
               >
                 <i
                   className={`${appStyles.txtAccentDark} fa-solid fa-heart p-1`}
@@ -122,6 +129,7 @@ const ArtpieceSimple = (props) => {
               <button
                 className={`p-0 ${appStyles.IconBtn}`}
                 onClick={handleLike}
+                aria-label="Like artpiece"
               >
                 <i
                   className={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
@@ -134,7 +142,10 @@ const ArtpieceSimple = (props) => {
                   <Tooltip>You need to log in to like artpieces</Tooltip>
                 }
               >
-                <button className={`p-0 ${appStyles.IconBtn}`}>
+                <button
+                  className={`p-0 ${appStyles.IconBtn}`}
+                  aria-label="Inactive like-button. You need to log in first."
+                >
                   <i
                     className={`${appStyles.txtAccentDark} fa-regular fa-heart p-1`}
                   />
@@ -154,7 +165,10 @@ const ArtpieceSimple = (props) => {
       </Card.Body>
       {!basic && (
         <Card.Footer className={`text-end px-2 ${styles.CardFooter}`}>
-          <Link to={`/profiles/${profile_id}`}>
+          <Link
+            to={`/profiles/${profile_id}`}
+            aria-label={`Go to profile page of artist ${profile_name}`}
+          >
             <span className={`me-2 ${appStyles.LinkStandard}`}>
               {profile_name}
             </span>

@@ -10,6 +10,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
       onClick(event);
     }}
     ref={ref}
+    aria-label="More options"
   >
     <i className="fa-solid fa-ellipsis-vertical" />
   </button>

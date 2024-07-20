@@ -103,6 +103,7 @@ const Discover = ({ likesFilter = "" }) => {
                 variant="dark"
                 onClick={handleToggleForSale}
                 className={`h-100`}
+                aria-label="Toggle between artpieces that are for sale, and artpieces regardless of sale status"
               >
                 {filterForSale === "1"
                   ? "Showing: For sale"
