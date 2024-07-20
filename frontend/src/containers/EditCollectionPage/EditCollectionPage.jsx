@@ -167,9 +167,8 @@ const EditCollectionPage = ({ newCollection }) => {
                 </Col>
                 <Col lg={6} className={appStyles.bgWhite}>
                   <Form.Group controlId="formTitle">
-                    <Form.Label htmlFor="formTitle">Title</Form.Label>
+                    <Form.Label>Title</Form.Label>
                     <Form.Control
-                      id="formTitle"
                       type="text"
                       name="title"
                       value={title}
@@ -181,11 +180,8 @@ const EditCollectionPage = ({ newCollection }) => {
                   ))}
 
                   <Form.Group controlId="formDescription">
-                    <Form.Label htmlFor="formDescription">
-                      Description
-                    </Form.Label>
+                    <Form.Label>Description</Form.Label>
                     <Form.Control
-                      id="formDescription"
                       as="textarea"
                       rows={6}
                       name="description"

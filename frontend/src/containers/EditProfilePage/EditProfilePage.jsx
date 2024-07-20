@@ -135,7 +135,7 @@ const EditProfilePage = () => {
             <Col lg={6} className={appStyles.bgAccentLight}>
               <Form.Group controlId="image-upload">
                 <div className={`${appStyles.bgAccentLight} p-4`}>
-                  <Form.Label htmlFor="image-upload" className="mb-0">
+                  <Form.Label className="mb-0">
                     <h2>Profile image:</h2>
                   </Form.Label>
                   <div className={`${appStyles.dividerPrimary} mb-3`}></div>
@@ -159,7 +159,6 @@ const EditProfilePage = () => {
 
                   <Form.Control
                     type="file"
-                    id="image-upload"
                     accept="image/*"
                     onChange={handleChangeImage}
                     ref={imageInput}
@@ -176,9 +175,8 @@ const EditProfilePage = () => {
                 <h2>Details:</h2>
                 <div className={`${appStyles.dividerPrimary} mb-3`}></div>
                 <Form.Group controlId="profileName">
-                  <Form.Label htmlFor="profileName">Name:</Form.Label>
+                  <Form.Label>Name:</Form.Label>
                   <Form.Control
-                    id="profileName"
                     type="text"
                     name="name"
                     value={name}
@@ -190,9 +188,8 @@ const EditProfilePage = () => {
                 ))}
 
                 <Form.Group controlId="descr">
-                  <Form.Label htmlFor="descr">Description</Form.Label>
+                  <Form.Label>Description</Form.Label>
                   <Form.Control
-                    id="descr"
                     as="textarea"
                     rows={6}
                     name="description"
@@ -205,9 +202,8 @@ const EditProfilePage = () => {
                 ))}
 
                 <Form.Group controlId="location">
-                  <Form.Label htmlFor="location">Location:</Form.Label>
+                  <Form.Label>Location:</Form.Label>
                   <Form.Control
-                    id="location"
                     type="text"
                     name="location"
                     value={location}

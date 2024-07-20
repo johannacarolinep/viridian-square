@@ -84,9 +84,8 @@ const CreateCollectionPage = () => {
             </Col>
             <Col lg={6} className={appStyles.bgWhite}>
               <Form.Group controlId="collectionTitle">
-                <Form.Label htmlFor="collectionTitle">Title</Form.Label>
+                <Form.Label>Title</Form.Label>
                 <Form.Control
-                  id="collectionTitle"
                   type="text"
                   name="title"
                   value={title}
@@ -98,9 +97,8 @@ const CreateCollectionPage = () => {
               ))}
 
               <Form.Group controlId="collectionDescr">
-                <Form.Label htmlFor="collectionDescr">Description</Form.Label>
+                <Form.Label>Description</Form.Label>
                 <Form.Control
-                  id="collectionDescr"
                   as="textarea"
                   rows={6}
                   name="description"

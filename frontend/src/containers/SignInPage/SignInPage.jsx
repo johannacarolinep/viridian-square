@@ -89,9 +89,8 @@ const SignInForm = () => {
               <h1>Sign in:</h1>
               <div className={`${appStyles.dividerPrimary} mb-3`}></div>
               <Form.Group className="mb-3" controlId="email">
-                <Form.Label htmlFor="email">Email address</Form.Label>
+                <Form.Label>Email address</Form.Label>
                 <Form.Control
-                  id="email"
                   type="email"
                   placeholder="Enter email"
                   name="email"
@@ -104,9 +103,8 @@ const SignInForm = () => {
               ))}
 
               <Form.Group className="mb-3" controlId="password">
-                <Form.Label htmlFor="password">Password</Form.Label>
+                <Form.Label>Password</Form.Label>
                 <Form.Control
-                  id="password"
                   type="password"
                   placeholder="Password"
                   name="password"

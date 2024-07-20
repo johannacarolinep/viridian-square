@@ -164,9 +164,8 @@ const AccountPage = () => {
               <Accordion.Body>
                 <Form onSubmit={handleEmailSubmit}>
                   <Form.Group controlId="formEmail">
-                    <Form.Label htmlFor="formEmail">Email:</Form.Label>
+                    <Form.Label>Email:</Form.Label>
                     <Form.Control
-                      id="formEmail"
                       type="text"
                       name="email"
                       value={email}
@@ -193,9 +192,8 @@ const AccountPage = () => {
               <Accordion.Body>
                 <Form onSubmit={handlePasswordSubmit}>
                   <Form.Group controlId="newPassword">
-                    <Form.Label htmlFor="newPassword">New password:</Form.Label>
+                    <Form.Label>New password:</Form.Label>
                     <Form.Control
-                      id="newPassword"
                       type="password"
                       name="new_password1"
                       value={new_password1}
@@ -207,11 +205,8 @@ const AccountPage = () => {
                   ))}
 
                   <Form.Group controlId="confirmPassword">
-                    <Form.Label htmlFor="confirmPassword">
-                      Confirm new password:
-                    </Form.Label>
+                    <Form.Label>Confirm new password:</Form.Label>
                     <Form.Control
-                      id="confirmPassword"
                       type="password"
                       name="new_password2"
                       value={new_password2}
@@ -238,9 +233,8 @@ const AccountPage = () => {
               <Accordion.Body>
                 <Form onSubmit={handleAccountDelete}>
                   <Form.Group controlId="formPassword">
-                    <Form.Label htmlFor="formPassword">Password:</Form.Label>
+                    <Form.Label>Password:</Form.Label>
                     <Form.Control
-                      id="formPassword"
                       type="password"
                       name="password"
                       value={password}
