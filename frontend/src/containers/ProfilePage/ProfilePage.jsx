@@ -168,6 +168,7 @@ const ProfilePage = () => {
                   <h1 className="mb-3">{profile?.name}</h1>
                   {profile.is_owner && (
                     <MoreDropdown
+                      profile
                       handleEdit={handleEdit}
                       handleAccountChange={handleAccountChange}
                     />

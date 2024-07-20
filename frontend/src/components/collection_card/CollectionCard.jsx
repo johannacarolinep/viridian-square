@@ -62,6 +62,7 @@ const CollectionCard = ({
         {is_owner && (
           <div className="position-absolute top-0 end-0 py-2">
             <MoreDropdown
+              collection
               handleEdit={handleEdit}
               handleDeleteConfirm={handleDeleteConfirm}
               collectionId={id}
