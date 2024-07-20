@@ -13,10 +13,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import cloudinary
 
 if os.path.exists('env.py'):
     import env
 
+# Cloudinary config
+cloudinary.config(
+    cloud_name=os.environ.get("CLOUD_NAME"),
+    secure=True
+)
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
 }
