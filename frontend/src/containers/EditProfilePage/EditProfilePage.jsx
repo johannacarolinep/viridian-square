@@ -6,7 +6,6 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import appStyles from "../../App.module.css";
 import styles from "./EditProfilePage.module.css";
@@ -222,7 +221,13 @@ const EditProfilePage = () => {
                 {errors.location?.map((message, idx) => (
                   <p key={idx}>{message}</p>
                 ))}
-                <Button className={`my-3 me-3`} variant="secondary">
+                <Button
+                  className={`my-3 me-3`}
+                  variant="secondary"
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+                >
                   Cancel
                 </Button>
                 <Button

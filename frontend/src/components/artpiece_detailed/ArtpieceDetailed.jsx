@@ -46,6 +46,7 @@ const ArtpieceDetailed = (props) => {
   const handleCloseEnquiry = () => setShowEnquiry(false);
   const handleShowEnquiry = () => setShowEnquiry(true);
   const [initialMessage, setInitialMessage] = useState("");
+  const [showEnquiryConfirm, setShowEnquiryConfirm] = useState(false);
 
   const handleSubmitEnquiry = async (event) => {
     event.preventDefault();
@@ -55,11 +56,12 @@ const ArtpieceDetailed = (props) => {
     formData.append("artpiece", id);
 
     try {
-      const response = await axiosReq.post("/enquiries/", formData, {
+      await axiosReq.post("/enquiries/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      setShowEnquiryConfirm(true);
       handleCloseEnquiry();
     } catch (err) {
       setErrors(err.response?.data);
@@ -225,6 +227,7 @@ const ArtpieceDetailed = (props) => {
               <div className="fs-5">
                 {art_collection && (
                   <Link
+                    className="me-2"
                     to={`/profiles/${profile_id}?collectionId=${art_collection}`}
                     aria-label="Visit the collection the artpiece is part of, on the artists profile page"
                   >
@@ -243,7 +246,7 @@ const ArtpieceDetailed = (props) => {
                     }
                   >
                     <Button
-                      className={appStyles.btnPrimary}
+                      className={`${appStyles.btnPrimary} me-2`}
                       aria-label="Make an enquiry. Inactive since you can't enquire about your own artpiece."
                     >
                       Make an enquiry
@@ -251,7 +254,7 @@ const ArtpieceDetailed = (props) => {
                   </OverlayTrigger>
                 ) : for_sale === 1 && currentUser ? (
                   <Button
-                    className={appStyles.btnPrimary}
+                    className={`${appStyles.btnPrimary} me-2`}
                     onClick={handleShowEnquiry}
                     aria-label="Make an enquiry."
                   >
@@ -264,13 +267,22 @@ const ArtpieceDetailed = (props) => {
                       overlay={<Tooltip>Log in to make enquiries</Tooltip>}
                     >
                       <Button
-                        className={appStyles.btnPrimary}
+                        className={`${appStyles.btnPrimary} me-2`}
                         aria-label="Make an enquiry. Inactive since you need to log in first."
                       >
                         Make an enquiry
                       </Button>
                     </OverlayTrigger>
                   )
+                )}
+                {showEnquiryConfirm && (
+                  <div className="d-inline-block">
+                    <span
+                      className={`${appStyles.txtPrimary} fs-6 fw-semibold`}
+                    >
+                      Your enquiry was sent!
+                    </span>
+                  </div>
                 )}
               </div>
             )}
