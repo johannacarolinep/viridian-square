@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Image from "react-bootstrap/esm/Image";
+import Image from "react-bootstrap/Image";
 import logo from "../../assets/images/logo.webp";
 import styles from "./NavBar.module.css";
 import { NavLink } from "react-router-dom";
