@@ -36,7 +36,7 @@ class Profile(models.Model):
     description = models.CharField(max_length=180, blank=True)
     profile_image = CloudinaryField(
         'image',
-        default='default_profile_shke8m',)
+        default='default_profile_viridian',)
     location = models.CharField(max_length=50, blank=True)
 
     def save(self, *args, **kwargs):
