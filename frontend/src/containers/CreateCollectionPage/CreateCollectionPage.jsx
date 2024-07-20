@@ -9,6 +9,32 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import appStyles from "../../App.module.css";
 
+/**
+ * CreateCollectionPage container
+ *
+ * The CreateCollectionPage container provides a form for users to create a new art collection.
+ * It captures the collection's title and description, and upon submission, it sends the data to the backend API.
+ *
+ * Features:
+ * - Redirects logged-out users to the home page using the useRedirect hook.
+ * - Provides a form with fields for the collection title and description.
+ * - Handles form input changes and form submission.
+ * - Displays validation errors returned from the backend API.
+ *
+ * State:
+ * - artCollectionData: Holds the current values for title and description.
+ * - errors: Stores any validation or submission errors for the form.
+ *
+ * Hooks:
+ * - useRedirect: Redirects logged-out users to the specified route.
+ * - useNavigate: Allows navigation to different routes.
+ * - useState: Manages the component's local state.
+ *
+ * API Calls:
+ * - axiosReq.post("/collections/"): Submits the new collection data to the backend API.
+ *
+ * @returns {JSX.Element} The CreateCollectionPage container.
+ */
 const CreateCollectionPage = () => {
   useRedirect("loggedOut", "/");
   const navigate = useNavigate();

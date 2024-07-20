@@ -17,6 +17,43 @@ import Avatar from "../../components/avatar/Avatar";
 import appStyles from "../../App.module.css";
 import styles from "./EnquiriesPage.module.css";
 
+/**
+ * EnquiriesPage Component
+ *
+ * The EnquiriesPage component is responsible for displaying a list of enquiries made by the buyer or received from other buyers.
+ * It provides functionality to view detailed information about each enquiry, respond to enquiries, and update enquiry statuses.
+ *
+ * Features:
+ * - Redirect logged-out users to the home page using the useRedirect hook.
+ * - Show detailed information about each enquiry, including the associated art piece and the user's response.
+ * - Handle form submissions for responding to enquiries and updating their status.
+ * - Indicate new or unchecked enquiries with badges.
+ *
+ * State:
+ * - enquiries: Holds the list of enquiries fetched from the API.
+ * - selectedEnquiry: Holds the currently selected enquiry for viewing details and responding.
+ * - status: Holds the status of the selected enquiry (pending, accepted, declined).
+ * - responseMessage: Holds the response message to be sent along with the status update.
+ * - hasLoaded: Indicates whether the enquiries data has finished loading.
+ * - artpieceHasLoaded: Indicates whether the art piece data for the selected enquiry has finished loading.
+ * - artpiece: Holds the art piece data associated with the selected enquiry.
+ * - errors: Stores any validation or submission errors for the response form.
+ * - activeAccordion: Keeps track of the currently active accordion panel.
+ *
+ * Hooks:
+ * - useCurrentUser: Retrieves the current user's information.
+ * - useRedirect: Redirects logged-out users to the specified route.
+ * - useState: Manages the component's local state.
+ * - useEffect: Fetches data when the component mounts or when dependencies change.
+ *
+ * API Calls:
+ * - axiosReq.get("/enquiries/"): Fetches the list of enquiries.
+ * - axiosReq.get(`/artpieces/${selectedEnquiry.artpiece}/`): Fetches the art piece data for the selected enquiry.
+ * - axiosReq.put(`/enquiries/${selectedEnquiry.id}/`): Updates the status and response message of the selected enquiry.
+ *
+ * @returns {JSX.Element} The EnquiriesPage component.
+ */
+
 const EnquiriesPage = () => {
   useRedirect("loggedOut", "/");
   const currentUser = useCurrentUser();

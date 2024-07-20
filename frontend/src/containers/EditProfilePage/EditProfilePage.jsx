@@ -11,6 +11,36 @@ import Row from "react-bootstrap/Row";
 import appStyles from "../../App.module.css";
 import styles from "./EditProfilePage.module.css";
 
+/**
+ * EditProfilePage Component
+ *
+ * The EditProfilePage component allows a user to edit their profile information including name, description, location,
+ * and profile image. It fetches the current profile data on mount and populates the form with existing values.
+ *
+ * Features:
+ * - Redirect logged-out users to the home page using the useRedirect hook.
+ * - Fetch and display the current profile information.
+ * - Provide form fields for editing the profile name, description, location, and profile image.
+ * - Handle form input changes and form submission to update the profile.
+ * - Display validation errors returned from the backend API.
+ *
+ * State:
+ * - profileData: Holds the current values for name, description, location, profile image, and profile image URL.
+ * - errors: Stores any validation or submission errors for the form.
+ *
+ * Hooks:
+ * - useRedirect: Redirects logged-out users to the specified route.
+ * - useNavigate: Allows navigation to different routes.
+ * - useParams: Retrieves the profile ID from the URL parameters.
+ * - useState: Manages the component's local state.
+ * - useEffect: Fetches profile data when the component mounts.
+ *
+ * API Calls:
+ * - axiosReq.get(`/profiles/${id}/`): Fetches the current profile data.
+ * - axiosReq.put(`/profiles/${id}/`): Submits the updated profile data to the backend API.
+ *
+ * @returns {JSX.Element} The EditProfilePage component.
+ */
 const EditProfilePage = () => {
   useRedirect("loggedOut", "/");
   const navigate = useNavigate();

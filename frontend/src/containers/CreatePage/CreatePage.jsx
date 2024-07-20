@@ -10,6 +10,22 @@ import Collection from "../../assets/images/collection.webp";
 import appStyles from "../../App.module.css";
 import styles from "./CreatePage.module.css";
 
+/**
+ * CreatePage Component
+ *
+ * The CreatePage component provides users with options to create new art pieces or collections.
+ * It displays two link cards, each leading to a respective creation page.
+ *
+ * Features:
+ * - Redirects logged-out users to the home page using the useRedirect hook.
+ * - Displays two link cards: one for creating a new art piece and one for creating a new collection.
+ * - Uses Bootstrap's grid system to arrange the link cards responsively.
+ *
+ * Hooks:
+ * - useRedirect: Redirects logged-out users to the specified route.
+ *
+ * @returns {JSX.Element} The CreatePage component.
+ */
 const CreatePage = () => {
   useRedirect("loggedOut", "/");
 

@@ -13,6 +13,36 @@ import styles from "./CreateArtpiecePage.module.css";
 import logo from "../../assets/images/logo.webp";
 import { useRedirect } from "../../hooks/useRedirect";
 
+/**
+ * CreateArtpiecePage container
+ *
+ * The CreateArtpiecePage container enables users to create a new art piece by filling out a form with details such as the title,
+ * description, image, medium, sale status, and collection.
+ *
+ * Features:
+ * - Redirect logged-out users to the home page using the useRedirect hook.
+ * - Fetch and display the user's art collections for selection.
+ * - Provide form fields for entering the art piece's title, description, image, medium, sale status, hashtags, and collection.
+ * - Handle form input changes and form submission to create the art piece.
+ *
+ * State:
+ * - artCollectionChoices: Holds the list of the user's art collections for selection.
+ * - artpieceData: Holds the current values for title, description, image, medium, sale status, collection, and hashtags.
+ * - errors: Stores any validation or submission errors for the form.
+ *
+ * Hooks:
+ * - useRedirect: Redirects logged-out users to the specified route.
+ * - useNavigate: Allows navigation to different routes.
+ * - useCurrentUser: Retrieves the current user's information.
+ * - useState: Manages the component's local state.
+ * - useEffect: Fetches the user's art collections when the component mounts.
+ *
+ * API Calls:
+ * - axiosReq.get(`/collections/?owner=${currentUser.pk}`): Fetches the user's art collections.
+ * - axiosReq.post("/artpieces/"): Submits the new art piece data to the backend API.
+ *
+ * @returns {JSX.Element} The CreateArtpiecePage container.
+ */
 const CreateArtpiecePage = () => {
   useRedirect("loggedOut", "/");
   const currentUser = useCurrentUser();

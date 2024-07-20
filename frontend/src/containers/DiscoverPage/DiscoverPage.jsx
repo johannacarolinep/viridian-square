@@ -11,6 +11,27 @@ import Row from "react-bootstrap/Row";
 import appStyles from "../../App.module.css";
 import styles from "./DiscoverPage.module.css";
 
+/**
+ * DiscoverPage Container
+ *
+ * The component is responsible for displaying a main page where users can discover trending art pieces and artists.
+ * If a newly registered user needs to complete their profile, a modal is displayed prompting them to do so.
+ *
+ * Features:
+ * - Show trending art pieces and artists using the TrendingDisplay component.
+ * - Use the Discover component to display a list of art pieces and artists for discovery.
+ * - Display a modal for new users to complete their profile if required.
+ *
+ * State:
+ * - showModal: Controls the visibility of the profile completion modal.
+ *
+ * Hooks:
+ * - useCurrentUser: Retrieves the current user's information.
+ * - useLocation: Accesses the location object to check for state passed through navigation.
+ * - useEffect: Checks if the user needs to complete their profile name and sets the modal visibility accordingly.
+ *
+ * @returns {JSX.Element} The DiscoverPage component.
+ */
 const DiscoverPage = () => {
   const currentUser = useCurrentUser();
   const location = useLocation();

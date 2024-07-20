@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import appStyles from "../../App.module.css";
@@ -8,15 +8,41 @@ import CollectionCard from "../../components/collection_card/CollectionCard";
 import NoResults from "../../assets/images/noresults.webp";
 import Asset from "../../components/asset/Asset";
 
+/**
+ * CollectionsDisplay Container
+ *
+ * The CollectionsDisplay container is responsible for displaying a list of art collections with support for infinite scrolling.
+ * It fetches more collections as the user scrolls down and displays a loading message while fetching.
+ * If there are no collections to display, it shows a message indicating no results.
+ *
+ * Features:
+ * - Display a list of art collections using the CollectionCard component.
+ * - Support infinite scrolling to load more collections as the user scrolls down.
+ * - Show a loading message while fetching more collections.
+ * - Display a message indicating no results if there are no collections to display.
+ *
+ * Props:
+ * - handleDisplayContentChange: Function to handle changes in the displayed content.
+ * - handleDeleteConfirm: Function to handle confirmation of collection deletion.
+ * - collections: Object containing the collection data and pagination information.
+ * - setCollections: Function to update the state of collections.
+ *
+ * State:
+ * - hasLoaded: Indicates whether the data has finished loading.
+ *
+ * @param {Object} props - The component props.
+ * @param {Function} props.handleDisplayContentChange - Function to handle changes in the displayed content.
+ * @param {Function} props.handleDeleteConfirm - Function to handle confirmation of collection deletion.
+ * @param {Object} props.collections - Object containing the collection data and pagination information.
+ * @param {Function} props.setCollections - Function to update the state of collections.
+ * @returns {JSX.Element} The CollectionsDisplay component.
+ */
 const CollectionsDisplay = ({
   handleDisplayContentChange,
   handleDeleteConfirm,
   collections,
   setCollections,
 }) => {
-  // const [collections, setCollections] = useState({ results: [] });
-  const [hasLoaded, setHasLoaded] = useState(false);
-
   return (
     <div className={`p-0 mt-2 ${appStyles.bgLight}`}>
       {collections.results.length ? (

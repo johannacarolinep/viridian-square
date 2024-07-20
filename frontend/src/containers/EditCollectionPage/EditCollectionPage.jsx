@@ -18,6 +18,45 @@ import styles from "./EditCollectionPage.module.css";
 import Asset from "../../components/asset/Asset";
 import NoResults from "../../assets/images/noresults.webp";
 
+/**
+ * EditCollectionPage Component
+ *
+ * The EditCollectionPage component allows a user to edit an existing art collection or add art pieces to a new collection.
+ * It fetches the current collection data and the user's owned art pieces, and provides form fields for editing the collection details.
+ *
+ * Features:
+ * - Redirect logged-out users to the home page using the useRedirect hook.
+ * - Fetch and display the current collection information and owned art pieces.
+ * - Provide form fields for editing the collection title and description.
+ * - Allow selecting and deselecting art pieces to be included in the collection.
+ * - Handle form submissions to update collection details and associate selected art pieces with the collection.
+ * - Display validation errors and success messages.
+ *
+ * State:
+ * - collectionData: Holds the current values for title and description.
+ * - ownedArtpieces: Holds the user's owned art pieces data with support for infinite scrolling.
+ * - selectedArtpieces: Holds the IDs of art pieces selected to be included in the collection.
+ * - errors: Stores any validation or submission errors for the forms.
+ * - successMessage: Displays a success message when the collection details are updated.
+ * - hasLoaded: Indicates whether the data has finished loading.
+ *
+ * Hooks:
+ * - useRedirect: Redirects logged-out users to the specified route.
+ * - useNavigate: Allows navigation to different routes.
+ * - useParams: Retrieves the collection ID from the URL parameters.
+ * - useState: Manages the component's local state.
+ * - useEffect: Fetches collection and art piece data when the component mounts or when dependencies change.
+ *
+ * API Calls:
+ * - axiosReq.get(`/collections/${id}/`): Fetches the current collection data.
+ * - axiosReq.get(`/artpieces/?owner=${collection.owner}`): Fetches the user's owned art pieces.
+ * - axiosReq.put(`/collections/${id}/`): Submits the updated collection data to the backend API.
+ * - axiosReq.post(`/collections/${id}/update-artpieces/`): Submits the selected art pieces to be associated with the collection.
+ *
+ * @param {boolean} newCollection - A flag indicating whether the component is used for a new collection.
+ * @returns {JSX.Element} The EditCollectionPage component.
+ */
+
 const EditCollectionPage = ({ newCollection }) => {
   useRedirect("loggedOut", "/");
   const navigate = useNavigate();

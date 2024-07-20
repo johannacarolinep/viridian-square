@@ -11,6 +11,37 @@ import Row from "react-bootstrap/Row";
 import appStyles from "../../App.module.css";
 import styles from "./EditArtpiecePage.module.css";
 
+/**
+ * EditArtpiecePage container
+ *
+ * The EditArtpiecePage component allows a user to edit the details of an existing art piece.
+ * It fetches the current art piece data and populates the form with existing values.
+ * If the user is not the owner of the art piece, they are redirected to the home page.
+ *
+ * Features:
+ * - Redirect logged-out users to the home page using the useRedirect hook.
+ * - Fetch and display the current art piece information.
+ * - Provide form fields for editing the art piece title, description, image, medium, sale status, and hashtags.
+ * - Handle form input changes and form submission to update the art piece.
+ * - Display validation errors returned from the backend API.
+ *
+ * State:
+ * - artpieceData: Holds the current values for title, description, image, medium, sale status, hashtags, and image URL.
+ * - errors: Stores any validation or submission errors for the form.
+ *
+ * Hooks:
+ * - useRedirect: Redirects logged-out users to the specified route.
+ * - useNavigate: Allows navigation to different routes.
+ * - useParams: Retrieves the art piece ID from the URL parameters.
+ * - useState: Manages the component's local state.
+ * - useEffect: Fetches art piece data when the component mounts or when dependencies change.
+ *
+ * API Calls:
+ * - axiosReq.get(`/artpieces/${id}/`): Fetches the current art piece data.
+ * - axiosReq.put(`/artpieces/${id}/`): Submits the updated art piece data to the backend API.
+ *
+ * @returns {JSX.Element} The EditArtpiecePage component.
+ */
 const EditArtpiecePage = () => {
   useRedirect("loggedOut", "/");
   const navigate = useNavigate();
