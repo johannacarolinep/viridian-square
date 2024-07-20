@@ -69,7 +69,11 @@ const Discover = ({ likesFilter = "" }) => {
             </Col>
 
             <Col sm={4} lg={2} className="ps-0 ps-lg-2">
+              <Form.Label htmlFor="formFilterMedium" className="sr-only">
+                Filter results by art medium used
+              </Form.Label>
               <Form.Select
+                id="formFilterMedium"
                 value={filterMedium}
                 onChange={(event) => setFilterMedium(event.target.value)}
                 className={`h-100 ${styles.Select}`}
@@ -87,7 +91,11 @@ const Discover = ({ likesFilter = "" }) => {
               </Form.Select>
             </Col>
             <Col sm={4} lg={2}>
+              <Form.Label htmlFor="formFilterOrder" className="sr-only">
+                Select sort order
+              </Form.Label>
               <Form.Select
+                id="formFilterOrder"
                 value={sortOrder}
                 onChange={(event) => setSortOrder(event.target.value)}
                 className={`h-100 ${styles.Select}`}
