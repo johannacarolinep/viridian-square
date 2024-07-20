@@ -334,9 +334,12 @@ const ArtpieceDetailed = (props) => {
             contract.
           </p>
           <Form onSubmit={handleSubmitEnquiry}>
-            <Form.Group className="mb-3">
-              <Form.Label>Your message to the artist:</Form.Label>
+            <Form.Group controlId="formInitialMsg" className="mb-3">
+              <Form.Label htmlFor="formInitialMsg">
+                Your message to the artist:
+              </Form.Label>
               <Form.Control
+                id="formInitialMsg"
                 name="initial_message"
                 placeholder="Write your message here"
                 value={initialMessage}

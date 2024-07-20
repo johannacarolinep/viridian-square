@@ -127,9 +127,10 @@ const EditCollectionPage = ({ newCollection }) => {
                   <div className={`${appStyles.dividerPrimary} mb-3`}></div>
                 </Col>
                 <Col lg={6} className={appStyles.bgWhite}>
-                  <Form.Group>
-                    <Form.Label>Title</Form.Label>
+                  <Form.Group controlId="formTitle">
+                    <Form.Label htmlFor="formTitle">Title</Form.Label>
                     <Form.Control
+                      id="formTitle"
                       type="text"
                       name="title"
                       value={title}
@@ -140,9 +141,12 @@ const EditCollectionPage = ({ newCollection }) => {
                     <p key={idx}>{message}</p>
                   ))}
 
-                  <Form.Group>
-                    <Form.Label>Description</Form.Label>
+                  <Form.Group controlId="formDescription">
+                    <Form.Label htmlFor="formDescription">
+                      Description
+                    </Form.Label>
                     <Form.Control
+                      id="formDescription"
                       as="textarea"
                       rows={6}
                       name="description"

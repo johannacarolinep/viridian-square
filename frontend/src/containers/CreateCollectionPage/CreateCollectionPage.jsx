@@ -57,9 +57,10 @@ const CreateCollectionPage = () => {
               <div className={`${appStyles.dividerPrimary} mb-3`}></div>
             </Col>
             <Col lg={6} className={appStyles.bgWhite}>
-              <Form.Group>
-                <Form.Label>Title</Form.Label>
+              <Form.Group controlId="collectionTitle">
+                <Form.Label htmlFor="collectionTitle">Title</Form.Label>
                 <Form.Control
+                  id="collectionTitle"
                   type="text"
                   name="title"
                   value={title}
@@ -70,9 +71,10 @@ const CreateCollectionPage = () => {
                 <p key={idx}>{message}</p>
               ))}
 
-              <Form.Group>
-                <Form.Label>Description</Form.Label>
+              <Form.Group controlId="collectionDescr">
+                <Form.Label htmlFor="collectionDescr">Description</Form.Label>
                 <Form.Control
+                  id="collectionDescr"
                   as="textarea"
                   rows={6}
                   name="description"

@@ -388,7 +388,9 @@ const EnquiriesPage = () => {
                                       className="mb-3"
                                       controlId="statusSelect"
                                     >
-                                      <Form.Label>Select Decision:</Form.Label>
+                                      <Form.Label htmlFor="statusSelect">
+                                        Select Decision:
+                                      </Form.Label>
                                       <p>
                                         If you accept the enquiry, your email
                                         address,{" "}
@@ -401,6 +403,7 @@ const EnquiriesPage = () => {
                                         </span>
                                       </p>
                                       <Form.Select
+                                        id="statusSelect"
                                         aria-label="Select a decision"
                                         name="status"
                                         value={status}
@@ -420,10 +423,11 @@ const EnquiriesPage = () => {
                                       className="mb-3"
                                       controlId="responseTextarea"
                                     >
-                                      <Form.Label>
+                                      <Form.Label htmlFor="responseTextarea">
                                         Do you wish to pass along a message?
                                       </Form.Label>
                                       <Form.Control
+                                        id="responseTextarea"
                                         as="textarea"
                                         rows={3}
                                         name="response_message"

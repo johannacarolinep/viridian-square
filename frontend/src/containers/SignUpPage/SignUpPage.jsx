@@ -53,8 +53,9 @@ const SignUpForm = () => {
               <h1>Sign up:</h1>
               <div className={`${appStyles.dividerPrimary} mb-3`}></div>
               <Form.Group controlId="email">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label htmlFor="email">Email address</Form.Label>
                 <Form.Control
+                  id="email"
                   type="email"
                   placeholder="Enter email"
                   name="email"
@@ -71,8 +72,9 @@ const SignUpForm = () => {
               ))}
 
               <Form.Group className="mb-3" controlId="password1">
-                <Form.Label>Password</Form.Label>
+                <Form.Label htmlFor="password1">Password</Form.Label>
                 <Form.Control
+                  id="password1"
                   type="password"
                   placeholder="Password"
                   name="password1"
@@ -84,8 +86,9 @@ const SignUpForm = () => {
                 <p key={idx}>{message}</p>
               ))}
               <Form.Group className="mb-3" controlId="password2">
-                <Form.Label>Password again</Form.Label>
+                <Form.Label htmlFor="password2">Password again</Form.Label>
                 <Form.Control
+                  id="password2"
                   type="password"
                   placeholder="Password"
                   name="password2"

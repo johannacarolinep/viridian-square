@@ -142,7 +142,7 @@ const EditArtpiecePage = () => {
         <Form onSubmit={handleSubmit} className="my-3">
           <Row className="m-0">
             <Col lg={6} className={appStyles.bgAccentLight}>
-              <Form.Group>
+              <Form.Group controlId="image-upload">
                 <div className={`${appStyles.bgAccentLight} p-4`}>
                   <Form.Label htmlFor="image-upload" className="mb-0">
                     <h2>Image:</h2>
@@ -184,9 +184,10 @@ const EditArtpiecePage = () => {
               <div className={`${appStyles.bgWhite} p-4`}>
                 <h2>Details:</h2>
                 <div className={`${appStyles.dividerPrimary} mb-3`}></div>
-                <Form.Group>
-                  <Form.Label>Title</Form.Label>
+                <Form.Group controlId="collectionTitle">
+                  <Form.Label htmlFor="collectionTitle">Title</Form.Label>
                   <Form.Control
+                    id="collectionTitle"
                     type="text"
                     name="title"
                     value={title}
@@ -197,9 +198,10 @@ const EditArtpiecePage = () => {
                   <p key={idx}>{message}</p>
                 ))}
 
-                <Form.Group>
-                  <Form.Label>Description</Form.Label>
+                <Form.Group controlId="collectionDescr">
+                  <Form.Label htmlFor="collectionDescr">Description</Form.Label>
                   <Form.Control
+                    id="collectionDescr"
                     as="textarea"
                     rows={6}
                     name="description"
@@ -211,9 +213,10 @@ const EditArtpiecePage = () => {
                   <p key={idx}>{message}</p>
                 ))}
 
-                <Form.Group>
-                  <Form.Label>Medium used:</Form.Label>
+                <Form.Group controlId="medium">
+                  <Form.Label htmlFor="medium">Medium used:</Form.Label>
                   <Form.Control
+                    id="medium"
                     as="select"
                     name="art_medium"
                     value={art_medium}
@@ -230,9 +233,10 @@ const EditArtpiecePage = () => {
                   <p key={idx}>{message}</p>
                 ))}
 
-                <Form.Group>
-                  <Form.Label>For sale?:</Form.Label>
+                <Form.Group controlId="forSale">
+                  <Form.Label htmlFor="forSale">For sale?:</Form.Label>
                   <Form.Control
+                    id="forSale"
                     as="select"
                     name="for_sale"
                     value={for_sale}
@@ -249,9 +253,10 @@ const EditArtpiecePage = () => {
                   <p key={idx}>{message}</p>
                 ))}
 
-                <Form.Group>
-                  <Form.Label>Hashtags</Form.Label>
+                <Form.Group controlId="hashtags">
+                  <Form.Label htmlFor="hashtags">Hashtags</Form.Label>
                   <Form.Control
+                    id="hashtags"
                     type="text"
                     name="hashtags"
                     value={hashtags}

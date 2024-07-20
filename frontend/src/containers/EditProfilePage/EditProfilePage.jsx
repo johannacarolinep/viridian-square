@@ -103,7 +103,7 @@ const EditProfilePage = () => {
         <Form onSubmit={handleSubmit} className="my-3">
           <Row className="m-0">
             <Col lg={6} className={appStyles.bgAccentLight}>
-              <Form.Group>
+              <Form.Group controlId="image-upload">
                 <div className={`${appStyles.bgAccentLight} p-4`}>
                   <Form.Label htmlFor="image-upload" className="mb-0">
                     <h2>Profile image:</h2>
@@ -145,9 +145,10 @@ const EditProfilePage = () => {
               <div className={`${appStyles.bgWhite} p-4`}>
                 <h2>Details:</h2>
                 <div className={`${appStyles.dividerPrimary} mb-3`}></div>
-                <Form.Group>
-                  <Form.Label>Name:</Form.Label>
+                <Form.Group controlId="profileName">
+                  <Form.Label htmlFor="profileName">Name:</Form.Label>
                   <Form.Control
+                    id="profileName"
                     type="text"
                     name="name"
                     value={name}
@@ -158,9 +159,10 @@ const EditProfilePage = () => {
                   <p key={idx}>{message}</p>
                 ))}
 
-                <Form.Group>
-                  <Form.Label>Description</Form.Label>
+                <Form.Group controlId="descr">
+                  <Form.Label htmlFor="descr">Description</Form.Label>
                   <Form.Control
+                    id="descr"
                     as="textarea"
                     rows={6}
                     name="description"
@@ -172,9 +174,10 @@ const EditProfilePage = () => {
                   <p key={idx}>{message}</p>
                 ))}
 
-                <Form.Group>
-                  <Form.Label>Location:</Form.Label>
+                <Form.Group controlId="location">
+                  <Form.Label htmlFor="location">Location:</Form.Label>
                   <Form.Control
+                    id="location"
                     type="text"
                     name="location"
                     value={location}
