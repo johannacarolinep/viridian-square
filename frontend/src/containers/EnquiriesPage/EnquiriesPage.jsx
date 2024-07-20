@@ -245,7 +245,10 @@ const EnquiriesPage = () => {
                                       <div
                                         className={`${appStyles.bgAccentLight} ${styles.ImgContainer} mb-1`}
                                       >
-                                        <Image src={artpiece.image_url} />
+                                        <Image
+                                          src={artpiece.image_url}
+                                          alt={`The artpiece for which the enquiry was made, ${artpiece.title}`}
+                                        />
                                       </div>
                                       <p className="mb-0">
                                         <span className="fw-bold">Title:</span>{" "}

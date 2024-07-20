@@ -119,7 +119,10 @@ const SignUpForm = () => {
               className={`d-flex align-items-center justify-content-center`}
             >
               <div className={`${styles.ImgContainer}`}>
-                <Image src={Napoleon} />
+                <Image
+                  src={Napoleon}
+                  alt="Oil painting of Napoleon on horseback"
+                />
               </div>
             </Col>
           </Row>

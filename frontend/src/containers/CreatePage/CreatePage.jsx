@@ -20,7 +20,10 @@ const CreatePage = () => {
           <Col xs={12} md={6} className={`h-100 d-flex justify-content-center`}>
             <Link to="/create-artpiece" className={styles.LinkCard}>
               <div className={`${styles.ImgContainer}`}>
-                <Image src={Frame} />
+                <Image
+                  src={Frame}
+                  alt="One frame, symbolising option to create an artpiece"
+                />
               </div>
               <div className="fs-3 mt-3 fw-bold">New artpiece</div>
             </Link>
@@ -28,7 +31,10 @@ const CreatePage = () => {
           <Col xs={12} md={6} className={`h-100 d-flex justify-content-center`}>
             <Link to="/create-collection" className={styles.LinkCard}>
               <div className={`${styles.ImgContainer}`}>
-                <Image src={Collection} />
+                <Image
+                  src={Collection}
+                  alt="Several frames, symbolising option to create a collection"
+                />
               </div>
               <div className="fs-3 mt-3 fw-bold">New collection</div>
             </Link>

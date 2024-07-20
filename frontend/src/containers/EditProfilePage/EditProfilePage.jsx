@@ -113,9 +113,17 @@ const EditProfilePage = () => {
                     className={`${appStyles.ImageContain} ${styles.ImageUpload}`}
                   >
                     {profile_image ? (
-                      <Image src={profile_image} rounded />
+                      <Image
+                        src={profile_image}
+                        rounded
+                        alt="Your new profile image"
+                      />
                     ) : (
-                      <Image src={profile_image_url} rounded />
+                      <Image
+                        src={profile_image_url}
+                        rounded
+                        alt="Your existing profile image"
+                      />
                     )}
                   </div>
 

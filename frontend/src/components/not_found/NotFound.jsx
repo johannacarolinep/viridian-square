@@ -18,7 +18,7 @@ const NotFound = () => {
           </Link>
         </div>
         <div className={styles.ImgContainer}>
-          <Image src={NoResults} />
+          <Image src={NoResults} alt="Page not found" />
         </div>
       </div>
     </main>

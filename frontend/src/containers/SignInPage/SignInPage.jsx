@@ -109,7 +109,10 @@ const SignInForm = () => {
               className={`d-flex align-items-center justify-content-center`}
             >
               <div className={`${styles.ImgContainer}`}>
-                <Image src={SignIn} />
+                <Image
+                  src={SignIn}
+                  alt="Oil painting of woman with two children, facing the viewer"
+                />
               </div>
             </Col>
           </Row>

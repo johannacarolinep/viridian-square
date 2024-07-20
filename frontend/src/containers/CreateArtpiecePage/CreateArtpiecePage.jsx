@@ -137,9 +137,9 @@ const CreateArtpiecePage = () => {
                     className={`${appStyles.ImageContain} ${styles.ImageUpload}`}
                   >
                     {image ? (
-                      <Image src={image} rounded />
+                      <Image src={image} rounded alt="Your uploaded image" />
                     ) : (
-                      <Image src={logo} rounded />
+                      <Image src={logo} rounded alt="" />
                     )}
                   </div>
 

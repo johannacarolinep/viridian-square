@@ -207,7 +207,10 @@ const EditCollectionPage = ({ newCollection }) => {
                               onClick={() => handleDeselect(artpiece.id)}
                               className={`${styles.Selected} ${appStyles.ImageCover} ${appStyles.Square}`}
                             >
-                              <Image src={artpiece.image_url} />
+                              <Image
+                                src={artpiece.image_url}
+                                alt={artpiece.title}
+                              />
                             </div>
                           ) : artpiece.art_collection &&
                             artpiece.art_collection !== parseInt(id) ? (
@@ -222,7 +225,10 @@ const EditCollectionPage = ({ newCollection }) => {
                               <div
                                 className={`position-relative ${appStyles.ImageCover} ${appStyles.Square}`}
                               >
-                                <Image src={artpiece.image_url} />
+                                <Image
+                                  src={artpiece.image_url}
+                                  alt={artpiece.title}
+                                />
                                 <div className={styles.Unavailable}></div>
                               </div>
                             </OverlayTrigger>
@@ -231,7 +237,10 @@ const EditCollectionPage = ({ newCollection }) => {
                               onClick={() => handleSelect(artpiece.id)}
                               className={`${styles.Available} ${appStyles.ImageCover} ${appStyles.Square}`}
                             >
-                              <Image src={artpiece.image_url} />
+                              <Image
+                                src={artpiece.image_url}
+                                alt={artpiece.title}
+                              />
                             </div>
                           )}
                         </Col>

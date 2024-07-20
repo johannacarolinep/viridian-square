@@ -152,9 +152,17 @@ const EditArtpiecePage = () => {
                     className={`${appStyles.ImageContain} ${styles.ImageUpload}`}
                   >
                     {image ? (
-                      <Image src={image} rounded />
+                      <Image
+                        src={image}
+                        rounded
+                        alt="Your newly uploaded image"
+                      />
                     ) : (
-                      <Image src={image_url} rounded />
+                      <Image
+                        src={image_url}
+                        rounded
+                        alt="The existing image associated with this artpiece"
+                      />
                     )}
                   </div>
 
