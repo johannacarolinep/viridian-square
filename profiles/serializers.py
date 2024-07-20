@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Profile
+import cloudinary.uploader
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -32,6 +33,8 @@ class ProfileSerializer(serializers.ModelSerializer):
         get_profile_image_url(obj): Retrieves the URL of the profile image.
         get_is_owner(obj): Determines if the request user is the owner of the
         profile.
+        create: Handles creation of Profile instances
+        update: Handles update of existing profile instances
     """
     owner = serializers.ReadOnlyField(source='owner.id')
     is_owner = serializers.SerializerMethodField()
@@ -116,6 +119,8 @@ class ProfileSerializer(serializers.ModelSerializer):
         """
         if isinstance(obj.profile_image, str):
             return obj.profile_image
+        print("PROFILE IMAGE")
+        print("profile image url", obj.profile_image.url)
         return obj.profile_image.url
 
     def get_is_owner(self, obj):
@@ -130,6 +135,35 @@ class ProfileSerializer(serializers.ModelSerializer):
         """
         request = self.context['request']
         return request.user == obj.owner
+
+    def create(self, validated_data):
+        """
+        Handles creation of a new Profile instance.
+        """
+        profile_image = validated_data.pop('profile_image', None)
+
+        if profile_image:
+            upload_data = cloudinary.uploader.upload(profile_image, secure=True)
+            validated_data['profile_image'] = upload_data['secure_url']
+
+        profile = Profile.objects.create(**validated_data)
+        return profile
+
+    def update(self, instance, validated_data):
+        """
+        Handles updating an existing Profile instance.
+        """
+        profile_image = validated_data.pop('profile_image', None)
+
+        if profile_image:
+            upload_data = cloudinary.uploader.upload(profile_image, secure=True)
+            instance.profile_image = upload_data['secure_url']
+
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        instance.save()
+        return instance
 
     class Meta:
         model = Profile
