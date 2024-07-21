@@ -36,7 +36,7 @@ class Profile(models.Model):
     description = models.CharField(max_length=180, blank=True)
     profile_image = CloudinaryField(
         'image',
-        default='default_profile_viridian',)
+        default='default_t6trzy')
     location = models.CharField(max_length=50, blank=True)
 
     def save(self, *args, **kwargs):
@@ -57,7 +57,7 @@ class Profile(models.Model):
 
         if old_image and old_image != self.profile_image:
             # Check if the old image is not the default image
-            default_image_public_id = 'default_profile_shke8m'
+            default_image_public_id = 'default_t6trzy'
             match = re.search(r'/([^/]+)$', old_image.url)
             if match:
                 public_id = match.group(1).split('.')[0]

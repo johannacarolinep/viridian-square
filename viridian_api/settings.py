@@ -2,6 +2,7 @@
 from pathlib import Path
 import os
 import dj_database_url
+import cloudinary
 
 if os.path.exists('env.py'):
     import env  # noqa: F401
@@ -11,6 +12,11 @@ CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL'),
     'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
 }
+# Cloudinary config
+cloudinary.config(
+    cloud_name=os.environ.get("CLOUD_NAME"),
+    secure=True
+)
 
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
