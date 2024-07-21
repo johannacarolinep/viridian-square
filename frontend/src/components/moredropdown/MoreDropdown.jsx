@@ -31,9 +31,9 @@ export const MoreDropdown = ({
 
       <Dropdown.Menu>
         <Dropdown.Item onClick={handleEdit} aria-label="edit">
-          <i className="fas fa-edit" /> Edit {profile && `profile`}
-          {collection && `collection`}
-          {artpiece && `artpiece`}
+          <i className="fas fa-edit" /> Edit {profile && "profile"}
+          {collection && "collection"}
+          {artpiece && "artpiece"}
         </Dropdown.Item>
         {handleDeleteConfirm && (
           <Dropdown.Item
@@ -41,8 +41,8 @@ export const MoreDropdown = ({
             aria-label="delete"
           >
             <i className="fas fa-trash-alt" /> Delete{" "}
-            {collection && `collection`}
-            {artpiece && `artpiece`}
+            {collection && "collection"}
+            {artpiece && "artpiece"}
           </Dropdown.Item>
         )}
         {handleAccountChange && (

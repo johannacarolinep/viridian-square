@@ -48,7 +48,7 @@ const CollectionCard = ({
           )}
         </div>
         {listPage && (
-          <div className={`d-flex align-items-end`}>
+          <div className={"d-flex align-items-end"}>
             <Button
               className={`${appStyles.btnPrimary} ms-auto`}
               onClick={() => handleDisplayContentChange(collection)}

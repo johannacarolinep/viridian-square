@@ -13,7 +13,7 @@ const TrendingDisplay = () => {
   useEffect(() => {
     const fetchArtpieces = async () => {
       try {
-        const { data } = await axios.get(`/artpieces/trending/`);
+        const { data } = await axios.get("/artpieces/trending/");
         setArtpieces(data);
         setHasLoaded(true);
       } catch (err) {
@@ -45,7 +45,7 @@ const TrendingDisplay = () => {
             <div className={`${appStyles.bgWhite} w-100 rounded`}>
               <Asset
                 src={NoResults}
-                message={`Sorry! No trending artpieces to display right now.`}
+                message={"Sorry! No trending artpieces to display right now."}
               />
             </div>
           )}

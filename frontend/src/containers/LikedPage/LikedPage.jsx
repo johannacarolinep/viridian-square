@@ -34,7 +34,7 @@ const LikedPage = () => {
   return (
     <main>
       <section className={`${appStyles.bgPrimary} ${styles.HeroSection} fs-1`}>
-        <h1 className={`fw-bold mb-0`}>Your liked artpieces </h1>
+        <h1 className={"fw-bold mb-0"}>Your liked artpieces </h1>
         <i
           className={`fa-solid fa-heart ${appStyles.txtWhite} ${appStyles.txtLarger}`}
         ></i>

@@ -106,12 +106,12 @@ const DiscoverPage = () => {
       </section>
       {location.state?.needsProfileCompletion &&
         currentUser?.profile_name.startsWith("newuser") && (
-          <UpdateProfileModal
-            show={showModal}
-            handleClose={handleClose}
-            user={currentUser}
-          />
-        )}
+        <UpdateProfileModal
+          show={showModal}
+          handleClose={handleClose}
+          user={currentUser}
+        />
+      )}
     </main>
   );
 };

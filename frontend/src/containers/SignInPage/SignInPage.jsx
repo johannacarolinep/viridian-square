@@ -117,7 +117,7 @@ const SignInForm = () => {
               ))}
 
               <Button
-                className={`my-3 me-3`}
+                className={"my-3 me-3"}
                 variant="secondary"
                 onClick={() => navigate("/")}
               >
@@ -135,7 +135,7 @@ const SignInForm = () => {
             </Col>
             <Col
               lg={6}
-              className={`d-flex align-items-center justify-content-center`}
+              className={"d-flex align-items-center justify-content-center"}
             >
               <div className={`${styles.ImgContainer}`}>
                 <Image

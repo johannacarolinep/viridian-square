@@ -85,8 +85,8 @@ const SignUpForm = () => {
                   onChange={handleChange}
                 />
                 <Form.Text className="text-muted">
-                  We'll never share your email with anyone else without your
-                  express permission.
+                  We&apos;ll never share your email with anyone else without
+                  your express permission.
                 </Form.Text>
               </Form.Group>
               {errors.email?.map((message, idx) => (
@@ -121,7 +121,7 @@ const SignUpForm = () => {
               ))}
 
               <Button
-                className={`my-3 me-3`}
+                className={"my-3 me-3"}
                 variant="secondary"
                 onClick={() => navigate("/")}
               >
@@ -139,7 +139,7 @@ const SignUpForm = () => {
             </Col>
             <Col
               lg={6}
-              className={`d-flex align-items-center justify-content-center`}
+              className={"d-flex align-items-center justify-content-center"}
             >
               <div className={`${styles.ImgContainer}`}>
                 <Image

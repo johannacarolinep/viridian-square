@@ -32,8 +32,8 @@ const CreatePage = () => {
   return (
     <main className={`d-flex align-items-center ${appStyles.bgWhite}`}>
       <Container fluid="xl">
-        <Row className={`g-3 g-md-0 m-0 my-2 my-md-4`}>
-          <Col xs={12} md={6} className={`h-100 d-flex justify-content-center`}>
+        <Row className={"g-3 g-md-0 m-0 my-2 my-md-4"}>
+          <Col xs={12} md={6} className={"h-100 d-flex justify-content-center"}>
             <Link to="/create-artpiece" className={styles.LinkCard}>
               <div className={`${styles.ImgContainer}`}>
                 <Image
@@ -44,7 +44,7 @@ const CreatePage = () => {
               <div className="fs-3 mt-3 fw-bold">New artpiece</div>
             </Link>
           </Col>
-          <Col xs={12} md={6} className={`h-100 d-flex justify-content-center`}>
+          <Col xs={12} md={6} className={"h-100 d-flex justify-content-center"}>
             <Link to="/create-collection" className={styles.LinkCard}>
               <div className={`${styles.ImgContainer}`}>
                 <Image

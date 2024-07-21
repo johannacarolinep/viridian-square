@@ -6,11 +6,12 @@ import App from "./App";
 
 describe("App component", () => {
   it("renders without crashing", () => {
-    render(
+    const { container } = render(
       <Router>
         <App />
       </Router>
     );
+    expect(container).toBeInTheDocument();
   });
 
   it("contains the NavBar component", () => {

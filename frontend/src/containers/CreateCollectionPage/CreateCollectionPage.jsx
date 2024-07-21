@@ -110,7 +110,7 @@ const CreateCollectionPage = () => {
                 <p key={idx}>{message}</p>
               ))}
               <Button
-                className={`my-3 me-3`}
+                className={"my-3 me-3"}
                 variant="secondary"
                 onClick={() => navigate(-1)}
               >

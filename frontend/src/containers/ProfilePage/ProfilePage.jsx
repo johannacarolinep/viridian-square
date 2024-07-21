@@ -113,7 +113,7 @@ const ProfilePage = () => {
   };
 
   const handleAccountChange = () => {
-    navigate(`/account`);
+    navigate("/account");
   };
 
   const handleDisplayContentChange = (content) => {
@@ -152,7 +152,7 @@ const ProfilePage = () => {
       {hasLoaded ? (
         <Container fluid="xl" className={`my-xl-4 pb-3 ${appStyles.bgWhite}`}>
           <section className="p-lg-3">
-            <Row className={`m-0 g-4`}>
+            <Row className={"m-0 g-4"}>
               <Col md={4} lg={3}>
                 <div
                   className={`${appStyles.ImageCover} ${appStyles.Round} ${styles.ProfileImage}`}
@@ -244,12 +244,12 @@ const ProfilePage = () => {
                 </Button>
                 {displayContent !== "artpieces" &&
                   displayContent !== "collections" && (
-                    <div
-                      className={`${styles.Tab} ${styles.TabButtonSelected}`}
-                    >
-                      {displayContent.title}
-                    </div>
-                  )}
+                  <div
+                    className={`${styles.Tab} ${styles.TabButtonSelected}`}
+                  >
+                    {displayContent.title}
+                  </div>
+                )}
               </div>
             </Row>
             <Row className="m-0">
@@ -278,7 +278,7 @@ const ProfilePage = () => {
                   ) : (
                     <Row className={`m-0 mt-2 p-2 ${appStyles.bgLight}`}>
                       <div
-                        className={`d-flex justify-content-center align-items-center flex-column flex-md-row`}
+                        className={"d-flex justify-content-center align-items-center flex-column flex-md-row"}
                       >
                         <Link
                           to="/create-artpiece"
@@ -289,7 +289,7 @@ const ProfilePage = () => {
                         <div className={styles.ImgContainer}>
                           <ImageHolder
                             src={NoResults}
-                            alt={`No artpieces to display`}
+                            alt={"No artpieces to display"}
                           />
                         </div>
                       </div>

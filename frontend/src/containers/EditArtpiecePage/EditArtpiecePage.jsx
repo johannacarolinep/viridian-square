@@ -87,13 +87,13 @@ const EditArtpiecePage = () => {
 
         is_owner
           ? setArtpieceData({
-              title,
-              description,
-              image_url,
-              art_medium,
-              for_sale,
-              hashtags,
-            })
+            title,
+            description,
+            image_url,
+            art_medium,
+            for_sale,
+            hashtags,
+          })
           : navigate("/");
         setHasLoaded(true);
       } catch (err) {
@@ -301,7 +301,7 @@ const EditArtpiecePage = () => {
                   <p key={idx}>{message}</p>
                 ))}
                 <Button
-                  className={`my-3 me-3`}
+                  className={"my-3 me-3"}
                   variant="secondary"
                   onClick={() => navigate(-1)}
                 >

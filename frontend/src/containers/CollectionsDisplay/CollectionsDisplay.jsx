@@ -67,7 +67,7 @@ const CollectionsDisplay = ({
       ) : (
         <Row className={`m-3 ${appStyles.bgLight}`}>
           <div
-            className={`d-flex justify-content-center align-items-center flex-column flex-md-row`}
+            className={"d-flex justify-content-center align-items-center flex-column flex-md-row"}
           >
             <Link
               to="/create-collection"
@@ -76,7 +76,7 @@ const CollectionsDisplay = ({
               Create your first collection
             </Link>
             <div className={styles.ImgContainer}>
-              <ImageHolder src={NoResults} alt={`No collections to display`} />
+              <ImageHolder src={NoResults} alt={"No collections to display"} />
             </div>
           </div>
         </Row>

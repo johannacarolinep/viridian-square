@@ -115,10 +115,10 @@ const EnquiriesPage = () => {
           prevEnquiries.map((enquiry) =>
             enquiry.id === selectedEnquiry.id
               ? {
-                  ...enquiry,
-                  status: parseInt(status),
-                  response_message: responseMessage,
-                }
+                ...enquiry,
+                status: parseInt(status),
+                response_message: responseMessage,
+              }
               : enquiry
           )
         );
@@ -141,10 +141,10 @@ const EnquiriesPage = () => {
           prevEnquiries.map((e) =>
             e.id === enquiry.id
               ? {
-                  ...e,
-                  buyer_has_checked: data.buyer_has_checked,
-                  artist_has_checked: data.artist_has_checked,
-                }
+                ...e,
+                buyer_has_checked: data.buyer_has_checked,
+                artist_has_checked: data.artist_has_checked,
+              }
               : e
           )
         );
@@ -159,7 +159,7 @@ const EnquiriesPage = () => {
       <section
         className={`${appStyles.bgAccentDark} ${styles.HeroSection} fs-1`}
       >
-        <h1 className={`fw-bold mb-0`}>Your enquiries </h1>
+        <h1 className={"fw-bold mb-0"}>Your enquiries </h1>
         <i
           className={`fa-regular fa-envelope ${appStyles.txtWhite} ${appStyles.txtLarger}`}
         ></i>
@@ -195,13 +195,13 @@ const EnquiriesPage = () => {
                                 <span className="me-2">
                                   {currentUser.profile_name ===
                                   enquiry.buyer_name ? (
-                                    <>Enquiry sent to: {enquiry.artist_name}</>
-                                  ) : (
-                                    <>
+                                      <>Enquiry sent to: {enquiry.artist_name}</>
+                                    ) : (
+                                      <>
                                       Enquiry received from:{" "}
-                                      {enquiry.buyer_name}
-                                    </>
-                                  )}
+                                        {enquiry.buyer_name}
+                                      </>
+                                    )}
                                 </span>
                                 {enquiry.status === 0 ? (
                                   <Badge bg="warning" text="dark" pill>
@@ -247,9 +247,9 @@ const EnquiriesPage = () => {
                                     sm={12}
                                     md={7}
                                     lg={8}
-                                    className={`d-flex flex-column`}
+                                    className={"d-flex flex-column"}
                                   >
-                                    <p className={`fw-bold`}>
+                                    <p className={"fw-bold"}>
                                       Enquiry by{" "}
                                       {enquiry.is_buyer ? (
                                         <span>You</span>
@@ -344,185 +344,185 @@ const EnquiriesPage = () => {
                                     </p>
                                   ) : enquiry.is_buyer &&
                                     enquiry.status !== 0 ? (
-                                    <div>
-                                      <Avatar
-                                        src={enquiry.artist_profile_image}
-                                      />
-                                      <Link
-                                        to={`/profiles/${enquiry.artist_profile_id}`}
-                                        className={appStyles.txtPrimary}
-                                        aria-label={`Go to ${enquiry.artist_name}'s profile page`}
-                                      >
-                                        {enquiry.artist_name}
-                                      </Link>{" "}
+                                      <div>
+                                        <Avatar
+                                          src={enquiry.artist_profile_image}
+                                        />
+                                        <Link
+                                          to={`/profiles/${enquiry.artist_profile_id}`}
+                                          className={appStyles.txtPrimary}
+                                          aria-label={`Go to ${enquiry.artist_name}'s profile page`}
+                                        >
+                                          {enquiry.artist_name}
+                                        </Link>{" "}
                                       has responded to your enquiry:
-                                      {enquiry.response_message && (
-                                        <div
-                                          className={`${appStyles.bgWhite} p-3 mt-3 ${appStyles.txtAccentDark}`}
-                                        >
-                                          <p className="m-0">
-                                            {enquiry.response_message}
-                                          </p>
-                                        </div>
-                                      )}
-                                      {enquiry.status === 1 ? (
-                                        <p className="mt-3">
+                                        {enquiry.response_message && (
+                                          <div
+                                            className={`${appStyles.bgWhite} p-3 mt-3 ${appStyles.txtAccentDark}`}
+                                          >
+                                            <p className="m-0">
+                                              {enquiry.response_message}
+                                            </p>
+                                          </div>
+                                        )}
+                                        {enquiry.status === 1 ? (
+                                          <p className="mt-3">
                                           The artist has{" "}
-                                          <span
-                                            className={`fw-bold ${appStyles.txtPrimary} ${appStyles.txtLarger}`}
-                                          >
+                                            <span
+                                              className={`fw-bold ${appStyles.txtPrimary} ${appStyles.txtLarger}`}
+                                            >
                                             accepted
-                                          </span>{" "}
+                                            </span>{" "}
                                           your enquiry. Their email is:{" "}
-                                          <span
-                                            className={`fw-bold ${appStyles.txtPrimary} ${appStyles.txtLarger}`}
-                                          >
-                                            {enquiry.artist_email}
-                                          </span>
-                                        </p>
-                                      ) : (
-                                        <p>
-                                          Unfortunately, the artist has{" "}
-                                          <span className="fw-bold">
-                                            declined
-                                          </span>{" "}
-                                          your enquiry.
-                                        </p>
-                                      )}
-                                    </div>
-                                  ) : enquiry.is_artist &&
-                                    enquiry.status !== 0 ? (
-                                    <div>
-                                      <Avatar
-                                        src={enquiry.artist_profile_image}
-                                      />
-                                      You{" "}
-                                      {enquiry.status === 1 ? (
-                                        <span className="fw-bold">
-                                          accepted
-                                        </span>
-                                      ) : enquiry.status === 2 ? (
-                                        <span className="fw-bold">
-                                          declined
-                                        </span>
-                                      ) : (
-                                        ""
-                                      )}{" "}
-                                      <Link
-                                        to={`/profiles/${enquiry.buyer_profile_id}`}
-                                        className={`${appStyles.txtPrimary}`}
-                                        aria-label={`Go to ${enquiry.buyer_name}'s profile page`}
-                                      >
-                                        {enquiry.buyer_name}'s
-                                      </Link>{" "}
-                                      enquiry.
-                                      {enquiry.response_message && (
-                                        <div
-                                          className={`${appStyles.bgWhite} p-3 my-3 ${appStyles.txtAccentDark}`}
-                                        >
-                                          <p className="m-0">
-                                            <span className="fw-bold">
-                                              You responded:{" "}
+                                            <span
+                                              className={`fw-bold ${appStyles.txtPrimary} ${appStyles.txtLarger}`}
+                                            >
+                                              {enquiry.artist_email}
                                             </span>
-                                            {enquiry.response_message}
                                           </p>
-                                        </div>
-                                      )}
-                                      {enquiry.status === 1 ? (
-                                        <p>
+                                        ) : (
+                                          <p>
+                                          Unfortunately, the artist has{" "}
+                                            <span className="fw-bold">
+                                            declined
+                                            </span>{" "}
+                                          your enquiry.
+                                          </p>
+                                        )}
+                                      </div>
+                                    ) : enquiry.is_artist &&
+                                    enquiry.status !== 0 ? (
+                                        <div>
+                                          <Avatar
+                                            src={enquiry.artist_profile_image}
+                                          />
+                                      You{" "}
+                                          {enquiry.status === 1 ? (
+                                            <span className="fw-bold">
+                                          accepted
+                                            </span>
+                                          ) : enquiry.status === 2 ? (
+                                            <span className="fw-bold">
+                                          declined
+                                            </span>
+                                          ) : (
+                                            ""
+                                          )}{" "}
+                                          <Link
+                                            to={`/profiles/${enquiry.buyer_profile_id}`}
+                                            className={`${appStyles.txtPrimary}`}
+                                            aria-label={`Go to ${enquiry.buyer_name}'s profile page`}
+                                          >
+                                            {enquiry.buyer_name}&apos;s
+                                          </Link>{" "}
+                                      enquiry.
+                                          {enquiry.response_message && (
+                                            <div
+                                              className={`${appStyles.bgWhite} p-3 my-3 ${appStyles.txtAccentDark}`}
+                                            >
+                                              <p className="m-0">
+                                                <span className="fw-bold">
+                                              You responded:{" "}
+                                                </span>
+                                                {enquiry.response_message}
+                                              </p>
+                                            </div>
+                                          )}
+                                          {enquiry.status === 1 ? (
+                                            <p>
                                           Your email address,{" "}
-                                          <span className="fw-bold">
-                                            {currentUser?.email}
-                                          </span>
+                                              <span className="fw-bold">
+                                                {currentUser?.email}
+                                              </span>
                                           , has been shared with{" "}
-                                          {enquiry.buyer_name}
-                                        </p>
-                                      ) : (
-                                        <p>
+                                              {enquiry.buyer_name}
+                                            </p>
+                                          ) : (
+                                            <p>
                                           Your email address will not be shared
                                           with {enquiry.buyer_name}.
-                                        </p>
-                                      )}
-                                    </div>
-                                  ) : (
-                                    <div>
-                                      <p className="fw-bold">
+                                            </p>
+                                          )}
+                                        </div>
+                                      ) : (
+                                        <div>
+                                          <p className="fw-bold">
                                         Respond to this enquiry:
-                                      </p>
-                                      <Form onSubmit={handleFormSubmit}>
-                                        <Form.Group
-                                          className="mb-3"
-                                          controlId="statusSelect"
-                                        >
-                                          <Form.Label>
+                                          </p>
+                                          <Form onSubmit={handleFormSubmit}>
+                                            <Form.Group
+                                              className="mb-3"
+                                              controlId="statusSelect"
+                                            >
+                                              <Form.Label>
                                             Select Decision:
-                                          </Form.Label>
-                                          <p>
+                                              </Form.Label>
+                                              <p>
                                             If you accept the enquiry, your
                                             email address,{" "}
-                                            <span className="fw-bold">
-                                              {currentUser?.email}
-                                            </span>
+                                                <span className="fw-bold">
+                                                  {currentUser?.email}
+                                                </span>
                                             , will be shared with{" "}
-                                            <span className="fw-bold">
-                                              {enquiry.buyer_name}
-                                            </span>
-                                          </p>
-                                          <Form.Select
-                                            aria-label="Select a decision"
-                                            name="status"
-                                            value={status}
-                                            onChange={(e) =>
-                                              setStatus(e.target.value)
-                                            }
-                                          >
-                                            <option>
+                                                <span className="fw-bold">
+                                                  {enquiry.buyer_name}
+                                                </span>
+                                              </p>
+                                              <Form.Select
+                                                aria-label="Select a decision"
+                                                name="status"
+                                                value={status}
+                                                onChange={(e) =>
+                                                  setStatus(e.target.value)
+                                                }
+                                              >
+                                                <option>
                                               Open this select menu
-                                            </option>
-                                            <option value="1">Accept</option>
-                                            <option value="2">Decline</option>
-                                          </Form.Select>
-                                        </Form.Group>
-                                        {errors.status?.map((message, idx) => (
-                                          <p key={idx}>{message}</p>
-                                        ))}
-                                        <Form.Group
-                                          className="mb-3"
-                                          controlId="responseTextarea"
-                                        >
-                                          <Form.Label>
+                                                </option>
+                                                <option value="1">Accept</option>
+                                                <option value="2">Decline</option>
+                                              </Form.Select>
+                                            </Form.Group>
+                                            {errors.status?.map((message, idx) => (
+                                              <p key={idx}>{message}</p>
+                                            ))}
+                                            <Form.Group
+                                              className="mb-3"
+                                              controlId="responseTextarea"
+                                            >
+                                              <Form.Label>
                                             Do you wish to pass along a message?
-                                          </Form.Label>
-                                          <Form.Control
-                                            as="textarea"
-                                            rows={3}
-                                            name="response_message"
-                                            value={responseMessage}
-                                            onChange={(e) =>
-                                              setResponseMessage(e.target.value)
-                                            }
-                                          />
-                                        </Form.Group>
-                                        {errors.response_message?.map(
-                                          (message, idx) => (
-                                            <p key={idx}>{message}</p>
-                                          )
-                                        )}
-                                        <Button
-                                          className={appStyles.btnPrimary}
-                                          type="submit"
-                                          aria-label="Submit enquiry response"
-                                        >
+                                              </Form.Label>
+                                              <Form.Control
+                                                as="textarea"
+                                                rows={3}
+                                                name="response_message"
+                                                value={responseMessage}
+                                                onChange={(e) =>
+                                                  setResponseMessage(e.target.value)
+                                                }
+                                              />
+                                            </Form.Group>
+                                            {errors.response_message?.map(
+                                              (message, idx) => (
+                                                <p key={idx}>{message}</p>
+                                              )
+                                            )}
+                                            <Button
+                                              className={appStyles.btnPrimary}
+                                              type="submit"
+                                              aria-label="Submit enquiry response"
+                                            >
                                           Send
-                                        </Button>
-                                        {errors.non_field_errors?.map(
-                                          (message, idx) => (
-                                            <p key={idx}>{message}</p>
-                                          )
-                                        )}
-                                      </Form>
-                                    </div>
-                                  )}
+                                            </Button>
+                                            {errors.non_field_errors?.map(
+                                              (message, idx) => (
+                                                <p key={idx}>{message}</p>
+                                              )
+                                            )}
+                                          </Form>
+                                        </div>
+                                      )}
                                 </Row>
                               </>
                             )}
@@ -559,7 +559,7 @@ const EnquiriesPage = () => {
               ) : (
                 <Asset
                   src={NoResults}
-                  message={`You have not received/sent any enquiries`}
+                  message={"You have not received/sent any enquiries"}
                 />
               )}
             </>

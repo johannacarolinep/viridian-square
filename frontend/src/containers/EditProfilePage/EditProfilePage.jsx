@@ -68,11 +68,11 @@ const EditProfilePage = () => {
 
         is_owner
           ? setProfileData({
-              name,
-              description,
-              profile_image_url,
-              location,
-            })
+            name,
+            description,
+            profile_image_url,
+            location,
+          })
           : navigate("/");
         setHasLoaded(true);
       } catch (err) {
@@ -222,7 +222,7 @@ const EditProfilePage = () => {
                   <p key={idx}>{message}</p>
                 ))}
                 <Button
-                  className={`my-3 me-3`}
+                  className={"my-3 me-3"}
                   variant="secondary"
                   onClick={() => {
                     navigate(-1);

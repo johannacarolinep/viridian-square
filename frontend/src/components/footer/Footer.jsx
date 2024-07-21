@@ -8,7 +8,7 @@ import styles from "./Footer.module.css";
 const Footer = () => {
   return (
     <footer className={`${appStyles.bgDark} ${appStyles.txtWhite}`}>
-      <Container fluid="xl" className={`py-3`}>
+      <Container fluid="xl" className={"py-3"}>
         <Row className="align-items-top">
           <Col xs={12} lg={9} className="text-center text-lg-start">
             <p>© Copyright 2024 Viridian Sq</p>

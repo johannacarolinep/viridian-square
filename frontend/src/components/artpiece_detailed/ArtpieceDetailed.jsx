@@ -115,7 +115,7 @@ const ArtpieceDetailed = (props) => {
   return (
     <>
       <Row className="my-lg-5">
-        <div className={`col-lg-7 position-relative p-0`}>
+        <div className={"col-lg-7 position-relative p-0"}>
           <div className={styles.ImgContainer}>
             <ImageHolder
               contain
@@ -153,7 +153,9 @@ const ArtpieceDetailed = (props) => {
               {is_owner ? (
                 <OverlayTrigger
                   placement="bottom"
-                  overlay={<Tooltip>You can't like your own artpiece</Tooltip>}
+                  overlay={
+                    <Tooltip>You can&apos;t like your own artpiece</Tooltip>
+                  }
                 >
                   <button
                     className={`${appStyles.IconBtn} ps-0`}
@@ -217,9 +219,9 @@ const ArtpieceDetailed = (props) => {
 
             <div className="ps-0 my-1 mb-2 fs-5">
               <Badge pill bg="dark">
-                {for_sale === 0 && `Not for sale`}
-                {for_sale === 1 && `For sale`}
-                {for_sale === 2 && `Sold`}
+                {for_sale === 0 && "Not for sale"}
+                {for_sale === 1 && "For sale"}
+                {for_sale === 2 && "Sold"}
               </Badge>
             </div>
             {hashtags && (
@@ -365,7 +367,7 @@ const ArtpieceDetailed = (props) => {
             {errors.non_field_errors?.map((message, idx) => (
               <p key={idx}>{message}</p>
             ))}
-            <div className={`d-flex justify-content-end`}>
+            <div className={"d-flex justify-content-end"}>
               <Button
                 variant="secondary"
                 onClick={handleCloseEnquiry}

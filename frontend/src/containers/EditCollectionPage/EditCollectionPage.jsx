@@ -193,7 +193,7 @@ const EditCollectionPage = ({ newCollection }) => {
                     <p key={idx}>{message}</p>
                   ))}
                   <Button
-                    className={`my-3 me-3`}
+                    className={"my-3 me-3"}
                     variant="secondary"
                     onClick={() =>
                       navigate(
@@ -243,7 +243,7 @@ const EditCollectionPage = ({ newCollection }) => {
                       {ownedArtpieces.results.map((artpiece) => (
                         <Col key={artpiece.id}>
                           {selectedArtpieces.includes(artpiece.id) ? (
-                            <div
+                            <Button
                               onClick={() => handleDeselect(artpiece.id)}
                               className={`${styles.Selected} ${appStyles.ImageCover} ${appStyles.Square}`}
                               aria-label="Deselect artpiece"
@@ -252,7 +252,7 @@ const EditCollectionPage = ({ newCollection }) => {
                                 src={artpiece.image_url}
                                 alt={artpiece.title}
                               />
-                            </div>
+                            </Button>
                           ) : artpiece.art_collection &&
                             artpiece.art_collection !== parseInt(id) ? (
                             <OverlayTrigger
@@ -263,8 +263,8 @@ const EditCollectionPage = ({ newCollection }) => {
                                 </Tooltip>
                               }
                             >
-                              <div
-                                className={`position-relative ${appStyles.ImageCover} ${appStyles.Square}`}
+                              <Button
+                                className={`position-relative ${appStyles.ImageCover} ${appStyles.Square} ${styles.Unavailable}`}
                                 aria-label="Cannot be selected since it's alrady part of a different collection"
                               >
                                 <Image
@@ -272,10 +272,10 @@ const EditCollectionPage = ({ newCollection }) => {
                                   alt={artpiece.title}
                                 />
                                 <div className={styles.Unavailable}></div>
-                              </div>
+                              </Button>
                             </OverlayTrigger>
                           ) : (
-                            <div
+                            <Button
                               onClick={() => handleSelect(artpiece.id)}
                               className={`${styles.Available} ${appStyles.ImageCover} ${appStyles.Square}`}
                               aria-label="Select artpiece"
@@ -284,7 +284,7 @@ const EditCollectionPage = ({ newCollection }) => {
                                 src={artpiece.image_url}
                                 alt={artpiece.title}
                               />
-                            </div>
+                            </Button>
                           )}
                         </Col>
                       ))}
@@ -307,7 +307,7 @@ const EditCollectionPage = ({ newCollection }) => {
                     `/profiles/${currentUser.profile_id}/?collectionId=${id}`
                   )
                 }
-                className={`my-2 mx-md-2`}
+                className={"my-2 mx-md-2"}
                 variant="secondary"
               >
                 Skip this step

@@ -25,8 +25,8 @@ const UpdateProfileModal = ({ show, handleClose, user }) => {
           We recommend changing this into something more personal.
           <br />
           <br />
-          While you're at it, make your profile stand out better with a personal
-          image and description.
+          While you&apos;re at it, make your profile stand out better with a
+          personal image and description.
         </p>
       </Modal.Body>
       <Modal.Footer>

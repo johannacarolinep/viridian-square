@@ -37,10 +37,10 @@ const ArtpieceSimple = (props) => {
         results: prevArtpieces.results.map((artpiece) => {
           return artpiece.id === id
             ? {
-                ...artpiece,
-                likes_count: artpiece.likes_count + 1,
-                like_id: data.id,
-              }
+              ...artpiece,
+              likes_count: artpiece.likes_count + 1,
+              like_id: data.id,
+            }
             : artpiece;
         }),
       }));
@@ -57,10 +57,10 @@ const ArtpieceSimple = (props) => {
         results: prevArtpieces.results.map((artpiece) => {
           return artpiece.id === id
             ? {
-                ...artpiece,
-                likes_count: artpiece.likes_count - 1,
-                like_id: null,
-              }
+              ...artpiece,
+              likes_count: artpiece.likes_count - 1,
+              like_id: null,
+            }
             : artpiece;
         }),
       }));
@@ -104,7 +104,9 @@ const ArtpieceSimple = (props) => {
             {is_owner ? (
               <OverlayTrigger
                 placement="top"
-                overlay={<Tooltip>You can't like your own artpiece</Tooltip>}
+                overlay={
+                  <Tooltip>You can&apos;t like your own artpiece</Tooltip>
+                }
               >
                 <button
                   className={`p-0 ${appStyles.IconBtn}`}
