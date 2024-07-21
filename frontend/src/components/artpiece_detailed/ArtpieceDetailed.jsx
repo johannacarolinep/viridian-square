@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
 import Modal from "react-bootstrap/Modal";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Row from "react-bootstrap/Row";
@@ -14,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { MoreDropdown } from "../moredropdown/MoreDropdown";
+import ImageHolder from "../image_holder/ImageHolder";
 
 const ArtpieceDetailed = (props) => {
   const {
@@ -83,7 +83,7 @@ const ArtpieceDetailed = (props) => {
 
   const handleUnlike = async () => {
     try {
-      const { data } = await axiosRes.delete(`/likes/${like_id}`);
+      await axiosRes.delete(`/likes/${like_id}`);
       setArtpiece((prevArtpiece) => ({
         ...prevArtpiece,
         likes_count: prevArtpiece.likes_count - 1,
@@ -116,17 +116,12 @@ const ArtpieceDetailed = (props) => {
     <>
       <Row className="my-lg-5">
         <div className={`col-lg-7 position-relative p-0`}>
-          <Image
-            src={image_url}
-            alt={`${title}, artwork by artist ${profile_name}`}
-            className={styles.Image}
-          />
-          <div className="position-absolute top-0 end-0 p-3 fs-5">
-            <Badge pill bg="dark">
-              {for_sale === 0 && `Not for sale`}
-              {for_sale === 1 && `For sale`}
-              {for_sale === 2 && `Sold`}
-            </Badge>
+          <div className={styles.ImgContainer}>
+            <ImageHolder
+              contain
+              src={image_url}
+              alt={`${title}, artwork by artist ${profile_name}`}
+            />
           </div>
         </div>
         <div className="col-lg-5 mt-3 mt-lg-0 ps-4">
@@ -218,6 +213,14 @@ const ArtpieceDetailed = (props) => {
                 {art_medium}
               </p>
             )}
+
+            <div className="ps-0 my-1 mb-2 fs-5">
+              <Badge pill bg="dark">
+                {for_sale === 0 && `Not for sale`}
+                {for_sale === 1 && `For sale`}
+                {for_sale === 2 && `Sold`}
+              </Badge>
+            </div>
             {hashtags && (
               <p className={`fst-italic ${appStyles.txtAccentDark}`}>
                 {hashtags}
