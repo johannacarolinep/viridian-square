@@ -112,7 +112,7 @@ const CreateCollectionPage = () => {
               <Button
                 className={`my-3 me-3`}
                 variant="secondary"
-                onClick={() => navigate("/")}
+                onClick={() => navigate(-1)}
               >
                 Cancel
               </Button>

@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Asset from "../asset/Asset";
 import NoResults from "../../assets/images/noresults.webp";
 import ArtpieceSimple from "../artpiece_simple/ArtpieceSimple";
+import appStyles from "../../App.module.css";
 
 const TrendingDisplay = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -41,10 +42,12 @@ const TrendingDisplay = () => {
               ))}
             </>
           ) : (
-            <Asset
-              src={NoResults}
-              message={`Sorry! No trending artpieces to display right now.`}
-            />
+            <div className={`${appStyles.bgWhite} w-100 rounded`}>
+              <Asset
+                src={NoResults}
+                message={`Sorry! No trending artpieces to display right now.`}
+              />
+            </div>
           )}
         </>
       ) : (

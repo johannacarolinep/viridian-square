@@ -8,6 +8,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import Asset from "../../components/asset/Asset";
 import appStyles from "../../App.module.css";
 import styles from "./EditArtpiecePage.module.css";
 
@@ -68,6 +69,7 @@ const EditArtpiecePage = () => {
 
   const [errors, setErrors] = useState({});
   const imageInput = useRef(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const handleMount = async () => {
@@ -93,12 +95,14 @@ const EditArtpiecePage = () => {
               hashtags,
             })
           : navigate("/");
+        setHasLoaded(true);
       } catch (err) {
         // console.log(err);
       }
     };
 
     handleMount();
+    setHasLoaded(false);
   }, [id, navigate]);
 
   const handleChange = (event) => {
@@ -182,21 +186,26 @@ const EditArtpiecePage = () => {
                   <div
                     className={`${appStyles.ImageContain} ${styles.ImageUpload}`}
                   >
-                    {image ? (
-                      <Image
-                        src={image}
-                        rounded
-                        alt="Your newly uploaded image"
-                      />
+                    {hasLoaded ? (
+                      <>
+                        {image ? (
+                          <Image
+                            src={image}
+                            rounded
+                            alt="Your newly uploaded image"
+                          />
+                        ) : (
+                          <Image
+                            src={image_url}
+                            rounded
+                            alt="The existing image associated with this artpiece"
+                          />
+                        )}
+                      </>
                     ) : (
-                      <Image
-                        src={image_url}
-                        rounded
-                        alt="The existing image associated with this artpiece"
-                      />
+                      <Asset spinner />
                     )}
                   </div>
-
                   <Form.Control
                     type="file"
                     accept="image/*"
@@ -291,7 +300,11 @@ const EditArtpiecePage = () => {
                 {errors.hashtags?.map((message, idx) => (
                   <p key={idx}>{message}</p>
                 ))}
-                <Button className={`my-3 me-3`} variant="secondary">
+                <Button
+                  className={`my-3 me-3`}
+                  variant="secondary"
+                  onClick={() => navigate(-1)}
+                >
                   Cancel
                 </Button>
                 <Button

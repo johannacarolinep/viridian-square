@@ -208,7 +208,7 @@ const ArtpieceDetailed = (props) => {
                 <span className="fw-bold">Description: </span> {description}
               </p>
             )}
-            {art_medium !== "0" && (
+            {art_medium !== "noselection" && (
               <p>
                 <span className="fw-bold">Art medium used: </span>
                 {art_medium}

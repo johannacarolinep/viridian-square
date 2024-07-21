@@ -48,7 +48,7 @@ const Discover = ({ likesFilter = "" }) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [query, filterMedium, filterForSale, sortOrder, currentUser]);
+  }, [query, filterMedium, filterForSale, sortOrder, currentUser, likesFilter]);
 
   return (
     <>
@@ -101,7 +101,7 @@ const Discover = ({ likesFilter = "" }) => {
                 className={`h-100 ${styles.Select}`}
               >
                 <option value="">Sort by</option>
-                <option value="likes_count">Most Liked</option>
+                <option value="-likes_count">Most Liked</option>
                 <option value="-created_on">Newest to Oldest</option>
                 <option value="created_on">Oldest to Newest</option>
               </Form.Select>
@@ -145,9 +145,12 @@ const Discover = ({ likesFilter = "" }) => {
               </Row>
             </InfiniteScroll>
           ) : (
-            <Container>
-              <Asset src={NoResults} message={"Nothing to display"} />
-            </Container>
+            <div className={`${appStyles.bgWhite} w-100 rounded mt-3`}>
+              <Asset
+                src={NoResults}
+                message={"Sorry, no artpieces to display."}
+              />
+            </div>
           )}
         </>
       ) : (

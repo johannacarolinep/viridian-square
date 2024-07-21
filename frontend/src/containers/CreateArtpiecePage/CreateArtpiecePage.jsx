@@ -289,7 +289,11 @@ const CreateArtpiecePage = () => {
                   <p key={idx}>{message}</p>
                 ))}
 
-                <Button className={`my-3 me-3`} variant="secondary">
+                <Button
+                  className={`my-3 me-3`}
+                  variant="secondary"
+                  onClick={() => navigate(-1)}
+                >
                   Cancel
                 </Button>
                 <Button

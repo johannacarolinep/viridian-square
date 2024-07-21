@@ -1,5 +1,4 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import appStyles from "../../App.module.css";
 import styles from "./CollectionsDisplay.module.css";

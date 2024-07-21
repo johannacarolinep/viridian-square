@@ -128,7 +128,11 @@ class Artpiece(models.Model):
         'image',
         blank=False,
         null=False)
-    art_medium = models.CharField(max_length=30, choices=ART_MEDIUM_CHOICES, default=0)
+    art_medium = models.CharField(
+        max_length=30,
+        choices=ART_MEDIUM_CHOICES,
+        default='noselection'
+        )
     for_sale = models.IntegerField(choices=FOR_SALE_CHOICES, default=0)
     art_collection = models.ForeignKey(
         ArtCollection,

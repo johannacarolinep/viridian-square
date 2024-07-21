@@ -156,7 +156,7 @@ const ArtpieceSimple = (props) => {
         </div>
         <div className="d-flex">
           <span className="small mb-0">{likes_count} likes</span>
-          {!basic && art_medium !== "0" && (
+          {!basic && art_medium !== "noselection" && (
             <Badge className="ms-2" pill bg="dark">
               {art_medium}
             </Badge>

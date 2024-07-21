@@ -1,6 +1,4 @@
-import styles from "./App.module.css";
 import NavBar from "./components/navbar/NavBar";
-import Container from "react-bootstrap/Container";
 import { Route, Routes } from "react-router-dom";
 import "./api/axiosDefaults";
 import SignUpPage from "./containers/SignUpPage/SignUpPage";
