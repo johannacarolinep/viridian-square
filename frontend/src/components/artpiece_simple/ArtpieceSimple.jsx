@@ -27,6 +27,8 @@ const ArtpieceSimple = (props) => {
     basic,
   } = props;
 
+  console.log("IMAGE URL", image_url);
+
   const currentUser = useCurrentUser();
 
   const handleLike = async () => {
@@ -37,10 +39,10 @@ const ArtpieceSimple = (props) => {
         results: prevArtpieces.results.map((artpiece) => {
           return artpiece.id === id
             ? {
-              ...artpiece,
-              likes_count: artpiece.likes_count + 1,
-              like_id: data.id,
-            }
+                ...artpiece,
+                likes_count: artpiece.likes_count + 1,
+                like_id: data.id,
+              }
             : artpiece;
         }),
       }));
@@ -57,10 +59,10 @@ const ArtpieceSimple = (props) => {
         results: prevArtpieces.results.map((artpiece) => {
           return artpiece.id === id
             ? {
-              ...artpiece,
-              likes_count: artpiece.likes_count - 1,
-              like_id: null,
-            }
+                ...artpiece,
+                likes_count: artpiece.likes_count - 1,
+                like_id: null,
+              }
             : artpiece;
         }),
       }));

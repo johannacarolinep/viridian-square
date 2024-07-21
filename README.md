@@ -532,3 +532,11 @@ ACCOUNT_USERNAME_REQUIRED = False
 - [m2m_changed signals - Django documentation](https://docs.djangoproject.com/en/5.0/ref/signals/#m2m-changed) - Used for removing orphaned hashtags
 - [Stack Overflow - Efficiently delete orphaned m2m objects/tags in Django](https://stackoverflow.com/questions/10609699/efficiently-delete-orphaned-m2m-objects-tags-in-django)
 - [Code Institute resource: Creating a new React app in an existing DRF workspace](https://code-institute-students.github.io/advfe-unified-workspace/creating-an-app-in-a-workspace/00-creating-an-app-in-a-workspace)
+
+### Media
+
+[Watercolour painting seagull](https://pixabay.com/illustrations/bird-sea-painting-art-ocean-storm-3342446/) - Pixabay
+[Watercolour painting bridge](https://pixabay.com/illustrations/watercolour-painting-art-effect-4820075/)
+- [Watercolour painting woman](https://pixabay.com/illustrations/woman-painting-watercolor-paper-4178302/)
+[Watercolour river](https://pixabay.com/illustrations/watercolour-watercolor-painting-2498024/)
+
