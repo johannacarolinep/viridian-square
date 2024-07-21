@@ -177,10 +177,8 @@ const ProfilePage = () => {
                 {profile?.description && <p>{profile.description}</p>}
                 {profile?.location && (
                   <p>
-                    <i
-                      className="fa-solid fa-location-dot ps-0"
-                      aria-label="Location"
-                    ></i>{" "}
+                    <i className="fa-solid fa-location-dot ps-0"></i>{" "}
+                    <span className="sr-only">Location:</span>
                     {profile.location}
                   </p>
                 )}
@@ -244,12 +242,12 @@ const ProfilePage = () => {
                 </Button>
                 {displayContent !== "artpieces" &&
                   displayContent !== "collections" && (
-                  <div
-                    className={`${styles.Tab} ${styles.TabButtonSelected}`}
-                  >
-                    {displayContent.title}
-                  </div>
-                )}
+                    <div
+                      className={`${styles.Tab} ${styles.TabButtonSelected}`}
+                    >
+                      {displayContent.title}
+                    </div>
+                  )}
               </div>
             </Row>
             <Row className="m-0">
@@ -278,7 +276,9 @@ const ProfilePage = () => {
                   ) : (
                     <Row className={`m-0 mt-2 p-2 ${appStyles.bgLight}`}>
                       <div
-                        className={"d-flex justify-content-center align-items-center flex-column flex-md-row"}
+                        className={
+                          "d-flex justify-content-center align-items-center flex-column flex-md-row"
+                        }
                       >
                         <Link
                           to="/create-artpiece"
