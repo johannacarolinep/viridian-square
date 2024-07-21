@@ -17,6 +17,7 @@ import appStyles from "../../App.module.css";
 import styles from "./EditCollectionPage.module.css";
 import Asset from "../../components/asset/Asset";
 import NoResults from "../../assets/images/noresults.webp";
+import NotFoundImg from "../../assets/images/notfound.webp";
 
 /**
  * EditCollectionPage Component
@@ -251,6 +252,9 @@ const EditCollectionPage = ({ newCollection }) => {
                               <Image
                                 src={artpiece.image_url}
                                 alt={artpiece.title}
+                                onError={(e) => {
+                                  e.target.src = NotFoundImg;
+                                }}
                               />
                             </Button>
                           ) : artpiece.art_collection &&
@@ -270,6 +274,9 @@ const EditCollectionPage = ({ newCollection }) => {
                                 <Image
                                   src={artpiece.image_url}
                                   alt={artpiece.title}
+                                  onError={(e) => {
+                                    e.target.src = NotFoundImg;
+                                  }}
                                 />
                                 <span className={styles.Unavailable}></span>
                               </Button>
@@ -283,6 +290,9 @@ const EditCollectionPage = ({ newCollection }) => {
                               <Image
                                 src={artpiece.image_url}
                                 alt={artpiece.title}
+                                onError={(e) => {
+                                  e.target.src = NotFoundImg;
+                                }}
                               />
                             </Button>
                           )}

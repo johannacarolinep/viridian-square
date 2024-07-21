@@ -11,6 +11,7 @@ import Row from "react-bootstrap/Row";
 import Asset from "../../components/asset/Asset";
 import appStyles from "../../App.module.css";
 import styles from "./EditArtpiecePage.module.css";
+import NotFoundImg from "../../assets/images/notfound.webp";
 
 /**
  * EditArtpiecePage container
@@ -199,6 +200,9 @@ const EditArtpiecePage = () => {
                             src={image_url}
                             rounded
                             alt="The existing image associated with this artpiece"
+                            onError={(e) => {
+                              e.target.src = NotFoundImg;
+                            }}
                           />
                         )}
                       </>

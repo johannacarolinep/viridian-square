@@ -16,6 +16,7 @@ import Asset from "../../components/asset/Asset";
 import Avatar from "../../components/avatar/Avatar";
 import appStyles from "../../App.module.css";
 import styles from "./EnquiriesPage.module.css";
+import NotFoundImg from "../../assets/images/notfound.webp";
 
 /**
  * EnquiriesPage Component
@@ -299,6 +300,9 @@ const EnquiriesPage = () => {
                                             <Image
                                               src={artpiece.image_url}
                                               alt={`The artpiece for which the enquiry was made, ${artpiece.title}`}
+                                              onError={(e) => {
+                                                e.target.src = NotFoundImg;
+                                              }}
                                             />
                                           </div>
                                           <p className="mb-0">

@@ -11,6 +11,7 @@ import appStyles from "../../App.module.css";
 import styles from "./EditProfilePage.module.css";
 import Asset from "../../components/asset/Asset";
 import ImageHolder from "../../components/image_holder/ImageHolder";
+import NotFoundImg from "../../assets/images/notfound.webp";
 
 /**
  * EditProfilePage Component
@@ -156,6 +157,9 @@ const EditProfilePage = () => {
                               round
                               src={profile_image_url}
                               alt="Your existing profile image"
+                              onError={(e) => {
+                                e.target.src = NotFoundImg;
+                              }}
                             />
                           )}
                         </>

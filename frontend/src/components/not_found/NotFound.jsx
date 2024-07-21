@@ -1,5 +1,5 @@
 import React from "react";
-import NoResults from "../../assets/images/noresults.webp";
+import NotFoundImg from "../../assets/images/notfound.webp";
 import styles from "./NotFound.module.css";
 import Image from "react-bootstrap/Image";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ const NotFound = () => {
           </Link>
         </div>
         <div className={styles.ImgContainer}>
-          <Image src={NoResults} alt="Page not found" />
+          <Image src={NotFoundImg} alt="Page not found" />
         </div>
       </div>
     </main>

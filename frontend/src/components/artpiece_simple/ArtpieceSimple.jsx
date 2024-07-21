@@ -9,6 +9,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosRes } from "../../api/axiosDefaults";
 import appStyles from "../../App.module.css";
 import styles from "./ArtpieceSimple.module.css";
+import NotFound from "../../assets/images/notfound.webp";
 
 const ArtpieceSimple = (props) => {
   const {
@@ -73,7 +74,14 @@ const ArtpieceSimple = (props) => {
     <Card className={styles.Card}>
       <Link to={`/artpieces/${id}`}>
         <div className={`${styles.ImgContainer} position-relative p-2`}>
-          <Card.Img variant="top" src={image_url} alt={title} />
+          <Card.Img
+            variant="top"
+            src={image_url}
+            alt={title}
+            onError={(e) => {
+              e.target.src = NotFound;
+            }}
+          />
           {for_sale === 1 ? (
             <div className="position-absolute top-0 end-0 p-3 pt-2 fs-5">
               <Badge className="ms-1" pill bg="dark">

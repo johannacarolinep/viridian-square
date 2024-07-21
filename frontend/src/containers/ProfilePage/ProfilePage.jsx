@@ -20,6 +20,7 @@ import NoResults from "../../assets/images/noresults.webp";
 import appStyles from "../../App.module.css";
 import styles from "./ProfilePage.module.css";
 import ImageHolder from "../../components/image_holder/ImageHolder";
+import NotFoundImg from "../../assets/images/notfound.webp";
 
 /**
  * ProfilePage container
@@ -160,6 +161,9 @@ const ProfilePage = () => {
                   <Image
                     src={profile?.profile_image_url}
                     alt={`${profile?.name}'s profile image`}
+                    onError={(e) => {
+                      e.target.src = NotFoundImg;
+                    }}
                   />
                 </div>
               </Col>
