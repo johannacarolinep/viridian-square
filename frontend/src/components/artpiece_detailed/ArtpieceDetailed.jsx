@@ -138,6 +138,7 @@ const ArtpieceDetailed = (props) => {
             {is_owner && (
               <div className="d-flex align-items-center">
                 <MoreDropdown
+                  artpiece
                   handleEdit={handleEdit}
                   handleDeleteConfirm={handleDeleteConfirm}
                 />

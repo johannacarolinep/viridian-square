@@ -4,7 +4,6 @@ import Col from "react-bootstrap/Col";
 import Asset from "../asset/Asset";
 import NoResults from "../../assets/images/noresults.webp";
 import ArtpieceSimple from "../artpiece_simple/ArtpieceSimple";
-import Row from "react-bootstrap/esm/Row";
 
 const TrendingDisplay = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -42,7 +41,10 @@ const TrendingDisplay = () => {
               ))}
             </>
           ) : (
-            <Asset src={NoResults} />
+            <Asset
+              src={NoResults}
+              message={`Sorry! No trending artpieces to display right now.`}
+            />
           )}
         </>
       ) : (

@@ -119,8 +119,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         """
         if isinstance(obj.profile_image, str):
             return obj.profile_image
-        print("PROFILE IMAGE")
-        print("profile image url", obj.profile_image.url)
         return obj.profile_image.url
 
     def get_is_owner(self, obj):
