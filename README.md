@@ -320,6 +320,66 @@ Actions taken:
 #### Accessibility
 - `Navigate the website with keyboard`: As a **Site User not able to utilise a mouse** I can **focus on and access all interactive elements on the website using a keyboard** so that I can **be included, navigate on the website, access the content, and use all core functionality**.
 
+<a id="tools-and-technologies"></a>
+## Tools and technologies
+
+### Languages:
+- [Python 3.12.4](https://www.python.org/downloads/release/python-385/) - Used to write the application's server-side logic.
+- [Node 3.12.4](https://nodejs.org/en/download/package-manager) - Used to write the application's client-side logic.
+- [JavaScript](https://www.javascript.com/) - Was used to develop interactive components on the website.
+- [HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML) - Was used for the structure of the web pages.
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/css) - Was used to style the website.
+
+### Frameworks:
+- [Django 4.2.10](https://www.djangoproject.com/) - Python-based framework used to build the web application.
+- [Django Rest Framework 3.15.2](https://www.django-rest-framework.org/) - Python-based framework used to built the API.
+- [dj-rest-auth](https://dj-rest-auth.readthedocs.io/en/latest/) - Used for authentication in the API.
+- [React 18.13.1](https://18.react.dev/) - JavaScript library used to build the user interface.
+- [React-Bootstrap 2.10.4](https://getbootstrap.com/) - CSS/JS framework used to style the website with Bootstrap components.
+- [Create React App](https://create-react-app.dev/) - Used to set up the React application.
+
+### Databases:
+- [PostgreSQL from Code Institute](https://dbs.ci-dbs.net/) - The database used to store the website's model data.
+- SQLite3(https://docs.python.org/3/library/sqlite3.html) - Used as database throughout development and testing
+
+### Authentication
+-   [dj-rest-auth](https://dj-rest-auth.readthedocs.io/en/latest/) - Used for authentication in the API.
+-   [PyJWT](https://pyjwt.readthedocs.io/en/stable/) - Used for JSON Web Token handling in Django.
+
+### Cloud:
+- [Cloudinary](https://cloudinary.com/) - Was used for cloud-based image storage and management.
+- [Heroku.com](https://id.heroku.com/login) - Was used to deploy the project.
+- [GitHub](https://github.com/) - Was used to host the code of the website.
+
+### Testing and validation
+- [CI Python Linter](https://pep8ci.herokuapp.com/) - Was used to ensure the code adheres to PEP 8 standards
+- [ESLint](https://eslint.org/) - Used to ensure code adheres to Javascript coding standards and best practices.
+-   [Jest](https://jestjs.io/) - Used for testing React components.
+-   [Postman](https://www.postman.com/) - Used for testing API requests.
+-   [Python Unittests (through Django's APITestCase class)](https://docs.python.org/3/library/unittest.html) - Used for testing API views.
+- [Chrome DevTools] (https://developer.chrome.com/docs/devtools/open/) - Was used for debugging
+- [LightHouse](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=sv&pli=1) - Was used to test and optimize website performance, best practices and accessibility
+- [JSHint](https://jshint.com/) - Was used to lint JavaScript code.
+- [W3C Markup Validation Service](https://validator.w3.org/) - Was used to validate HTML.
+- [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) - Was used to validate CSS.
+- [Responsive Viewer](https://chromewebstore.google.com/detail/responsive-viewer/inmopeiepgfljkpkidclfgbgbmfcennb) - Was used to review the responsiveness of the website.
+
+### Design
+- [FontAwesome](https://fontawesome.com/) - Was used to create icons for the website.
+- [Favicon generator](https://favicon.io/favicon-generator/) - Was used to create the website's favicon.
+- [Adobe Illustrator](https://www.adobe.com/se/products/illustrator) - Was used to create the website logo and custom graphics.
+- [Colormind](http://colormind.io/) - Was used to generate the colour scheme for the website.
+- [Figma](https://www.figma.com/) - Was used to create a design wireframe.
+- [Balsamiq](https://balsamiq.com/) - Was used to create schematic wireframes
+- [Draw.io](https://app.diagrams.net/) - was used to create the ERD
+
+### Other: 
+- [gunicorn](https://gunicorn.org/) - Was used as the webserver to run the website.
+- [psycopg2](https://www.psycopg.org/) - Was used as the database adapter.
+- [VSCode](https://code.visualstudio.com/) - Was used as the IDE.
+- [Git](https://git-scm.com/) - Was used for version control.
+- [venv](https://docs.python.org/3/library/venv.html) - Used to manage the Python virtual environment.
+
 <a id="repo-description"></a>
 ## Repository description
 
