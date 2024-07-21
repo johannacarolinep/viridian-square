@@ -122,9 +122,28 @@ The following pages were validated, with no errors or warnings:
 <a id="css-validation"></a>
 ## Validation of CSS
 
+CSS was validated using [W3C's CSS Validation Service](https://jigsaw.w3.org/css-validator/validator).
+
 <details>
 <summary>Click to see CSS validation details</summary>
 
+![CSS validation](documentation/css_validate/css_validate.png)
+
+The tool raises no errors when checking the website by URL, but raises a variation of warnings.
+
+Two of the warnings are related to my custom CSS:
+
+![Root variables](documentation/css_validate/css_validate_root.png)
+
+This warning relates to the use of ROOT: variables in CSS, and simply states that these are not being checked by the tool. Since the variables are working as expected, I will disregard this warning.
+
+![Same color for border and background](documentation/css_validate/css_validate_border_color.png)
+
+This warning relates to my buttons having the same border and background colour. This was a conscious decision, and different styles are being used to make the buttons accessible, have good contrast against background colour, and look different when hovered. 
+
+The remaining warnings relate to styles implemented by react-bootstrap. Visiting Bootstrap's website, I found the following text, providing an explanation for these errors and warnings.
+
+![Bootstrap validators](documentation/bootstrap-validators.png)
 
 </details>
 
