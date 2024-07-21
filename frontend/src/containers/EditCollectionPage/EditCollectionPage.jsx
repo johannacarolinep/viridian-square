@@ -271,7 +271,7 @@ const EditCollectionPage = ({ newCollection }) => {
                                   src={artpiece.image_url}
                                   alt={artpiece.title}
                                 />
-                                <div className={styles.Unavailable}></div>
+                                <span className={styles.Unavailable}></span>
                               </Button>
                             </OverlayTrigger>
                           ) : (

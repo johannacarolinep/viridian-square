@@ -27,8 +27,6 @@ const ArtpieceSimple = (props) => {
     basic,
   } = props;
 
-  console.log("IMAGE URL", image_url);
-
   const currentUser = useCurrentUser();
 
   const handleLike = async () => {

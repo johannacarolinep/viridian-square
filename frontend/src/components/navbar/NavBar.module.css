@@ -36,5 +36,5 @@ i {
 }
 
 .Active i {
-    color: vad(--clr-brand--primary);
+    color: var(--clr-brand--primary);
 }

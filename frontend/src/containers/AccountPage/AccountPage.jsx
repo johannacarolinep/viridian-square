@@ -12,6 +12,7 @@ import appStyles from "../../App.module.css";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { removeTokenTimestamp } from "../../utils/utils";
 import { useRedirect } from "../../hooks/useRedirect";
+import styles from "./AccountPage.module.css";
 
 /**
  * AccountPage Container
@@ -159,7 +160,9 @@ const AccountPage = () => {
           >
             <Accordion.Item eventKey="0">
               <Accordion.Header>
-                <h2>Change email address:</h2>
+                <span className={`${styles.Heading} fs-3 my-1`}>
+                  Change email address:
+                </span>
               </Accordion.Header>
               <Accordion.Body>
                 <Form onSubmit={handleEmailSubmit}>
@@ -187,7 +190,9 @@ const AccountPage = () => {
             </Accordion.Item>
             <Accordion.Item eventKey="1">
               <Accordion.Header>
-                <h2>Change password:</h2>
+                <span className={`${styles.Heading} fs-3 my-1`}>
+                  Change password:
+                </span>
               </Accordion.Header>
               <Accordion.Body>
                 <Form onSubmit={handlePasswordSubmit}>
@@ -228,7 +233,9 @@ const AccountPage = () => {
             </Accordion.Item>
             <Accordion.Item eventKey="2">
               <Accordion.Header>
-                <h2>Delete account:</h2>
+                <span className={`${styles.Heading} fs-3 my-1`}>
+                  Delete account:
+                </span>
               </Accordion.Header>
               <Accordion.Body>
                 <Form onSubmit={handleAccountDelete}>

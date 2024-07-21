@@ -1,0 +1,5 @@
+.Heading {
+    font-family: var(--ff-secondary);
+    line-height: 1.2;
+    font-weight: 500;
+}

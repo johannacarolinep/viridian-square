@@ -68,11 +68,11 @@ const EditProfilePage = () => {
 
         is_owner
           ? setProfileData({
-            name,
-            description,
-            profile_image_url,
-            location,
-          })
+              name,
+              description,
+              profile_image_url,
+              location,
+            })
           : navigate("/");
         setHasLoaded(true);
       } catch (err) {
@@ -137,9 +137,9 @@ const EditProfilePage = () => {
             <Col lg={6} className={appStyles.bgAccentLight}>
               <Form.Group controlId="image-upload">
                 <div className={`${appStyles.bgAccentLight} p-4`}>
-                  <Form.Label className="mb-0">
-                    <h2>Profile image:</h2>
-                  </Form.Label>
+                  <h2>
+                    <Form.Label className="mb-0">Profile image:</Form.Label>
+                  </h2>
                   <div className={`${appStyles.dividerPrimary} mb-3`}></div>
                   <div>
                     <div className={`${styles.ImageUpload} my-3`}>

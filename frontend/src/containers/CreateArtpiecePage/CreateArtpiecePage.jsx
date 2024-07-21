@@ -159,9 +159,10 @@ const CreateArtpiecePage = () => {
             <Col lg={6} className={appStyles.bgAccentLight}>
               <Form.Group controlId="image-upload">
                 <div className={`${appStyles.bgAccentLight} p-4`}>
-                  <Form.Label className="mb-0">
-                    <h2>Image:</h2>
-                  </Form.Label>
+                  <h2>
+                    <Form.Label className="mb-0">Image:</Form.Label>
+                  </h2>
+
                   <div className={`${appStyles.dividerPrimary} mb-3`}></div>
                   <div
                     className={`${appStyles.ImageContain} ${styles.ImageUpload}`}

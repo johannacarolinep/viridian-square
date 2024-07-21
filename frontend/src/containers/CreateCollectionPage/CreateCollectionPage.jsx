@@ -74,7 +74,7 @@ const CreateCollectionPage = () => {
 
   return (
     <main>
-      <Container flui="xl">
+      <Container fluid="xl">
         <h1 className="my-3">Create collection:</h1>
         <Form onSubmit={handleSubmit} className="my-3">
           <Row className={`${appStyles.bgWhite} p-4 m-0`}>
