@@ -671,7 +671,49 @@ All documentation related to testing of the project can be found in [TESTING.md]
 <a id="bugs"></a>
 ## Bugs
 
+#### 2024-07-20: Incorrect use of React Form.Group
+
+<details>
+<summary>Click to see bug details</summary>
+
+**Issue:** I noticed while checking my code that I received a warning that a form input field did not have a label. This related to the HTML best practice where form input fields with attribute `id` should have a label with attribute `for`.
+
+I then made sure that all my form inputs had labels associated with them and that the label `for` (`htmlFor`) matched the input `id` attributes. 
+
+Yet when I ran my app locally I noticed that I had gotten even more errors.
+
+**Steps taken:**
+
+- Due to this breaking intended behavior, I checked the React Bootstrap documentation.
+- The solution implemented was that the React Bootstrap <Form.Group/> component that wraps the input and form elements itself injects the necessary id and for attributes and displays the html as required at render time. So explicit id and htmlfor attributes are not neccessary.
+
+Instead the <Form.Group/> component should have a `controlID` attribute. 
+
+**Solution:**
+
+- Basing my new solution largely on this post from the [React From.Control page](https://react-bootstrap.netlify.app/docs/forms/form-control) I reviewed all <Form.Group/> instances and ensured they all used `controlId`, e.g. :
+
+```
+    <Form.Group controlId="hashtags">
+        <Form.Label>Hashtags</Form.Label>
+        <Form.Control
+            type="text"
+            name="hashtags"
+            value={hashtags}
+        />
+    </Form.Group>
+```
+
+In the above example, the use of ` <Form.Label htmlFor="formHashtags">Hashtags</Form.Label>` previously has been replaced by `<Form.Label>Hashtags</Form.Label>`. The id attribute in the <Form.Control> was also removed.
+
+Finally, I redeployed the website and tried clicking on pages containing forms to check that the behaviour and functionality were working correctly.
+
+</details>
+
 ### BUG: 2024-07-18: Custom serializers 'REGISTER_SERIALIZER' and 'USER_DETAILS_SERIALIZER' not used by dj-rest-auth register and login views.
+
+<details>
+<summary>Click to see bug details</summary>
 
 **Background:**
 
@@ -741,7 +783,13 @@ const handleSubmit = async (event) => {
   };
 ``````
 
+</details>
+
+
 ### BUG: 2024-07-07: Connection Refused error for POST request to live DB /dj-rest-auth/registration/.
+
+<details>
+<summary>Click to see bug details</summary>
 
 **Issue:**
 
@@ -767,8 +815,13 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 
 This resolved the issue, and I was able to successfully register a user without encountering the error.
 
+</details>
+
 
 ### BUG: 2024-07-01: Removing the `username` field from `CustomUser`.
+
+<details>
+<summary>Click to see bug details</summary>
 
 **Background:** 
 
@@ -800,6 +853,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 1. Adding the above configuration informed `django-allauth` not to expect a `username` field.
 1. After updating `settings.py`, I successfully ran migrations and confirmed the creation of `CustomUser` instances in the Django Admin panel.
 
+</details>
 
 <a id="credits"></a>
 ## Credits

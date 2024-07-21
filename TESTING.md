@@ -256,8 +256,73 @@ The remaining warnings relate to styles implemented by react-bootstrap. Visiting
 <a id="python-lint"></a>
 ## Linting of Python code
 
+#### Linting and Formatting
+
+Due to the large amount of code and files in this project compared to previous projects I was unable due to time constraints to use the online linter one file at a time.
+
+Therefore I decided to use an automated linter for my python code.
+
+I decided to install the flake8 linter with:
+
+```
+pip install flake8
+```
+
+Then create a basic .flake8 config file in the root of my Django project and run the command:
+
+```
+flake8 .
+```
+
+This command works to scan through all my project files and check if my code adheres to the PEP8 standards. One drawback of this package is that it's only a linter and not also a formatter, thus the 12 or so errors it found about unused imports had to be corrected by hand.
+Overall though it also worked to help me tremendously as by running a simple command I could be sure that my files would be checked and my code would adhere to all the best practices.
+
+In the end, one flag remained (as per the screenshot below). The linter complained about 'env' being imported but unused in `settings.py`. Since I do need the import, I used the following to instruct flake8 to ignore the specific flag, for the specifc line:
+
+```python
+import env  # noqa: F401
+```
+
+Below is a screenshot of flake8 being run, raising no flags, after instructing to ignore the issue mentioned above:
+
+![Screenshot flake8](documentation/python_lint/flake8.png)
+
+I did also cross-check a few of my files using Code Institute's Python Linter online tool, finding no warnings:
+
+- Settings.py:
+    ![settings.py](documentation/python_lint/lint_settings.png)
+
+- artpieces/serializers.py:
+    ![serializers.py](documentation/python_lint/lint_artpiece_serializers.png)
+
+- artpieces/models.py:
+    ![models.py](documentation/python_lint/lint_artpieces_models.png)
+
+
 <a id="js-lint"></a>
 ## Linting of JS and JSX code
+
+For my frontend app I decided to use ESLint, both due to it being the best practice standard and due to it having built-in commands to automatically fix linting issues. This is due to the *React eslint plugin* being both a linter and a formatter.
+
+I followed the steps listed here on how to set it up with my react app [ESLint react Setup](https://www.geeksforgeeks.org/how-to-configure-eslint-for-react-projects/).
+
+Once the linter was set up, I ran the command:
+
+```
+npm run lint
+```
+
+After which I received around 520 errors, but due to the vast majority of them being due to indentation and use of single quotes after running the following command I was able to get down to around 20 errors:
+
+```
+npm run lint:fix
+```
+
+This is one of the major reasons why I chose to use ESLint, during this process it has saved me a tremendous amount of time by scanning through my project and automatically fixing small issues.
+
+Below is a screenshot of running the linter, with no issues raised:
+
+![eslint](documentation/react_lint/eslint.png)
 
 <details>
 <summary>Click to see screenshots of linting results per file</summary>

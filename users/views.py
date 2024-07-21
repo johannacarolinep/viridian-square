@@ -1,8 +1,7 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .serializers import EmailUpdateSerializer, DeleteUserSerializer, CurrentUserSerializer
-from dj_rest_auth.views import UserDetailsView
+from .serializers import EmailUpdateSerializer, DeleteUserSerializer
 from django.contrib.auth import logout
 
 

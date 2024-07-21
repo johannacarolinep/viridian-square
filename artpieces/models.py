@@ -1,7 +1,7 @@
 import re
 from django.db import models
 from django.core.validators import MaxLengthValidator
-from django.db.models.signals import m2m_changed, post_delete
+from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
 from users.models import CustomUser
 from cloudinary.models import CloudinaryField
