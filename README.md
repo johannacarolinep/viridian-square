@@ -859,6 +859,22 @@ The src folder contains the following folders and files:
 8. __App.jsx:__ The root component of the React application, setting up routing and providing global context providers.
 9. __setupTests.js:__ Configuration file for setting up testing utilities and environments for jest tests.
 
+List of reusable components used in the React app:
+1. ArtpieceDetailed - displays detailed information about an art piece based on passed in props
+1. ArtpieceSimple - represents an artpiece card (used for the artpiece cards in the discovery section, as well as on the profile page).
+1. Asset (same as in walkthrough project) - displays a loading spinner, an image, or a message, depending on props passed in.
+1. Avatar (same as in walkthrough project) - displays a user avatar with optional text. Used e.g. in the navbar, and inside ArtpieceSimple component.
+1. CollectionCard - displays information about an art collection in a card format.
+1. Discover - displays a list of art pieces with filtering, search and sorting options. Used in Discover page and liked page.
+1. Footer - the apps footer
+1. ImageHolder - displays an image with optional styles (applied based on the props passed in)
+1. MoreDropdown - renders a dropdown menu with options to edit, delete, or change account details. Options displays differently depending on props passed in (eg "Edit artpiece" or "Edit collection").
+1. NavBar - the website's navbar.
+1. NotFound - used when there's no matching route. Informs the user and links back.
+1. TrendingDisplay - fetches and displays trending art pieces. (Should have been defined as a container rather than a component. Is not reused.)
+1. UpdateProfileModal - displays a modal prompting the user to complete their profile.
+
+
 The following are found in the root frontend directory:
     
 10. __.babelrc:__ Configuration file for Babel, used to transpile JavaScript code.
