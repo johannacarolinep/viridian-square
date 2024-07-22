@@ -61,6 +61,13 @@ No issues found
 <a id="responsiveness"></a>
 ## Responsiveness testing
 
+Responsiveness was tested with [Responsive Viewer](https://chromewebstore.google.com/detail/responsive-viewer/inmopeiepgfljkpkidclfgbgbmfcennb?hl=sv) (and throughout development with Google Dev Tools).
+
+Please see screenshots from responsiveness testing in the PDF's linked below:
+
+- [Mobile](documentation/responsiveness/responsiveness_mobile.pdf)
+- [Tablet](documentation/responsiveness/responsiveness_tablet.pdf)
+- [Desktop](documentation/responsiveness/responsiveness_desktop.pdf)
 
 <a id="manual-testing"></a>
 ## Manual testing TBC
