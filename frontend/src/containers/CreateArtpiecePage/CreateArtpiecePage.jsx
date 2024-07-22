@@ -80,7 +80,7 @@ const CreateArtpiecePage = () => {
         );
         setArtCollectionChoices(data.results);
       } catch (err) {
-        // console.log(err);
+        // Ignoring the error intentionally
       }
     };
 

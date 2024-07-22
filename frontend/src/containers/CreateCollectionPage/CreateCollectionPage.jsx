@@ -65,7 +65,6 @@ const CreateCollectionPage = () => {
       const { data } = await axiosReq.post("/collections/", formData);
       navigate(`/collections/${data.id}/edit/new`);
     } catch (err) {
-      // console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }

@@ -101,7 +101,7 @@ const ProfilePage = () => {
         }
         setHasLoaded(true);
       } catch (err) {
-        // console.log(err);
+        // Ignoring the error intentionally
       }
     };
 
@@ -144,7 +144,7 @@ const ProfilePage = () => {
         setDisplayContent("collections");
       }
     } catch (err) {
-      // console.log(err);
+      // Ignoring the error intentionally
     }
   };
 

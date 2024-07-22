@@ -93,7 +93,7 @@ const EnquiriesPage = () => {
           setArtpiece(data);
           setArtpieceHasLoaded(true);
         } catch (err) {
-          // console.log(err);
+          // Ignoring the error intentionally
         }
       }
     };
@@ -124,7 +124,6 @@ const EnquiriesPage = () => {
           )
         );
       } catch (err) {
-        // console.log(err);
         setErrors(err.response?.data);
       }
     }
@@ -151,7 +150,7 @@ const EnquiriesPage = () => {
         );
       }
     } catch (err) {
-      console.error("Error updating enquiry:", err);
+      // Ignoring the error intentionally
     }
   };
 

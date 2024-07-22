@@ -98,7 +98,7 @@ const ArtpieceDetailed = (props) => {
         like_id: data.id,
       }));
     } catch (err) {
-      // console.log(err);
+      // Ignoring the error intentionally
     }
   };
 
@@ -111,7 +111,7 @@ const ArtpieceDetailed = (props) => {
         like_id: null,
       }));
     } catch (err) {
-      // console.log(err);
+      // Ignoring the error intentionally
     }
   };
 
@@ -129,7 +129,7 @@ const ArtpieceDetailed = (props) => {
       await axiosRes.delete(`/artpieces/${id}/`);
       navigate("/");
     } catch (err) {
-      // console.log(err);
+      // Ignoring the error intentionally
     }
   };
 

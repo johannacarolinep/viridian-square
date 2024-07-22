@@ -66,7 +66,7 @@ const Discover = ({ likesFilter = "" }) => {
         setArtpieces(data);
         setHasLoaded(true);
       } catch (err) {
-        // console.log(err);
+        // Ignoring the error intentionally
       }
     };
 

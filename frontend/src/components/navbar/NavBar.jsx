@@ -40,7 +40,7 @@ const NavBar = () => {
       setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
-      // console.log(err);
+      // Ignoring the error intentionally
     }
   };
 

@@ -63,7 +63,7 @@ const ArtpieceSimple = (props) => {
         }),
       }));
     } catch (err) {
-      // console.log(err);
+      // Ignoring the error intentionally
     }
   };
 
@@ -83,7 +83,7 @@ const ArtpieceSimple = (props) => {
         }),
       }));
     } catch (err) {
-      // console.log(err);
+      // Ignoring the error intentionally
     }
   };
 

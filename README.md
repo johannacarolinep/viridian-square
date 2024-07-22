@@ -1,8 +1,15 @@
+![Logo](documentation/logo.webp)
+
 # Viridian Square
 
 Welcome to Viridian Square - the natural meeting place for artists and art lovers!
 
 Named after a well known artist pigment, Viridian green, the platform is tailored for the needs of artists and art lovers.
+
+In short, the platform aims to:
+- let artists showcase their art in a way that makes sense to them, e.g. by grouping artpieces into collections that go together.
+- let art lovers discover new art, with comprehensive search and filtering functionality
+- offer a way for art lovers to get in touch with artists once they find what they're looking for, by making an enquiry for a specific artpiece.
 
 ---
 
@@ -1087,7 +1094,11 @@ All documentation related to testing of the project can be found in [TESTING.md]
 <a id="bugs"></a>
 ## Bugs
 
-#### 2024-07-20: Incorrect use of React Form.Group
+### Known open bugs:
+
+- During browser compatibility testing on the final day before project submission, I found that artpiece cards are not displaying correctly in Safari browsers. In brief, the image used in the card should have the same height, across all cards in a row, and be styled to cover their parent element (a div). However, it appears in Safari, the styles are not being applied correctly, resulting in the images retaining their aspect ratio instead, resulting in different heights. Due to time constraints and finding the issue at a late stage, I have not yet had time to take action on this.
+
+### 2024-07-20: Incorrect use of React Form.Group
 
 <details>
 <summary>Click to see bug details</summary>

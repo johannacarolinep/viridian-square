@@ -95,7 +95,6 @@ const AccountPage = () => {
       setSuccessMessage("Email successfully updated.");
       setActiveAccordion(null);
     } catch (err) {
-      //   console.log(err);
       setErrors(err.response?.data);
     }
   };
@@ -110,7 +109,6 @@ const AccountPage = () => {
       setSuccessMessage("Password successfully updated.");
       setActiveAccordion(null);
     } catch (err) {
-      //   console.log(err);
       setErrors(err.response?.data);
     }
   };
@@ -136,7 +134,6 @@ const AccountPage = () => {
         navigate("/");
       }, 5000);
     } catch (err) {
-      // console.log(err);
       setErrors(err.response?.data);
     }
   };

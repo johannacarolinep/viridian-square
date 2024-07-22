@@ -18,7 +18,6 @@ export const useRedirect = (userAuthStatus, pathStr) => {
           navigate(pathStr);
         }
       } catch (err) {
-        // console.log(err);
         if (userAuthStatus === "loggedOut") {
           navigate(pathStr);
         }
