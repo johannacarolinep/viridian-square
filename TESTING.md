@@ -231,13 +231,44 @@ The Jest tests have been placed in the directory hosting the component with the 
 <a id="lighthouse"></a>
 ## Lighthouse tests
 
-<details>
-<summary>Click to see screenshots of test results on mobile</summary>
+Due to time constraints, I have not had time to run significant tests and optimize performance, and will need to get back to this at a later stage.
 
-</details>
+Nonetheless, a few of the pages were tested with Lighthouse, to gain insights on performance, best practice adherance and accessibility.
+
+In general the pages score well on best practices and accessibility, but leave room for improvement in terms of performance, especially on mobile.
 
 <details>
-<summary>Click to see screenshots of test results on desktop</summary>
+<summary>Click to see details and screenshots</summary>
+
+**Desktop:**
+
+- Discover page:
+    ![Lighthouse - Discover page](documentation/lighthouse/lighthouse-discover.png)
+
+- Artpiece page
+    ![Lighthouse - Artpiece page](documentation/lighthouse/lighthouse_artpiece.png)
+
+- Liked page
+    ![Lighthouse - Liked page](documentation/lighthouse/lighthouse_liked.png)
+
+- Profile page
+    ![Lighthouse - Profile page](documentation/lighthouse/lighthouse_profile.png)
+
+- Sign in page
+    ![Lighthouse - Sign in](documentation/lighthouse/lighthouse_signin.png)
+
+
+**Mobile:**
+As mentioned, the scores on mobile was significantly lower for performance. This seems to be the case especially on pages containing infinite scrolling, and/or a lot of image content, a key aspect to optimise going forward.
+
+- Enquiries page:
+    ![Lighthouse - Mobile enquiries](documentation/lighthouse/lighthouse_enquiries_mobile.png)
+
+- Liked page:
+    ![Lighthouse - Mobile likes](documentation/lighthouse/lighthouse_liked_mobile.png)
+- Sign in:
+    ![Lighthouse - Mobile sign in](documentation/lighthouse/lighthouse_signin_mobile.png)
+
 
 </details>
 
