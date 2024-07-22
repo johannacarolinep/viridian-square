@@ -4,6 +4,21 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import appStyles from "../../App.module.css";
 
+/**
+ * UpdateProfileModal component displays a modal prompting the user to complete their profile.
+ *
+ * Props:
+ * - show: A boolean value indicating whether the modal should be displayed.
+ * - handleClose: Function to handle closing the modal.
+ * - user: Object containing user details such as profile_id and profile_name.
+ *
+ * Features:
+ * - Displays a modal with information about completing the user's profile.
+ * - Provides buttons to either skip the profile update or navigate to the profile edit page.
+ *
+ * Hooks:
+ * - useNavigate: Provides a function to navigate to other pages.
+ */
 const UpdateProfileModal = ({ show, handleClose, user }) => {
   const navigate = useNavigate();
   const directToProfile = () => {

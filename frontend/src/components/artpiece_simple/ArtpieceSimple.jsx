@@ -11,6 +11,23 @@ import appStyles from "../../App.module.css";
 import styles from "./ArtpieceSimple.module.css";
 import NotFound from "../../assets/images/notfound.webp";
 
+/**
+ * ArtpieceSimple component displays a simplified view of an art piece.
+ *
+ * Props:
+ * - id, is_owner, profile_id, profile_name, profile_image, title, image_url,
+ *   art_medium, for_sale, like_id, likes_count, setArtpieces, basic
+ *
+ * Features:
+ * - Displays art piece image, title, and basic details.
+ * - Allows users to like/unlike the art piece.
+ * - Shows if the art piece is for sale or sold.
+ * - Provides links to the detailed art piece page and artist profile.
+ * - Conditionally shows the artist's profile details and art medium based on the `basic` prop.
+ *
+ * State:
+ * - Manages like/unlike actions with API calls.
+ */
 const ArtpieceSimple = (props) => {
   const {
     id,

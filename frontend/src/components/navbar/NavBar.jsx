@@ -15,6 +15,19 @@ import useClickOutsideToggle from "../../hooks/useClickOutsideToggle";
 import Avatar from "../avatar/Avatar";
 import { removeTokenTimestamp } from "../../utils/utils";
 
+/**
+ * NavBar component displays the navigation bar for the website.
+ *
+ * Features:
+ * - Provides navigation links for different pages such as Discover, Create, Enquiries, Liked, Profile, Sign in, Sign up.
+ * - Displays different options based on the user's authentication status logged in or logged out.
+ *
+ * Hooks:
+ * - useCurrentUser: Retrieves the current authenticated user.
+ * - useSetCurrentUser: Provides a function to set the current user.
+ * - useClickOutsideToggle: Manages the expanded state of the navbar and collapses it when clicking outside.
+ *
+ */
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();

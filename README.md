@@ -1274,19 +1274,37 @@ ACCOUNT_USERNAME_REQUIRED = False
 <a id="credits"></a>
 ## Credits
 
+### Code
+- [Code Institute resource: Creating a new React app in an existing DRF workspace](https://code-institute-students.github.io/advfe-unified-workspace/creating-an-app-in-a-workspace/00-creating-an-app-in-a-workspace)
+- Code Institute walkthrough project 5 - Moments. Importantly, the Moments walkthrough project was used frequently as a guide especially in the earlier phase of development. A few sections of the code were taken almost completely from the walkthrough project. Examples of this is the code in axiosDefaults.jsx, CurrentUserContext.jsx, useRedirect.js, and useClickOutsideToggle.jsx. Furthermore, the Asset component is completely copied from the walkthrough project, and the MoreDropDown component was originally copied from the walkthrough, while it has later been slightly modified to fit its purpose in this project better.
 - [Customising the user model - Django documentation](https://docs.djangoproject.com/en/5.0/topics/auth/customizing/#a-full-example)
 - [Installation dj-rest-auth](https://dj-rest-auth.readthedocs.io/en/latest/installation.html)
 - [m2m_changed signals - Django documentation](https://docs.djangoproject.com/en/5.0/ref/signals/#m2m-changed) - Used for removing orphaned hashtags
 - [Stack Overflow - Efficiently delete orphaned m2m objects/tags in Django](https://stackoverflow.com/questions/10609699/efficiently-delete-orphaned-m2m-objects-tags-in-django)
-- [Code Institute resource: Creating a new React app in an existing DRF workspace](https://code-institute-students.github.io/advfe-unified-workspace/creating-an-app-in-a-workspace/00-creating-an-app-in-a-workspace)
+- [Django rest famework official docs](https://www.django-rest-framework.org/) - used frequently, especially when writing the serializers.
+- [Django official documentation](https://docs.djangoproject.com/en/5.0/) - used frequently while writing the models and views
+- [SimpleJWT docs](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html)
+- [Stack Overflow - *Django-rest-auth (dj-rest-auth) custom user registration*](https://stackoverflow.com/questions/62291394/django-rest-auth-dj-rest-auth-custom-user-registration)
+- [ConnectionRefusedError at /account/signup/ [Errno 61] Connection refused by user Alexicode](https://github.com/pennersr/django-allauth/issues/1843)
+- [Stack Overflow: *How to remove username field in the register form on django admin?*](https://stackoverflow.com/questions/36094342/how-to-remove-username-field-in-the-register-form-on-django-admin)
+- [React "learn"](https://react.dev/learn)
+- [React bootstrap documentation]()
+  - A specific example: [Form Controls](https://react-bootstrap.netlify.app/docs/forms/form-control/)
+- [Tutorial for setting up Jest](https://jestjs.io/docs/tutorial-react)
+
+
 
 ### Media
 
-[Watercolour painting seagull](https://pixabay.com/illustrations/bird-sea-painting-art-ocean-storm-3342446/) - Pixabay
-[Watercolour painting bridge](https://pixabay.com/illustrations/watercolour-painting-art-effect-4820075/)
+All images used for the project were either found on [Pixabay](https://pixabay.com/) or created specifically for the project, using Adobe Illustrator.
+
+- [Watercolour painting seagull](https://pixabay.com/illustrations/bird-sea-painting-art-ocean-storm-3342446/)
+- [Watercolour painting bridge](https://pixabay.com/illustrations/watercolour-painting-art-effect-4820075/)
 - [Watercolour painting woman](https://pixabay.com/illustrations/woman-painting-watercolor-paper-4178302/)
-[Watercolour river](https://pixabay.com/illustrations/watercolour-watercolor-painting-2498024/)
+- [Watercolour river](https://pixabay.com/illustrations/watercolour-watercolor-painting-2498024/)
 - [Oil painting, field](https://pixabay.com/illustrations/painting-classical-oil-painting-8598152/)
 - [Oil painting, house on field](https://pixabay.com/illustrations/oil-painting-paint-painting-artist-5285801/)
 - [Oil painting, pink flowers](https://pixabay.com/illustrations/oil-painting-paint-painting-artist-5268834/)
 - [Mixed media, branch](https://pixabay.com/illustrations/boho-art-boho-style-art-7375748/)
+- [Vector, woman painting](https://pixabay.com/vectors/art-artist-easel-for-use-girl-2027294/)
+- [Vector, man painting](https://pixabay.com/vectors/art-artist-paint-painter-painting-1299039/)

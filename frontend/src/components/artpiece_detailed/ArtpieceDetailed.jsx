@@ -15,6 +15,27 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { MoreDropdown } from "../moredropdown/MoreDropdown";
 import ImageHolder from "../image_holder/ImageHolder";
 
+/**
+ * ArtpieceDetailed component displays detailed information about an art piece.
+ *
+ * Props:
+ * - id, is_owner, profile_id, profile_name, profile_image, title, description,
+ *   created_on, updated_on, image_url, art_medium, for_sale, likes_count,
+ *   like_id, hashtags, art_collection, setArtpiece
+ *
+ * Features:
+ * - Displays art piece image, title, description, and other details.
+ * - Allows owners to edit or delete the art piece.
+ * - Enables users to like/unlike the art piece.
+ * - Permits users to make enquiries if the art piece is for sale.
+ *
+ * State:
+ * - showDelete: Controls the visibility of the delete confirmation modal.
+ * - showEnquiry: Controls the visibility of the enquiry modal.
+ * - errors: Stores any form submission errors.
+ * - initialMessage: Stores the initial enquiry message.
+ * - showEnquiryConfirm: Controls the visibility of the enquiry confirmation message.
+ */
 const ArtpieceDetailed = (props) => {
   const {
     id,

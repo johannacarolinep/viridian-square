@@ -5,6 +5,13 @@ import Col from "react-bootstrap/Col";
 import appStyles from "../../App.module.css";
 import styles from "./Footer.module.css";
 
+/**
+ * Footer component displays the footer of the website.
+ *
+ * Features:
+ * - Shows copyright information and contact email.
+ * - Includes links to the creator's Github and LinkedIn profiles with corresponding icons.
+ */
 const Footer = () => {
   return (
     <footer className={`${appStyles.bgDark} ${appStyles.txtWhite}`}>

@@ -5,6 +5,22 @@ import appStyles from "../../App.module.css";
 import { MoreDropdown } from "../moredropdown/MoreDropdown";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * CollectionCard component displays information about an art collection.
+ *
+ * Props:
+ * - collection: Object containing collection details (id, is_owner, title, description,
+ *   created_on, updated_on, artpieces).
+ * - handleDisplayContentChange: Function to handle displaying collection content.
+ * - handleDeleteConfirm: Function to handle confirming deletion of the collection.
+ * - listPage: Boolean indicating if the card is displayed on a list page.
+ *
+ * Features:
+ * - Displays collection title, description, creation date, and last updated date.
+ * - Shows the number of art pieces in the collection.
+ * - Provides an option to show collection content if `listPage` is true.
+ * - Allows owners to edit or delete the collection using the `MoreDropdown` component.
+ */
 const CollectionCard = ({
   collection,
   handleDisplayContentChange,

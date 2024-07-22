@@ -14,6 +14,35 @@ import styles from "./Discover.module.css";
 import Asset from "../asset/Asset";
 import NoResults from "../../assets/images/noresults.webp";
 
+/**
+ * Discover component displays a list of art pieces with filtering and sorting options.
+ *
+ * Props:
+ * - likesFilter: String used to filter art pieces based on likes.
+ *
+ * Features:
+ * - Allows users to search for art pieces by title or description.
+ * - Provides filtering options by art medium and sale status.
+ * - Allows sorting of results by most liked, newest to oldest, or oldest to newest.
+ * - Implements infinite scrolling to load more art pieces as the user scrolls.
+ * - Displays a loading spinner while fetching data and a message if no results are found.
+ *
+ * State:
+ * - artpieces: Stores the list of art pieces and pagination data.
+ * - hasLoaded: Boolean indicating whether the data has been loaded.
+ * - query: Search query for filtering art pieces.
+ * - filterMedium: Filter for art medium used.
+ * - filterForSale: Filter for sale status.
+ * - sortOrder: Sorting order of the results.
+ *
+ * Hooks:
+ * - useEffect: Fetches art pieces from the API based on the current filters and search query.
+ *
+ * Dependencies:
+ * - Uses axios for API requests.
+ * - Uses react-bootstrap for UI components.
+ * - Uses InfiniteScroll for infinite scrolling functionality.
+ */
 const Discover = ({ likesFilter = "" }) => {
   const [artpieces, setArtpieces] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
