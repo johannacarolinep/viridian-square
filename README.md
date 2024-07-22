@@ -241,6 +241,7 @@ Profile page showing an individual collection:
 
 ![Profile - collection details](documentation/feature/profile_collection_details.png)
 
+</details>
 
 ### Edit profile page
 
@@ -455,6 +456,11 @@ An additional wireframe was created to test out the colour scheme and intended s
 ### Agile methodologies
 
 #### Sprint 1:
+
+<details>
+<summary>Click to see details of sprint 1</summary>
+
+
 ![Sprint 1 milestone](documentation/sprints/sprint1_milestone.png)
 
 ##### Sprint 1 wrap-up:
@@ -469,7 +475,14 @@ Points completed: 12
 - Moved 6 PBI's back to the backlog.
 - Reprioritised backlog.
 
+</details>
+
+
 #### Sprint 2:
+
+<details>
+<summary>Click to see details of sprint 2</summary>
+
 
 ![Sprint 2 milestone](documentation/sprints/sprint2_milestone.png)
 
@@ -488,7 +501,15 @@ Actions taken:
     - `REFACTOR`: Review potential refactoring of code in artpieces/serializers.py.
     - This action was added as I currently have methods relating to the Hashtag model in the serializer for the Artpiece model, and believe refactoring could lead to better separation of concerns and better adherence to best practice.
 
+
+</details>
+
 #### Sprint 3:
+
+
+<details>
+<summary>Click to see details of sprint 3</summary>
+
 
 ![Sprint 3 milestone](documentation/sprints/sprint3_milestone.png)
 
@@ -523,7 +544,15 @@ Actions taken:
 - 5 PBI's moved back to the backlog
 - Reprioritised backlog in preparation for sprint 4.
 
+
+</details>
+
+
 #### Sprint 4
+
+<details>
+<summary>Click to see details of sprint 4</summary>
+
 
 ![Sprint 4 milestone](documentation/sprints/sprint4_milestone.png)
 
@@ -547,7 +576,15 @@ Actions taken:
     - Added a PBI to adjust the ArtpieceSerializer, to more easily identify in the frontend whether an artpiece has been liked by the current user.
 - Repriotised backlog in preparation for sprint 5
 
+
+</details>
+
+
 #### Sprint 5
+
+<details>
+<summary>Click to see details of sprint 5</summary>
+
 
 ![Sprint 5](documentation/sprints/sprint5_milestone.png)
 
@@ -568,9 +605,30 @@ Actions taken:
 - Added new PBI's relating to documentation to the backlog.
 - Reprioritised backlog.
 
+
+</details>
+
 #### Sprint 6:
 
+<details>
+<summary>Click to see details of sprint 6</summary>
+
+
 ![Sprint 6 milestone](documentation/sprints/sprint6_milestone.png)
+
+##### Wrap-up sprint 6
+
+Project board at end of sprint 6:
+
+![Sprint 6 project board](documentation/sprints/sprint6_board.png)
+
+Points completed: 47
+
+Velocity: 29
+
+This was the final sprint of the project.
+
+</details>
 
 
 <a id="user-stories"></a>

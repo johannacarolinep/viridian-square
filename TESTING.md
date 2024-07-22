@@ -4,8 +4,6 @@
 - [Browser compatibility testing](#browser-compatibility)
 - [Responsiveness testing](#responsiveness)
 - [Manual testing](#manual-testing)
-    - [Manual testing of core functionality](#manual-test-functionality)
-    - [Manual testing of user stories](#user-story-testing)
 - [Automated tests](#automated-tests)
     - [Django unit tests](#unittests)
     - [Jest tests for JavaScript](#jest-tests)
@@ -70,13 +68,11 @@ Please see screenshots from responsiveness testing in the PDF's linked below:
 - [Desktop](documentation/responsiveness/responsiveness_desktop.pdf)
 
 <a id="manual-testing"></a>
-## Manual testing TBC
 
-<a id="manual-test-functionality"></a>
-### Manual testing of core functionality TBC
+## Manual testing
+Manual testing was based around the user stories of the project, utilising the frontend acceptance criteria as the criteria for the tests.
 
-### Manual testing of user stories WIP
-
+See test results below split by epic.
 
 <details>
 <summary>Navigation & structure</summary>
@@ -406,8 +402,3 @@ This is one of the major reasons why I chose to use ESLint, during this process 
 Below is a screenshot of running the linter, with no issues raised:
 
 ![eslint](documentation/react_lint/eslint.png)
-
-<details>
-<summary>Click to see screenshots of linting results per file</summary>
-
-</details>
