@@ -171,10 +171,6 @@ It let's the user choose if they want to create an artpiece or a collection.
 </details>
 
 ### Create artpiece
-<details>
-<summary>Click to see details</summary>
-
-### Create artpiece
 
 <details>
 
@@ -454,6 +450,28 @@ An additional wireframe was created to test out the colour scheme and intended s
 
 <a id="agile-methodology"></a>
 ### Agile methodologies
+
+Agile methodologies were used to develop this project.
+
+<details>
+<summary>Click for description of agile methodology in the project</summary>
+
+In the planning phase a set of user stories were defined in order to ensure the project focused on adding value to its users. The user stories represented small/bite sized features to be implemented, allowing for the work to stay focused.
+
+The user stories were also split up into EPICS reflecting larger features or sets of features on the site.
+
+In order to be able to separate concerns and work on the API and the frontend React app separately, before adding the user stories as issues to be worked on in the backlog, they were duplicated, so that the acceptance criteria for the frontend vs backend could be put into it's own PBI.
+
+To clarify, for each user story, I created two issues to be added to the backlog, each representing the same user story, but tagged with a label for frontend and backend respectively, and containing only the acceptance criteria relevant to frontend/backend.
+
+All user stories, as well as PBI’s that fell outside of the user stories (such as project setup and documentation) were added to a backlog, and given a points score to estimate the relative work required for implementation. The backlog was maintained throughout the project, meaning regular prioritisation of the PBI’s.
+
+The project was split into 6 sprints/iterations of 6 days each. Before each sprint, the PBI’s with the highest priority were added to the iteration, and prioritised according to MoSCoW method, with a maximum of 60% of points having a “Must Have” status for the iteration. The PBI’s added to the iteration were also added to a board, making it easier to keep track and focus only on the PBI’s in scope for the iteration. At the end of each iteration, any user story/PBI for which all acceptance criteria had been met was closed, and any user story that had not been completed was moved back to the backlog, before reprioritising and defining the next sprint.
+
+In keeping with Agile philosophies, new user stories and PBI's were allowed to enter the backlog throughout the project. Time was set aside at the end of each sprint, to reflect on the need to add new stories/edit existing ones.
+
+</details>
+
 
 #### Sprint 1:
 
