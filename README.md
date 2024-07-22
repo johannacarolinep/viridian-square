@@ -894,4 +894,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 [Watercolour painting bridge](https://pixabay.com/illustrations/watercolour-painting-art-effect-4820075/)
 - [Watercolour painting woman](https://pixabay.com/illustrations/woman-painting-watercolor-paper-4178302/)
 [Watercolour river](https://pixabay.com/illustrations/watercolour-watercolor-painting-2498024/)
-
+- [Oil painting, field](https://pixabay.com/illustrations/painting-classical-oil-painting-8598152/)
+- [Oil painting, house on field](https://pixabay.com/illustrations/oil-painting-paint-painting-artist-5285801/)
+- [Oil painting, pink flowers](https://pixabay.com/illustrations/oil-painting-paint-painting-artist-5268834/)
+- [Mixed media, branch](https://pixabay.com/illustrations/boho-art-boho-style-art-7375748/)

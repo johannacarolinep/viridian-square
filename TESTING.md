@@ -18,24 +18,43 @@
 <a id="browser-compatibility"></a>
 ## Browser compatibility testing
 
+The website was tested for compatibility in Chrome, Safari, Microsoft Edge, and Firefox (see screenshots and details below). One issue was found during testing in Safari, and added as a bug.
+
 <details>
 <summary>Chrome</summary>
+
+No issues found
+
+![Chrome](documentation/browser_compatibility/chrome.png)
 
 </details>
 
 <details>
 <summary>Safari</summary>
 
+*NOTE:* In Safari, there seems to be an issue with the sizing of cards/card images (please see screenshots). Since this was not detected until a very late stage (same day as project submission), I will not be able to prioritise investigating and fixing before project submission. Instead, this finding will be added as a known bug, to be addressed in the future. 
+
+![Safari](documentation/browser_compatibility/safari.png)
+
+![Safari](documentation/browser_compatibility//safari_issue.png)
 
 </details>
 
 <details>
 <summary>Microsoft Edge</summary>
 
+No issues found
+
+![Edge](documentation/browser_compatibility/edge.png)
+
 </details>
 
 <details>
 <summary>Firefox</summary>
+
+No issues found
+
+![Firefox](documentation/browser_compatibility/firefox.png)
 
 </details>
 
