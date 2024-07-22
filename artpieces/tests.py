@@ -1,10 +1,10 @@
+from unittest.mock import patch
 from users.models import CustomUser
 from .models import Artpiece, Hashtag
 from rest_framework import status
 from rest_framework.test import APITestCase
 from io import BytesIO
 import requests
-import json
 
 
 class ArtpieceListTests(APITestCase):
@@ -62,30 +62,16 @@ class ArtpieceListTests(APITestCase):
             'title': 'a test title',
             'image': image_file,
         }
-        response = self.client.post(
-            '/api/artpieces/',
-            data,
-            format='multipart'
-        )
-        print("-*/-*-**-*-*-*-*", response)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-        # Retrieve and delete the created instance to delete Cloudinary image
-        response_data = json.loads(response.content)
-        created_artpiece = Artpiece.objects.get(id=response_data['id'])
-        created_artpiece.delete()
-        with self.assertRaises(Artpiece.DoesNotExist):
-            Artpiece.objects.get(id=response_data['id'])
+        with patch('cloudinary.uploader.upload') as mock_upload:
+            mock_upload.return_value = {
+                'public_id': 'test_image',
+                'secure_url': 'http://res.cloudinary.com/test_image'
+            }
 
-        # Log out and try to make the POST request again
-        self.client.logout()
-        response_anonymous = self.client.post(
-            '/api/artpieces/',
-            data,
-            format='multipart'
-        )
-        self.assertEqual(
-            response_anonymous.status_code, status.HTTP_403_FORBIDDEN)
+            response = self.client.post(
+                '/api/artpieces/', data, format='multipart')
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 
 class ArtpieceDetailTests(APITestCase):

@@ -183,22 +183,48 @@ Please see screenshots from responsiveness testing in the PDF's linked below:
 
 </details>
 
+
 <a id="automated-tests"></a>
 ## Automated tests
+
+Unfortunately, due to both time constraints and inexperience with writing Django unit tests, not all scenarios are covered by these tests. The goal was for automated testing to complement manual testing and provide a more comprehensive overall assessment of the project.
 
 <a id="unittests"></a>
 ### Django unit tests
 
 <details> 
-<summary>Click for details relating to Django rest unit tests</summary>
+<summary>Click for details relating to Django unit tests</summary>
+
+Unit tests were created to verify key functionality across models and views in the project. These tests were developed concurrently with the project, helping identify unexpected behavior. However, the tests were designed to work with the SQLite3 database, so to run them, it is necessary to add DEV in env.py.
+
+
+In brief, the tests focus on aspects such as:
+- Tests use Django's APITestCase class to check that the API functions as intended.
+- Ensuring an anonymous user cannot access functionality that should be restricted to logged-in users.
+- Ensuring that CRUD functionality is possible on the art piece model and related models such as hashtags.
+- Ensuring that methods in general return expected values and status codes.
+
+In total 28 tests were written:
+
+![Screenshot of tests passing](documentation/automated_tests/unittests.png)
 
 </details>
 
 <a id="jest-tests"></a>
-### Jest tests
+### Jest tests for JavaScript
 
 <details>
 <summary>Click for details relating to Jest tests</summary>
+
+Due to limited time, Jest tests were not given priority throughout the project's development. Nonetheless, a few tests were incorporated at the end of the development phase to address the most critical elements of the React app. These tests primarily aimed to verify that the components functioned correctly and displayed the intended content.
+
+The Jest tests simulate the necessary Axios dependency, execute the components, and verify that they include the expected elements and content.
+
+In total AMOUNT HERE tests were written, in AMOUNT HERE test suites.
+
+![Jest tests passing](documentation/automated_tests/jest.png)
+
+The Jest tests have been placed in the directory hosting the component with the same name as the component and post-fixed with a **test.jsx**. 
 
 </details>
 
