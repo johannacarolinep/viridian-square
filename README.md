@@ -320,6 +320,30 @@ Actions taken:
 #### Accessibility
 - `Navigate the website with keyboard`: As a **Site User not able to utilise a mouse** I can **focus on and access all interactive elements on the website using a keyboard** so that I can **be included, navigate on the website, access the content, and use all core functionality**.
 
+<a id="future-improvements"></a>
+## Future improvements
+
+Below I have made a (non-exhaustive) list of possible future improvements for the platform.
+
+Some are UX improvements while others are more to do with best practice and refactoring.
+
+<details>
+<summary>See list of future improvements</summary>
+
+- Separation of concerns in artpieces/serializers.py: Refactor *serializers.py* in the artpieces app. When adding an artpiece, the user can create hashtags along with them, improving the "searchability" of the artpiece. In the ArtpiecSerializer, methods relating to validating the hashtags are included. Ideally, these methods should be in the separate HashtagSerializer. This would provide better modularity and separation of concerns.
+
+- Components vs containers: The second refactoring improvement would be to refactor the presentational and container components inside the React app. Reading multiple sources online [geeksforgeeks](https://www.geeksforgeeks.org/reactjs-container-and-presentational-pattern-in-components/) and [react.dev](https://react.dev/reference/rules/components-and-hooks-must-be-pure) there appears to be a concensus that if a component decides **how** data will be presented then it should be a presentational component otherwise if it decides on **what** data will be displayed then it would be a container component. In many of my components the separation of these concerns may not be as distinct, this being due to my inexperience in React and its vast documentation of best practices.
+
+- Email verification and password reset: For this application I had managed to enable a custom user model, overriding the default Django username by requiring email to sign up instead. A great future improvement would be to set up an email client that could handle email verification, lost password and password reset verifications. This would truly enhance UX as currently if the user were to forget their password they would be required to get in contact with an admin who would have to manually reset the password from the backend.
+
+- Better backend logic for image management: I would like to spend time researching the multitude of options offered by Cloudinary for image storage and transformation. Given that the app is largely based around image assets, it would make sense to optimize the handling of images going forward.
+
+- Nicer "viewing options" for artpieces: Tying back to image assets being a focal point in the app, an interesting future feature to plan out and implement would be better "viewing options" of artpieces. A simple example could be to allow users to view artpieces on different background colours.
+
+- Messaging: The enquiries functionality would be a great place for improving the communication between artists and buyers. One effective future improvement would be to replace the announcement board style communication currently present with a fully functioning messaging window. This would be to allow back and forth discussion between the artist and buyer and enable an overall better user experience.
+
+</details>
+
 <a id="tools-and-technologies"></a>
 ## Tools and technologies
 

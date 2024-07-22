@@ -63,10 +63,11 @@ class ArtpieceListTests(APITestCase):
             'image': image_file,
         }
         response = self.client.post(
-            '/artpieces/',
+            '/api/artpieces/',
             data,
             format='multipart'
         )
+        print("-*/-*-**-*-*-*-*", response)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         # Retrieve and delete the created instance to delete Cloudinary image
@@ -79,7 +80,7 @@ class ArtpieceListTests(APITestCase):
         # Log out and try to make the POST request again
         self.client.logout()
         response_anonymous = self.client.post(
-            '/artpieces/',
+            '/api/artpieces/',
             data,
             format='multipart'
         )
@@ -137,7 +138,7 @@ class ArtpieceDetailTests(APITestCase):
             'description': 'a new description',
         }
         response = self.client.put(
-            f'/artpieces/{self.test_artpiece.id}/',
+            f'/api/artpieces/{self.test_artpiece.id}/',
             data,
             format='multipart'
         )
@@ -164,7 +165,7 @@ class ArtpieceDetailTests(APITestCase):
             'hashtags': '#hashtag2 #hashtag3',
         }
         response = self.client.put(
-            f'/artpieces/{self.test_artpiece.id}/',
+            f'/api/artpieces/{self.test_artpiece.id}/',
             data,
             format='multipart'
         )
@@ -189,7 +190,7 @@ class ArtpieceDetailTests(APITestCase):
             password='testpass')
 
         response = self.client.delete(
-            f'/artpieces/{self.test_artpiece.id}/')
+            f'/api/artpieces/{self.test_artpiece.id}/')
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertTrue(self.test_artpiece.DoesNotExist)
