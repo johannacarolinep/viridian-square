@@ -65,7 +65,6 @@ The options available for non-logged-in users are:
 
 ![Footer](documentation/feature/feat_footer.png)
 
-  
 
 </details>
 
@@ -88,7 +87,6 @@ These pages are not available to already logged in users.
 
 ![Sign up page](documentation/feature/signup.png)
   
-
 </details>
 
 ### Discover page (home page)
@@ -125,7 +123,6 @@ The image and title links to the artpiece page.
 
 ![Artpiece card](documentation/feature/feat_artpiece_card.png)
   
-
 </details>
 
 ### Artpiece page
@@ -159,6 +156,7 @@ Lastly, for the owner of the artpiece, the page also contains the MoreDropdown c
 </details>
 
 ### Create page
+
 <details>
 <summary>Click to see details</summary>
 
@@ -315,7 +313,6 @@ The selection area is interactive. The user can select and deselect artpieces. T
 
 </details>
 
-
 ### Enquiries page
 
 <details>
@@ -387,25 +384,25 @@ The goal of the site is to help independent artists to increase their visibility
 
 | Endpoint | GET | POST | PUT | DELETE | Permissions | Usage |
 | - | - | - | - | - | - | - |
-| dj-rest-auth/registration | - | Y | - | - | - | Sign up (creates CustomUser and Profile) |
-| dj-rest-auth/login | - | Y | - | - | - | Log in |
-| dj-rest-auth/logout | - | Y | - | - | IsAuthenticated | Log out |
-| dj-rest-auth/user | Y | - | - | - | IsAuthenticated | Retrieve user details |
-| dj-rest-auth/token/refresh | - | Y | - | - | IsAuthenticated | Refresh token |
-| delete-user/ | - | - | - | Y | IsAuthenticated | Delete user |
-| update-email/ | - | - | Y | - | IsAuthenticated | Update user email |
-| profiles/ | Y | - | - | - | - | List profiles |
-| profiles/:id/ | Y | - | Y | - | IsOwnerOrReadOnly | Retrieve and update profile |
-| artpieces/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | List and create artpieces |
-| artpieces/:id/ | Y | - | Y | Y | IsOwnerOrReadOnly | Retrieve artpiece by id, update and delete artpiece |
-| artpieces/trending/ | Y | - | - | - | - | Retrieve artpieces with most likes in last 30 days |
-| likes/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | Retrieve a list of likes, create a like |
-| likes/:id/ | Y | - | - | Y | IsOwnerOrReadOnly | Retrieve a like by id, delete a like |
-| collections/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | Retrieve a list of collections, create a collection |
-| collections/:id/ | Y | - | Y | Y | IsOwnerOrReadOnly | Retrieve a collection by id, edit and delete a collection |
-| collections/:id/update-artpieces/ | - | Y | - | - | IsOwner | Bulk add artpieces to an art collection |
-| enquiries/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | Retrieve enquiries associated to the requesting user, create an enquiry |
-| enquiries/:id/ | Y | - | Y | Y | IsBuyerOrArtist | Retrieve an enquiry by id, update, and soft delete an enquiry |
+| api/dj-rest-auth/registration | - | Y | - | - | - | Sign up (creates CustomUser and Profile) |
+| api/dj-rest-auth/login | - | Y | - | - | - | Log in |
+| api/dj-rest-auth/logout | - | Y | - | - | IsAuthenticated | Log out |
+| api/dj-rest-auth/user | Y | - | - | - | IsAuthenticated | Retrieve user details |
+| api/dj-rest-auth/token/refresh | - | Y | - | - | IsAuthenticated | Refresh token |
+| api/delete-user/ | - | - | - | Y | IsAuthenticated | Delete user |
+| api/update-email/ | - | - | Y | - | IsAuthenticated | Update user email |
+| api/profiles/ | Y | - | - | - | - | List profiles |
+| api/profiles/:id/ | Y | - | Y | - | IsOwnerOrReadOnly | Retrieve and update profile |
+| api/artpieces/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | List and create artpieces |
+| api/artpieces/:id/ | Y | - | Y | Y | IsOwnerOrReadOnly | Retrieve artpiece by id, update and delete artpiece |
+| api/artpieces/trending/ | Y | - | - | - | - | Retrieve artpieces with most likes in last 30 days |
+| api/likes/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | Retrieve a list of likes, create a like |
+| api/likes/:id/ | Y | - | - | Y | IsOwnerOrReadOnly | Retrieve a like by id, delete a like |
+| api/collections/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | Retrieve a list of collections, create a collection |
+| api/collections/:id/ | Y | - | Y | Y | IsOwnerOrReadOnly | Retrieve a collection by id, edit and delete a collection |
+| api/collections/:id/update-artpieces/ | - | Y | - | - | IsOwner | Bulk add artpieces to an art collection |
+| api/enquiries/ | Y | Y | - | - | IsAuthenticatedOrReadOnly | Retrieve enquiries associated to the requesting user, create an enquiry |
+| api/enquiries/:id/ | Y | - | Y | Y | IsBuyerOrArtist | Retrieve an enquiry by id, update, and soft delete an enquiry |
 
 
 <a id="surface-plane-design"></a>
@@ -414,7 +411,11 @@ The goal of the site is to help independent artists to increase their visibility
 <a id="colours"></a>
 #### Colour scheme
 
-Preliminary colour scheme: The primary brand colour, #40826, Viridian green, will be included. The other colours may be adjusted at a later stage in the project.
+The colour scheme is based around the primary brand colour, #40826, Viridian green after which the website is named.
+
+To complement the primary brand colour, a light accent (beige) and a dark accent colour (a darker green) was chosen.
+
+Lastly a very dark, almost black, colour was used as a softer alternative to black, and a light gray, to function as a light, subtle background colour.
 
 ![Colour scheme](documentation/design/colour-scheme.png)
 
@@ -423,17 +424,16 @@ Preliminary colour scheme: The primary brand colour, #40826, Viridian green, wil
 
 ![Oswald font](documentation/design/font-oswald.png)
 
-For headings, and used in logo
+For headings and logo, adding some more personality to the site.
 
 ![Heebo font](documentation/design/font-heebo.png)
 
-For normal text
-
+For normal text, for high readability.
 
 <a id="logo"></a>
 #### Logo
 
-Logo, black on transparent background:
+A simple logo was created for the website. The "signpost" in the logo was reused for some custom graphics used on the site (images for "not found" and "no results").
 
 ![Logo](documentation/design/logo.webp)
 
@@ -481,7 +481,7 @@ In keeping with Agile philosophies, new user stories and PBI's were allowed to e
 
 ![Sprint 1 milestone](documentation/sprints/sprint1_milestone.png)
 
-##### Sprint 1 wrap-up:
+**Sprint 1 wrap-up:**
 
 Project board at end of sprint 1:
 
@@ -504,7 +504,7 @@ Points completed: 12
 
 ![Sprint 2 milestone](documentation/sprints/sprint2_milestone.png)
 
-##### Sprint 2 wrap-up:
+**Sprint 2 wrap-up:**
 
 Project board at end of sprint 2:
 
@@ -531,7 +531,7 @@ Actions taken:
 
 ![Sprint 3 milestone](documentation/sprints/sprint3_milestone.png)
 
-##### Sprint 3 wrap-up:
+**Sprint 3 wrap-up:**
 
 Project board at end of sprint 3:
 
@@ -574,7 +574,7 @@ Actions taken:
 
 ![Sprint 4 milestone](documentation/sprints/sprint4_milestone.png)
 
-##### Sprint 4 wrap-up
+**Sprint 4 wrap-up**
 
 Project board at end of sprint 4:
 
@@ -606,7 +606,7 @@ Actions taken:
 
 ![Sprint 5](documentation/sprints/sprint5_milestone.png)
 
-##### Sprint 5 wrap-up:
+**Sprint 5 wrap-up:**
 
 Project board at end of sprint 5:
 
@@ -634,7 +634,7 @@ Actions taken:
 
 ![Sprint 6 milestone](documentation/sprints/sprint6_milestone.png)
 
-##### Wrap-up sprint 6
+**Wrap-up sprint 6**
 
 Project board at end of sprint 6:
 
