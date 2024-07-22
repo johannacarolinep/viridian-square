@@ -8,6 +8,7 @@ Named after a well known artist pigment, Viridian green, the platform is tailore
 
 **Table of content**
 
+- [Features](#features)
 - [Planning and methodology](#planning)
     - [Site goals and strategy](#strategy)
     - [Database ERD](#erd)
@@ -22,7 +23,6 @@ Named after a well known artist pigment, Viridian green, the platform is tailore
     - [Agile methodology](#agile-methodology)
     - [User stories](#user-stories)
     - [Future improvements](#future-improvements)
-- [Features](#features)
 - [Tools and technologies](#tools-and-technologies)
 - [Repository description](#repo-description)
 - [Deployment](#deployment)
@@ -32,6 +32,322 @@ Named after a well known artist pigment, Viridian green, the platform is tailore
 - [Acknowledgements](#acknowledgements)
 
 ---
+
+<a id="features"></a>
+## Features
+
+### Main navigation and footer
+
+<details>
+
+<summary>Click to see details</summary>
+
+The app features a global main navigation at the top of the page. The navbar is responsive.
+
+The options available for a logged-in user are:
+- Discover
+- Create
+- Enquiries
+- Liked
+- Sign out
+- Profile
+
+The navbar features an avatar with a logged-in user's profile image, signaling the logged-in status to the user.
+
+The options available for non-logged-in users are:
+- Discover
+- Sign in
+- Sign up
+
+![Nav](documentation/feature/feat_navbar.png)
+
+  The website also features a global footer, containing copyright and contact information.
+
+![Footer](documentation/feature/feat_footer.png)
+
+  
+
+</details>
+
+  
+### Sign up and Sign in pages
+
+<details>
+
+<summary>Click to see details</summary>
+
+These pages both feature a form, with an accompanying image for visual interest.
+The forms have error validation and display error messages to the user on unsuccessful sign up/login.
+
+On successful signup, the user is redirected to the signin page.
+On successful sign in, the user is redirected to the "Discover" page ("/").
+These pages are not available to already logged in users.
+
+![Sign in page](documentation/feature/signin.png)
+
+
+![Sign up page](documentation/feature/signup.png)
+  
+
+</details>
+
+### Discover page (home page)
+
+<details>
+
+<summary>Click to see details</summary>
+
+The "Discover" page (which acts as the websites homepage) is available to all users.
+
+It has three main sections:
+- Hero/welcome section: This section is displayed only to non-logged-in users. Its purpose is to welcome users to the site and help encourage signing up/signing in. It contains two links styles as buttons, leading to the sign in and sign up  pages.
+- Trending: This section features the 4 artpieces, in card format, that have received the highest amount of likes in the past 30 days. If there are not 4 artpieces with likes in the last 30 days, it will add artpieces to fill up the spaces (default ordering is newest created). If there are not 4 artpieces in the database, then it will instead display a graphic and a text "No artpieces to display".
+- Discover/Search: This section displays all art pieces by default, sorted by newest first, and utilising infinite scrolling to gradually load results (8 results at a time). At the top of the section, the user can:
+	- Search: Search for artpieces by artpiece title, artist name, collection name, and hashtags.
+	- Sort: Sort the results by creation date and likes count.
+	- Filter: Filter the results by art medium (dropdown) and by "sale-status". The filter for sale status is in the form of a toggle button. The user can toggle between showing only artpieces which the artist has marked as "for sale" or showing artpieces regardless of sale status. 
+
+The discover page also contains a modal which will appear after signing in and landing on the page, if the user has not updated their given, temporary profile name, yet. The modal will prompt the user to complete their profile, and link to the edit profile page.
+
+![Discover page (home)](documentation/feature/discover.png)
+
+**Artpiece cards:**
+
+On the "Discover page" the artpieces are presented in card format (with the ArtpieceSimple component).
+
+Each card contains the image of the artpiece, The sale status is displayed as a badge in the upper right corner if the artist has added a value for this field.
+
+The card body contains the artpiece title, a button to like the artpiece, the nr of likes received by the artpiece, and a badge for art medium used (if the artist has given a value).
+
+The card footer contains the artist's profile name and avatar, and links to the artists profile page.
+
+The image and title links to the artpiece page.
+
+![Artpiece card](documentation/feature/feat_artpiece_card.png)
+  
+
+</details>
+
+### Artpiece page
+
+<details>
+
+<summary>Click to see details</summary>
+
+  The artpiece page is available to all users. The user arrives at the page by clicking on an artpiece card, e.g. on the "Discover page" or on an artist's profile page.
+
+The page features an image of the artpiece, and various details associated with the artpiece.
+It will always contain the artpiece title, the artist's name and avatar (linking to the artist's profile), a  button for liking the artpiece, and the artpiece's creation date.
+
+Furthermore, the following details are displayed if the artist has provided values for these, non-mandatory, fields:
+- A badge displaying the art medium used (eg watercolour, or oil)
+- A badge displaying the artpiece sale status
+- Hashtags added to the artpiece
+- Updated (added if the artist has edited the artpiece).
+- A badge linking to the collection, if the artpiece is part of a collection.
+- A button for making an enquiry, if the artpiece's sale-status is "For sale".
+
+The like button and enquiry button can only be used by logged-in users who are not the owner of the artpiece. Overlays will be triggered with user feedback when the buttons are not active.
+
+When clicking the enquiry-button, a modal will show with a form to create an enquiry for the artpiece. After creation, the enquiry is available on the enquiries page (for the artist and for the user who created the enquiry).
+
+Lastly, for the owner of the artpiece, the page also contains the MoreDropdown component (displayed as a three-dots icon). Clicking the icon opens a small menu with options to edit the artpiece or delete the artpiece.
+
+![Artpiece page](documentation/feature/artpiece.png)
+
+
+</details>
+
+### Create page
+<details>
+<summary>Click to see details</summary>
+
+The "Create page" ("/create/") is only available to logged-in users. It's a simple page containing two links (Image and text) leading to the creation pages for artpieces and collections.
+
+It let's the user choose if they want to create an artpiece or a collection.
+
+![Create page](documentation/feature/create.png)
+
+</details>
+
+### Create artpiece
+<details>
+<summary>Click to see details</summary>
+
+### Create artpiece
+
+<details>
+
+<summary>Click to see details</summary>
+
+This page is available to logged-in users, and contains the form for creating an artpiece.
+
+The form features an image preview, providing helpful visual feedback to the user when uploading their image.
+
+The form contains validation and error messages will show when form submission is unsuccessful.
+
+On successful submission, the user will be redirected to the artpiece page for the newly created artpiece (providing feedback and allowing the user to check the artpiece was created as expected).  
+
+![Create artpiece page](documentation/feature/create_artpiece.png)
+
+
+</details>
+
+
+### Create collection
+
+<details>
+
+<summary>Click to see details</summary>
+
+This page similary to the "create artpiece" page contains a form to create a collection, and is available to logged-in users.
+
+![Create collection page](documentation/feature/create_collection.png)
+
+On successful submission, the user will be redirected to the collection "edit page", displaying only the "artpiece selection" section of that page. This is meant to make art piece collection easier for the user, allowing them to quickly add artpieces into their new collection, as part of the creation flow (more details about the functionality of the artpiece selection in the feature description of the collection "edit page").
+
+</details>
+
+
+### Profile page
+
+<details>
+
+<summary>Click to see details</summary>
+
+The profile page is available to all users. Logged-in users  can reach their own profile page through the main navigation, while the profile page of other users is reached by links in the artpiece cards and artpiece pages.
+
+**Top section**
+The top section displays the profile information (profile image, profile name, and other, non-mandatory, details such as description and location that the user may add in).
+
+The top section will also contain badges showing the nr of artpieces and collections associated with the profile (if not 0), and a badge "has artpieces for sale" if the profile contains at least one artpiece with a sale-status of "for sale".
+
+For the profile owner, the top section will also contain an icon button (three dots), opening a menu with options to edit the profile or change account details.
+
+**Display area**
+The lower part of the profile page is the display area for artpieces and collections. By default it displays all of the artpieces owned by the profile. At the top of the section, there are two "tabs", "Artpieces" and "Collections". The user can click "Collections" to instead view any collections associated with the profile, in card format.
+
+The collection cards will contain a button for showing the collection. Clicking this will change the display area again, to show the individual collection: The collection card together with the artpieces belonging to the collection.
+
+For the profile owner, the collection card will also contain another "three-dots"-button, containing options to edit the collection or delete the collection.
+
+![Profile page](documentation/feature/profile.png)
+
+Profile page showing "Collections":
+
+![Profile - collections](documentation/feature/profile_collections.png)
+
+Profile page showing an individual collection:
+
+![Profile - collection details](documentation/feature/profile_collection_details.png)
+
+
+### Edit profile page
+
+<details>
+
+<summary>Click to see details</summary>
+
+The edit profile page, reached from the "more"-button on the profile page, or by the modal prompting a new user to complete their profile on the "Discover" page, contains the form for editing profile details (such as a personal profile image, profile name and description).
+
+![Profile edit page](documentation/feature/edit_profile.png)
+
+</details>
+
+
+### Account page
+
+<details>
+
+<summary>Click to see details</summary>
+
+  The account page, only available to logged-in users, and reached from the more-button on the profile page, contains forms for:
+  - Changing the password
+  - Changing the email
+  - Deleting the account
+	  - Deleting the account requires inputting the correct password. On successful deletion, a confirmation message will be shown for a few seconds before the user is redirected to the "Discover" page (as a non-logged-in user".
+
+The forms are inside of an accordion, to keep the page more neat, with the different actions clearly separated.
+
+![Account page](documentation/feature/account.png)
+
+</details>
+
+### Edit artpiece page
+
+<details>
+
+<summary>Click to see details</summary>
+
+The edit artpiece page is available to the artpiece owner, and features the form for editing an artpiece. The artpiece opens up with the artpiece's current information pre-filled in the form.
+
+![Edit artpiece page](documentation/feature/edit_artpiece.png)
+
+</details>
+
+### Edit collection page
+
+<details>
+
+<summary>Click to see details</summary>
+
+The edit collection page is avilable to the collection owner, and contains two forms.
+The first form is used to edit the collection details (title and description).
+
+The second form is used for editing which artpieces to include in the collection. The artists artpieces will appear as clickable buttons, styled differently depending on their status in relation to the collection:
+
+- With a green border (the artpiece has been selected for the collection). When the page loads, artpieces that are already in the collection are styled like this to indicate their status.
+- Grayed out (overlayed) and non-clickable: The artpiece is part of a different collection and can therefore not be selected for this collection.
+- "Normal/image only": The artpiece can be selected.
+
+The selection area is interactive. The user can select and deselect artpieces. The artpieces that are selected when the form is submitted will be the artpieces used in the collection.
+
+![Edit collection page](documentation/feature/edit_collection.png)
+
+</details>
+
+### Liked page
+
+<details>
+
+<summary>Click to see details</summary>
+
+  The "Liked" page ("/liked") is available to logged in users. It re-uses the discover-component from the Discovery page, but filtered by artpieces liked by the user.
+
+![Liked page](documentation/feature/liked.png)
+
+</details>
+
+
+### Enquiries page
+
+<details>
+
+<summary>Click to see details</summary>
+
+The enquiries page is available to logged-in users and can be reached from the main navigation.
+
+It contains any enquiries the user is associated with (as the sender or receiver of the enquiry).
+
+The enquiries are represented by an accordion, where each accordion button represents one enquiry. Clicking an accordion button will open up the enquiry details.
+
+Any enquiries that have not yet been seen by the user will be styled differently (bold and with a badge "new"), to help the user quickly identify enquiries they need to review.
+
+Each enquiry will contain (in the following order):
+- The initial enquiry: sender, artist, artpiece, and the message attached to the enquiry by the sender.
+
+If the enquiry is pending (the artist has not responded):
+- If the user is the artist: a form to respond to the enquiry, by accepting/declining and the option to attach a message.
+- If the user is the buyer: A paragraph explaining the artist has not yet responded.
+
+If the enquiry has been answered by the artist:
+- If the user is the buyer: The artists response. If the artist accepted the enquiry, the response will contain the artist's email address, allowing the user to get in contact with the artist for further conversation.
+- If the user is the artist: Information confirming their response has been sent. If the artist accepted the enquiry, this information will confirm to the artist that their email address has been shared with the potential buyer. If the artist declined the enquiry, the information will confirm their email address was not shared with the potential buyer.
+
+![Enquiries page](documentation/feature/enquiries.png)
+
+</details>
+
 
 <a id="planning"></a>
 ## Planning and methodology
