@@ -11,6 +11,8 @@ In short, the platform aims to:
 - let art lovers discover new art, with comprehensive search and filtering functionality
 - offer a way for art lovers to get in touch with artists once they find what they're looking for, by making an enquiry for a specific artpiece.
 
+The live project can be accessed by this [link](https://viridian-api-492ce518a5c7.herokuapp.com/).
+
 ---
 
 **Table of content**
@@ -949,6 +951,10 @@ Alternatively, the project can be run locally with the SQLite3 database. To do t
 os.environ['DEV'] = '1'
 ```
 
+<note>
+If you wish to run the project locally with the live database, ensure os.environ['DEV'] and os.environ['DEBUG'] are not set, or set to 0. 
+</note>
+
 </details>
 
 #### Connect a Cloudinary account to the project
@@ -1113,6 +1119,32 @@ All documentation related to testing of the project can be found in [TESTING.md]
 ### Known open bugs:
 
 - During browser compatibility testing on the final day before project submission, I found that artpiece cards are not displaying correctly in Safari browsers. In brief, the image used in the card should have the same height, across all cards in a row, and be styled to cover their parent element (a div). However, it appears in Safari, the styles are not being applied correctly, resulting in the images retaining their aspect ratio instead, resulting in different heights. Due to time constraints and finding the issue at a late stage, I have not yet had time to take action on this.
+
+
+### 2024-12-28: Unlike functionality not working
+
+<details>
+<summary>Click to see bug details</summary>
+
+**Issue:** The user could not unlike an artpiece, neither in the lists or detailed view of the artpiece.
+
+The API returned a 405 (Method not allowed).
+
+
+**Steps taken:**
+
+- I reviewed the view in the DRF to ensure the DELETE method was supported.
+- Reviewing the API call (in handleUnlike, in components ArtpieceSimple and ArtpieceDetailed) and comparing it to other API calls, I noticed it was missing a trailing slash.
+
+**Solution:**
+
+- I added "/" to the API calls and tested to ensure the functionality was now working as expected.
+
+```
+await axiosRes.delete(`/likes/${like_id}/`);
+```
+
+</details>
 
 ### 2024-07-20: Incorrect use of React Form.Group
 
