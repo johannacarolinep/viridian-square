@@ -104,7 +104,7 @@ const ArtpieceDetailed = (props) => {
 
   const handleUnlike = async () => {
     try {
-      await axiosRes.delete(`/likes/${like_id}`);
+      await axiosRes.delete(`/likes/${like_id}/`);
       setArtpiece((prevArtpiece) => ({
         ...prevArtpiece,
         likes_count: prevArtpiece.likes_count - 1,
