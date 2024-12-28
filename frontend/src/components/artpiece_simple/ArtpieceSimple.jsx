@@ -83,7 +83,7 @@ const ArtpieceSimple = (props) => {
         }),
       }));
     } catch (err) {
-      // Ignoring the error intentionally
+      // Ignoring the error intentionally.
     }
   };
 

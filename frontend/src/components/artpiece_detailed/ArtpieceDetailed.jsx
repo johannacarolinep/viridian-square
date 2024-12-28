@@ -111,7 +111,7 @@ const ArtpieceDetailed = (props) => {
         like_id: null,
       }));
     } catch (err) {
-      // Ignoring the error intentionally
+      // Ignoring the error intentionally.
     }
   };
 
