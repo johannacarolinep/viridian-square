@@ -92,7 +92,7 @@ const DiscoverPage = () => {
       )}
       <section className={appStyles.bgAccentLight}>
         <Container fluid="xl" className="py-4">
-          <h2>Trending:</h2>
+          <h2>!!Trending:</h2>
           <Row xs={1} md={2} lg={4} className="m-0 py-3 g-2">
             <TrendingDisplay />
           </Row>
@@ -106,12 +106,12 @@ const DiscoverPage = () => {
       </section>
       {location.state?.needsProfileCompletion &&
         currentUser?.profile_name.startsWith("newuser") && (
-        <UpdateProfileModal
-          show={showModal}
-          handleClose={handleClose}
-          user={currentUser}
-        />
-      )}
+          <UpdateProfileModal
+            show={showModal}
+            handleClose={handleClose}
+            user={currentUser}
+          />
+        )}
     </main>
   );
 };
